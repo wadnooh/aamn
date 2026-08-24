@@ -282,6 +282,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = document.getElementById('name')?.value.trim();
             const email = document.getElementById('email')?.value.trim();
             const phone = document.getElementById('phone')?.value.trim();
+            const serviceEl = document.getElementById('service');
+            const service = serviceEl?.selectedOptions?.[0]?.textContent?.trim() || serviceEl?.value || '';
             const message = document.getElementById('message')?.value.trim();
             const submitBtn = contactForm.querySelector('.btn-submit');
 
@@ -302,29 +304,78 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
             }
 
+            const payload = {
+                name,
+                email,
+                phone: phone || '',
+                service,
+                message,
+                status: 'new',
+                submitted_at: new Date().toISOString()
+            };
+
+            const saveLocalInquiry = () => {
+                try {
+                    const key = 'aamn_operations';
+                    const current = JSON.parse(localStorage.getItem(key) || '[]');
+                    current.unshift({
+                        id: `op_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`,
+                        type: 'consultation',
+                        status: 'open',
+                        date: new Date().toISOString().slice(0, 10),
+                        customer: name,
+                        phone: phone || '',
+                        email,
+                        service: service || 'رسالة تواصل',
+                        amount: 0,
+                        followUp: '',
+                        notes: message
+                    });
+                    localStorage.setItem(key, JSON.stringify(current));
+                } catch {
+                    // Local backup is best-effort only.
+                }
+            };
+
+            const openDirectChannel = () => {
+                const settings = (() => {
+                    try { return JSON.parse(localStorage.getItem('aamn_site_settings') || '{}'); } catch { return {}; }
+                })();
+                const rawWhatsApp = String(settings.whatsapp || '966500000000').replace(/[^\d]/g, '');
+                const text = [
+                    'رسالة جديدة من موقع ودنوح AAMN',
+                    `الاسم: ${name}`,
+                    `البريد: ${email}`,
+                    `الجوال: ${phone || 'غير مذكور'}`,
+                    `الخدمة: ${service || 'غير محددة'}`,
+                    `الرسالة: ${message}`
+                ].join('\n');
+                if (rawWhatsApp) {
+                    window.open(`https://wa.me/${rawWhatsApp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+                    return;
+                }
+                window.location.href = `mailto:${settings.email || 'info@wadnooh.tech'}?subject=${encodeURIComponent('رسالة من موقع ودنوح AAMN')}&body=${encodeURIComponent(text)}`;
+            };
+
             try {
-                // Save to table
-                const response = await fetch('tables/contact_messages', {
+                const response = await fetch('/api/contact', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        name,
-                        email,
-                        phone: phone || '',
-                        message,
-                        status: 'new',
-                        submitted_at: new Date().toISOString()
-                    })
+                    body: JSON.stringify(payload)
                 });
 
                 if (response.ok) {
+                    saveLocalInquiry();
                     showNotification('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.', 'success');
                     contactForm.reset();
                 } else {
                     throw new Error('Server error');
                 }
             } catch (err) {
-                showNotification('حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً', 'error');
+                saveLocalInquiry();
+                openDirectChannel();
+                showNotification('تم تجهيز رسالتك وفتح واتساب لإرسالها مباشرة.', 'success');
+                contactForm.reset();
             } finally {
                 if (submitBtn) {
                     submitBtn.disabled = false;
