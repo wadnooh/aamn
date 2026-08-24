@@ -1,0 +1,41 @@
+# Patch Hostinger static site to current tunnel URL and redeploy (WNC Phase 1).
+$ErrorActionPreference = "Stop"
+$root = "d:\FLY"
+$tunnel = (Get-Content (Join-Path $root "deploy\runtime\public-url.txt") -Raw).Trim()
+if (-not $tunnel) { throw "public-url.txt empty" }
+
+$src = Join-Path $root "SudanTravelApp.API\wwwroot"
+$dest = Join-Path $root "publish\hostinger-site"
+if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
+New-Item -ItemType Directory -Force -Path (Join-Path $dest "images") | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $dest "data") | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $dest "js") | Out-Null
+
+Copy-Item (Join-Path $src "index.html"), (Join-Path $src "guide.html"), (Join-Path $src "admin.html"), (Join-Path $src "specialty.html"), (Join-Path $src "osh.html") -Destination $dest -Force
+Copy-Item (Join-Path $src "images\*") -Destination (Join-Path $dest "images") -Force -ErrorAction SilentlyContinue
+Copy-Item (Join-Path $src "data\*") -Destination (Join-Path $dest "data") -Force
+Copy-Item (Join-Path $src "js\*") -Destination (Join-Path $dest "js") -Force
+
+# Static hosting: point API_BASE at Cloudflare tunnel
+$apiBase = "$tunnel/api"
+foreach ($rel in @("index.html", "admin.html", "js\wadnooh-eng.js", "js\wep-gate.js")) {
+    $p = Join-Path $dest $rel
+    if (-not (Test-Path $p)) { continue }
+    $text = [IO.File]::ReadAllText($p, [Text.UTF8Encoding]::new($false))
+    $text = [regex]::Replace($text, "const API_BASE = '[^']*'", "const API_BASE = '$apiBase'")
+    $text = $text.Replace("const API_BASE = '/api';", "const API_BASE = '$apiBase';")
+    [IO.File]::WriteAllText($p, $text, [Text.UTF8Encoding]::new($false))
+}
+
+# Simple .htaccess for SPA-ish static
+$ht = "DirectoryIndex index.html`nOptions -Indexes`n"
+[IO.File]::WriteAllText((Join-Path $dest ".htaccess"), $ht, [Text.UTF8Encoding]::new($false))
+
+$zip = Join-Path $root "publish\hostinger-site.zip"
+Remove-Item $zip -Force -ErrorAction SilentlyContinue
+Compress-Archive -Path (Join-Path $dest "*") -DestinationPath $zip -Force
+Write-Host "Packed $zip ($([math]::Round((Get-Item $zip).Length/1MB,2)) MB) -> API_BASE=$apiBase"
+
+Push-Location (Join-Path $root "deploy\runtime")
+try { node .\deploy-static.mjs } finally { Pop-Location }
+Write-Host "Hostinger refreshed -> $tunnel"

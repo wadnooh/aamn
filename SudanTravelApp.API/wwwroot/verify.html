@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تأكيد البريد · Verify email — AAMN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nile-deep: #053d47;
+      --kush: #c4a35a;
+      --kush-deep: #9a7a35;
+      --surface: #f7f4ee;
+      --muted: #5c6a70;
+      --line: #cfc7b8;
+      --palm: #2f6b4f;
+      --font: "IBM Plex Sans Arabic", "Segoe UI", sans-serif;
+      --font-display: Outfit, "IBM Plex Sans Arabic", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; font-family: var(--font);
+      background:
+        radial-gradient(ellipse 80% 50% at 10% 0%, rgba(196,163,90,.18), transparent 55%),
+        linear-gradient(165deg, #eef3f1 0%, var(--surface) 45%, #e8e2d6 100%);
+      color: var(--nile-deep);
+      display: grid; place-items: center; padding: 24px;
+    }
+    .card {
+      width: min(440px, 100%); background: rgba(255,255,255,.88);
+      border: 1px solid var(--line); border-top: 4px solid var(--kush);
+      padding: 28px 24px; backdrop-filter: blur(6px);
+    }
+    h1 {
+      font-family: var(--font-display); font-size: 1.45rem; margin: 0 0 8px;
+      letter-spacing: -.02em;
+    }
+    .lead { color: var(--muted); font-size: .95rem; margin: 0 0 18px; line-height: 1.55; }
+    label { display: block; font-size: .85rem; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+    input {
+      width: 100%; padding: 11px 12px; border: 1px solid var(--line);
+      font: inherit; margin-bottom: 12px; background: #fff;
+    }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 10px 16px; border: none; cursor: pointer; font: inherit; font-weight: 600;
+      background: var(--nile-deep); color: #f5f0e6; text-decoration: none;
+    }
+    .btn.secondary { background: var(--kush-deep); color: #fff; }
+    .btn.outline { background: transparent; color: var(--nile-deep); border: 1px solid var(--nile-deep); }
+    .msg { min-height: 1.4em; font-size: .9rem; margin: 10px 0; }
+    .msg.ok { color: var(--palm); }
+    .msg.err { color: #8b2e2e; }
+    .lang { position: absolute; top: 16px; inset-inline-end: 16px; display: flex; gap: 6px; }
+    .lang button {
+      border: 1px solid var(--line); background: #fff; padding: 6px 10px;
+      font: inherit; cursor: pointer; font-size: .82rem;
+    }
+    .lang button.active { background: var(--nile-deep); color: #fff; border-color: var(--nile-deep); }
+    .status-ico { font-size: 2rem; margin-bottom: 8px; color: var(--kush-deep); }
+  </style>
+</head>
+<body>
+  <div class="lang">
+    <button type="button" id="btnAr" class="active" onclick="setLang('ar')">العربية</button>
+    <button type="button" id="btnEn" onclick="setLang('en')">English</button>
+  </div>
+  <div class="card">
+    <div class="status-ico" aria-hidden="true">✉</div>
+    <h1 id="title">تأكيد البريد</h1>
+    <p class="lead" id="lead">افتح رابط التأكيد من بريدك، أو أدخل البريد والرمز المكوّن من 6 أرقام.</p>
+    <div id="autoMsg" class="msg"></div>
+    <form id="codeForm" onsubmit="return submitCode(event)">
+      <label for="email" id="lblEmail">البريد</label>
+      <input id="email" type="email" autocomplete="email" required>
+      <label for="code" id="lblCode">رمز التأكيد (6 أرقام)</label>
+      <input id="code" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required>
+      <div id="formMsg" class="msg"></div>
+      <div class="row">
+        <button type="submit" class="btn secondary" id="btnVerify">تأكيد</button>
+        <button type="button" class="btn outline" id="btnResend" onclick="resend()">إعادة إرسال</button>
+        <a class="btn" href="/" id="btnHome">الرئيسية</a>
+      </div>
+    </form>
+  </div>
+  <script>
+    const API_BASE = '/api';
+    const copy = {
+      ar: {
+        title: 'تأكيد البريد',
+        lead: 'افتح رابط التأكيد من بريدك، أو أدخل البريد والرمز المكوّن من 6 أرقام.',
+        email: 'البريد',
+        code: 'رمز التأكيد (6 أرقام)',
+        verify: 'تأكيد',
+        resend: 'إعادة إرسال',
+        home: 'الرئيسية',
+        verifying: 'جاري التأكيد…',
+        ok: 'تم تأكيد بريدك بنجاح — يمكنك فتح المحتوى الكامل.',
+        resent: 'إن وُجد الحساب فسيصلك رابط التأكيد.',
+        needEmail: 'أدخل بريدك أولاً'
+      },
+      en: {
+        title: 'Verify email',
+        lead: 'Open the link from your email, or enter your email and the 6-digit code.',
+        email: 'Email',
+        code: 'Verification code (6 digits)',
+        verify: 'Verify',
+        resend: 'Resend',
+        home: 'Home',
+        verifying: 'Verifying…',
+        ok: 'Email confirmed — full catalog is unlocked.',
+        resent: 'If the account exists, a verification link will be sent.',
+        needEmail: 'Enter your email first'
+      }
+    };
+    let lang = localStorage.getItem('wadnooh_lang') === 'en' ? 'en' : 'ar';
+
+    function setLang(l) {
+      lang = l === 'en' ? 'en' : 'ar';
+      localStorage.setItem('wadnooh_lang', lang);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      const c = copy[lang];
+      document.getElementById('title').textContent = c.title;
+      document.getElementById('lead').textContent = c.lead;
+      document.getElementById('lblEmail').textContent = c.email;
+      document.getElementById('lblCode').textContent = c.code;
+      document.getElementById('btnVerify').textContent = c.verify;
+      document.getElementById('btnResend').textContent = c.resend;
+      document.getElementById('btnHome').textContent = c.home;
+      document.getElementById('btnAr').classList.toggle('active', lang === 'ar');
+      document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    }
+
+    async function api(path, options) {
+      const headers = { 'Content-Type': 'application/json', ...(options?.headers || {}) };
+      const tok = localStorage.getItem('wadnooh_token');
+      if (tok) headers.Authorization = `Bearer ${tok}`;
+      const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+      let data = null;
+      const text = await res.text();
+      if (text) { try { data = JSON.parse(text); } catch { data = text; } }
+      if (!res.ok) {
+        const message = typeof data === 'string' ? data : (data?.message || 'Error');
+        throw new Error(message);
+      }
+      return data;
+    }
+
+    async function confirmToken(token) {
+      const box = document.getElementById('autoMsg');
+      box.className = 'msg';
+      box.textContent = copy[lang].verifying;
+      try {
+        await api(`/auth/confirm-email?token=${encodeURIComponent(token)}`, { method: 'POST', body: '{}' });
+        box.className = 'msg ok';
+        box.textContent = copy[lang].ok;
+      } catch (err) {
+        box.className = 'msg err';
+        box.textContent = err.message;
+      }
+    }
+
+    async function submitCode(e) {
+      e.preventDefault();
+      const box = document.getElementById('formMsg');
+      try {
+        await api('/auth/verify-email', {
+          method: 'POST',
+          body: JSON.stringify({
+            email: document.getElementById('email').value.trim(),
+            code: document.getElementById('code').value.trim()
+          })
+        });
+        box.className = 'msg ok';
+        box.textContent = copy[lang].ok;
+      } catch (err) {
+        box.className = 'msg err';
+        box.textContent = err.message;
+      }
+      return false;
+    }
+
+    async function resend() {
+      const box = document.getElementById('formMsg');
+      const email = document.getElementById('email').value.trim();
+      if (!email && !localStorage.getItem('wadnooh_token')) {
+        box.className = 'msg err';
+        box.textContent = copy[lang].needEmail;
+        return;
+      }
+      try {
+        const r = await api('/auth/resend-verification', {
+          method: 'POST',
+          body: JSON.stringify({ email })
+        });
+        box.className = 'msg ok';
+        let msg = r.message || copy[lang].resent;
+        if (r.devVerifyUrl) msg += ` · ${r.devVerifyUrl}`;
+        if (r.devVerifyCode) msg += ` · code ${r.devVerifyCode}`;
+        box.textContent = msg;
+      } catch (err) {
+        box.className = 'msg err';
+        box.textContent = err.message;
+      }
+    }
+
+    setLang(lang);
+    const params = new URLSearchParams(location.search);
+    const token = params.get('token') || params.get('verify');
+    if (token) confirmToken(token);
+  </script>
+    <script src="js/admin-site-config.js"></script>
+</body>
+</html>

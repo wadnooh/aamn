@@ -1,0 +1,317 @@
+{
+  "faqs": [
+    {
+      "id": "faq-aggregator",
+      "q": {
+        "ar": "من أين تُجلب مراجع OSH الخارجية؟",
+        "en": "Where do external OSH references come from?"
+      },
+      "a": {
+        "ar": "ملخصات وروابط رسمية فقط (ILO، OSHA، ISO، المجلس الوطني، IOSH…) — بلا نسخ نصوص محمية.",
+        "en": "Summaries and official links only (ILO, OSHA, ISO, NCOSH, IOSH…) — no copyrighted full-text copies."
+      }
+    },
+    {
+      "id": "faq-templates",
+      "q": {
+        "ar": "هل قوالب الحوادث وPTW قابلة للتحميل؟",
+        "en": "Are incident/PTW templates downloadable?"
+      },
+      "a": {
+        "ar": "في المخدمة ١ نوفر بيانات وصفية وروابط/مواضع قوالب. ملفات كاملة قابلة للتخصيص تتوسع في المخدمة ٢.",
+        "en": "Phase 1 provides metadata and template placeholders/links. Full customizable files expand in Phase 2."
+      }
+    },
+    {
+      "id": "faq-osh",
+      "q": {
+        "ar": "أين أجد قسم السلامة والصحة المهنية؟",
+        "en": "Where is the OSH/HSE section?"
+      },
+      "a": {
+        "ar": "افتح /osh.html أو بوابة التخصص ?dept=osh أو من تمييز الصفحة الرئيسية.",
+        "en": "Open /osh.html, specialty.html?dept=osh, or the homepage OSH highlight."
+      }
+    },
+    {
+      "id": "faq-portal",
+      "q": {
+        "ar": "ما هي ودنوح AAMN للبرمجيات والكمبيوتر؟",
+        "en": "What is AAMN Software & Computer?"
+      },
+      "a": {
+        "ar": "منظومة رقمية عربية: تعليم + بحث + ابتكار + وظائف — ليست مجرد موقع دورات. الشعار: Code • Repair • Connect • Support.",
+        "en": "An Arabic digital ecosystem: education + research + innovation + jobs — not just a course site. Tagline: Code • Repair • Connect • Support."
+      }
+    },
+    {
+      "id": "faq-wep",
+      "q": {
+        "ar": "ما هي منصة ودنوح AAMN للبرمجيات والكمبيوتر (AAMN)؟",
+        "en": "What is AAMN Software & Computer Platform (AAMN)?"
+      },
+      "a": {
+        "ar": "منصة عربية مؤسسية للتعليم الهندسي: تعليم + بحث + تدريب عملي + مسار مهني — ليست مجرد دورات.",
+        "en": "An institutional Arabic EdTech platform for engineering: education + research + practical training + career path — not just courses."
+      }
+    },
+    {
+      "id": "faq-what",
+      "q": {
+        "ar": "ما هي ودنوح AAMN للبرمجيات والكمبيوتر للتقنية؟",
+        "en": "What is AAMN Software & Computer?"
+      },
+      "a": {
+        "ar": "منصة عربية متخصصة في العلوم والتقنية للطلاب والمهندسين: دورات، أقسام، مكتبة، مشاريع، ومساعد ذكي — بهوية النيل والكوش.",
+        "en": "An Arabic platform for science and engineering: courses, departments, library, projects, and an AI tutor — with Nile/Kush identity."
+      }
+    },
+    {
+      "id": "faq-free",
+      "q": {
+        "ar": "هل المحتوى مجاني؟",
+        "en": "Is the content free?"
+      },
+      "a": {
+        "ar": "يمكنك تصفح الكتالوج والالتحاق بالدورات وحفظ التقدّم على جهازك مجاناً. العضوية اختيارية لدعم المنصة.",
+        "en": "You can browse the catalog, enroll, and save progress on your device for free. Membership is optional to support the platform."
+      }
+    },
+    {
+      "id": "faq-progress",
+      "q": {
+        "ar": "أين يُحفظ تقدّمي؟",
+        "en": "Where is my progress saved?"
+      },
+      "a": {
+        "ar": "في هذا الإصدار (MVP 1.0) يُحفظ التقدّم محلياً في المتصفح مع ترحيل من المفتاح القديم إن وُجد.",
+        "en": "In MVP 1.0, progress is stored locally in the browser, with migration from the previous key when present."
+      }
+    },
+    {
+      "id": "faq-certs",
+      "q": {
+        "ar": "هل الشهادات موثّقة رسمياً؟",
+        "en": "Are certificates officially verified?"
+      },
+      "a": {
+        "ar": "الشهادات حالياً رمزية/موضعية داخل المنصة. التحقق الرسمي بمعرفات على نطاق واسع مؤجل للإصدارات اللاحقة.",
+        "en": "Certificates are currently in-platform placeholders. Large-scale official ID verification is deferred to later versions."
+      }
+    },
+    {
+      "id": "faq-labs",
+      "q": {
+        "ar": "هل توجد مختبرات افتراضية؟",
+        "en": "Are there virtual labs?"
+      },
+      "a": {
+        "ar": "مختبرات Proteus/Packet Tracer وغيرها مخططة في الإصدار 2.0 — ستظهر كـ «قريباً» في الواجهة.",
+        "en": "Proteus/Packet Tracer and similar labs are planned for 2.0 — shown as “Coming soon” in the UI."
+      }
+    },
+    {
+      "id": "faq-roles",
+      "q": {
+        "ar": "ما أدوار المستخدمين؟",
+        "en": "What user roles exist?"
+      },
+      "a": {
+        "ar": "نموذج الأدوار مُعرَّف في الكود (مسؤول نظام، مشرف، مؤلف، معلّم، مساعد، طالب، زائر). المصادقة الكاملة للأدوار السبعة قادمة في 2.0.",
+        "en": "Roles are scaffolded in code (SystemAdmin, Supervisor, Author, Teacher, TA, Student, Guest). Full seven-role auth arrives in 2.0."
+      }
+    },
+    {
+      "id": "faq-ai",
+      "q": {
+        "ar": "كيف يعمل المساعد الذكي؟",
+        "en": "How does the AI assistant work?"
+      },
+      "a": {
+        "ar": "يساعد في شرح مفاهيم تقنية ومراجعة كود وكتب مفتوحة عبر ويكيبيديا وOpen Library، ومع OpenAI عند توفر المفتاح.",
+        "en": "It helps explain engineering concepts, review code, and fetch open books via Wikipedia and Open Library, plus OpenAI when configured."
+      }
+    },
+    {
+      "id": "faq-lang",
+      "q": {
+        "ar": "هل المنصة بالعربية والإنجليزية؟",
+        "en": "Is the platform Arabic and English?"
+      },
+      "a": {
+        "ar": "نعم — الواجهة ثنائية اللغة AR/EN مع محتوى هندسي بالعربية أولاً.",
+        "en": "Yes — AR/EN UI with Arabic-first engineering content."
+      }
+    }
+  ],
+  "successStories": [
+    {
+      "id": "ss1",
+      "name": {
+        "ar": "مريم أ.",
+        "en": "Maryam A."
+      },
+      "role": {
+        "ar": "طالبة اتصالات",
+        "en": "Communications student"
+      },
+      "quote": {
+        "ar": "مسار الإلكترونيات ساعدني أربط النظرية بمشروع ESP32 في فصل واحد.",
+        "en": "The electronics path helped me connect theory to an ESP32 project in one term."
+      }
+    },
+    {
+      "id": "ss2",
+      "name": {
+        "ar": "خالد م.",
+        "en": "Khalid M."
+      },
+      "role": {
+        "ar": "مهندس كهرباء مبتدئ",
+        "en": "Junior electrical engineer"
+      },
+      "quote": {
+        "ar": "دورة القدرة والطاقة الشمسية رتّبت لي مفاهيم كنت أخلط بينها في الموقع.",
+        "en": "The power and solar course clarified concepts I used to mix up on site."
+      }
+    },
+    {
+      "id": "ss3",
+      "name": {
+        "ar": "سارة ن.",
+        "en": "Sara N."
+      },
+      "role": {
+        "ar": "مطوّرة برمجيات",
+        "en": "Software developer"
+      },
+      "quote": {
+        "ar": "هياكل البيانات + ممارسات Git غيّرت طريقة تسليمي للمشاريع الجامعية.",
+        "en": "Data structures + Git practices changed how I deliver university projects."
+      }
+    },
+    {
+      "id": "ss4",
+      "name": {
+        "ar": "يوسف ح.",
+        "en": "Yousef H."
+      },
+      "role": {
+        "ar": "فني أتمتة",
+        "en": "Automation technician"
+      },
+      "quote": {
+        "ar": "مقدمة PLC أعطتني لغة مشتركة مع فريق الصيانة في المصنع.",
+        "en": "The PLC intro gave me a shared language with the plant maintenance team."
+      }
+    }
+  ],
+  "partners": [
+    {
+      "id": "p1",
+      "name": "IEEE",
+      "url": "https://www.ieee.org/"
+    },
+    {
+      "id": "p2",
+      "name": "ISO",
+      "url": "https://www.iso.org/"
+    },
+    {
+      "id": "p3",
+      "name": "IRENA",
+      "url": "https://www.irena.org/"
+    },
+    {
+      "id": "p4",
+      "name": "Open Library",
+      "url": "https://openlibrary.org/"
+    },
+    {
+      "id": "p5",
+      "name": "NIST",
+      "url": "https://www.nist.gov/"
+    },
+    {
+      "id": "p6",
+      "name": "IETF",
+      "url": "https://www.ietf.org/"
+    }
+  ],
+  "roadmap": [
+    {
+      "version": "1",
+      "status": "shipped",
+      "label": {
+        "ar": "المخدمة ١ — أساس المنصة",
+        "en": "Phase 1 — Platform foundation"
+      },
+      "items": {
+        "ar": [
+          "واجهة حديثة وبحث موحّد",
+          "بوابات التخصصات",
+          "LMS خفيف + تقدّم",
+          "مكتبة ومشاريع",
+          "مساعد هندسي",
+          "لوحة طالب وأصداف معلّم/أدمن"
+        ],
+        "en": [
+          "Modern UI + unified search",
+          "Specialty portals",
+          "LMS-lite + progress",
+          "Library & projects",
+          "Engineering tutor",
+          "Student dashboard + teacher/admin shells"
+        ]
+      }
+    },
+    {
+      "version": "2",
+      "status": "soon",
+      "label": {
+        "ar": "المخدمة ٢ — LMS كامل",
+        "en": "Phase 2 — Full LMS"
+      },
+      "items": {
+        "ar": [
+          "امتحانات وتصحيح",
+          "شهادات موثّقة",
+          "منتديات وملفات",
+          "إشعارات وتحليلات",
+          "صلاحيات أدوار كاملة"
+        ],
+        "en": [
+          "Exams & grading",
+          "Verified certificates",
+          "Forums & files",
+          "Notifications & analytics",
+          "Full role RBAC"
+        ]
+      }
+    },
+    {
+      "version": "3",
+      "status": "planned",
+      "label": {
+        "ar": "المخدمة ٣ — منظومة مؤسسية",
+        "en": "Phase 3 — Institutional stack"
+      },
+      "items": {
+        "ar": [
+          "مختبرات افتراضية",
+          "وظائف وتدريب",
+          "عمق ذكاء اصطناعي",
+          "تطبيقات جوال",
+          "APIs وتكامل جامعات"
+        ],
+        "en": [
+          "Virtual labs",
+          "Jobs & training",
+          "Deeper AI",
+          "Mobile apps",
+          "APIs & university integrations"
+        ]
+      }
+    }
+  ]
+}

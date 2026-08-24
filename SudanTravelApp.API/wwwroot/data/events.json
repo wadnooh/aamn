@@ -1,0 +1,166 @@
+{
+  "events": [
+    {
+      "id": "ev-osh-week",
+      "date": "2026-09-05",
+      "type": "webinar",
+      "title": {
+        "ar": "أسبوع السلامة المهنية — ورشة تقييم مخاطر",
+        "en": "OSH Week — Risk Assessment Workshop"
+      },
+      "summary": {
+        "ar": "تطبيق مصفوفة مخاطر وقائمة PTW مع أمثلة تقنية.",
+        "en": "Apply risk matrices and PTW lists with engineering examples."
+      },
+      "url": "/osh.html",
+      "status": "upcoming"
+    },
+    {
+      "id": "ev-wep-launch",
+      "date": "2026-08-15",
+      "type": "webinar",
+      "title": {
+        "ar": "إطلاق منصة ودنوح AAMN للبرمجيات والكمبيوتر (AAMN) — جلسة تعريفية",
+        "en": "AAMN Software & Computer Platform (AAMN) Launch Webinar"
+      },
+      "summary": {
+        "ar": "تعريف بالبنية، الأقسام، والمسارات — للطلاب والكليات.",
+        "en": "Platform overview for students and colleges."
+      },
+      "url": "#",
+      "status": "upcoming"
+    },
+    {
+      "id": "ev-ieee-day",
+      "date": "2026-09-20",
+      "type": "conference",
+      "title": {
+        "ar": "يوم IEEE الطلابي — ورش دوائر وشبكات",
+        "en": "Student IEEE Day — Circuits & Networks Workshops"
+      },
+      "summary": {
+        "ar": "ورش عملية بالشراكة مع مراجع IEEE (تنسيق لاحق).",
+        "en": "Hands-on workshops with IEEE references (coordination TBD)."
+      },
+      "url": "https://www.ieee.org/",
+      "status": "upcoming"
+    },
+    {
+      "id": "ev-career-fair",
+      "date": "2026-10-05",
+      "type": "career",
+      "title": {
+        "ar": "ملتقى مسارات المهندس — تدريب ووظائف (قريباً)",
+        "en": "Engineer Pathways Meetup — Training & Jobs (soon)"
+      },
+      "summary": {
+        "ar": "واجهة وظائف وتدريب ضمن المخدمة ٢ — التسجيل التجريبي مفتوح.",
+        "en": "Jobs/training UI in Phase 2 — waitlist open."
+      },
+      "url": "#",
+      "status": "soon"
+    }
+  ],
+  "qbankTeasers": [
+    {
+      "id": "qb-circuits",
+      "department": "electronics",
+      "count": 40,
+      "title": {
+        "ar": "بنك أسئلة: دوائر كهربائية",
+        "en": "Q-Bank: Electric Circuits"
+      },
+      "summary": {
+        "ar": "أسئلة اختيار متعدد حول أوم وكيرشوف — محرك الامتحان الكامل في المخدمة ٢.",
+        "en": "MCQs on Ohm & Kirchhoff — full exam engine in Phase 2."
+      }
+    },
+    {
+      "id": "qb-networks",
+      "department": "networks",
+      "count": 35,
+      "title": {
+        "ar": "بنك أسئلة: شبكات IPv4",
+        "en": "Q-Bank: IPv4 Networking"
+      },
+      "summary": {
+        "ar": "تقسيم شبكات فرعية وطبقات OSI — للتمرين الآن، التصحيح الآلي لاحقاً.",
+        "en": "Subnetting & OSI layers — practice teasers now, auto-grade later."
+      }
+    },
+    {
+      "id": "qb-plc",
+      "department": "control",
+      "count": 25,
+      "title": {
+        "ar": "بنك أسئلة: منطق السلم PLC",
+        "en": "Q-Bank: PLC Ladder Logic"
+      },
+      "summary": {
+        "ar": "مفاهيم المدخلات/المخارج ودورة المسح.",
+        "en": "I/O concepts and scan cycle."
+      }
+    },
+    {
+      "id": "qb-osh-awareness",
+      "department": "osh",
+      "count": 50,
+      "title": {
+        "ar": "بنك أسئلة: وعي السلامة",
+        "en": "Q-Bank: OSH Awareness"
+      },
+      "summary": {
+        "ar": "مخاطر، PPE، وإبلاغ — محرك كامل في المخدمة ٢.",
+        "en": "Hazards, PPE, reporting — full engine in Phase 2."
+      }
+    },
+    {
+      "id": "qb-osh-iso",
+      "department": "osh",
+      "count": 30,
+      "title": {
+        "ar": "بنك أسئلة: ISO 45001",
+        "en": "Q-Bank: ISO 45001"
+      },
+      "summary": {
+        "ar": "PDCA، التدقيق، ومشاركة العمال.",
+        "en": "PDCA, audits, and worker participation."
+      }
+    }
+  ],
+  "accreditations": [
+    {
+      "id": "acc-internal",
+      "name": {
+        "ar": "شهادات إنجاز المنصة (رمزية — مخدمة ١)",
+        "en": "Platform completion certificates (placeholder — Phase 1)"
+      },
+      "note": {
+        "ar": "التحقق الرسمي بمعرفات على نطاق واسع في المخدمة ٢.",
+        "en": "Large-scale verified IDs in Phase 2."
+      }
+    },
+    {
+      "id": "acc-ieee-ref",
+      "name": {
+        "ar": "مراجع معيارية IEEE / ISO",
+        "en": "IEEE / ISO standards references"
+      },
+      "note": {
+        "ar": "روابط مرجعية في المكتبة — ليست اعتماداً رسمياً للمنصة.",
+        "en": "Library reference links — not platform accreditation."
+      }
+    },
+    {
+      "id": "acc-osh-ref",
+      "name": {
+        "ar": "مراجع OSH: ILO / OSHA / ISO 45001",
+        "en": "OSH refs: ILO / OSHA / ISO 45001"
+      },
+      "note": {
+        "ar": "روابط معيارية في مركز السلامة — ليست اعتماداً رسمياً للبوابة.",
+        "en": "Standards links in OSH center — not portal accreditation."
+      }
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيف تتعلم معنا | ودنوح AAMN للبرمجيات والكمبيوتر</title>
+    <meta name="description" content="تعرّف على طريقة التعلم في ودنوح AAMN للبرمجيات والكمبيوتر: مسارات، دروس قصيرة، ومتابعة تقدّمك.">
+    <link rel="icon" type="image/png" href="/images/wad-nooh-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nile-deep: #053d47;
+            --nile: #0a5f6c;
+            --kush: #c4a35a;
+            --ink: #1c2428;
+            --muted: #5c6a70;
+            --surface: #f7f4ee;
+            --line: #cfc7b8;
+            --font-display: 'El Messiri', 'IBM Plex Sans Arabic', sans-serif;
+            --font-body: 'IBM Plex Sans Arabic', 'El Messiri', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body);
+            background:
+                radial-gradient(ellipse at 80% 0%, rgba(196,163,90,.18), transparent 45%),
+                linear-gradient(165deg, #ebe6dc 0%, #d5e4e6 50%, #c8d9d0 100%);
+            min-height: 100vh;
+            color: var(--ink);
+            padding: 20px 16px 48px;
+            line-height: 1.7;
+        }
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            padding: 0 0 40px;
+            overflow: hidden;
+        }
+        .guide-hero {
+            background:
+                linear-gradient(135deg, rgba(5,61,71,.92), rgba(10,95,108,.85)),
+                linear-gradient(115deg, #0a4a52, #1a5c4a);
+            color: #f5f0e6;
+            padding: 36px 28px 32px;
+            text-align: center;
+            position: relative;
+        }
+        .guide-hero::after {
+            content: '';
+            display: block;
+            height: 4px;
+            margin: 22px auto 0;
+            width: 64px;
+            background: linear-gradient(90deg, var(--kush) 0 30%, transparent 30% 38%, var(--kush) 38% 62%, transparent 62% 70%, var(--kush) 70%);
+        }
+        .brand {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 700;
+            color: #f8f3e8;
+        }
+        .subtitle { margin-top: 10px; color: rgba(245,240,230,.85); font-size: .98rem; }
+        .inner { padding: 24px 28px 0; }
+        .tabs {
+            display: flex; gap: 0; flex-wrap: wrap; margin-bottom: 22px;
+            border-bottom: 1px solid var(--line);
+        }
+        .tab {
+            padding: 12px 14px; background: transparent; border: none;
+            border-bottom: 2px solid transparent; margin-bottom: -1px;
+            cursor: pointer; font-family: inherit; font-weight: 600; color: var(--muted);
+        }
+        .tab:hover { color: var(--nile); }
+        .tab.active { color: var(--nile-deep); border-bottom-color: var(--kush); }
+        .content { display: none; }
+        .content.active { display: block; animation: fade .3s ease; }
+        @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        h2 {
+            font-family: var(--font-display);
+            color: var(--nile-deep); margin: 8px 0 16px; font-size: 1.5rem;
+        }
+        h3 {
+            font-family: var(--font-display);
+            color: var(--nile-deep); margin: 18px 0 10px;
+        }
+        .stats {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px; margin: 18px 0 24px;
+        }
+        .stat {
+            text-align: center; padding: 18px 12px;
+            background: var(--nile-deep); color: #f5f0e6;
+            border-bottom: 3px solid var(--kush);
+        }
+        .stat-number { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--kush); }
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px; margin: 16px 0;
+        }
+        .card, .info-box, .step {
+            background: #fff; border: 1px solid var(--line); padding: 16px;
+            border-inline-start: 3px solid var(--kush);
+        }
+        .card h3, .step h3 { margin-top: 0; }
+        .info-box { margin: 14px 0; }
+        .step { margin-bottom: 10px; }
+        .step-num {
+            font-family: var(--font-display);
+            font-weight: 700; color: var(--kush); font-size: 1.1rem; margin-bottom: 6px;
+        }
+        .btn-back {
+            display: inline-block; margin: 28px 28px 0;
+            padding: 11px 22px; background: var(--nile-deep); color: #f5f0e6;
+            text-decoration: none; font-weight: 600;
+        }
+        .btn-back:hover { background: #032e36; }
+        ul { padding-inline-start: 18px; line-height: 1.8; color: var(--muted); }
+        p { color: var(--muted); margin-bottom: 10px; }
+        @media (max-width: 700px) {
+            .inner { padding: 20px 16px 0; }
+            .guide-hero { padding: 28px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="guide-hero">
+            <div class="brand">ودنوح AAMN للبرمجيات والكمبيوتر</div>
+            <p class="subtitle">كيف تتعلم معنا — دورات، جامعات عالمية، ومساعد ذكي بروح النيل</p>
+        </header>
+
+        <div class="inner">
+        <div class="tabs">
+            <button class="tab active" type="button" data-tab="about">عن الشركة</button>
+            <button class="tab" type="button" data-tab="howto">طريقة التعلم</button>
+            <button class="tab" type="button" data-tab="paths">المسارات</button>
+            <button class="tab" type="button" data-tab="tips">نصائح النجاح</button>
+        </div>
+
+        <div id="about" class="content active">
+            <h2>مرحباً بك في ودنوح AAMN للبرمجيات والكمبيوتر</h2>
+            <div class="stats">
+                <div class="stat"><div class="stat-number">9</div><div>دورات أساسية</div></div>
+                <div class="stat"><div class="stat-number">70+</div><div>جامعة ومصدر</div></div>
+                <div class="stat"><div class="stat-number">AR/EN</div><div>واجهة ثنائية</div></div>
+                <div class="stat"><div class="stat-number">مجاني</div><div>بدء التعلم</div></div>
+            </div>
+            <div class="info-box">
+                <h3>رسالتنا</h3>
+                <p>نوفّر تعلّماً عملياً في اللغات والحاسوب والمهارات المهنية، مع دليل جامعات عالمية ومساعد معرفة وكتب مفتوحة — بهوية سودانية واضحة وإيقاع يناسب المتعلم المشغول.</p>
+            </div>
+            <div class="grid">
+                <div class="card"><h3>لغات</h3><p>إنجليزية وعربية للتواصل اليومي والعمل.</p></div>
+                <div class="card"><h3>حاسوب</h3><p>أساسيات الجهاز، أدوات المكتب، ومقدمة الويب.</p></div>
+                <div class="card"><h3>جامعات</h3><p>دليل جامعات ومصادر تعليم مفتوح بروابط رسمية.</p></div>
+                <div class="card"><h3>مساعد وكتب</h3><p>شرح موضوعات وكتب من ويكيبيديا وOpen Library.</p></div>
+            </div>
+        </div>
+
+        <div id="howto" class="content">
+            <h2>طريقة التعلم في أربع خطوات</h2>
+            <div class="step">
+                <div class="step-num">١</div>
+                <h3>اختر دورة أو مساراً</h3>
+                <p>من الكتالوج أو من المسارات المقترحة (مبتدئ رقمي، لغة للتواصل، مهارات مهنية).</p>
+            </div>
+            <div class="step">
+                <div class="step-num">٢</div>
+                <h3>الالتحاق</h3>
+                <p>اضغط «الالتحاق» لتظهر الدورة في «دوراتي» ويُحفظ تقدّمك على جهازك.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">٣</div>
+                <h3>ادرس درساً قصيراً</h3>
+                <p>كل درس نص مركّز. عند الانتهاء اضغط «إتمام الدرس» لتحديث شريط التقدّم.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">٤</div>
+                <h3>استكشف الجامعات واسأل المساعد</h3>
+                <p>تصفّح دليل الجامعات العالمية، أو استخدم مساعد التعلّم لطلب ملخص أو كتب أو معلومات عن جامعة.</p>
+            </div>
+        </div>
+
+        <div id="paths" class="content">
+            <h2>المسارات الثلاثة</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>مبتدئ رقمي</h3>
+                    <p>أساسيات الحاسوب ← أدوات المكتب ← إدارة الوقت.</p>
+                </div>
+                <div class="card">
+                    <h3>لغة للتواصل</h3>
+                    <p>إنجليزية للمبتدئين ← عربية لغير الناطقين ← مهارات التواصل.</p>
+                </div>
+                <div class="card">
+                    <h3>مهارات مهنية</h3>
+                    <p>مقدمة الويب ← إنجليزية للعمل ← انطلاقة مهنية.</p>
+                </div>
+            </div>
+            <div class="info-box">
+                <h3>العضوية</h3>
+                <p>التعلم من الدورات متاح مباشرة. عضوية الشركة اختيارية لدعم رحلتك عبر الحساب.</p>
+            </div>
+        </div>
+
+        <div id="tips" class="content">
+            <h2>نصائح للنجاح</h2>
+            <ul>
+                <li>خصّص جلسة قصيرة يومياً (١٥–٢٥ دقيقة) أفضل من جلسة طويلة نادرة.</li>
+                <li>أكمل درساً واحداً قبل فتح التالي.</li>
+                <li>استخدم المساعد عند التوقف عند مفهوم.</li>
+                <li>راجع «دوراتي» أسبوعياً لترى تقدّمك.</li>
+                <li>بدّل العربية/English حسب راحة القراءة.</li>
+            </ul>
+            <div class="info-box">
+                <h3>جاهز للبدء؟</h3>
+                <p>ارجع للصفحة الرئيسية واستكشف الكتالوج، أو اختر مساراً وابدأ أول درس اليوم.</p>
+            </div>
+        </div>
+        </div>
+
+        <a class="btn-back" href="/">العودة للأكاديمية</a>
+    </div>
+
+    <script>
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+    <script src="js/admin-site-config.js"></script>
+</body>
+</html>

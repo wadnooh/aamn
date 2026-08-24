@@ -1,3 +1,36 @@
 deploy/.hostinger-token.env
 *.env
 
+# Build outputs
+bin/
+obj/
+publish/
+dist/
+build/
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+
+# Local databases
+*.db
+*.db-shm
+*.db-wal
+App_Data/
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# IDE and local state
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Logs and temporary files
+*.log
+*.tmp
+*.cache
+

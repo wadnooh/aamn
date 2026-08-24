@@ -1,0 +1,272 @@
+{
+  "departments": [
+    {
+      "id": "communications",
+      "icon": "📡",
+      "name": {
+        "ar": "تقنية الاتصالات",
+        "en": "Communications Engineering"
+      },
+      "desc": {
+        "ar": "أنظمة الاتصال، الموجات، والشبكات اللاسلكية.",
+        "en": "Communication systems, waves, and wireless networks."
+      }
+    },
+    {
+      "id": "electrical",
+      "icon": "⚡",
+      "name": {
+        "ar": "التقنية الكهربائية",
+        "en": "Electrical Engineering"
+      },
+      "desc": {
+        "ar": "الطاقة، الدوائر، والآلات الكهربائية.",
+        "en": "Power systems, circuits, and electrical machines."
+      }
+    },
+    {
+      "id": "electronics",
+      "icon": "🔌",
+      "name": {
+        "ar": "تقنية الإلكترونيات",
+        "en": "Electronics Engineering"
+      },
+      "desc": {
+        "ar": "أشباه الموصلات، الدوائر التناظرية والرقمية.",
+        "en": "Semiconductors, analog and digital circuits."
+      }
+    },
+    {
+      "id": "computer",
+      "icon": "🖥️",
+      "name": {
+        "ar": "تقنية الحاسوب",
+        "en": "Computer Engineering"
+      },
+      "desc": {
+        "ar": "معمارية الحاسوب، الأنظمة المدمجة، والعتاد.",
+        "en": "Computer architecture, embedded systems, and hardware."
+      }
+    },
+    {
+      "id": "software",
+      "icon": "💻",
+      "name": {
+        "ar": "تقنية البرمجيات",
+        "en": "Software Engineering"
+      },
+      "desc": {
+        "ar": "تصميم البرمجيات، الخوارزميات، وتقنية التطبيقات.",
+        "en": "Software design, algorithms, and application engineering."
+      }
+    },
+    {
+      "id": "civil",
+      "icon": "🏗️",
+      "name": {
+        "ar": "التقنية المدنية",
+        "en": "Civil Engineering"
+      },
+      "desc": {
+        "ar": "الإنشاءات، الطرق، والمواد الإنشائية.",
+        "en": "Structures, roads, and construction materials."
+      }
+    },
+    {
+      "id": "mechanical",
+      "icon": "⚙️",
+      "name": {
+        "ar": "التقنية الميكانيكية",
+        "en": "Mechanical Engineering"
+      },
+      "desc": {
+        "ar": "الديناميكا الحرارية، الآلات، والتصنيع.",
+        "en": "Thermodynamics, machines, and manufacturing."
+      }
+    },
+    {
+      "id": "industrial",
+      "icon": "🏭",
+      "name": {
+        "ar": "التقنية الصناعية",
+        "en": "Industrial Engineering"
+      },
+      "desc": {
+        "ar": "تحسين العمليات، الجودة، وإدارة الإنتاج.",
+        "en": "Process optimization, quality, and production management."
+      }
+    },
+    {
+      "id": "architecture",
+      "icon": "🏛️",
+      "name": {
+        "ar": "العمارة",
+        "en": "Architecture"
+      },
+      "desc": {
+        "ar": "التصميم المعماري، التخطيط، والاستدامة.",
+        "en": "Architectural design, planning, and sustainability."
+      }
+    },
+    {
+      "id": "renewable",
+      "icon": "☀️",
+      "name": {
+        "ar": "الطاقة المتجددة",
+        "en": "Renewable Energy"
+      },
+      "desc": {
+        "ar": "الطاقة الشمسية، الرياح، والأنظمة الهجينة.",
+        "en": "Solar, wind, and hybrid energy systems."
+      }
+    },
+    {
+      "id": "ai-eng",
+      "icon": "🧠",
+      "name": {
+        "ar": "تقنية الذكاء الاصطناعي",
+        "en": "AI Engineering"
+      },
+      "desc": {
+        "ar": "تعلم الآلة، الرؤية الحاسوبية، وتقنية النماذج.",
+        "en": "Machine learning, computer vision, and model engineering."
+      }
+    },
+    {
+      "id": "iot",
+      "icon": "🌐",
+      "name": {
+        "ar": "إنترنت الأشياء",
+        "en": "Internet of Things (IoT)"
+      },
+      "desc": {
+        "ar": "أجهزة الاستشعار، البروتوكولات، والأنظمة المتصلة.",
+        "en": "Sensors, protocols, and connected systems."
+      }
+    },
+    {
+      "id": "cybersecurity",
+      "icon": "🔒",
+      "name": {
+        "ar": "الأمن السيبراني",
+        "en": "Cybersecurity"
+      },
+      "desc": {
+        "ar": "حماية الشبكات، التشفير، والاستجابة للحوادث.",
+        "en": "Network defense, cryptography, and incident response."
+      }
+    },
+    {
+      "id": "networks",
+      "icon": "🔗",
+      "name": {
+        "ar": "شبكات الحاسوب",
+        "en": "Computer Networks"
+      },
+      "desc": {
+        "ar": "TCP/IP، التوجيه، وتصميم الشبكات المؤسسية.",
+        "en": "TCP/IP, routing, and enterprise network design."
+      }
+    },
+    {
+      "id": "robotics",
+      "icon": "🤖",
+      "name": {
+        "ar": "الروبوتات",
+        "en": "Robotics"
+      },
+      "desc": {
+        "ar": "الحركة، التحكم، وأنظمة الروبوت الصناعي.",
+        "en": "Kinematics, control, and industrial robot systems."
+      }
+    },
+    {
+      "id": "control",
+      "icon": "🎛️",
+      "name": {
+        "ar": "التحكم والأتمتة",
+        "en": "Control & Automation"
+      },
+      "desc": {
+        "ar": "PLC، SCADA، وأنظمة التحكم الآلي.",
+        "en": "PLC, SCADA, and automated control systems."
+      }
+    },
+    {
+      "id": "osh",
+      "icon": "🦺",
+      "name": {
+        "ar": "السلامة والصحة المهنية",
+        "en": "Occupational Safety & Health (OSH/HSE)"
+      },
+      "desc": {
+        "ar": "إدارة السلامة، تقييم المخاطر، معدات الوقاية، وأنظمة ISO 45001.",
+        "en": "Safety management, risk assessment, PPE, and ISO 45001 systems."
+      },
+      "aliases": [
+        "hse",
+        "occupational-safety"
+      ]
+    },
+    {
+      "id": "petroleum",
+      "icon": "🛢️",
+      "name": {
+        "ar": "تقنية البترول",
+        "en": "Petroleum Engineering"
+      },
+      "desc": {
+        "ar": "الاستكشاف، الحفر، الإنتاج، وسلامة النفط والغاز.",
+        "en": "Exploration, drilling, production, and oil & gas safety."
+      }
+    },
+    {
+      "id": "chemical",
+      "icon": "🧪",
+      "name": {
+        "ar": "التقنية الكيميائية",
+        "en": "Chemical Engineering"
+      },
+      "desc": {
+        "ar": "العمليات الكيميائية، المفاعلات، والسلامة العملية.",
+        "en": "Chemical processes, reactors, and process safety."
+      }
+    },
+    {
+      "id": "aviation",
+      "icon": "✈️",
+      "name": {
+        "ar": "تقنية الطيران",
+        "en": "Aviation / Aerospace Engineering"
+      },
+      "desc": {
+        "ar": "هياكل الطائرات، الدفع، وأنظمة الطيران.",
+        "en": "Airframes, propulsion, and flight systems."
+      }
+    },
+    {
+      "id": "mining",
+      "icon": "⛏️",
+      "name": {
+        "ar": "تقنية التعدين",
+        "en": "Mining Engineering"
+      },
+      "desc": {
+        "ar": "استخراج المعادن، التهوية، وسلامة المناجم.",
+        "en": "Mineral extraction, ventilation, and mine safety."
+      }
+    },
+    {
+      "id": "biomedical",
+      "icon": "🩺",
+      "name": {
+        "ar": "التقنية الطبية الحيوية",
+        "en": "Biomedical Engineering"
+      },
+      "desc": {
+        "ar": "الأجهزة الطبية، التصوير، والسلامة في بيئة الرعاية.",
+        "en": "Medical devices, imaging, and clinical-environment safety."
+      }
+    }
+  ]
+}

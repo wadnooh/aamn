@@ -1,0 +1,303 @@
+{
+  "articles": [
+    {
+      "id": "art-petro-safety",
+      "department": "petroleum",
+      "date": "2026-07-28",
+      "title": {
+        "ar": "سلامة المواقع النفطية: أساسيات HSE",
+        "en": "Oil Site Safety: HSE Basics"
+      },
+      "summary": {
+        "ar": "مناطق مصنّفة، غازات سامة، وتصاريح العمل.",
+        "en": "Classified zones, toxic gases, and permits to work."
+      },
+      "tags": [
+        "petroleum",
+        "osh"
+      ]
+    },
+    {
+      "id": "art-osh-iso",
+      "department": "osh",
+      "date": "2026-08-01",
+      "title": {
+        "ar": "ISO 45001 باختصار للمهندس",
+        "en": "ISO 45001 in Brief for Engineers"
+      },
+      "summary": {
+        "ar": "قيادة، مشاركة عمال، مخاطر، وتحسين مستمر — لا أوراق فقط.",
+        "en": "Leadership, worker participation, risks, continual improvement — not paperwork only."
+      },
+      "tags": [
+        "osh",
+        "iso45001"
+      ]
+    },
+    {
+      "id": "art-osh-ptw",
+      "department": "osh",
+      "date": "2026-08-02",
+      "title": {
+        "ar": "متى تحتاج تصريح عمل؟",
+        "en": "When Do You Need a Permit to Work?"
+      },
+      "summary": {
+        "ar": "أعمال ساخنة، ارتفاع، كهرباء حية، أماكن محصورة، وحفر.",
+        "en": "Hot work, height, live electrical, confined space, excavation."
+      },
+      "tags": [
+        "osh",
+        "ptw"
+      ]
+    },
+    {
+      "id": "art-osh-hierarchy",
+      "department": "osh",
+      "date": "2026-08-02",
+      "title": {
+        "ar": "التسلسل الهرمي للتحكم قبل معدات الوقاية",
+        "en": "Hierarchy of Controls Before PPE"
+      },
+      "summary": {
+        "ar": "الإزالة والاستبدال والتقنية والإدارة ثم PPE كخط أخير.",
+        "en": "Elimination, substitution, engineering, admin — then PPE last."
+      },
+      "tags": [
+        "osh",
+        "ppe"
+      ]
+    },
+    {
+      "id": "art-ohm-law",
+      "department": "electronics",
+      "date": "2026-07-20",
+      "title": {
+        "ar": "قانون أوم في المختبر: أخطاء شائعة",
+        "en": "Ohm’s Law in the Lab: Common Mistakes"
+      },
+      "summary": {
+        "ar": "كيف تتجنب أخطاء القياس عند التحقق من V = IR عملياً.",
+        "en": "How to avoid measurement errors when verifying V = IR in practice."
+      },
+      "tags": [
+        "electronics",
+        "lab"
+      ]
+    },
+    {
+      "id": "art-esp32-mqtt",
+      "department": "iot",
+      "date": "2026-07-22",
+      "title": {
+        "ar": "لماذا MQTT مناسب لأجهزة ESP32؟",
+        "en": "Why MQTT Fits ESP32 Devices"
+      },
+      "summary": {
+        "ar": "خفة البروتوكول، QoS، وأنماط النشر/الاشتراك للمشاريع الطلابية.",
+        "en": "Protocol lightness, QoS, and pub/sub patterns for student projects."
+      },
+      "tags": [
+        "iot",
+        "esp32"
+      ]
+    },
+    {
+      "id": "art-git-engineers",
+      "department": "software",
+      "date": "2026-07-25",
+      "title": {
+        "ar": "Git للمهندسين: عادات يومية",
+        "en": "Git for Engineers: Daily Habits"
+      },
+      "summary": {
+        "ar": "التزامات صغيرة، رسائل واضحة، ومراجعة قبل الدمج.",
+        "en": "Small commits, clear messages, and review before merge."
+      },
+      "tags": [
+        "software",
+        "git"
+      ]
+    },
+    {
+      "id": "art-pv-sizing",
+      "department": "renewable",
+      "date": "2026-07-28",
+      "title": {
+        "ar": "تقدير حمل منظومة شمسية منزلية",
+        "en": "Sizing a Home Solar Load"
+      },
+      "summary": {
+        "ar": "من قائمة الأجهزة إلى Wh/يوم مع هامش الفقد.",
+        "en": "From appliance list to Wh/day with loss margins."
+      },
+      "tags": [
+        "solar",
+        "renewable"
+      ]
+    },
+    {
+      "id": "art-subnetting",
+      "department": "networks",
+      "date": "2026-07-30",
+      "title": {
+        "ar": "تقسيم الشبكات الفرعية دون ارتباك",
+        "en": "Subnetting Without Confusion"
+      },
+      "summary": {
+        "ar": "طريقة عملية لحساب /24 و /26 مع أمثلة.",
+        "en": "A practical method for /24 and /26 with examples."
+      },
+      "tags": [
+        "networks",
+        "ipv4"
+      ]
+    },
+    {
+      "id": "art-cia-triad",
+      "department": "cybersecurity",
+      "date": "2026-08-01",
+      "title": {
+        "ar": "مثلث CIA بلغة المهندس",
+        "en": "The CIA Triad in Engineer Language"
+      },
+      "summary": {
+        "ar": "السرية والسلامة والتوافر كمتطلبات تصميم لا شعارات.",
+        "en": "Confidentiality, integrity, availability as design requirements—not slogans."
+      },
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "art-plc-scan",
+      "department": "control",
+      "date": "2026-08-01",
+      "title": {
+        "ar": "دورة مسح PLC باختصار",
+        "en": "PLC Scan Cycle in Brief"
+      },
+      "summary": {
+        "ar": "قراءة مدخلات → تنفيذ منطق → تحديث مخارج — ولماذا التوقيت مهم.",
+        "en": "Read inputs → run logic → update outputs — and why timing matters."
+      },
+      "tags": [
+        "plc",
+        "automation"
+      ]
+    },
+    {
+      "id": "art-concrete-cure",
+      "department": "civil",
+      "date": "2026-07-18",
+      "title": {
+        "ar": "معالجة الخرسانة: لماذا لا تهمل؟",
+        "en": "Concrete Curing: Why It Matters"
+      },
+      "summary": {
+        "ar": "الرطوبة والزمن يحددان القوة النهائية أكثر مما يظن البعض.",
+        "en": "Moisture and time determine final strength more than many expect."
+      },
+      "tags": [
+        "civil",
+        "materials"
+      ]
+    },
+    {
+      "id": "art-first-law",
+      "department": "mechanical",
+      "date": "2026-07-15",
+      "title": {
+        "ar": "القانون الأول للديناميكا الحرارية بأمثلة",
+        "en": "First Law of Thermodynamics with Examples"
+      },
+      "summary": {
+        "ar": "طاقة داخلية، حرارة، وعمل — مع اصطلاح الإشارات.",
+        "en": "Internal energy, heat, and work — with sign conventions."
+      },
+      "tags": [
+        "mechanical",
+        "thermo"
+      ]
+    },
+    {
+      "id": "art-ml-metrics",
+      "department": "ai-eng",
+      "date": "2026-07-12",
+      "title": {
+        "ar": "متى لا تكفي دقة النموذج؟",
+        "en": "When Accuracy Is Not Enough"
+      },
+      "summary": {
+        "ar": "الاستدعاء والدقة Precision/Recall في بيانات غير متوازنة.",
+        "en": "Precision and recall on imbalanced datasets."
+      },
+      "tags": [
+        "ai",
+        "ml"
+      ]
+    }
+  ],
+  "news": [
+    {
+      "id": "news-portal-rebrand",
+      "date": "2026-08-02",
+      "title": {
+        "ar": "إعادة تموضع: ودنوح AAMN للبرمجيات والكمبيوتر",
+        "en": "Repositioned: AAMN Software & Computer"
+      },
+      "summary": {
+        "ar": "Code • Repair • Connect • Support — منظومة رقمية عربية للتقنية.",
+        "en": "Code • Repair • Connect • Support — Arabic engineering digital ecosystem."
+      }
+    },
+    {
+      "id": "news-osh-center",
+      "date": "2026-08-02",
+      "title": {
+        "ar": "افتتاح مركز السلامة والصحة المهنية في بوابة ودنوح",
+        "en": "OSH/HSE Center Opens on AAMN Software & Computer"
+      },
+      "summary": {
+        "ar": "دورات، قوالب، ومراجع ILO/OSHA/ISO — ضمن منظومة التعليم والابتكار.",
+        "en": "Courses, templates, and ILO/OSHA/ISO refs — within the education & innovation portal."
+      }
+    },
+    {
+      "id": "news-mvp10",
+      "date": "2026-08-02",
+      "title": {
+        "ar": "إطلاق MVP 1.0 لودنوح AAMN للبرمجيات والكمبيوتر للتقنية",
+        "en": "AAMN Software & Computer MVP 1.0 Launch"
+      },
+      "summary": {
+        "ar": "منصة عربية للتقنية: أقسام، دورات، مكتبة، ومشاريع — مع خارطة طريق 2.0/3.0.",
+        "en": "Arabic engineering platform: departments, courses, library, projects — with a 2.0/3.0 roadmap."
+      }
+    },
+    {
+      "id": "news-depts",
+      "date": "2026-08-01",
+      "title": {
+        "ar": "٢٢+ تخصصاً هندسياً بما فيها OSH والبترول والطيران",
+        "en": "22+ engineering specialties including OSH, petroleum, aviation"
+      },
+      "summary": {
+        "ar": "توسعة الكتالوج لبوابة تقنية شاملة.",
+        "en": "Catalog expansion for a full engineering portal."
+      }
+    },
+    {
+      "id": "news-ai-tutor",
+      "date": "2026-07-29",
+      "title": {
+        "ar": "المساعد الذكي موجّه للتدريس الهندسي",
+        "en": "AI Assistant Tuned for Engineering Tutoring"
+      },
+      "summary": {
+        "ar": "معادلات، مراجعة كود، ومراجع — مع كتب مفتوحة.",
+        "en": "Equations, code review, and references — plus open books."
+      }
+    }
+  ]
+}

@@ -1,0 +1,2476 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ودنوح AAMN للبرمجيات والكمبيوتر | Wad Nooh Academy</title>
+    <meta name="description" content="ودنوح AAMN للبرمجيات والكمبيوتر — دورات ومسارات تعليمية، دليل جامعات عالمية، ومساعد تعلّم ذكي مع كتب مفتوحة. تعلّم بروح النيل.">
+    <meta name="keywords" content="ودنوح AAMN للبرمجيات والكمبيوتر, Wad Nooh Academy, دورات, جامعات, مسارات تعلم, مساعد ذكي, كتب, تعليم">
+    <link rel="alternate" hreflang="ar" href="https://wadnooh.com/">
+    <link rel="alternate" hreflang="en" href="https://wadnooh.com/?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://wadnooh.com/">
+    <link rel="icon" type="image/png" href="/images/wad-nooh-icon.png">
+    <link rel="apple-touch-icon" href="/images/wad-nooh-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nile-deep: #053d47;
+            --nile: #0a5f6c;
+            --nile-mist: #7eb8c0;
+            --kush: #c4a35a;
+            --kush-deep: #9a7a35;
+            --stone: #ebe6dc;
+            --stone-dark: #d4cdc0;
+            --ink: #1c2428;
+            --muted: #5c6a70;
+            --surface: #f7f4ee;
+            --line: #cfc7b8;
+            --palm: #2f6b4f;
+            --danger: #8b2e2e;
+            --radius: 2px;
+            --font-display: 'El Messiri', 'IBM Plex Sans Arabic', sans-serif;
+            --font-body: 'IBM Plex Sans Arabic', 'El Messiri', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--ink);
+            background: var(--stone);
+            min-height: 100vh;
+            line-height: 1.65;
+        }
+
+        .topbar {
+            position: absolute;
+            inset-inline: 0;
+            top: 0;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px clamp(16px, 4vw, 48px);
+            color: #f5f0e6;
+        }
+
+        .topbar-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #f5f0e6;
+            line-height: 1.2;
+        }
+        .topbar-brand img {
+            height: 42px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,.25));
+        }
+        .topbar-brand .brand-text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(0.78rem, 1.8vw, 1.05rem);
+            letter-spacing: 0.02em;
+        }
+        .topbar-brand .brand-text small {
+            display: block;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.72em;
+            color: var(--kush);
+            letter-spacing: 0.08em;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .topbar-actions a {
+            color: rgba(245, 240, 230, 0.88);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .topbar-actions a:hover {
+            color: #fff;
+            border-bottom-color: var(--kush);
+        }
+
+        .lang-switch {
+            display: inline-flex;
+            border: 1px solid rgba(245, 240, 230, 0.35);
+            overflow: hidden;
+        }
+        .lang-switch button {
+            border: none;
+            background: transparent;
+            color: rgba(245, 240, 230, 0.85);
+            padding: 6px 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.82rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .lang-switch button.active {
+            background: var(--kush);
+            color: var(--nile-deep);
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            color: #f5f0e6;
+            background:
+                linear-gradient(165deg, #032830 0%, #053d47 38%, #0a5f6c 72%, #1a5c4a 100%);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                radial-gradient(ellipse at 18% 28%, rgba(196,163,90,.28), transparent 48%),
+                radial-gradient(ellipse at 88% 12%, rgba(126,184,192,.18), transparent 42%),
+                linear-gradient(180deg, rgba(5,30,36,.15) 0%, rgba(5,45,52,.5) 48%, rgba(5,45,52,.94) 100%);
+            pointer-events: none;
+        }
+        .hero-glow {
+            position: absolute;
+            inset-inline-end: -8%;
+            top: 12%;
+            width: min(52vw, 520px);
+            height: min(52vw, 520px);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(196,163,90,.16) 0%, transparent 68%);
+            z-index: 1;
+            pointer-events: none;
+            animation: glowPulse 7s ease-in-out infinite;
+        }
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.12;
+            background-image:
+                repeating-linear-gradient(90deg, transparent 0 18px, rgba(196,163,90,.4) 18px 19px),
+                repeating-linear-gradient(0deg, transparent 0 22px, rgba(126,184,192,.25) 22px 23px);
+            animation: patternDrift 28s linear infinite;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 760px;
+            padding: 28px clamp(16px, 4vw, 48px) clamp(48px, 8vh, 88px);
+            animation: riseIn 0.9s ease both;
+        }
+        .brand {
+            font-family: var(--font-display);
+            font-size: clamp(2.55rem, 7vw, 4.1rem);
+            font-weight: 700;
+            line-height: 1.12;
+            color: #f8f3e8;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 24px rgba(0, 0, 0, 0.25);
+        }
+        .hero-headline {
+            font-family: var(--font-display);
+            font-size: clamp(1.15rem, 2.8vw, 1.45rem);
+            font-weight: 600;
+            color: var(--kush);
+            margin-bottom: 12px;
+            max-width: 22em;
+        }
+        .hero-lead {
+            font-size: clamp(1rem, 2.2vw, 1.12rem);
+            color: rgba(245, 240, 230, 0.88);
+            max-width: 34em;
+            margin-bottom: 28px;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nubian-rule {
+            height: 3px;
+            width: 72px;
+            margin-bottom: 18px;
+            background: linear-gradient(90deg, var(--kush) 0 28%, transparent 28% 36%, var(--kush) 36% 64%, transparent 64% 72%, var(--kush) 72%);
+            animation: ruleGrow 1.1s ease 0.2s both;
+        }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes ruleGrow {
+            from { width: 0; opacity: 0; }
+            to { width: 72px; opacity: 1; }
+        }
+        @keyframes patternDrift {
+            from { background-position: 0 0; }
+            to { background-position: 80px 40px; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.06); }
+        }
+
+        .workspace {
+            position: relative;
+            background: var(--surface);
+            padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 48px) 64px;
+        }
+        .workspace::before {
+            content: '';
+            display: block;
+            height: 6px;
+            margin: -28px calc(-1 * clamp(16px, 4vw, 48px)) 28px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--nile-deep) 0 12px,
+                var(--kush) 12px 18px,
+                var(--nile) 18px 30px,
+                var(--stone-dark) 30px 36px
+            );
+        }
+        .workspace-inner { max-width: 1080px; margin: 0 auto; }
+
+        .section-head { margin-bottom: 22px; }
+        .section-head h2 {
+            font-family: var(--font-display);
+            font-size: 1.65rem;
+            color: var(--nile-deep);
+            font-weight: 700;
+        }
+        .section-head p {
+            color: var(--muted);
+            margin-top: 4px;
+            font-size: 0.95rem;
+        }
+
+        .stats-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .stat-item {
+            padding: 14px 12px;
+            border-bottom: 2px solid var(--kush);
+            background: rgba(5, 61, 71, 0.04);
+            text-align: center;
+        }
+        .stat-item strong {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            color: var(--nile-deep);
+        }
+        .stat-item span { font-size: 0.82rem; color: var(--muted); }
+
+        .value-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-bottom: 28px;
+            border-block: 1px solid var(--line);
+            background: rgba(5, 61, 71, 0.03);
+        }
+        .value-item {
+            padding: 16px 14px;
+            border-inline-end: 1px solid var(--line);
+            animation: fadeIn 0.55s ease both;
+        }
+        .value-item:last-child { border-inline-end: none; }
+        .value-item:nth-child(2) { animation-delay: 0.08s; }
+        .value-item:nth-child(3) { animation-delay: 0.16s; }
+        .value-item:nth-child(4) { animation-delay: 0.24s; }
+        .value-item strong {
+            display: block;
+            font-family: var(--font-display);
+            color: var(--nile-deep);
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+        .value-item span {
+            font-size: 0.84rem;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--line);
+        }
+        .tab {
+            flex: 0 1 auto;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--muted);
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .tab:hover { color: var(--nile); }
+        .tab.active {
+            color: var(--nile-deep);
+            border-bottom-color: var(--kush);
+        }
+
+        .content { display: none; }
+        .content.active { display: block; animation: fadeIn 0.3s ease; }
+
+        .search-panel {
+            padding: 0 0 20px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--line);
+        }
+        .search-panel h3 {
+            font-family: var(--font-display);
+            margin-bottom: 14px;
+            color: var(--nile-deep);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 0 0 16px;
+        }
+        .filter-chips button {
+            border: 1px solid var(--line);
+            background: transparent;
+            border-radius: var(--radius);
+            padding: 7px 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.84rem;
+            color: var(--nile);
+            font-weight: 600;
+            transition: border-color 0.2s, background 0.2s, color 0.2s;
+        }
+        .filter-chips button:hover,
+        .filter-chips button.active {
+            border-color: var(--nile);
+            background: rgba(10, 95, 108, 0.08);
+            color: var(--nile-deep);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+        .form-group { margin-bottom: 12px; }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 0.86rem;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 1rem;
+            background: #fff;
+            color: var(--ink);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--nile);
+            box-shadow: 0 0 0 3px rgba(10, 95, 108, 0.12);
+        }
+
+        .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        .btn {
+            background: var(--nile-deep);
+            color: #f5f0e6;
+            padding: 11px 22px;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.15s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn:hover { background: #032e36; }
+        .btn:active { transform: scale(0.98); }
+        .btn-secondary { background: var(--kush-deep); color: #fff; }
+        .btn-secondary:hover { background: #7d6328; }
+        .btn-outline {
+            background: transparent;
+            color: var(--nile-deep);
+            border: 1px solid var(--nile-deep);
+        }
+        .btn-outline:hover { background: var(--nile-deep); color: #f5f0e6; }
+        .btn-ghost {
+            background: transparent;
+            color: #f5f0e6;
+            border: 1px solid rgba(245, 240, 230, 0.55);
+        }
+        .btn-ghost:hover { background: rgba(245, 240, 230, 0.12); }
+        .btn-sm { padding: 8px 14px; font-size: 0.86rem; }
+        .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .results { margin-top: 16px; }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 18px;
+            margin-bottom: 12px;
+            border-inline-start: 3px solid var(--kush);
+            transition: border-color 0.2s;
+        }
+        .card:hover { border-color: var(--nile-mist); }
+        .card h4 {
+            font-family: var(--font-display);
+            color: var(--nile-deep);
+            margin-bottom: 10px;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+        .card p { color: var(--muted); font-size: 0.92rem; margin-bottom: 12px; }
+
+        .meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .meta-tag {
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            background: rgba(10, 95, 108, 0.1);
+            color: var(--nile);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--stone-dark);
+            margin: 10px 0 6px;
+            overflow: hidden;
+        }
+        .progress-bar > span {
+            display: block;
+            height: 100%;
+            background: var(--palm);
+            transition: width 0.35s ease;
+        }
+        .progress-label { font-size: 0.82rem; color: var(--muted); }
+
+        .card-actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+        }
+
+        .path-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            padding: 20px;
+            border-top: 3px solid var(--kush);
+            animation: fadeIn 0.45s ease both;
+        }
+        .path-card:nth-child(2) { animation-delay: 0.08s; }
+        .path-card:nth-child(3) { animation-delay: 0.16s; }
+        .path-card h4 {
+            font-family: var(--font-display);
+            color: var(--nile-deep);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        .path-card p { color: var(--muted); font-size: 0.92rem; margin-bottom: 14px; }
+        .path-card ul {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+        .path-card li {
+            padding: 6px 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+        .path-card li::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 2px;
+            background: var(--kush);
+            margin-inline-end: 8px;
+            vertical-align: middle;
+        }
+
+        .loading, .empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--muted);
+        }
+        .error {
+            background: #f8eaea;
+            color: #6e2424;
+            padding: 12px 14px;
+            border-radius: var(--radius);
+            margin: 10px 0;
+            border: 1px solid #e4c4c4;
+        }
+        .success {
+            background: #e8f3ec;
+            color: #1e4d35;
+            padding: 12px 14px;
+            border-radius: var(--radius);
+            margin: 10px 0;
+            border: 1px solid #b8d9c4;
+        }
+
+        .ai-panel {
+            padding-bottom: 16px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+        }
+        .ai-panel h3 {
+            font-family: var(--font-display);
+            color: var(--nile-deep);
+            margin-bottom: 6px;
+            font-size: 1.25rem;
+        }
+        .ai-panel > p {
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-bottom: 12px;
+        }
+        .ai-chat { display: flex; gap: 8px; margin-top: 10px; }
+        .ai-chat input { flex: 1; }
+        .ai-reply {
+            margin-top: 14px;
+            white-space: pre-wrap;
+            line-height: 1.75;
+        }
+        .ai-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .ai-suggestions button {
+            border: 1px solid var(--line);
+            background: #fff;
+            padding: 6px 10px;
+            font: inherit;
+            font-size: 0.82rem;
+            color: var(--nile);
+            cursor: pointer;
+        }
+        .ai-suggestions button:hover { border-color: var(--nile); }
+
+        .book-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-inline-start: 3px solid var(--kush);
+            padding: 14px;
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+        .book-card img {
+            width: 64px;
+            height: 90px;
+            object-fit: cover;
+            background: var(--stone-dark);
+        }
+        .book-card h4 {
+            font-family: var(--font-display);
+            color: var(--nile-deep);
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .book-card .authors { font-size: 0.84rem; color: var(--muted); margin-bottom: 8px; }
+        .source-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            padding: 14px;
+            margin-top: 12px;
+            border-inline-start: 3px solid var(--nile);
+        }
+        .source-card h4 {
+            font-family: var(--font-display);
+            color: var(--nile-deep);
+            margin-bottom: 6px;
+        }
+        .source-card a { color: var(--nile); font-weight: 600; }
+
+        .uni-row {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-inline-start: 3px solid var(--nile);
+            padding: 16px 18px;
+            margin-bottom: 10px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px 18px;
+            align-items: start;
+            animation: fadeIn 0.35s ease both;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .uni-row:hover {
+            border-color: var(--nile-mist);
+            background: rgba(247, 244, 238, 0.65);
+        }
+        .uni-row h4 {
+            font-family: var(--font-display);
+            color: var(--nile-deep);
+            font-size: 1.12rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .uni-row .uni-en {
+            font-size: 0.86rem;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+        .uni-row .uni-focus {
+            font-size: 0.9rem;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        .uni-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: stretch;
+            min-width: 120px;
+        }
+        .uni-count {
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin: 4px 0 12px;
+        }
+
+        .lesson-list { list-style: none; margin-top: 8px; }
+        .lesson-list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.92rem;
+        }
+        .lesson-list li.done { color: var(--palm); }
+        .lesson-list button {
+            border: 1px solid var(--line);
+            background: transparent;
+            padding: 5px 10px;
+            font: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--nile-deep);
+            cursor: pointer;
+        }
+        .lesson-list button:hover { background: rgba(10, 95, 108, 0.06); }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 30, 36, 0.62);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal {
+            background: var(--surface);
+            width: min(640px, 100%);
+            max-height: 90vh;
+            overflow: auto;
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-top: 3px solid var(--kush);
+            animation: fadeIn 0.2s ease;
+        }
+        .modal h3 {
+            font-family: var(--font-display);
+            color: var(--nile-deep);
+            margin-bottom: 6px;
+            font-size: 1.35rem;
+        }
+        .modal-summary {
+            color: var(--muted);
+            margin-bottom: 16px;
+            font-size: 0.92rem;
+        }
+        .lesson-body {
+            color: var(--ink);
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+        .lesson-body p { margin-bottom: 12px; }
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .site-footer {
+            text-align: center;
+            padding: 28px 16px 40px;
+            background: var(--nile-deep);
+            color: rgba(245, 240, 230, 0.7);
+            font-size: 0.88rem;
+        }
+        .site-footer strong {
+            color: var(--kush);
+            font-family: var(--font-display);
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px) {
+            .value-strip { grid-template-columns: 1fr 1fr; }
+            .value-item:nth-child(2) { border-inline-end: none; }
+            .value-item:nth-child(1),
+            .value-item:nth-child(2) { border-bottom: 1px solid var(--line); }
+            .stats-strip { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 640px) {
+            .brand { font-size: 2.2rem; }
+            .ai-chat { flex-direction: column; }
+            .tab { padding: 10px 12px; font-size: 0.88rem; }
+            .topbar { padding-top: 14px; }
+            .stats-strip { grid-template-columns: 1fr 1fr; }
+            .value-strip { grid-template-columns: 1fr; }
+            .value-item { border-inline-end: none; border-bottom: 1px solid var(--line); }
+            .value-item:last-child { border-bottom: none; }
+            .uni-row { grid-template-columns: 1fr; }
+            .uni-actions { flex-direction: row; min-width: 0; }
+            .topbar-actions a.nav-hide-sm { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <a class="topbar-brand" href="#top">
+            <img src="/images/wad-nooh-icon.png" width="42" height="42" alt="">
+            <span class="brand-text">ود نــــــــــــوح<small>ACADEMY</small></span>
+        </a>
+        <div class="topbar-actions">
+            <a href="#learn" class="nav-hide-sm" data-i18n="navCourses">الدورات</a>
+            <a href="#universities-tab" class="nav-hide-sm" onclick="openTab('universities'); return true;" data-i18n="navUnis">الجامعات</a>
+            <a href="/guide.html" data-i18n="guide">كيف تتعلم</a>
+            <a href="/admin.html" data-i18n="adminPanel">لوحة التحكم</a>
+            <span id="authGuest">
+                <button type="button" class="btn btn-ghost btn-sm" onclick="openModal('loginModal')" data-i18n="login">دخول</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="openModal('registerModal')" data-i18n="register">تسجيل</button>
+            </span>
+            <span id="authUser" style="display:none;align-items:center;gap:10px;">
+                <span id="userNameLabel" style="font-size:0.9rem;color:rgba(245,240,230,.9)"></span>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="logout()" data-i18n="logout">خروج</button>
+            </span>
+            <div class="lang-switch" role="group" aria-label="Language">
+                <button type="button" id="langAr" class="active" onclick="setLang('ar')">العربية</button>
+                <button type="button" id="langEn" onclick="setLang('en')">English</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="top" aria-label="Wad Nooh Academy">
+        <div class="hero-pattern" aria-hidden="true"></div>
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-content">
+            <div class="nubian-rule" aria-hidden="true"></div>
+            <h1 class="brand" data-i18n="brand">ودنوح AAMN للبرمجيات والكمبيوتر</h1>
+            <p class="hero-headline" data-i18n="heroHeadline">من النيل إلى العالم — تعلّم، استكشف الجامعات، وابنِ مسارك</p>
+            <p class="hero-lead" data-i18n="heroLead">دورات عملية، مسارات واضحة، دليل جامعات عالمية، ومساعد ذكي مع كتب مفتوحة — كلّها في منصة واحدة.</p>
+            <div class="hero-cta">
+                <a class="btn btn-secondary" href="#learn" data-i18n="ctaCourses">ابدأ التعلّم</a>
+                <a class="btn btn-ghost" href="#learn" onclick="openTab('universities')" data-i18n="ctaUnis">استكشف الجامعات</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="workspace" id="learn">
+        <div class="workspace-inner">
+            <div class="section-head">
+                <h2 data-i18n="workspaceTitle">منصّة أكاديمية متكاملة</h2>
+                <p data-i18n="workspaceSub">دورات · مسارات · جامعات عالمية · مساعد تعلّم وكتب · عضوية</p>
+            </div>
+
+            <div class="value-strip" aria-label="Services">
+                <div class="value-item">
+                    <strong data-i18n="valCoursesTitle">دورات ومسارات</strong>
+                    <span data-i18n="valCoursesDesc">لغات وحاسوب ومهارات بخطوات قصيرة قابلة للمتابعة.</span>
+                </div>
+                <div class="value-item">
+                    <strong data-i18n="valUnisTitle">دليل الجامعات</strong>
+                    <span data-i18n="valUnisDesc">جامعات ومصادر مفتوحة عالمية مع روابط رسمية.</span>
+                </div>
+                <div class="value-item">
+                    <strong data-i18n="valAiTitle">مساعد التعلّم</strong>
+                    <span data-i18n="valAiDesc">شرح موضوعات وكتب من ويكيبيديا وOpen Library.</span>
+                </div>
+                <div class="value-item">
+                    <strong data-i18n="valMineTitle">تعلّمي</strong>
+                    <span data-i18n="valMineDesc">تتبّع تقدّمك على الجهاز وعضوية اختيارية.</span>
+                </div>
+            </div>
+
+            <div class="stats-strip" aria-hidden="true">
+                <div class="stat-item"><strong id="statCourses">9</strong><span data-i18n="statCourses">دورات</span></div>
+                <div class="stat-item"><strong id="statLessons">0</strong><span data-i18n="statLessons">دروس</span></div>
+                <div class="stat-item"><strong id="statUnis">0</strong><span data-i18n="statUnis">جامعة</span></div>
+                <div class="stat-item"><strong id="statEnrolled">0</strong><span data-i18n="statEnrolled">ملتحق بها</span></div>
+            </div>
+
+            <div class="tabs" role="tablist">
+                <button class="tab active" data-tab="courses" type="button" data-i18n="tabCourses">الدورات</button>
+                <button class="tab" data-tab="paths" type="button" data-i18n="tabPaths">المسارات</button>
+                <button class="tab" data-tab="universities" type="button" id="universities-tab" data-i18n="tabUnis">الجامعات</button>
+                <button class="tab" data-tab="mine" type="button" data-i18n="tabMine">دوراتي</button>
+                <button class="tab" data-tab="ai" type="button" data-i18n="tabAi">مساعد التعلّم</button>
+                <button class="tab" data-tab="membership" type="button" data-i18n="tabMembership">العضوية</button>
+            </div>
+
+            <div id="courses" class="content active">
+                <div class="search-panel">
+                    <h3 data-i18n="coursesTitle">كتالوج الدورات</h3>
+                    <div class="filter-chips" id="categoryChips"></div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="courseSearch" data-i18n="searchLabel">بحث</label>
+                            <input type="search" id="courseSearch" data-i18n-placeholder="searchPh" placeholder="اسم الدورة أو الكلمة المفتاحية">
+                        </div>
+                        <div class="form-group">
+                            <label for="levelFilter" data-i18n="levelLabel">المستوى</label>
+                            <select id="levelFilter">
+                                <option value="" data-i18n="levelAll">الكل</option>
+                                <option value="beginner" data-i18n="levelBeginner">مبتدئ</option>
+                                <option value="intermediate" data-i18n="levelIntermediate">متوسط</option>
+                                <option value="advanced" data-i18n="levelAdvanced">متقدم</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="coursesResults" class="grid results"></div>
+            </div>
+
+            <div id="paths" class="content">
+                <div class="search-panel">
+                    <h3 data-i18n="pathsTitle">مسارات مقترحة</h3>
+                    <p style="color:var(--muted);margin-bottom:8px;" data-i18n="pathsHint">اختر مساراً وابدأ بالدورات المرتبطة به.</p>
+                </div>
+                <div id="pathsResults" class="grid"></div>
+            </div>
+
+            <div id="universities" class="content">
+                <div class="search-panel">
+                    <h3 data-i18n="unisTitle">دليل الجامعات والمصادر العالمية</h3>
+                    <p style="color:var(--muted);margin-bottom:12px;" data-i18n="unisHint">ابحث عن جامعات شهيرة ومصادر تعليم مفتوح — الروابط تفتح المواقع الرسمية.</p>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="uniSearch" data-i18n="uniSearchLabel">بحث</label>
+                            <input type="search" id="uniSearch" data-i18n-placeholder="uniSearchPh" placeholder="اسم الجامعة أو الدولة أو التخصص">
+                        </div>
+                        <div class="form-group">
+                            <label for="uniRegion" data-i18n="uniRegionLabel">المنطقة</label>
+                            <select id="uniRegion">
+                                <option value="" data-i18n="uniRegionAll">كل المناطق</option>
+                                <option value="africa" data-i18n="regAfrica">أفريقيا</option>
+                                <option value="middle_east" data-i18n="regMiddleEast">الشرق الأوسط</option>
+                                <option value="europe" data-i18n="regEurope">أوروبا</option>
+                                <option value="north_america" data-i18n="regNorthAmerica">أمريكا الشمالية</option>
+                                <option value="asia" data-i18n="regAsia">آسيا</option>
+                                <option value="oceania" data-i18n="regOceania">أوقيانوسيا</option>
+                                <option value="latin_america" data-i18n="regLatinAmerica">أمريكا اللاتينية</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="uniField" data-i18n="uniFieldLabel">المجال</label>
+                            <select id="uniField">
+                                <option value="" data-i18n="uniFieldAll">كل المجالات</option>
+                                <option value="general" data-i18n="fieldGeneral">عام</option>
+                                <option value="engineering" data-i18n="fieldEngineering">تقنية</option>
+                                <option value="computer" data-i18n="fieldComputer">حوسبة</option>
+                                <option value="medicine" data-i18n="fieldMedicine">طب</option>
+                                <option value="business" data-i18n="fieldBusiness">أعمال</option>
+                                <option value="arts" data-i18n="fieldArts">فنون وإنسانيات</option>
+                                <option value="open" data-i18n="fieldOpen">تعليم مفتوح</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="uni-count" id="uniCount"></div>
+                </div>
+                <div id="universitiesResults" class="results"></div>
+            </div>
+
+            <div id="mine" class="content">
+                <div class="search-panel">
+                    <h3 data-i18n="mineTitle">دوراتي وتقدّمي</h3>
+                    <p style="color:var(--muted);margin-bottom:8px;" data-i18n="mineHint">يُحفظ تقدّمك على هذا الجهاز.</p>
+                </div>
+                <div id="mineResults" class="results"></div>
+            </div>
+
+            <div id="ai" class="content">
+                <div class="ai-panel">
+                    <h3 data-i18n="aiTitle">مساعد تعلّم ودنوح</h3>
+                    <p data-i18n="aiHint">اسأل عن مفهوم أو جامعة أو مسار — نجلب الملخص من ويكيبيديا والكتب من Open Library (ومع OpenAI إن وُجد المفتاح).</p>
+                    <div class="ai-chat">
+                        <input type="text" id="aiMessage" data-i18n-placeholder="aiPh" placeholder="مثال: اشرح HTML أو كتب عن إدارة الوقت أو جامعة أكسفورد">
+                        <button class="btn btn-secondary" type="button" onclick="askStudyAi()" data-i18n="ask">اسأل</button>
+                        <button class="btn btn-outline" type="button" onclick="searchBooksOnly()" data-i18n="findBooks">كتب</button>
+                    </div>
+                    <div class="ai-suggestions" id="aiSuggestions"></div>
+                    <div id="aiReply" class="ai-reply"></div>
+                    <div id="aiSources" class="results"></div>
+                    <div id="aiBooks" class="grid results"></div>
+                </div>
+            </div>
+
+            <div id="membership" class="content">
+                <div class="search-panel">
+                    <h3 data-i18n="membershipTitle">عضوية ودنوح AAMN للبرمجيات والكمبيوتر</h3>
+                    <p style="color:var(--muted);margin-bottom:14px;" data-i18n="membershipHint">سجّل مجاناً، ثم اختر باقة اختيارية لدعم رحلتك التعليمية.</p>
+                    <div id="membershipStatus" style="margin-bottom:14px;color:var(--muted);font-size:0.92rem;"></div>
+                    <div id="membershipPlans" class="grid"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <strong>ودنوح AAMN للبرمجيات والكمبيوتر</strong> · wadnooh.com · <span data-i18n="footerTag">تعلّم بروح النيل</span>
+        · <a href="/admin.html" style="color:var(--kush);text-decoration:none;">Admin</a>
+    </footer>
+
+    <div id="loginModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal">
+            <h3 data-i18n="login">دخول</h3>
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input id="loginEmail" type="email" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword" data-i18n="password">كلمة المرور</label>
+                <input id="loginPassword" type="password" required>
+            </div>
+            <div id="loginMsg"></div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" type="button" onclick="closeModal('loginModal')" data-i18n="cancel">إلغاء</button>
+                <button class="btn btn-secondary" type="button" onclick="doLogin()" data-i18n="login">دخول</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal">
+            <h3 data-i18n="register">تسجيل</h3>
+            <div class="form-group">
+                <label for="regName" data-i18n="fullName">الاسم الكامل</label>
+                <input id="regName" type="text" required>
+            </div>
+            <div class="form-group">
+                <label for="regEmail">Email</label>
+                <input id="regEmail" type="email" required>
+            </div>
+            <div class="form-group">
+                <label for="regPhone" data-i18n="phone">الهاتف</label>
+                <input id="regPhone" type="tel">
+            </div>
+            <div class="form-group">
+                <label for="regPassword" data-i18n="password">كلمة المرور</label>
+                <input id="regPassword" type="password" required minlength="6">
+            </div>
+            <div id="registerMsg"></div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" type="button" onclick="closeModal('registerModal')" data-i18n="cancel">إلغاء</button>
+                <button class="btn btn-secondary" type="button" onclick="doRegister()" data-i18n="register">تسجيل</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="demoPayModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal">
+            <h3 data-i18n="demoPayTitle">إتمام الدفع التجريبي</h3>
+            <p id="demoPaySummary" class="modal-summary"></p>
+            <div id="demoPayMsg"></div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" type="button" onclick="closeModal('demoPayModal')" data-i18n="cancel">إلغاء</button>
+                <button class="btn btn-secondary" type="button" onclick="completeDemoPayment()" data-i18n="payNow">ادفع الآن</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="courseModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal">
+            <h3 id="courseModalTitle"></h3>
+            <p id="courseModalSummary" class="modal-summary"></p>
+            <ul class="lesson-list" id="courseModalLessons"></ul>
+            <div class="modal-actions">
+                <button class="btn btn-outline" type="button" onclick="closeModal('courseModal')" data-i18n="close">إغلاق</button>
+                <button class="btn btn-secondary" type="button" id="courseEnrollBtn" onclick="enrollFromModal()" data-i18n="enroll">الالتحاق بالدورة</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="lessonModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal">
+            <h3 id="lessonModalTitle"></h3>
+            <p id="lessonModalMeta" class="modal-summary"></p>
+            <div class="lesson-body" id="lessonModalBody"></div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" type="button" onclick="closeModal('lessonModal')" data-i18n="close">إغلاق</button>
+                <button class="btn btn-secondary" type="button" id="lessonCompleteBtn" onclick="completeCurrentLesson()" data-i18n="markDone">إتمام الدرس</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://sacrifice-logged-montreal-input.trycloudflare.com/api';
+        let authToken = localStorage.getItem('wadnooh_token') || '';
+        let currentUser = null;
+        let pendingDemoPaymentId = null;
+        let activeCategory = 'all';
+        let openCourseId = null;
+        let activeLesson = null;
+        let universitiesData = [];
+        let universitiesLoaded = false;
+        let currentLang = (() => {
+            const saved = localStorage.getItem('wadnooh_lang');
+            if (saved === 'en' || saved === 'ar') return saved;
+            const q = new URLSearchParams(location.search).get('lang');
+            if (q === 'en' || q === 'ar') return q;
+            return (navigator.language || '').toLowerCase().startsWith('en') ? 'en' : 'ar';
+        })();
+
+        const PROGRESS_KEY = 'wadnooh_academy_progress';
+
+        const I18N = {
+            ar: {
+                brand: 'ودنوح AAMN للبرمجيات والكمبيوتر',
+                heroHeadline: 'من النيل إلى العالم — تعلّم، استكشف الجامعات، وابنِ مسارك',
+                heroLead: 'دورات عملية، مسارات واضحة، دليل جامعات عالمية، ومساعد ذكي مع كتب مفتوحة — كلّها في منصة واحدة.',
+                ctaCourses: 'ابدأ التعلّم',
+                ctaUnis: 'استكشف الجامعات',
+                ctaGuide: 'كيف تتعلم معنا',
+                workspaceTitle: 'منصّة أكاديمية متكاملة',
+                workspaceSub: 'دورات · مسارات · جامعات عالمية · مساعد تعلّم وكتب · عضوية',
+                navCourses: 'الدورات',
+                navUnis: 'الجامعات',
+                guide: 'كيف تتعلم',
+                adminPanel: 'لوحة التحكم',
+                login: 'دخول', register: 'تسجيل', logout: 'خروج',
+                password: 'كلمة المرور', fullName: 'الاسم الكامل', phone: 'الهاتف',
+                cancel: 'إلغاء', close: 'إغلاق',
+                tabCourses: 'الدورات', tabPaths: 'المسارات', tabUnis: 'الجامعات', tabMine: 'دوراتي',
+                tabAi: 'مساعد التعلّم', tabMembership: 'العضوية',
+                valCoursesTitle: 'دورات ومسارات',
+                valCoursesDesc: 'لغات وحاسوب ومهارات بخطوات قصيرة قابلة للمتابعة.',
+                valUnisTitle: 'دليل الجامعات',
+                valUnisDesc: 'جامعات ومصادر مفتوحة عالمية مع روابط رسمية.',
+                valAiTitle: 'مساعد التعلّم',
+                valAiDesc: 'شرح موضوعات وكتب من ويكيبيديا وOpen Library.',
+                valMineTitle: 'تعلّمي',
+                valMineDesc: 'تتبّع تقدّمك على الجهاز وعضوية اختيارية.',
+                coursesTitle: 'كتالوج الدورات',
+                pathsTitle: 'مسارات مقترحة',
+                pathsHint: 'اختر مساراً وابدأ بالدورات المرتبطة به.',
+                mineTitle: 'دوراتي وتقدّمي',
+                mineHint: 'يُحفظ تقدّمك على هذا الجهاز.',
+                unisTitle: 'دليل الجامعات والمصادر العالمية',
+                unisHint: 'ابحث عن جامعات شهيرة ومصادر تعليم مفتوح — الروابط تفتح المواقع الرسمية.',
+                uniSearchLabel: 'بحث',
+                uniSearchPh: 'اسم الجامعة أو الدولة أو التخصص',
+                uniRegionLabel: 'المنطقة',
+                uniRegionAll: 'كل المناطق',
+                uniFieldLabel: 'المجال',
+                uniFieldAll: 'كل المجالات',
+                uniVisit: 'الموقع الرسمي',
+                uniAskAi: 'اسأل المساعد',
+                uniLoading: 'جاري تحميل دليل الجامعات...',
+                uniFailed: 'تعذر تحميل دليل الجامعات',
+                uniNone: 'لا توجد جامعات مطابقة',
+                uniShowing: 'عرض',
+                uniOf: 'من',
+                regAfrica: 'أفريقيا',
+                regMiddleEast: 'الشرق الأوسط',
+                regEurope: 'أوروبا',
+                regNorthAmerica: 'أمريكا الشمالية',
+                regAsia: 'آسيا',
+                regOceania: 'أوقيانوسيا',
+                regLatinAmerica: 'أمريكا اللاتينية',
+                fieldGeneral: 'عام',
+                fieldEngineering: 'تقنية',
+                fieldComputer: 'حوسبة',
+                fieldMedicine: 'طب',
+                fieldBusiness: 'أعمال',
+                fieldArts: 'فنون وإنسانيات',
+                fieldOpen: 'تعليم مفتوح',
+                aiTitle: 'مساعد تعلّم ودنوح',
+                aiHint: 'اسأل عن مفهوم أو جامعة أو مسار — نجلب الملخص من ويكيبيديا والكتب من Open Library (ومع OpenAI إن وُجد المفتاح).',
+                aiPh: 'مثال: اشرح HTML أو كتب عن إدارة الوقت أو جامعة أكسفورد',
+                ask: 'اسأل',
+                findBooks: 'كتب',
+                booksTitle: 'كتب مقترحة',
+                openBook: 'فتح',
+                readBook: 'قراءة',
+                sourcesTitle: 'مصدر المعرفة',
+                aiLoading: 'جاري جلب المعلومات والكتب...',
+                aiFailed: 'تعذر الاتصال بالمساعد — تأكد أن الخادم يعمل',
+                membershipTitle: 'عضوية ودنوح AAMN للبرمجيات والكمبيوتر',
+                membershipHint: 'سجّل مجاناً، ثم اختر باقة اختيارية لدعم رحلتك التعليمية.',
+                subscribe: 'اشترك الآن',
+                searchLabel: 'بحث',
+                searchPh: 'اسم الدورة أو الكلمة المفتاحية',
+                levelLabel: 'المستوى',
+                levelAll: 'الكل', levelBeginner: 'مبتدئ', levelIntermediate: 'متوسط', levelAdvanced: 'متقدم',
+                catAll: 'الكل', catLanguages: 'لغات', catComputer: 'حاسوب', catSkills: 'مهارات',
+                enroll: 'الالتحاق', enrolled: 'ملتحق',
+                openCourse: 'فتح الدورة',
+                continueLearning: 'متابعة التعلم',
+                markDone: 'إتمام الدرس',
+                viewPath: 'عرض الدورات',
+                noCourses: 'لا توجد دورات مطابقة',
+                noEnrolled: 'لم تلتحق بأي دورة بعد — اختر من الكتالوج.',
+                lessons: 'دروس',
+                duration: 'المدة',
+                level: 'المستوى',
+                progress: 'التقدّم',
+                completed: 'مكتمل',
+                demoPayTitle: 'إتمام الدفع التجريبي',
+                payNow: 'ادفع الآن',
+                loginRequired: 'سجّل الدخول أولاً',
+                footerTag: 'تعلّم بروح النيل',
+                statCourses: 'دورات',
+                statLessons: 'دروس',
+                statUnis: 'جامعة',
+                statEnrolled: 'ملتحق بها',
+                hours: 'ساعات'
+            },
+            en: {
+                brand: 'Wad Nooh Academy',
+                heroHeadline: 'From the Nile to the world — learn, explore universities, build your path',
+                heroLead: 'Practical courses, clear paths, a global university directory, and an AI study assistant with open books — in one platform.',
+                ctaCourses: 'Start learning',
+                ctaUnis: 'Explore universities',
+                ctaGuide: 'How learning works',
+                workspaceTitle: 'An integrated academy platform',
+                workspaceSub: 'Courses · Paths · Global universities · Study assistant & books · Membership',
+                navCourses: 'Courses',
+                navUnis: 'Universities',
+                guide: 'How to learn',
+                adminPanel: 'Control Panel',
+                login: 'Login', register: 'Register', logout: 'Logout',
+                password: 'Password', fullName: 'Full name', phone: 'Phone',
+                cancel: 'Cancel', close: 'Close',
+                tabCourses: 'Courses', tabPaths: 'Paths', tabUnis: 'Universities', tabMine: 'My learning',
+                tabAi: 'Study assistant', tabMembership: 'Membership',
+                valCoursesTitle: 'Courses & paths',
+                valCoursesDesc: 'Languages, computer, and skills in short trackable steps.',
+                valUnisTitle: 'University directory',
+                valUnisDesc: 'Global universities and open resources with official links.',
+                valAiTitle: 'Study assistant',
+                valAiDesc: 'Topic explainers and books via Wikipedia and Open Library.',
+                valMineTitle: 'My learning',
+                valMineDesc: 'Track progress on this device; optional membership.',
+                coursesTitle: 'Course catalog',
+                pathsTitle: 'Suggested paths',
+                pathsHint: 'Pick a path and start the linked courses.',
+                mineTitle: 'My courses & progress',
+                mineHint: 'Your progress is saved on this device.',
+                unisTitle: 'Global universities & open resources',
+                unisHint: 'Browse well-known universities and open learning portals — links open official sites.',
+                uniSearchLabel: 'Search',
+                uniSearchPh: 'University, country, or field',
+                uniRegionLabel: 'Region',
+                uniRegionAll: 'All regions',
+                uniFieldLabel: 'Field',
+                uniFieldAll: 'All fields',
+                uniVisit: 'Official site',
+                uniAskAi: 'Ask assistant',
+                uniLoading: 'Loading university directory...',
+                uniFailed: 'Could not load university directory',
+                uniNone: 'No matching universities',
+                uniShowing: 'Showing',
+                uniOf: 'of',
+                regAfrica: 'Africa',
+                regMiddleEast: 'Middle East',
+                regEurope: 'Europe',
+                regNorthAmerica: 'North America',
+                regAsia: 'Asia',
+                regOceania: 'Oceania',
+                regLatinAmerica: 'Latin America',
+                fieldGeneral: 'General',
+                fieldEngineering: 'Engineering',
+                fieldComputer: 'Computing',
+                fieldMedicine: 'Medicine',
+                fieldBusiness: 'Business',
+                fieldArts: 'Arts & humanities',
+                fieldOpen: 'Open learning',
+                aiTitle: 'Wad Nooh study assistant',
+                aiHint: 'Ask about a concept, university, or learning path — we fetch Wikipedia summaries and Open Library titles (plus OpenAI when configured).',
+                aiPh: 'e.g. explain HTML, books on time management, or University of Oxford',
+                ask: 'Ask',
+                findBooks: 'Books',
+                booksTitle: 'Suggested books',
+                openBook: 'Open',
+                readBook: 'Read',
+                sourcesTitle: 'Knowledge source',
+                aiLoading: 'Fetching information and books...',
+                aiFailed: 'Could not reach the assistant — check that the server is running',
+                membershipTitle: 'Wad Nooh Academy membership',
+                membershipHint: 'Register free, then optionally upgrade to support your learning journey.',
+                subscribe: 'Subscribe',
+                searchLabel: 'Search',
+                searchPh: 'Course name or keyword',
+                levelLabel: 'Level',
+                levelAll: 'All', levelBeginner: 'Beginner', levelIntermediate: 'Intermediate', levelAdvanced: 'Advanced',
+                catAll: 'All', catLanguages: 'Languages', catComputer: 'Computer', catSkills: 'Skills',
+                enroll: 'Enroll', enrolled: 'Enrolled',
+                openCourse: 'Open course',
+                continueLearning: 'Continue',
+                markDone: 'Mark complete',
+                viewPath: 'View courses',
+                noCourses: 'No matching courses',
+                noEnrolled: 'No enrolled courses yet — pick from the catalog.',
+                lessons: 'lessons',
+                duration: 'Duration',
+                level: 'Level',
+                progress: 'Progress',
+                completed: 'Completed',
+                demoPayTitle: 'Complete demo payment',
+                payNow: 'Pay now',
+                loginRequired: 'Please log in first',
+                footerTag: 'Learn with the spirit of the Nile',
+                statCourses: 'Courses',
+                statLessons: 'Lessons',
+                statUnis: 'Universities',
+                statEnrolled: 'Enrolled',
+                hours: 'hours'
+            }
+        };
+
+        const CATEGORIES = [
+            { id: 'all', key: 'catAll' },
+            { id: 'languages', key: 'catLanguages' },
+            { id: 'computer', key: 'catComputer' },
+            { id: 'skills', key: 'catSkills' }
+        ];
+
+        const COURSES = [
+            {
+                id: 'comp-basics',
+                category: 'computer',
+                level: 'beginner',
+                hours: 4,
+                title: { ar: 'أساسيات الحاسوب', en: 'Computer Basics' },
+                desc: {
+                    ar: 'تعرّف على أجزاء الجهاز، نظام التشغيل، والملفات والإنترنت بأمان.',
+                    en: 'Learn hardware parts, the operating system, files, and safe internet use.'
+                },
+                lessons: [
+                    {
+                        id: 'cb1',
+                        title: { ar: 'ما هو الحاسوب؟', en: 'What is a computer?' },
+                        body: {
+                            ar: 'الحاسوب جهاز يعالج البيانات: إدخال، معالجة، إخراج، وتخزين. فهم هذه الدورة يساعدك على استخدام أي جهاز بثقة.',
+                            en: 'A computer processes data through input, processing, output, and storage. Understanding this cycle builds confidence on any device.'
+                        }
+                    },
+                    {
+                        id: 'cb2',
+                        title: { ar: 'الملفات والمجلدات', en: 'Files and folders' },
+                        body: {
+                            ar: 'نظّم عملك بمجلدات واضحة، سمِّ الملفات بأسماء مفهومة، واحفظ نسخاً احتياطية مهمة.',
+                            en: 'Organize work with clear folders, name files meaningfully, and keep backups of important work.'
+                        }
+                    },
+                    {
+                        id: 'cb3',
+                        title: { ar: 'الإنترنت بأمان', en: 'Safe internet use' },
+                        body: {
+                            ar: 'استخدم كلمات مرور قوية، لا تشارك بياناتك الحساسة، وتحقق من الروابط قبل النقر.',
+                            en: 'Use strong passwords, never share sensitive data, and verify links before clicking.'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'eng-beginner',
+                category: 'languages',
+                level: 'beginner',
+                hours: 6,
+                title: { ar: 'الإنجليزية للمبتدئين', en: 'English for Beginners' },
+                desc: {
+                    ar: 'مفردات يومية، جمل بسيطة، ومحادثة أساسية للعمل والسفر.',
+                    en: 'Everyday vocabulary, simple sentences, and basic conversation for work and travel.'
+                },
+                lessons: [
+                    {
+                        id: 'eb1',
+                        title: { ar: 'التحية والتعارف', en: 'Greetings and introductions' },
+                        body: {
+                            ar: 'Hello / Hi — My name is… — Nice to meet you. تدرب على تقديم نفسك بجمل قصيرة.',
+                            en: 'Hello / Hi — My name is… — Nice to meet you. Practice introducing yourself in short sentences.'
+                        }
+                    },
+                    {
+                        id: 'eb2',
+                        title: { ar: 'الأرقام والوقت', en: 'Numbers and time' },
+                        body: {
+                            ar: 'تعلّم الأرقام من 1 إلى 100 وصِغ الوقت: It is three o’clock / half past four.',
+                            en: 'Learn numbers 1–100 and tell the time: It is three o’clock / half past four.'
+                        }
+                    },
+                    {
+                        id: 'eb3',
+                        title: { ar: 'طلب المساعدة', en: 'Asking for help' },
+                        body: {
+                            ar: 'Can you help me? / Where is…? / How much is this? عبارات عملية للمواقف اليومية.',
+                            en: 'Can you help me? / Where is…? / How much is this? Practical phrases for daily situations.'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'ar-foreign',
+                category: 'languages',
+                level: 'beginner',
+                hours: 6,
+                title: { ar: 'العربية لغير الناطقين بها', en: 'Arabic for Non-Native Speakers' },
+                desc: {
+                    ar: 'الحروف، الأصوات، وجمل تواصل أساسية باللهجة الفصحى المبسطة.',
+                    en: 'Letters, sounds, and essential communication phrases in simplified Modern Standard Arabic.'
+                },
+                lessons: [
+                    {
+                        id: 'af1',
+                        title: { ar: 'الحروف والأصوات', en: 'Letters and sounds' },
+                        body: {
+                            ar: 'الأبجدية العربية 28 حرفاً. ركّز على نطق الحروف الخاصة مثل ع، غ، ق، ح.',
+                            en: 'Arabic has 28 letters. Focus on distinctive sounds such as ع، غ، ق، ح.'
+                        }
+                    },
+                    {
+                        id: 'af2',
+                        title: { ar: 'جمل التعارف', en: 'Introduction phrases' },
+                        body: {
+                            ar: 'السلام عليكم — اسمي… — من أين أنت؟ — أنا بخير، شكراً.',
+                            en: 'As-salamu alaykum — My name is… — Where are you from? — I am fine, thank you.'
+                        }
+                    },
+                    {
+                        id: 'af3',
+                        title: { ar: 'في السوق', en: 'At the market' },
+                        body: {
+                            ar: 'بكم هذا؟ — غالي قليلاً — أريد كيلو… — شكراً جزيلاً.',
+                            en: 'How much is this? — A bit expensive — I want a kilo of… — Thank you very much.'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'comm-skills',
+                category: 'skills',
+                level: 'beginner',
+                hours: 5,
+                title: { ar: 'مهارات التواصل', en: 'Communication Skills' },
+                desc: {
+                    ar: 'الاستماع الفعّال، وضوح الرسالة، والتواصل باحترام في العمل والدراسة.',
+                    en: 'Active listening, clear messaging, and respectful communication at work and study.'
+                },
+                lessons: [
+                    {
+                        id: 'cs1',
+                        title: { ar: 'الاستماع أولاً', en: 'Listen first' },
+                        body: {
+                            ar: 'قبل الرد، لخّص ما سمعته. هذا يقلل سوء الفهم ويبني ثقة.',
+                            en: 'Before replying, summarize what you heard. This reduces misunderstanding and builds trust.'
+                        }
+                    },
+                    {
+                        id: 'cs2',
+                        title: { ar: 'رسالة واضحة', en: 'Clear messages' },
+                        body: {
+                            ar: 'ابدأ بالنقطة الأساسية، ثم التفاصيل، واختتم بطلب واضح إن وُجد.',
+                            en: 'Lead with the main point, then details, and end with a clear ask if needed.'
+                        }
+                    },
+                    {
+                        id: 'cs3',
+                        title: { ar: 'التغذية الراجعة', en: 'Giving feedback' },
+                        body: {
+                            ar: 'صف السلوك لا الشخص، واقترح بديلاً عملياً، واشكر الجهد.',
+                            en: 'Describe the behavior—not the person—suggest a practical alternative, and acknowledge effort.'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'web-intro',
+                category: 'computer',
+                level: 'intermediate',
+                hours: 8,
+                title: { ar: 'مقدمة البرمجة الويب', en: 'Intro to Web Development' },
+                desc: {
+                    ar: 'HTML وCSS وجافاسكريبت الأساسية لبناء صفحات بسيطة.',
+                    en: 'HTML, CSS, and basic JavaScript to build simple pages.'
+                },
+                lessons: [
+                    {
+                        id: 'wi1',
+                        title: { ar: 'هيكل HTML', en: 'HTML structure' },
+                        body: {
+                            ar: 'الصفحة تتكون من html و head و body. استخدم عناوين وفقرات وروابط بشكل دلالي.',
+                            en: 'A page has html, head, and body. Use headings, paragraphs, and links semantically.'
+                        }
+                    },
+                    {
+                        id: 'wi2',
+                        title: { ar: 'تنسيق CSS', en: 'Styling with CSS' },
+                        body: {
+                            ar: 'اللون والخط والمسافات تحدد الهوية البصرية. ابدأ بمتغيرات بسيطة وتنسيق الأقسام.',
+                            en: 'Color, type, and spacing shape visual identity. Start with simple variables and section styles.'
+                        }
+                    },
+                    {
+                        id: 'wi3',
+                        title: { ar: 'تفاعل بسيط', en: 'Simple interactivity' },
+                        body: {
+                            ar: 'جافاسكريبت تربط الأزرار بالأحداث. جرّب تغيير نص عند النقر كأول خطوة.',
+                            en: 'JavaScript connects buttons to events. Try changing text on click as a first step.'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'time-productivity',
+                category: 'skills',
+                level: 'beginner',
+                hours: 4,
+                title: { ar: 'إدارة الوقت والإنتاجية', en: 'Time & Productivity' },
+                desc: {
+                    ar: 'أولويات، تقنية بومودورو، وعادات يومية تحافظ على تركيزك.',
+                    en: 'Priorities, Pomodoro technique, and daily habits that protect focus.'
+                },
+                lessons: [
+                    {
+                        id: 'tp1',
+                        title: { ar: 'مصفوفة الأولويات', en: 'Priority matrix' },
+                        body: {
+                            ar: 'فرّق بين العاجل والمهم. أنجز المهم قبل أن يصبح عاجلاً.',
+                            en: 'Separate urgent from important. Finish important work before it becomes urgent.'
+                        }
+                    },
+                    {
+                        id: 'tp2',
+                        title: { ar: 'جلسات التركيز', en: 'Focus sessions' },
+                        body: {
+                            ar: '25 دقيقة عمل + 5 راحة. بعد أربع جلسات خذ راحة أطول.',
+                            en: '25 minutes work + 5 minutes break. After four sessions, take a longer break.'
+                        }
+                    },
+                    {
+                        id: 'tp3',
+                        title: { ar: 'عادة صغيرة يومياً', en: 'Tiny daily habits' },
+                        body: {
+                            ar: 'اختر عادة واحدة لمدة أسبوعين فقط. الثبات أهم من الكمال.',
+                            en: 'Pick one habit for two weeks only. Consistency beats perfection.'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'office-tools',
+                category: 'computer',
+                level: 'beginner',
+                hours: 5,
+                title: { ar: 'أدوات المكتب الرقمية', en: 'Digital Office Tools' },
+                desc: {
+                    ar: 'جداول، عروض، ومستندات تعاونية للعمل والدراسة.',
+                    en: 'Spreadsheets, presentations, and collaborative documents for work and study.'
+                },
+                lessons: [
+                    {
+                        id: 'ot1',
+                        title: { ar: 'المستندات', en: 'Documents' },
+                        body: {
+                            ar: 'استخدم العناوين والأنماط لتسهيل القراءة، وفعّل التعليقات للمراجعة الجماعية.',
+                            en: 'Use headings and styles for readability, and comments for collaborative review.'
+                        }
+                    },
+                    {
+                        id: 'ot2',
+                        title: { ar: 'الجداول', en: 'Spreadsheets' },
+                        body: {
+                            ar: 'صف واحد لكل سجل، وصِغ بسيطة مثل المجموع والمتوسط لفهم الأرقام بسرعة.',
+                            en: 'One row per record, and simple formulas like SUM and AVERAGE to understand numbers fast.'
+                        }
+                    },
+                    {
+                        id: 'ot3',
+                        title: { ar: 'العروض', en: 'Presentations' },
+                        body: {
+                            ar: 'شريحة واحدة = فكرة واحدة. قلّل النص وزِد الوضوح البصري.',
+                            en: 'One slide = one idea. Reduce text and increase visual clarity.'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'eng-work',
+                category: 'languages',
+                level: 'intermediate',
+                hours: 7,
+                title: { ar: 'الإنجليزية للعمل', en: 'English for Work' },
+                desc: {
+                    ar: 'رسائل بريد، اجتماعات، وعبارات مهنية للاستخدام اليومي في الوظيفة.',
+                    en: 'Emails, meetings, and professional phrases for daily workplace use.'
+                },
+                lessons: [
+                    {
+                        id: 'ew1',
+                        title: { ar: 'كتابة بريد مهني', en: 'Writing a professional email' },
+                        body: {
+                            ar: 'Subject واضح، تحية، غرض الرسالة، طلب، وخاتمة مهذبة.',
+                            en: 'Clear subject, greeting, purpose, ask, and a polite closing.'
+                        }
+                    },
+                    {
+                        id: 'ew2',
+                        title: { ar: 'في الاجتماع', en: 'In meetings' },
+                        body: {
+                            ar: 'I’d like to add… / Could you clarify… / Let’s follow up on…',
+                            en: 'I’d like to add… / Could you clarify… / Let’s follow up on…'
+                        }
+                    },
+                    {
+                        id: 'ew3',
+                        title: { ar: 'تقديم فكرة', en: 'Pitching an idea' },
+                        body: {
+                            ar: 'المشكلة → الحل → الفائدة → الخطوة التالية. اختصر في أقل من دقيقة.',
+                            en: 'Problem → solution → benefit → next step. Keep it under a minute.'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'career-start',
+                category: 'skills',
+                level: 'intermediate',
+                hours: 5,
+                title: { ar: 'انطلاقة مهنية', en: 'Career Kickstart' },
+                desc: {
+                    ar: 'بناء ملف شخصي، كتابة سيرة ذاتية، والتحضير لمقابلة عمل.',
+                    en: 'Build a profile, write a CV, and prepare for a job interview.'
+                },
+                lessons: [
+                    {
+                        id: 'ck1',
+                        title: { ar: 'ملفّك المهني', en: 'Your professional profile' },
+                        body: {
+                            ar: 'اجمع إنجازات قابلة للقياس ومهارات تثبتها بأمثلة حقيقية.',
+                            en: 'Gather measurable achievements and skills backed by real examples.'
+                        }
+                    },
+                    {
+                        id: 'ck2',
+                        title: { ar: 'السيرة الذاتية', en: 'CV essentials' },
+                        body: {
+                            ar: 'صفحة أو صفحتان، نتائج لا مهام فقط، وتكييف النص لكل وظيفة.',
+                            en: 'One or two pages, results not only tasks, and tailor the text for each role.'
+                        }
+                    },
+                    {
+                        id: 'ck3',
+                        title: { ar: 'المقابلة', en: 'The interview' },
+                        body: {
+                            ar: 'حضّر قصة قصيرة عن نفسك، أمثلة STAR، وأسئلة تسألها أنت أيضاً.',
+                            en: 'Prepare a short self-intro, STAR examples, and questions you will ask too.'
+                        }
+                    }
+                ]
+            }
+        ];
+
+        const PATHS = [
+            {
+                id: 'digital-start',
+                title: { ar: 'مبتدئ رقمي', en: 'Digital starter' },
+                desc: {
+                    ar: 'من تشغيل الجهاز إلى أدوات المكتب الأساسية.',
+                    en: 'From using a computer to essential office tools.'
+                },
+                courseIds: ['comp-basics', 'office-tools', 'time-productivity']
+            },
+            {
+                id: 'language-comm',
+                title: { ar: 'لغة للتواصل', en: 'Language for connection' },
+                desc: {
+                    ar: 'ابنِ جسراً لغوياً ثم طوّر مهارات الحوار.',
+                    en: 'Build a language bridge, then strengthen conversation skills.'
+                },
+                courseIds: ['eng-beginner', 'ar-foreign', 'comm-skills']
+            },
+            {
+                id: 'career-path',
+                title: { ar: 'مهارات مهنية', en: 'Professional skills' },
+                desc: {
+                    ar: 'ويب، إنجليزية عمل، وانطلاقة نحو وظيفة أفضل.',
+                    en: 'Web basics, workplace English, and a stronger career start.'
+                },
+                courseIds: ['web-intro', 'eng-work', 'career-start']
+            }
+        ];
+
+        function t(key) {
+            return (I18N[currentLang] && I18N[currentLang][key]) || I18N.ar[key] || key;
+        }
+
+        function loc(obj) {
+            if (!obj) return '';
+            return obj[currentLang] || obj.ar || obj.en || '';
+        }
+
+        function levelLabel(level) {
+            if (level === 'beginner') return t('levelBeginner');
+            if (level === 'intermediate') return t('levelIntermediate');
+            if (level === 'advanced') return t('levelAdvanced');
+            return level;
+        }
+
+        function getProgress() {
+            try {
+                return JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}') || {};
+            } catch {
+                return {};
+            }
+        }
+
+        function saveProgress(data) {
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(data));
+            updateStats();
+        }
+
+        function ensureCourseProgress(courseId) {
+            const data = getProgress();
+            if (!data[courseId]) {
+                data[courseId] = { enrolled: true, completed: [] };
+                saveProgress(data);
+            } else if (!data[courseId].enrolled) {
+                data[courseId].enrolled = true;
+                saveProgress(data);
+            }
+            return data[courseId];
+        }
+
+        function courseProgressPercent(course) {
+            const p = getProgress()[course.id];
+            if (!p?.enrolled) return 0;
+            const done = (p.completed || []).length;
+            return Math.round((done / course.lessons.length) * 100);
+        }
+
+        function isEnrolled(courseId) {
+            return !!getProgress()[courseId]?.enrolled;
+        }
+
+        function setLang(lang) {
+            currentLang = lang === 'en' ? 'en' : 'ar';
+            localStorage.setItem('wadnooh_lang', currentLang);
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('langAr')?.classList.toggle('active', currentLang === 'ar');
+            document.getElementById('langEn')?.classList.toggle('active', currentLang === 'en');
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (key && I18N[currentLang][key]) el.textContent = I18N[currentLang][key];
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (key && I18N[currentLang][key]) el.setAttribute('placeholder', I18N[currentLang][key]);
+            });
+            document.title = currentLang === 'en'
+                ? 'Wad Nooh Academy | ودنوح AAMN للبرمجيات والكمبيوتر'
+                : 'ودنوح AAMN للبرمجيات والكمبيوتر | Wad Nooh Academy';
+            renderCategoryChips();
+            renderCourses();
+            renderPaths();
+            renderMine();
+            renderUniversities();
+            renderAiSuggestions();
+            loadMembershipPlans();
+        }
+
+        function renderCategoryChips() {
+            const box = document.getElementById('categoryChips');
+            if (!box) return;
+            box.innerHTML = CATEGORIES.map(c =>
+                `<button type="button" class="${activeCategory === c.id ? 'active' : ''}" onclick="setCategory('${c.id}')">${t(c.key)}</button>`
+            ).join('');
+        }
+
+        function setCategory(id) {
+            activeCategory = id;
+            renderCategoryChips();
+            renderCourses();
+        }
+
+        function filteredCourses() {
+            const q = (document.getElementById('courseSearch')?.value || '').trim().toLowerCase();
+            const level = document.getElementById('levelFilter')?.value || '';
+            return COURSES.filter(c => {
+                if (activeCategory !== 'all' && c.category !== activeCategory) return false;
+                if (level && c.level !== level) return false;
+                if (!q) return true;
+                const hay = `${loc(c.title)} ${loc(c.desc)}`.toLowerCase();
+                return hay.includes(q);
+            });
+        }
+
+        function courseCardHtml(course, extraActions) {
+            const pct = courseProgressPercent(course);
+            const enrolled = isEnrolled(course.id);
+            return `
+                <div class="card">
+                    <h4>${loc(course.title)}</h4>
+                    <p>${loc(course.desc)}</p>
+                    <div class="meta-row">
+                        <span class="meta-tag">${t(course.category === 'languages' ? 'catLanguages' : course.category === 'computer' ? 'catComputer' : 'catSkills')}</span>
+                        <span class="meta-tag">${levelLabel(course.level)}</span>
+                        <span class="meta-tag">${course.hours} ${t('hours')}</span>
+                        <span class="meta-tag">${course.lessons.length} ${t('lessons')}</span>
+                        ${enrolled ? `<span class="meta-tag">${t('enrolled')}</span>` : ''}
+                    </div>
+                    ${enrolled ? `
+                        <div class="progress-bar" aria-hidden="true"><span style="width:${pct}%"></span></div>
+                        <div class="progress-label">${t('progress')}: ${pct}%</div>
+                    ` : ''}
+                    <div class="card-actions">
+                        <button class="btn btn-outline btn-sm" type="button" onclick="openCourse('${course.id}')">${t('openCourse')}</button>
+                        ${enrolled
+                            ? `<button class="btn btn-secondary btn-sm" type="button" onclick="openCourse('${course.id}')">${t('continueLearning')}</button>`
+                            : `<button class="btn btn-secondary btn-sm" type="button" onclick="enrollCourse('${course.id}')">${t('enroll')}</button>`
+                        }
+                        ${extraActions || ''}
+                    </div>
+                </div>`;
+        }
+
+        function renderCourses() {
+            const box = document.getElementById('coursesResults');
+            if (!box) return;
+            const list = filteredCourses();
+            box.innerHTML = list.length
+                ? list.map(c => courseCardHtml(c)).join('')
+                : `<div class="empty">${t('noCourses')}</div>`;
+        }
+
+        function renderPaths() {
+            const box = document.getElementById('pathsResults');
+            if (!box) return;
+            box.innerHTML = PATHS.map(path => {
+                const names = path.courseIds
+                    .map(id => COURSES.find(c => c.id === id))
+                    .filter(Boolean)
+                    .map(c => `<li>${loc(c.title)}</li>`)
+                    .join('');
+                return `
+                    <div class="path-card">
+                        <h4>${loc(path.title)}</h4>
+                        <p>${loc(path.desc)}</p>
+                        <ul>${names}</ul>
+                        <button class="btn btn-secondary btn-sm" type="button" onclick="openPath('${path.id}')">${t('viewPath')}</button>
+                    </div>`;
+            }).join('');
+        }
+
+        function openPath(pathId) {
+            const path = PATHS.find(p => p.id === pathId);
+            if (!path) return;
+            document.querySelector('[data-tab="courses"]')?.click();
+            activeCategory = 'all';
+            const search = document.getElementById('courseSearch');
+            if (search) search.value = '';
+            const level = document.getElementById('levelFilter');
+            if (level) level.value = '';
+            renderCategoryChips();
+            const box = document.getElementById('coursesResults');
+            const list = path.courseIds.map(id => COURSES.find(c => c.id === id)).filter(Boolean);
+            box.innerHTML = list.map(c => courseCardHtml(c)).join('');
+            box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function renderMine() {
+            const box = document.getElementById('mineResults');
+            if (!box) return;
+            const progress = getProgress();
+            const enrolled = COURSES.filter(c => progress[c.id]?.enrolled);
+            if (!enrolled.length) {
+                box.innerHTML = `<div class="empty">${t('noEnrolled')}</div>`;
+                return;
+            }
+            box.innerHTML = enrolled.map(c => {
+                const p = progress[c.id];
+                const done = (p.completed || []).length;
+                const pct = courseProgressPercent(c);
+                const lessons = c.lessons.map(l => {
+                    const isDone = (p.completed || []).includes(l.id);
+                    return `<li class="${isDone ? 'done' : ''}">
+                        <span>${isDone ? '✓ ' : ''}${loc(l.title)}</span>
+                        <button type="button" onclick="openLesson('${c.id}','${l.id}')">${t('continueLearning')}</button>
+                    </li>`;
+                }).join('');
+                return `
+                    <div class="card">
+                        <h4>${loc(c.title)}</h4>
+                        <div class="progress-bar"><span style="width:${pct}%"></span></div>
+                        <div class="progress-label">${t('progress')}: ${pct}% · ${done}/${c.lessons.length} ${t('lessons')}${pct === 100 ? ` · ${t('completed')}` : ''}</div>
+                        <ul class="lesson-list">${lessons}</ul>
+                    </div>`;
+            }).join('');
+        }
+
+        function updateStats() {
+            const totalLessons = COURSES.reduce((n, c) => n + c.lessons.length, 0);
+            const enrolledCount = Object.values(getProgress()).filter(p => p.enrolled).length;
+            const elC = document.getElementById('statCourses');
+            const elL = document.getElementById('statLessons');
+            const elU = document.getElementById('statUnis');
+            const elE = document.getElementById('statEnrolled');
+            if (elC) elC.textContent = String(COURSES.length);
+            if (elL) elL.textContent = String(totalLessons);
+            if (elU) elU.textContent = String(universitiesData.length || '—');
+            if (elE) elE.textContent = String(enrolledCount);
+        }
+
+        async function loadUniversities() {
+            if (universitiesLoaded) {
+                renderUniversities();
+                return;
+            }
+            const box = document.getElementById('universitiesResults');
+            if (box) box.innerHTML = `<div class="loading">${t('uniLoading')}</div>`;
+            try {
+                const res = await fetch('/data/universities.json', { cache: 'no-cache' });
+                if (!res.ok) throw new Error('load failed');
+                const data = await res.json();
+                universitiesData = Array.isArray(data.universities) ? data.universities : [];
+                universitiesLoaded = true;
+                updateStats();
+                renderUniversities();
+            } catch {
+                if (box) box.innerHTML = `<div class="error">${t('uniFailed')}</div>`;
+            }
+        }
+
+        function filteredUniversities() {
+            const q = (document.getElementById('uniSearch')?.value || '').trim().toLowerCase();
+            const region = document.getElementById('uniRegion')?.value || '';
+            const field = document.getElementById('uniField')?.value || '';
+            return universitiesData.filter(u => {
+                if (region && u.region !== region) return false;
+                if (field && !(u.fields || []).includes(field)) return false;
+                if (!q) return true;
+                const hay = [
+                    u.nameAr, u.nameEn, u.countryAr, u.countryEn,
+                    u.focusAr, u.focusEn, ...(u.fields || [])
+                ].join(' ').toLowerCase();
+                return hay.includes(q);
+            });
+        }
+
+        function regionLabel(region) {
+            const map = {
+                africa: 'regAfrica',
+                middle_east: 'regMiddleEast',
+                europe: 'regEurope',
+                north_america: 'regNorthAmerica',
+                asia: 'regAsia',
+                oceania: 'regOceania',
+                latin_america: 'regLatinAmerica'
+            };
+            return map[region] ? t(map[region]) : region;
+        }
+
+        function renderUniversities() {
+            const box = document.getElementById('universitiesResults');
+            const countEl = document.getElementById('uniCount');
+            if (!box) return;
+            if (!universitiesLoaded) {
+                box.innerHTML = `<div class="loading">${t('uniLoading')}</div>`;
+                return;
+            }
+            const list = filteredUniversities();
+            if (countEl) {
+                countEl.textContent = `${t('uniShowing')} ${list.length} ${t('uniOf')} ${universitiesData.length}`;
+            }
+            if (!list.length) {
+                box.innerHTML = `<div class="empty">${t('uniNone')}</div>`;
+                return;
+            }
+            box.innerHTML = list.map(u => {
+                const namePrimary = currentLang === 'en' ? u.nameEn : u.nameAr;
+                const nameSecondary = currentLang === 'en' ? u.nameAr : u.nameEn;
+                const country = currentLang === 'en' ? u.countryEn : u.countryAr;
+                const focus = currentLang === 'en' ? u.focusEn : u.focusAr;
+                const fieldTags = (u.fields || []).slice(0, 4).map(f => {
+                    const key = 'field' + f.charAt(0).toUpperCase() + f.slice(1).replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+                    const label = I18N[currentLang][key] || f;
+                    return `<span class="meta-tag">${escapeHtml(label)}</span>`;
+                }).join('');
+                const askQ = currentLang === 'en'
+                    ? `Tell me about ${u.nameEn}`
+                    : `أخبرني عن ${u.nameAr}`;
+                return `<article class="uni-row">
+                    <div>
+                        <h4>${escapeHtml(namePrimary)}</h4>
+                        <div class="uni-en">${escapeHtml(nameSecondary)}</div>
+                        <p class="uni-focus">${escapeHtml(focus)}</p>
+                        <div class="meta-row">
+                            <span class="meta-tag">${escapeHtml(country)}</span>
+                            <span class="meta-tag">${escapeHtml(regionLabel(u.region))}</span>
+                            ${fieldTags}
+                        </div>
+                    </div>
+                    <div class="uni-actions">
+                        <a class="btn btn-secondary btn-sm" href="${escapeHtml(u.website)}" target="_blank" rel="noopener noreferrer">${t('uniVisit')}</a>
+                        <button class="btn btn-outline btn-sm" type="button" onclick="askAboutUniversity(${JSON.stringify(askQ)})">${t('uniAskAi')}</button>
+                    </div>
+                </article>`;
+            }).join('');
+        }
+
+        function askAboutUniversity(question) {
+            openTab('ai');
+            const input = document.getElementById('aiMessage');
+            if (input) input.value = question;
+            askStudyAi();
+        }
+
+        function openTab(name) {
+            const tab = document.querySelector(`.tab[data-tab="${name}"]`);
+            if (tab) tab.click();
+            else {
+                document.querySelectorAll('.tab').forEach(x => x.classList.toggle('active', x.dataset.tab === name));
+                document.querySelectorAll('.content').forEach(c => c.classList.toggle('active', c.id === name));
+            }
+            const learn = document.getElementById('learn');
+            if (learn) learn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function enrollCourse(courseId) {
+            ensureCourseProgress(courseId);
+            renderCourses();
+            renderMine();
+            openCourse(courseId);
+        }
+
+        function enrollFromModal() {
+            if (!openCourseId) return;
+            enrollCourse(openCourseId);
+            const btn = document.getElementById('courseEnrollBtn');
+            if (btn) btn.textContent = t('enrolled');
+            openCourse(openCourseId);
+        }
+
+        function openCourse(courseId) {
+            const course = COURSES.find(c => c.id === courseId);
+            if (!course) return;
+            openCourseId = courseId;
+            const enrolled = isEnrolled(courseId);
+            const progress = getProgress()[courseId] || { completed: [] };
+            document.getElementById('courseModalTitle').textContent = loc(course.title);
+            document.getElementById('courseModalSummary').textContent =
+                `${loc(course.desc)} · ${levelLabel(course.level)} · ${course.hours} ${t('hours')}`;
+            document.getElementById('courseModalLessons').innerHTML = course.lessons.map(l => {
+                const isDone = (progress.completed || []).includes(l.id);
+                return `<li class="${isDone ? 'done' : ''}">
+                    <span>${isDone ? '✓ ' : ''}${loc(l.title)}</span>
+                    <button type="button" onclick="openLesson('${course.id}','${l.id}')">${t('continueLearning')}</button>
+                </li>`;
+            }).join('');
+            const enrollBtn = document.getElementById('courseEnrollBtn');
+            if (enrollBtn) {
+                enrollBtn.textContent = enrolled ? t('enrolled') : t('enroll');
+                enrollBtn.disabled = enrolled;
+            }
+            openModal('courseModal');
+        }
+
+        function openLesson(courseId, lessonId) {
+            const course = COURSES.find(c => c.id === courseId);
+            const lesson = course?.lessons.find(l => l.id === lessonId);
+            if (!course || !lesson) return;
+            ensureCourseProgress(courseId);
+            activeLesson = { courseId, lessonId };
+            document.getElementById('lessonModalTitle').textContent = loc(lesson.title);
+            document.getElementById('lessonModalMeta').textContent = `${loc(course.title)} · ${t('lessons')}`;
+            document.getElementById('lessonModalBody').innerHTML = `<p>${loc(lesson.body)}</p>`;
+            const done = (getProgress()[courseId]?.completed || []).includes(lessonId);
+            const btn = document.getElementById('lessonCompleteBtn');
+            if (btn) {
+                btn.disabled = done;
+                btn.textContent = done ? t('completed') : t('markDone');
+            }
+            closeModal('courseModal');
+            openModal('lessonModal');
+            renderMine();
+            renderCourses();
+        }
+
+        function completeCurrentLesson() {
+            if (!activeLesson) return;
+            const data = getProgress();
+            if (!data[activeLesson.courseId]) {
+                data[activeLesson.courseId] = { enrolled: true, completed: [] };
+            }
+            const entry = data[activeLesson.courseId];
+            entry.enrolled = true;
+            if (!Array.isArray(entry.completed)) entry.completed = [];
+            if (!entry.completed.includes(activeLesson.lessonId)) {
+                entry.completed.push(activeLesson.lessonId);
+            }
+            saveProgress(data);
+            const btn = document.getElementById('lessonCompleteBtn');
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = t('completed');
+            }
+            renderMine();
+            renderCourses();
+        }
+
+        function renderAiSuggestions() {
+            const box = document.getElementById('aiSuggestions');
+            if (!box) return;
+            const tips = currentLang === 'en'
+                ? ['Explain HTML', 'Books about Python', 'University of Oxford', 'Open learning paths']
+                : ['اشرح HTML', 'كتب عن Python', 'جامعة أكسفورد', 'مسارات تعليم مفتوح'];
+            box.innerHTML = tips.map(s =>
+                `<button type="button" onclick="document.getElementById('aiMessage').value=${JSON.stringify(s)};askStudyAi()">${s}</button>`
+            ).join('');
+        }
+
+        function escapeHtml(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function renderBooks(books) {
+            const box = document.getElementById('aiBooks');
+            if (!box) return;
+            if (!books?.length) {
+                box.innerHTML = '';
+                return;
+            }
+            box.innerHTML = `<h3 style="grid-column:1/-1;font-family:var(--font-display);color:var(--nile-deep);margin:8px 0 4px;">${t('booksTitle')}</h3>` +
+                books.map(b => {
+                    const cover = b.coverUrl
+                        ? `<img src="${escapeHtml(b.coverUrl)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`
+                        : `<div style="width:64px;height:90px;background:var(--stone-dark)"></div>`;
+                    const year = b.year ? ` · ${b.year}` : '';
+                    return `<div class="book-card">
+                        ${cover}
+                        <div>
+                            <h4>${escapeHtml(b.title)}</h4>
+                            <div class="authors">${escapeHtml(b.authors || '—')}${year}</div>
+                            <div class="card-actions">
+                                <a class="btn btn-outline btn-sm" href="${escapeHtml(b.openLibraryUrl)}" target="_blank" rel="noopener">${t('openBook')}</a>
+                                <a class="btn btn-secondary btn-sm" href="${escapeHtml(b.readUrl || b.openLibraryUrl)}" target="_blank" rel="noopener">${t('readBook')}</a>
+                            </div>
+                        </div>
+                    </div>`;
+                }).join('');
+        }
+
+        function renderSources(sources) {
+            const box = document.getElementById('aiSources');
+            if (!box) return;
+            if (!sources?.length) {
+                box.innerHTML = '';
+                return;
+            }
+            box.innerHTML = sources.map(s => `
+                <div class="source-card">
+                    <h4>${t('sourcesTitle')}: ${escapeHtml(s.title)}</h4>
+                    <p style="color:var(--muted);font-size:0.92rem;margin-bottom:8px;">${escapeHtml(s.summary || '').slice(0, 420)}${(s.summary || '').length > 420 ? '…' : ''}</p>
+                    <a href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.source || 'wikipedia')} ↗</a>
+                </div>`).join('');
+        }
+
+        async function askStudyAi() {
+            const message = (document.getElementById('aiMessage')?.value || '').trim();
+            const replyDiv = document.getElementById('aiReply');
+            if (!message) {
+                replyDiv.innerHTML = `<div class="error">${currentLang === 'en' ? 'Type a question first' : 'اكتب سؤالك أولاً'}</div>`;
+                return;
+            }
+            replyDiv.innerHTML = `<div class="loading">${t('aiLoading')}</div>`;
+            document.getElementById('aiBooks').innerHTML = '';
+            document.getElementById('aiSources').innerHTML = '';
+            try {
+                const result = await api('/ai/study', {
+                    method: 'POST',
+                    body: JSON.stringify({ message, language: currentLang })
+                });
+                replyDiv.innerHTML = `<div class="success">${escapeHtml(result.reply || '').replace(/\n/g, '<br>')}</div>
+                    <div style="margin-top:6px;color:var(--muted);font-size:0.85rem;">${currentLang === 'en' ? 'Engine' : 'المحرك'}: ${escapeHtml(result.provider)} · ${escapeHtml(result.intent || '')}</div>`;
+                renderSources(result.sources || []);
+                renderBooks(result.books || []);
+            } catch (err) {
+                // Offline / local fallback from catalog
+                const local = localStudyFallback(message);
+                replyDiv.innerHTML = `<div class="error">${t('aiFailed')}</div><div class="success" style="margin-top:10px;">${escapeHtml(local).replace(/\n/g, '<br>')}</div>`;
+                try {
+                    const books = await api(`/ai/books?q=${encodeURIComponent(message)}&lang=${currentLang}&limit=6`);
+                    renderBooks(books);
+                } catch { /* ignore */ }
+            }
+        }
+
+        async function searchBooksOnly() {
+            const message = (document.getElementById('aiMessage')?.value || '').trim();
+            const replyDiv = document.getElementById('aiReply');
+            if (!message) {
+                replyDiv.innerHTML = `<div class="error">${currentLang === 'en' ? 'Type a topic to find books' : 'اكتب موضوعاً للبحث عن كتب'}</div>`;
+                return;
+            }
+            replyDiv.innerHTML = `<div class="loading">${t('aiLoading')}</div>`;
+            document.getElementById('aiSources').innerHTML = '';
+            try {
+                const books = await api(`/ai/books?q=${encodeURIComponent(message)}&lang=${currentLang}&limit=8`);
+                replyDiv.innerHTML = `<div class="success">${currentLang === 'en'
+                    ? `Found ${books.length} books for «${message}».`
+                    : `عُثر على ${books.length} كتاباً عن «${message}».`}</div>`;
+                renderBooks(books);
+            } catch (err) {
+                replyDiv.innerHTML = `<div class="error">${err.message || t('aiFailed')}</div>`;
+            }
+        }
+
+        function localStudyFallback(message) {
+            const q = message.toLowerCase();
+            if (universitiesData.length) {
+                const hit = universitiesData.find(u =>
+                    (u.nameAr && message.includes(u.nameAr)) ||
+                    (u.nameEn && q.includes(u.nameEn.toLowerCase())) ||
+                    (u.nameEn && u.nameEn.toLowerCase().split(/\s+/).filter(w => w.length > 4).some(w => q.includes(w)))
+                );
+                if (hit) {
+                    const focus = currentLang === 'en' ? hit.focusEn : hit.focusAr;
+                    const name = currentLang === 'en' ? hit.nameEn : hit.nameAr;
+                    const country = currentLang === 'en' ? hit.countryEn : hit.countryAr;
+                    return currentLang === 'en'
+                        ? `${name} (${country})\n${focus}\nOfficial site: ${hit.website}\n\nStart the API for a fuller Wikipedia summary and related books.`
+                        : `${name} (${country})\n${focus}\nالموقع الرسمي: ${hit.website}\n\nشغّل الخادم لملخص ويكيبيديا وكتب مرتبطة.`;
+                }
+            }
+            for (const c of COURSES) {
+                for (const l of c.lessons) {
+                    const blob = `${loc(c.title)} ${loc(l.title)} ${loc(l.body)}`.toLowerCase();
+                    if (q.split(/\s+/).filter(w => w.length > 2).some(w => blob.includes(w))) {
+                        return currentLang === 'en'
+                            ? `From «${loc(c.title)}» → ${loc(l.title)}:\n\n${loc(l.body)}`
+                            : `من دورة «${loc(c.title)}» ← ${loc(l.title)}:\n\n${loc(l.body)}`;
+                    }
+                }
+            }
+            if (/مسار|path|مبتدئ|beginner/.test(q)) {
+                const path = PATHS[0];
+                return currentLang === 'en'
+                    ? `Recommended path: ${loc(path.title)}.`
+                    : `المسار المقترح: ${loc(path.title)}.`;
+            }
+            return currentLang === 'en'
+                ? 'Start the API to fetch live Wikipedia info and Open Library books. Or browse the Universities tab for official links.'
+                : 'شغّل الخادم لجلب معلومات ويكيبيديا وكتب Open Library مباشرة. أو تصفّح تبويب الجامعات للروابط الرسمية.';
+        }
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const name = tab.dataset.tab;
+                document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+                document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(name).classList.add('active');
+                if (name === 'mine') renderMine();
+                if (name === 'membership') loadMembershipPlans();
+                if (name === 'paths') renderPaths();
+                if (name === 'universities') loadUniversities();
+            });
+        });
+
+        document.getElementById('courseSearch')?.addEventListener('input', renderCourses);
+        document.getElementById('levelFilter')?.addEventListener('change', renderCourses);
+        document.getElementById('uniSearch')?.addEventListener('input', renderUniversities);
+        document.getElementById('uniRegion')?.addEventListener('change', renderUniversities);
+        document.getElementById('uniField')?.addEventListener('change', renderUniversities);
+        document.getElementById('aiMessage')?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') askStudyAi();
+        });
+
+        function setMsg(elId, text, type) {
+            const el = document.getElementById(elId);
+            if (!text) { el.innerHTML = ''; return; }
+            el.innerHTML = `<div class="${type}">${text}</div>`;
+        }
+
+        async function api(path, options) {
+            const headers = { 'Content-Type': 'application/json', ...(options?.headers || {}) };
+            if (authToken) headers.Authorization = `Bearer ${authToken}`;
+            const response = await fetch(`${API_BASE}${path}`, { ...options, headers });
+            let data = null;
+            const text = await response.text();
+            if (text) {
+                try { data = JSON.parse(text); } catch { data = text; }
+            }
+            if (!response.ok) {
+                const message = typeof data === 'string'
+                    ? data
+                    : (data?.message || data?.title || data?.detail || 'حدث خطأ');
+                throw new Error(message);
+            }
+            return data;
+        }
+
+        function applyAuthUi() {
+            const guest = document.getElementById('authGuest');
+            const userBox = document.getElementById('authUser');
+            if (currentUser) {
+                guest.style.display = 'none';
+                userBox.style.display = 'inline-flex';
+                document.getElementById('userNameLabel').textContent = currentUser.fullName || currentUser.email;
+            } else {
+                guest.style.display = 'inline-flex';
+                userBox.style.display = 'none';
+            }
+        }
+
+        async function refreshAuth() {
+            if (!authToken) {
+                currentUser = null;
+                applyAuthUi();
+                return;
+            }
+            try {
+                currentUser = await api('/auth/me');
+                applyAuthUi();
+            } catch {
+                authToken = '';
+                localStorage.removeItem('wadnooh_token');
+                currentUser = null;
+                applyAuthUi();
+            }
+        }
+
+        async function doRegister() {
+            try {
+                const result = await api('/auth/register', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        fullName: document.getElementById('regName').value.trim(),
+                        email: document.getElementById('regEmail').value.trim(),
+                        phone: document.getElementById('regPhone').value.trim(),
+                        password: document.getElementById('regPassword').value
+                    })
+                });
+                authToken = result.token;
+                localStorage.setItem('wadnooh_token', authToken);
+                currentUser = result.user;
+                applyAuthUi();
+                setMsg('registerMsg', currentLang === 'en' ? 'Registered successfully' : 'تم التسجيل بنجاح', 'success');
+                setTimeout(() => closeModal('registerModal'), 700);
+            } catch (err) {
+                setMsg('registerMsg', err.message, 'error');
+            }
+        }
+
+        async function doLogin() {
+            try {
+                const result = await api('/auth/login', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: document.getElementById('loginEmail').value.trim(),
+                        password: document.getElementById('loginPassword').value
+                    })
+                });
+                authToken = result.token;
+                localStorage.setItem('wadnooh_token', authToken);
+                currentUser = result.user;
+                applyAuthUi();
+                setMsg('loginMsg', currentLang === 'en' ? 'Welcome back' : 'مرحباً بعودتك', 'success');
+                setTimeout(() => closeModal('loginModal'), 700);
+            } catch (err) {
+                setMsg('loginMsg', err.message, 'error');
+            }
+        }
+
+        function logout() {
+            authToken = '';
+            currentUser = null;
+            localStorage.removeItem('wadnooh_token');
+            applyAuthUi();
+        }
+
+        async function loadMembershipPlans() {
+            const box = document.getElementById('membershipPlans');
+            const status = document.getElementById('membershipStatus');
+            if (!box) return;
+            try {
+                const plans = await api('/membership/plans');
+                if (currentUser?.membership) {
+                    const m = currentUser.membership;
+                    status.innerHTML = `${currentLang === 'en' ? 'Current plan' : 'باقتك الحالية'}: <strong>${currentLang === 'en' ? m.planNameEn : m.planNameAr}</strong>`;
+                } else {
+                    status.innerHTML = currentLang === 'en'
+                        ? 'Free academy member — upgrade optionally'
+                        : 'عضوية أكاديمية مجانية — يمكنك الترقية اختيارياً';
+                }
+                box.innerHTML = plans.map(p => `
+                    <div class="card">
+                        <h4>${currentLang === 'en' ? p.nameEn : p.nameAr}</h4>
+                        <p>${currentLang === 'en' ? p.descriptionEn : p.descriptionAr}</p>
+                        <div class="meta-row">
+                            <span class="meta-tag">${p.price} ${p.currency}</span>
+                            <span class="meta-tag">${p.durationDays} ${currentLang === 'en' ? 'days' : 'يوم'}</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-secondary btn-sm" type="button" onclick="subscribePlan(${p.id})">${t('subscribe')}</button>
+                        </div>
+                    </div>`).join('');
+            } catch {
+                status.innerHTML = currentLang === 'en'
+                    ? 'Membership plans will appear when the API is online. You can still learn with free courses.'
+                    : 'باقات العضوية تظهر عند تشغيل الـ API. يمكنك التعلم مجاناً من الدورات.';
+                box.innerHTML = '';
+            }
+        }
+
+        async function subscribePlan(planId) {
+            if (!authToken) {
+                openModal('loginModal');
+                return;
+            }
+            try {
+                const checkout = await api('/membership/subscribe', {
+                    method: 'POST',
+                    body: JSON.stringify({ purpose: 'membership', membershipPlanId: planId })
+                });
+                await startCheckout(checkout);
+            } catch (err) {
+                alert(err.message);
+            }
+        }
+
+        async function startCheckout(checkout) {
+            if (!checkout) return;
+            if (checkout.provider === 'demo' || (checkout.checkoutUrl || '').includes('demoPay=')) {
+                pendingDemoPaymentId = checkout.paymentId;
+                document.getElementById('demoPaySummary').textContent =
+                    `${checkout.amount} ${checkout.currency} · #${checkout.paymentId}`;
+                setMsg('demoPayMsg', '', '');
+                openModal('demoPayModal');
+                return;
+            }
+            window.location.href = checkout.checkoutUrl;
+        }
+
+        async function completeDemoPayment() {
+            if (!pendingDemoPaymentId) return;
+            try {
+                const result = await api('/payments/demo/complete', {
+                    method: 'POST',
+                    body: JSON.stringify({ paymentId: pendingDemoPaymentId })
+                });
+                setMsg('demoPayMsg', result.message || 'OK', 'success');
+                await refreshAuth();
+                setTimeout(() => {
+                    closeModal('demoPayModal');
+                    document.querySelector('[data-tab="membership"]')?.click();
+                    loadMembershipPlans();
+                }, 800);
+            } catch (err) {
+                setMsg('demoPayMsg', err.message, 'error');
+            }
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.add('open');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('open');
+        }
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) overlay.classList.remove('open');
+            });
+        });
+
+        setLang(currentLang);
+        updateStats();
+        loadUniversities();
+        refreshAuth();
+    </script>
+    <script src="js/admin-site-config.js"></script>
+</body>
+</html>

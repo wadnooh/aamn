@@ -1,0 +1,913 @@
+{
+  "categories": [
+    {
+      "id": "graduation",
+      "name": {
+        "ar": "مشاريع تخرج",
+        "en": "Graduation"
+      }
+    },
+    {
+      "id": "arduino",
+      "name": {
+        "ar": "Arduino",
+        "en": "Arduino"
+      }
+    },
+    {
+      "id": "esp32",
+      "name": {
+        "ar": "ESP32",
+        "en": "ESP32"
+      }
+    },
+    {
+      "id": "rpi",
+      "name": {
+        "ar": "Raspberry Pi",
+        "en": "Raspberry Pi"
+      }
+    },
+    {
+      "id": "matlab",
+      "name": {
+        "ar": "MATLAB",
+        "en": "MATLAB"
+      }
+    },
+    {
+      "id": "plc",
+      "name": {
+        "ar": "PLC",
+        "en": "PLC"
+      }
+    },
+    {
+      "id": "scada",
+      "name": {
+        "ar": "SCADA",
+        "en": "SCADA"
+      }
+    },
+    {
+      "id": "fpga",
+      "name": {
+        "ar": "FPGA",
+        "en": "FPGA"
+      }
+    },
+    {
+      "id": "rfid",
+      "name": {
+        "ar": "RFID",
+        "en": "RFID"
+      }
+    },
+    {
+      "id": "iot",
+      "name": {
+        "ar": "إنترنت الأشياء",
+        "en": "IoT"
+      }
+    },
+    {
+      "id": "hse",
+      "name": {
+        "ar": "سلامة مهنية HSE",
+        "en": "HSE / OSH"
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-smart-irrigation",
+      "category": "esp32",
+      "department": "iot",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "ري ذكي برطوبة التربة",
+        "en": "Smart Soil-Moisture Irrigation"
+      },
+      "description": {
+        "ar": "ESP32 + مستشعر رطوبة يفعّل مضخة عند انخفاض الرطوبة، مع تنبيه عبر MQTT.",
+        "en": "ESP32 + moisture sensor triggers a pump on dry soil, with MQTT alerts."
+      },
+      "codeUrl": "https://github.com/",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "لوحة تطوير",
+            "en": "Dev board"
+          },
+          "qty": 1
+        },
+        {
+          "item": {
+            "ar": "أسلاك توصيل",
+            "en": "Jumper wires"
+          },
+          "qty": 10
+        }
+      ],
+      "steps": {
+        "ar": [
+          "جهّز المكونات",
+          "ابنِ الدائرة",
+          "ارفع الكود",
+          "اختبر ووثّق"
+        ],
+        "en": [
+          "Prepare parts",
+          "Build circuit",
+          "Upload code",
+          "Test & document"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يعمل بدون شبكة؟",
+            "a": "نعم إن لم يعتمد المشروع على الشبكة."
+          }
+        ],
+        "en": [
+          {
+            "q": "Works offline?",
+            "a": "Yes if the project does not need network."
+          }
+        ]
+      },
+      "skills": [
+        "electronics",
+        "documentation"
+      ]
+    },
+    {
+      "id": "proj-line-follower",
+      "category": "arduino",
+      "department": "robotics",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "روبوت يتتبع الخط",
+        "en": "Line-Following Robot"
+      },
+      "description": {
+        "ar": "Arduino Uno مع مستشعرات IR ومحركات DC لتتبع مسار أسود.",
+        "en": "Arduino Uno with IR sensors and DC motors to follow a black path."
+      },
+      "codeUrl": "https://github.com/",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "لوحة تطوير",
+            "en": "Dev board"
+          },
+          "qty": 1
+        },
+        {
+          "item": {
+            "ar": "أسلاك توصيل",
+            "en": "Jumper wires"
+          },
+          "qty": 10
+        }
+      ],
+      "steps": {
+        "ar": [
+          "جهّز المكونات",
+          "ابنِ الدائرة",
+          "ارفع الكود",
+          "اختبر ووثّق"
+        ],
+        "en": [
+          "Prepare parts",
+          "Build circuit",
+          "Upload code",
+          "Test & document"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يعمل بدون شبكة؟",
+            "a": "نعم إن لم يعتمد المشروع على الشبكة."
+          }
+        ],
+        "en": [
+          {
+            "q": "Works offline?",
+            "a": "Yes if the project does not need network."
+          }
+        ]
+      },
+      "skills": [
+        "electronics",
+        "documentation"
+      ]
+    },
+    {
+      "id": "proj-home-energy",
+      "category": "graduation",
+      "department": "renewable",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "مراقبة استهلاك منزل شمسي",
+        "en": "Solar Home Energy Monitor"
+      },
+      "description": {
+        "ar": "لوحة تخرج: قياس تيار/جهد DC وعرض الطاقة اليومية.",
+        "en": "Graduation board: measure DC voltage/current and display daily energy."
+      },
+      "codeUrl": "",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "لوحة تطوير",
+            "en": "Dev board"
+          },
+          "qty": 1
+        },
+        {
+          "item": {
+            "ar": "أسلاك توصيل",
+            "en": "Jumper wires"
+          },
+          "qty": 10
+        }
+      ],
+      "steps": {
+        "ar": [
+          "جهّز المكونات",
+          "ابنِ الدائرة",
+          "ارفع الكود",
+          "اختبر ووثّق"
+        ],
+        "en": [
+          "Prepare parts",
+          "Build circuit",
+          "Upload code",
+          "Test & document"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يعمل بدون شبكة؟",
+            "a": "نعم إن لم يعتمد المشروع على الشبكة."
+          }
+        ],
+        "en": [
+          {
+            "q": "Works offline?",
+            "a": "Yes if the project does not need network."
+          }
+        ]
+      },
+      "skills": [
+        "electronics",
+        "documentation"
+      ]
+    },
+    {
+      "id": "proj-rfid-access",
+      "category": "rfid",
+      "department": "electronics",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "نظام دخول ببطاقة RFID",
+        "en": "RFID Access Control"
+      },
+      "description": {
+        "ar": "قارئ RFID يفتح قفلاً إلكترونياً ويسجّل الأحداث محلياً.",
+        "en": "RFID reader unlocks an electronic lock and logs events locally."
+      },
+      "codeUrl": "https://github.com/",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "لوحة تطوير",
+            "en": "Dev board"
+          },
+          "qty": 1
+        },
+        {
+          "item": {
+            "ar": "أسلاك توصيل",
+            "en": "Jumper wires"
+          },
+          "qty": 10
+        }
+      ],
+      "steps": {
+        "ar": [
+          "جهّز المكونات",
+          "ابنِ الدائرة",
+          "ارفع الكود",
+          "اختبر ووثّق"
+        ],
+        "en": [
+          "Prepare parts",
+          "Build circuit",
+          "Upload code",
+          "Test & document"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يعمل بدون شبكة؟",
+            "a": "نعم إن لم يعتمد المشروع على الشبكة."
+          }
+        ],
+        "en": [
+          {
+            "q": "Works offline?",
+            "a": "Yes if the project does not need network."
+          }
+        ]
+      },
+      "skills": [
+        "electronics",
+        "documentation"
+      ]
+    },
+    {
+      "id": "proj-plc-conveyor",
+      "category": "plc",
+      "department": "control",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "تحكم سير ناقل بـ PLC",
+        "en": "PLC Conveyor Control"
+      },
+      "description": {
+        "ar": "منطق سلم لتشغيل/إيقاف سير مع حساس نهاية مشوار.",
+        "en": "Ladder logic for start/stop conveyor with an end-of-travel sensor."
+      },
+      "codeUrl": "",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "لوحة تطوير",
+            "en": "Dev board"
+          },
+          "qty": 1
+        },
+        {
+          "item": {
+            "ar": "أسلاك توصيل",
+            "en": "Jumper wires"
+          },
+          "qty": 10
+        }
+      ],
+      "steps": {
+        "ar": [
+          "جهّز المكونات",
+          "ابنِ الدائرة",
+          "ارفع الكود",
+          "اختبر ووثّق"
+        ],
+        "en": [
+          "Prepare parts",
+          "Build circuit",
+          "Upload code",
+          "Test & document"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يعمل بدون شبكة؟",
+            "a": "نعم إن لم يعتمد المشروع على الشبكة."
+          }
+        ],
+        "en": [
+          {
+            "q": "Works offline?",
+            "a": "Yes if the project does not need network."
+          }
+        ]
+      },
+      "skills": [
+        "electronics",
+        "documentation"
+      ]
+    },
+    {
+      "id": "proj-matlab-pid",
+      "category": "matlab",
+      "department": "control",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "محاكاة متحكم PID",
+        "en": "PID Controller Simulation"
+      },
+      "description": {
+        "ar": "MATLAB/Simulink لضبط Kp/Ki/Kd على نظام من الدرجة الثانية.",
+        "en": "MATLAB/Simulink tuning Kp/Ki/Kd on a second-order plant."
+      },
+      "codeUrl": "",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "لوحة تطوير",
+            "en": "Dev board"
+          },
+          "qty": 1
+        },
+        {
+          "item": {
+            "ar": "أسلاك توصيل",
+            "en": "Jumper wires"
+          },
+          "qty": 10
+        }
+      ],
+      "steps": {
+        "ar": [
+          "جهّز المكونات",
+          "ابنِ الدائرة",
+          "ارفع الكود",
+          "اختبر ووثّق"
+        ],
+        "en": [
+          "Prepare parts",
+          "Build circuit",
+          "Upload code",
+          "Test & document"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يعمل بدون شبكة؟",
+            "a": "نعم إن لم يعتمد المشروع على الشبكة."
+          }
+        ],
+        "en": [
+          {
+            "q": "Works offline?",
+            "a": "Yes if the project does not need network."
+          }
+        ]
+      },
+      "skills": [
+        "electronics",
+        "documentation"
+      ]
+    },
+    {
+      "id": "proj-rpi-vision",
+      "category": "rpi",
+      "department": "ai-eng",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "كشف أجسام بسيط على Raspberry Pi",
+        "en": "Simple Object Detection on Raspberry Pi"
+      },
+      "description": {
+        "ar": "كاميرا Pi مع نموذج خفيف لتصنيف أجسام في المختبر.",
+        "en": "Pi camera with a lightweight model for lab object classification."
+      },
+      "codeUrl": "https://github.com/",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "لوحة تطوير",
+            "en": "Dev board"
+          },
+          "qty": 1
+        },
+        {
+          "item": {
+            "ar": "أسلاك توصيل",
+            "en": "Jumper wires"
+          },
+          "qty": 10
+        }
+      ],
+      "steps": {
+        "ar": [
+          "جهّز المكونات",
+          "ابنِ الدائرة",
+          "ارفع الكود",
+          "اختبر ووثّق"
+        ],
+        "en": [
+          "Prepare parts",
+          "Build circuit",
+          "Upload code",
+          "Test & document"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يعمل بدون شبكة؟",
+            "a": "نعم إن لم يعتمد المشروع على الشبكة."
+          }
+        ],
+        "en": [
+          {
+            "q": "Works offline?",
+            "a": "Yes if the project does not need network."
+          }
+        ]
+      },
+      "skills": [
+        "electronics",
+        "documentation"
+      ]
+    },
+    {
+      "id": "proj-scada-tank",
+      "category": "scada",
+      "department": "control",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "مراقبة مستوى خزان عبر SCADA",
+        "en": "Tank Level Monitoring via SCADA"
+      },
+      "description": {
+        "ar": "واجهة مراقبة لمستوى خزان مع إنذارات عتبة.",
+        "en": "HMI monitoring tank level with threshold alarms."
+      },
+      "codeUrl": "",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "لوحة تطوير",
+            "en": "Dev board"
+          },
+          "qty": 1
+        },
+        {
+          "item": {
+            "ar": "أسلاك توصيل",
+            "en": "Jumper wires"
+          },
+          "qty": 10
+        }
+      ],
+      "steps": {
+        "ar": [
+          "جهّز المكونات",
+          "ابنِ الدائرة",
+          "ارفع الكود",
+          "اختبر ووثّق"
+        ],
+        "en": [
+          "Prepare parts",
+          "Build circuit",
+          "Upload code",
+          "Test & document"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يعمل بدون شبكة؟",
+            "a": "نعم إن لم يعتمد المشروع على الشبكة."
+          }
+        ],
+        "en": [
+          {
+            "q": "Works offline?",
+            "a": "Yes if the project does not need network."
+          }
+        ]
+      },
+      "skills": [
+        "electronics",
+        "documentation"
+      ]
+    },
+    {
+      "id": "proj-fpga-counter",
+      "category": "fpga",
+      "department": "computer",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "عداد رقمي على FPGA",
+        "en": "Digital Counter on FPGA"
+      },
+      "description": {
+        "ar": "Verilog لعداد متزامن مع عرض على سبعة أجزاء.",
+        "en": "Verilog synchronous counter with seven-segment display."
+      },
+      "codeUrl": "https://github.com/",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "لوحة تطوير",
+            "en": "Dev board"
+          },
+          "qty": 1
+        },
+        {
+          "item": {
+            "ar": "أسلاك توصيل",
+            "en": "Jumper wires"
+          },
+          "qty": 10
+        }
+      ],
+      "steps": {
+        "ar": [
+          "جهّز المكونات",
+          "ابنِ الدائرة",
+          "ارفع الكود",
+          "اختبر ووثّق"
+        ],
+        "en": [
+          "Prepare parts",
+          "Build circuit",
+          "Upload code",
+          "Test & document"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يعمل بدون شبكة؟",
+            "a": "نعم إن لم يعتمد المشروع على الشبكة."
+          }
+        ],
+        "en": [
+          {
+            "q": "Works offline?",
+            "a": "Yes if the project does not need network."
+          }
+        ]
+      },
+      "skills": [
+        "electronics",
+        "documentation"
+      ]
+    },
+    {
+      "id": "proj-iot-weather",
+      "category": "iot",
+      "department": "iot",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "محطة طقس IoT",
+        "en": "IoT Weather Station"
+      },
+      "description": {
+        "ar": "حرارة ورطوبة وضغط تُنشر إلى لوحة مراقبة ويب.",
+        "en": "Temp, humidity, and pressure published to a web dashboard."
+      },
+      "codeUrl": "https://github.com/",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "لوحة تطوير",
+            "en": "Dev board"
+          },
+          "qty": 1
+        },
+        {
+          "item": {
+            "ar": "أسلاك توصيل",
+            "en": "Jumper wires"
+          },
+          "qty": 10
+        }
+      ],
+      "steps": {
+        "ar": [
+          "جهّز المكونات",
+          "ابنِ الدائرة",
+          "ارفع الكود",
+          "اختبر ووثّق"
+        ],
+        "en": [
+          "Prepare parts",
+          "Build circuit",
+          "Upload code",
+          "Test & document"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يعمل بدون شبكة؟",
+            "a": "نعم إن لم يعتمد المشروع على الشبكة."
+          }
+        ],
+        "en": [
+          {
+            "q": "Works offline?",
+            "a": "Yes if the project does not need network."
+          }
+        ]
+      },
+      "skills": [
+        "electronics",
+        "documentation"
+      ]
+    },
+    {
+      "id": "proj-risk-matrix",
+      "category": "hse",
+      "department": "osh",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "مصفوفة تقييم مخاطر لموقع ورشة",
+        "en": "Workshop Site Risk Matrix"
+      },
+      "description": {
+        "ar": "حدد 8 أخطار، قيّم الاحتمال×الشدة، واقترح ضوابط وفق التسلسل الهرمي.",
+        "en": "Identify 8 hazards, score L×S, propose hierarchy-of-controls measures."
+      },
+      "codeUrl": "",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "نموذج مصفوفة (Excel/Sheets)",
+            "en": "Matrix template (Excel/Sheets)"
+          },
+          "qty": 1
+        }
+      ],
+      "steps": {
+        "ar": [
+          "حصر الأخطار",
+          "تقييم",
+          "ضوابط",
+          "سجل مخاطر"
+        ],
+        "en": [
+          "List hazards",
+          "Assess",
+          "Controls",
+          "Risk register"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يوجد ملف جاهز؟",
+            "a": "نعم — قوالب وصفية في مركز OSH (روابط/مواضع تحميل)."
+          }
+        ],
+        "en": [
+          {
+            "q": "Ready file?",
+            "a": "Yes — metadata templates in the OSH center."
+          }
+        ]
+      },
+      "skills": [
+        "osh",
+        "risk"
+      ]
+    },
+    {
+      "id": "proj-ptw-checklist",
+      "category": "hse",
+      "department": "osh",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "قائمة تحقق تصريح عمل ساخن",
+        "en": "Hot-Work Permit Checklist"
+      },
+      "description": {
+        "ar": "صمّم قائمة تحقق PTW لأعمال اللحام تشمل الإطفاء والمراقبة.",
+        "en": "Design a PTW checklist for welding including fire watch."
+      },
+      "codeUrl": "",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [
+        {
+          "item": {
+            "ar": "نموذج PTW",
+            "en": "PTW form"
+          },
+          "qty": 1
+        }
+      ],
+      "steps": {
+        "ar": [
+          "حدد نطاق العمل",
+          "مخاطر",
+          "ضوابط",
+          "توقيعات"
+        ],
+        "en": [
+          "Scope",
+          "Hazards",
+          "Controls",
+          "Sign-offs"
+        ]
+      },
+      "faq": {
+        "ar": [
+          {
+            "q": "هل يغني عن التدريب؟",
+            "a": "لا — التصريح أداة بعد الكفاءة."
+          }
+        ],
+        "en": [
+          {
+            "q": "Replaces training?",
+            "a": "No — permit follows competence."
+          }
+        ]
+      },
+      "skills": [
+        "osh",
+        "ptw"
+      ]
+    },
+    {
+      "id": "proj-toolbox-talk",
+      "category": "hse",
+      "department": "osh",
+      "image": "/images/wad-nooh-icon.png",
+      "title": {
+        "ar": "حزمة Toolbox Talk أسبوعية",
+        "en": "Weekly Toolbox Talk Pack"
+      },
+      "description": {
+        "ar": "أعد 4 أحاديث سلامة قصيرة (ارتفاع، كهرباء، PPE، Housekeeping).",
+        "en": "Prepare 4 short talks (height, electrical, PPE, housekeeping)."
+      },
+      "codeUrl": "",
+      "reportUrl": "",
+      "videoUrl": "",
+      "circuitUrl": "",
+      "files": [],
+      "bom": [],
+      "steps": {
+        "ar": [
+          "اختر موضوعاً",
+          "نقاط رئيسية",
+          "أسئلة"
+        ],
+        "en": [
+          "Pick topic",
+          "Key points",
+          "Questions"
+        ]
+      },
+      "faq": {
+        "ar": [],
+        "en": []
+      },
+      "skills": [
+        "osh",
+        "communication"
+      ]
+    }
+  ]
+}

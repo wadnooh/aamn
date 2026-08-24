@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم · ودنوح AAMN للبرمجيات والكمبيوتر | Admin</title>
+    <link rel="icon" type="image/png" href="/images/wad-nooh-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nile-deep: #053d47;
+            --nile: #0a5f6c;
+            --kush: #c4a35a;
+            --stone: #ebe6dc;
+            --ink: #1c2428;
+            --muted: #5c6a70;
+            --surface: #f7f4ee;
+            --line: #cfc7b8;
+            --danger: #8b2e2e;
+            --ok: #2f6b4f;
+            --font-display: 'El Messiri', 'IBM Plex Sans Arabic', sans-serif;
+            --font-body: 'IBM Plex Sans Arabic', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(165deg, #dfe8e6 0%, var(--stone) 40%, #e8e0d2 100%);
+            color: var(--ink);
+            min-height: 100vh;
+            line-height: 1.55;
+        }
+        .shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+        .mobile-nav { display: none; }
+        @media (max-width: 900px) {
+            .shell { grid-template-columns: 1fr; }
+            .side { display: none; position: fixed; inset: 0 auto 0 0; width: min(280px, 86vw); z-index: 50; }
+            html[dir="rtl"] .side { inset: 0 0 0 auto; left: auto; right: 0; }
+            .side.open { display: block; }
+            .mobile-nav { display: flex; gap: 8px; margin-bottom: 12px; }
+            .side-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 40; }
+            .side-backdrop.open { display: block; }
+        }
+
+        .side {
+            background: var(--nile-deep);
+            color: #f5f0e6;
+            padding: 22px 16px;
+        }
+        .side .logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 6px;
+            color: var(--kush);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .side .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+        }
+        .side .sub { font-size: 0.82rem; opacity: 0.75; margin-bottom: 22px; }
+        .nav-btn {
+            display: block; width: 100%; text-align: start;
+            background: transparent; border: none; color: rgba(245,240,230,.88);
+            padding: 11px 12px; margin-bottom: 4px; cursor: pointer;
+            font: inherit; border-inline-start: 3px solid transparent;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            background: rgba(255,255,255,.08);
+            border-inline-start-color: var(--kush);
+            color: #fff;
+        }
+
+        .main { padding: 22px clamp(14px, 3vw, 32px) 40px; }
+        .top {
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 12px; flex-wrap: wrap; margin-bottom: 20px;
+        }
+        .top h1 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            color: var(--nile-deep);
+        }
+        .meta { color: var(--muted); font-size: 0.9rem; }
+
+        .btn {
+            border: none; cursor: pointer; font: inherit; font-weight: 600;
+            padding: 9px 14px; background: var(--nile); color: #fff;
+        }
+        .btn:hover { background: var(--nile-deep); }
+        .btn-ghost { background: transparent; color: var(--nile-deep); border: 1px solid var(--line); }
+        .btn-danger { background: var(--danger); }
+        .btn-sm { padding: 6px 10px; font-size: 0.85rem; }
+        .btn-kush { background: var(--kush); color: var(--nile-deep); }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+        .stat {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-top: 3px solid var(--kush);
+            padding: 14px;
+        }
+        .stat .n {
+            font-family: var(--font-display);
+            font-size: 1.55rem;
+            color: var(--nile-deep);
+            font-weight: 700;
+        }
+        .stat .l { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+
+        .panel {
+            display: none;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            padding: 16px;
+        }
+        .panel.active { display: block; animation: fade .2s ease; }
+        @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+        .toolbar {
+            display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; align-items: center;
+        }
+        input, select {
+            font: inherit; padding: 8px 10px; border: 1px solid var(--line);
+            background: #fff; min-width: 140px;
+        }
+
+        .table-wrap { overflow: auto; max-height: 65vh; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+        th, td { padding: 9px 8px; border-bottom: 1px solid var(--line); text-align: start; white-space: nowrap; }
+        th {
+            position: sticky; top: 0; background: #efe9df;
+            color: var(--nile-deep); font-weight: 600; z-index: 1;
+        }
+        tr:hover td { background: rgba(10,95,108,.04); }
+
+        .badge {
+            display: inline-block; padding: 2px 8px; font-size: 0.75rem; font-weight: 600;
+            background: #dce8e6; color: var(--nile-deep);
+        }
+        .badge.ok { background: #d7ebe0; color: var(--ok); }
+        .badge.warn { background: #f3e6c8; color: #7a5a18; }
+        .badge.bad { background: #f0d6d6; color: var(--danger); }
+
+        .login-wrap {
+            min-height: 100vh; display: grid; place-items: center; padding: 20px;
+            background:
+                radial-gradient(ellipse at 20% 10%, rgba(196,163,90,.25), transparent 50%),
+                linear-gradient(165deg, #053d47 0%, #0a5f6c 45%, #1a3a40 100%);
+        }
+        .login-box {
+            width: min(400px, 100%);
+            background: var(--surface);
+            border-top: 4px solid var(--kush);
+            padding: 28px 24px;
+        }
+        .login-box h1 {
+            font-family: var(--font-display);
+            color: var(--nile-deep);
+            margin-bottom: 6px;
+        }
+        .login-box p { color: var(--muted); margin-bottom: 18px; font-size: 0.92rem; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 4px; font-size: 0.88rem; color: var(--muted); }
+        .form-group input { width: 100%; }
+        .msg { margin-top: 10px; font-size: 0.9rem; }
+        .msg.error { color: var(--danger); }
+        .msg.success { color: var(--ok); }
+        .pager { display: flex; gap: 8px; align-items: center; margin-top: 12px; color: var(--muted); font-size: 0.88rem; }
+        .hidden { display: none !important; }
+        a.link { color: var(--kush); }
+    </style>
+</head>
+<body>
+    <div id="loginScreen" class="login-wrap">
+        <div class="login-box">
+        <div style="margin-bottom:12px;">
+            <img src="/images/wad-nooh-logo.jpg" alt="ودنوح · Wad Nooh" style="width:100%;height:auto;border-radius:2px;margin-bottom:12px;">
+            <h1>لوحة تحكم الشركة</h1>
+            <p>ودنوح AAMN للبرمجيات والكمبيوتر · إدارة المستخدمين والعضوية والمدفوعات</p>
+        </div>
+            <div class="form-group">
+                <label for="email">البريد</label>
+                <input id="email" type="email" value="admin@wadnooh.com" autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <input id="password" type="password" autocomplete="current-password">
+            </div>
+            <button class="btn btn-kush" type="button" style="width:100%" onclick="doLogin()">دخول الأدمن</button>
+            <div id="loginMsg" class="msg"></div>
+            <p style="margin-top:16px;font-size:0.82rem;"><a class="link" href="/">← العودة للموقع</a></p>
+        </div>
+    </div>
+
+    <div id="app" class="shell hidden">
+        <aside class="side" id="side">
+            <div class="logo"><img src="/images/wad-nooh-icon.png" alt="">ودنوح AAMN للبرمجيات والكمبيوتر · Admin</div>
+            <div class="sub">Academy Control Panel</div>
+            <button class="nav-btn active" data-panel="dashboard" type="button">لوحة المؤشرات</button>
+            <button class="nav-btn" data-panel="users" type="button">المستخدمون</button>
+            <button class="nav-btn" data-panel="payments" type="button">المدفوعات</button>
+            <button class="nav-btn" data-panel="flights" type="button">حجوزات الطيران</button>
+            <button class="nav-btn" data-panel="hotels" type="button">حجوزات الفنادق</button>
+            <button class="nav-btn" data-panel="memberships" type="button">العضويات</button>
+            <button class="nav-btn" data-panel="inventory" type="button">الفنادق (مخزون)</button>
+            <div style="margin-top:28px;">
+                <button class="btn btn-ghost btn-sm" type="button" style="color:#f5f0e6;border-color:rgba(245,240,230,.3)" onclick="logout()">خروج</button>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="side-backdrop" id="sideBackdrop" onclick="toggleSide(false)"></div>
+            <div class="mobile-nav">
+                <button class="btn btn-ghost btn-sm" type="button" onclick="toggleSide(true)">☰ القائمة</button>
+            </div>
+            <div class="top">
+                <div>
+                    <h1 id="panelTitle">لوحة المؤشرات</h1>
+                    <div class="meta" id="adminMeta"></div>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="btn btn-ghost btn-sm" type="button" onclick="refreshCurrent()">تحديث</button>
+                    <a class="btn btn-ghost btn-sm" href="/" style="text-decoration:none;">الموقع</a>
+                </div>
+            </div>
+
+            <div id="dashboard" class="panel active">
+                <div class="stats" id="statsGrid"></div>
+            </div>
+
+            <div id="users" class="panel">
+                <div class="toolbar">
+                    <input id="userSearch" placeholder="بحث بالاسم / البريد / الهاتف">
+                    <button class="btn btn-sm" type="button" onclick="loadUsers(1)">بحث</button>
+                </div>
+                <div class="table-wrap"><table><thead><tr>
+                    <th>الاسم</th><th>البريد</th><th>الهاتف</th><th>العضوية</th><th>حجوزات</th><th>مدفوعات</th><th>أدوار</th><th>حالة</th><th></th>
+                </tr></thead><tbody id="usersBody"></tbody></table></div>
+                <div class="pager" id="usersPager"></div>
+            </div>
+
+            <div id="payments" class="panel">
+                <div class="toolbar">
+                    <select id="payStatus">
+                        <option value="">كل الحالات</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Paid">Paid</option>
+                        <option value="Failed">Failed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                    <select id="payPurpose">
+                        <option value="">كل الأغراض</option>
+                        <option value="booking">booking</option>
+                        <option value="membership">membership</option>
+                    </select>
+                    <button class="btn btn-sm" type="button" onclick="loadPayments(1)">تصفية</button>
+                </div>
+                <div class="table-wrap"><table><thead><tr>
+                    <th>#</th><th>المبلغ</th><th>الغرض</th><th>الحالة</th><th>المزوّد</th><th>المستخدم</th><th>الوصف</th><th>التاريخ</th>
+                </tr></thead><tbody id="paymentsBody"></tbody></table></div>
+                <div class="pager" id="paymentsPager"></div>
+            </div>
+
+            <div id="flights" class="panel">
+                <div class="toolbar">
+                    <input id="flightSearch" placeholder="رقم الحجز / المسافر">
+                    <select id="flightStatus">
+                        <option value="">كل الحالات</option>
+                        <option value="PendingPayment">PendingPayment</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                    <button class="btn btn-sm" type="button" onclick="loadFlights(1)">بحث</button>
+                </div>
+                <div class="table-wrap"><table><thead><tr>
+                    <th>المرجع</th><th>المسافر</th><th>المسار</th><th>السعر</th><th>الحالة</th><th>الدفع</th><th>التاريخ</th><th></th>
+                </tr></thead><tbody id="flightsBody"></tbody></table></div>
+                <div class="pager" id="flightsPager"></div>
+            </div>
+
+            <div id="hotels" class="panel">
+                <div class="toolbar">
+                    <input id="hotelSearch" placeholder="رقم الحجز / النزيل">
+                    <select id="hotelStatus">
+                        <option value="">كل الحالات</option>
+                        <option value="PendingPayment">PendingPayment</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                    <button class="btn btn-sm" type="button" onclick="loadHotelBookings(1)">بحث</button>
+                </div>
+                <div class="table-wrap"><table><thead><tr>
+                    <th>المرجع</th><th>النزيل</th><th>الفندق</th><th>الوصول</th><th>السعر</th><th>الحالة</th><th>الدفع</th><th></th>
+                </tr></thead><tbody id="hotelsBody"></tbody></table></div>
+                <div class="pager" id="hotelsPager"></div>
+            </div>
+
+            <div id="memberships" class="panel">
+                <div class="toolbar">
+                    <select id="memStatus">
+                        <option value="">كل الحالات</option>
+                        <option value="Active">Active</option>
+                        <option value="PendingPayment">PendingPayment</option>
+                        <option value="Expired">Expired</option>
+                    </select>
+                    <button class="btn btn-sm" type="button" onclick="loadMemberships(1)">تصفية</button>
+                </div>
+                <div class="table-wrap"><table><thead><tr>
+                    <th>المستخدم</th><th>الباقة</th><th>الخصم</th><th>الحالة</th><th>من</th><th>إلى</th><th>دفع #</th>
+                </tr></thead><tbody id="membershipsBody"></tbody></table></div>
+                <div class="pager" id="membershipsPager"></div>
+            </div>
+
+            <div id="inventory" class="panel">
+                <div class="table-wrap"><table><thead><tr>
+                    <th>الفندق</th><th>المدينة</th><th>نجوم</th><th>السعر/ليلة</th><th>غرف متاحة</th><th></th>
+                </tr></thead><tbody id="inventoryBody"></tbody></table></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE = 'https://sacrifice-logged-montreal-input.trycloudflare.com/api';
+        let authToken = localStorage.getItem('wadnooh_admin_token') || '';
+        let currentUser = null;
+        let currentPanel = 'dashboard';
+        const pages = { users: 1, payments: 1, flights: 1, hotels: 1, memberships: 1 };
+
+        const titles = {
+            dashboard: 'لوحة المؤشرات',
+            users: 'المستخدمون',
+            payments: 'المدفوعات',
+            flights: 'حجوزات الطيران',
+            hotels: 'حجوزات الفنادق',
+            memberships: 'العضويات',
+            inventory: 'الفنادق (مخزون)'
+        };
+
+        async function api(path, options = {}) {
+            const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
+            if (authToken) headers.Authorization = `Bearer ${authToken}`;
+            const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+            const text = await res.text();
+            let data = null;
+            if (text) { try { data = JSON.parse(text); } catch { data = text; } }
+            if (!res.ok) {
+                const msg = typeof data === 'string' ? data : (data?.message || data?.title || 'خطأ');
+                throw new Error(msg);
+            }
+            return data;
+        }
+
+        function fmt(d) {
+            if (!d) return '—';
+            try { return new Date(d).toLocaleString('ar'); } catch { return d; }
+        }
+        function money(v, c) { return `${Number(v || 0).toLocaleString()} ${c || ''}`.trim(); }
+        function badge(status) {
+            const s = String(status || '').toLowerCase();
+            let cls = '';
+            if (s.includes('confirm') || s === 'paid' || s === 'active') cls = 'ok';
+            else if (s.includes('pending') || s === 'unpaid') cls = 'warn';
+            else if (s.includes('cancel') || s === 'failed' || s === 'expired') cls = 'bad';
+            return `<span class="badge ${cls}">${status || '—'}</span>`;
+        }
+        function pagerHtml(id, page, pageSize, total, fn) {
+            const pagesCount = Math.max(1, Math.ceil(total / pageSize));
+            return `<span>صفحة ${page} / ${pagesCount} · الإجمالي ${total}</span>
+                <button class="btn btn-ghost btn-sm" type="button" ${page <= 1 ? 'disabled' : ''} onclick="${fn}(${page - 1})">السابق</button>
+                <button class="btn btn-ghost btn-sm" type="button" ${page >= pagesCount ? 'disabled' : ''} onclick="${fn}(${page + 1})">التالي</button>`;
+        }
+
+        async function doLogin() {
+            const msg = document.getElementById('loginMsg');
+            msg.className = 'msg';
+            msg.textContent = '';
+            try {
+                const result = await api('/auth/login', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: document.getElementById('email').value.trim(),
+                        password: document.getElementById('password').value
+                    })
+                });
+                const roles = result.user?.roles || [];
+                if (!roles.includes('Admin')) {
+                    throw new Error('هذا الحساب ليس أدمن');
+                }
+                authToken = result.token;
+                localStorage.setItem('wadnooh_admin_token', authToken);
+                currentUser = result.user;
+                showApp();
+            } catch (err) {
+                msg.className = 'msg error';
+                msg.textContent = err.message;
+            }
+        }
+
+        function logout() {
+            authToken = '';
+            currentUser = null;
+            localStorage.removeItem('wadnooh_admin_token');
+            document.getElementById('app').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+        }
+
+        function showApp() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('app').classList.remove('hidden');
+            document.getElementById('adminMeta').textContent =
+                `${currentUser?.fullName || ''} · ${currentUser?.email || ''}`;
+            switchPanel(currentPanel);
+        }
+
+        async function boot() {
+            if (!authToken) return;
+            try {
+                currentUser = await api('/auth/me');
+                const roles = currentUser.roles || [];
+                if (!roles.includes('Admin') && !currentUser.isAdmin) {
+                    logout();
+                    return;
+                }
+                showApp();
+            } catch {
+                logout();
+            }
+        }
+
+        function toggleSide(open) {
+            document.getElementById('side').classList.toggle('open', !!open);
+            document.getElementById('sideBackdrop').classList.toggle('open', !!open);
+        }
+
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchPanel(btn.dataset.panel);
+                toggleSide(false);
+            });
+        });
+
+        function switchPanel(name) {
+            currentPanel = name;
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.panel === name));
+            document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === name));
+            document.getElementById('panelTitle').textContent = titles[name] || name;
+            refreshCurrent();
+        }
+
+        function refreshCurrent() {
+            if (currentPanel === 'dashboard') loadStats();
+            else if (currentPanel === 'users') loadUsers(pages.users);
+            else if (currentPanel === 'payments') loadPayments(pages.payments);
+            else if (currentPanel === 'flights') loadFlights(pages.flights);
+            else if (currentPanel === 'hotels') loadHotelBookings(pages.hotels);
+            else if (currentPanel === 'memberships') loadMemberships(pages.memberships);
+            else if (currentPanel === 'inventory') loadInventory();
+        }
+
+        async function loadStats() {
+            const s = await api('/admin/stats');
+            document.getElementById('statsGrid').innerHTML = [
+                ['المستخدمون', s.usersCount],
+                ['حجوزات طيران', s.flightBookingsCount],
+                ['حجوزات فنادق', s.hotelBookingsCount],
+                ['بانتظار الدفع', s.pendingBookingsCount],
+                ['مدفوعات ناجحة', s.paidPaymentsCount],
+                ['إيراد مدفوع', money(s.paidRevenue, s.revenueCurrency)],
+                ['مدفوعات معلّقة', s.pendingPaymentsCount],
+                ['عضويات نشطة', s.activeMembershipsCount],
+                ['طيران مؤكد', s.confirmedFlightsCount],
+                ['فنادق مؤكدة', s.confirmedHotelsCount],
+                ['فنادق بالمخزون', s.hotelsCount],
+                ['معالم', s.attractionsCount]
+            ].map(([l, n]) => `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+        }
+
+        async function loadUsers(page = 1) {
+            pages.users = page;
+            const search = encodeURIComponent(document.getElementById('userSearch').value.trim());
+            const data = await api(`/admin/users?page=${page}&pageSize=20&search=${search}`);
+            document.getElementById('usersBody').innerHTML = (data.items || []).map(u => `
+                <tr>
+                    <td>${u.fullName}</td>
+                    <td>${u.email}</td>
+                    <td>${u.phone || '—'}</td>
+                    <td>${u.membershipPlan}</td>
+                    <td>${u.flightBookings}/${u.hotelBookings}</td>
+                    <td>${u.paymentsCount}</td>
+                    <td>${(u.roles || []).join(', ') || '—'}</td>
+                    <td>${u.locked ? badge('Locked') : badge('Active')}</td>
+                    <td>
+                        ${u.roles?.includes('Admin') ? '' : `
+                        <button class="btn btn-sm ${u.locked ? '' : 'btn-danger'}" type="button"
+                            onclick="toggleLock('${u.id}', ${!u.locked})">${u.locked ? 'فتح' : 'قفل'}</button>`}
+                    </td>
+                </tr>`).join('') || '<tr><td colspan="9">لا توجد نتائج</td></tr>';
+            document.getElementById('usersPager').innerHTML = pagerHtml('users', data.page, data.pageSize, data.total, 'loadUsers');
+        }
+
+        async function toggleLock(id, locked) {
+            if (!confirm(locked ? 'قفل هذا الحساب؟' : 'فتح الحساب؟')) return;
+            await api(`/admin/users/${id}/lock`, { method: 'POST', body: JSON.stringify({ locked }) });
+            loadUsers(pages.users);
+        }
+
+        async function loadPayments(page = 1) {
+            pages.payments = page;
+            const status = document.getElementById('payStatus').value;
+            const purpose = document.getElementById('payPurpose').value;
+            const data = await api(`/admin/payments?page=${page}&pageSize=20&status=${encodeURIComponent(status)}&purpose=${encodeURIComponent(purpose)}`);
+            document.getElementById('paymentsBody').innerHTML = (data.items || []).map(p => `
+                <tr>
+                    <td>${p.id}</td>
+                    <td>${money(p.amount, p.currency)}</td>
+                    <td>${p.purpose}${p.bookingType ? ' / ' + p.bookingType : ''}</td>
+                    <td>${badge(p.status)}</td>
+                    <td>${p.provider}</td>
+                    <td>${p.userName || '—'}<br><small>${p.userEmail || ''}</small></td>
+                    <td>${p.description || '—'}</td>
+                    <td>${fmt(p.paidAtUtc || p.createdAtUtc)}</td>
+                </tr>`).join('') || '<tr><td colspan="8">لا توجد مدفوعات</td></tr>';
+            document.getElementById('paymentsPager').innerHTML = pagerHtml('payments', data.page, data.pageSize, data.total, 'loadPayments');
+        }
+
+        async function loadFlights(page = 1) {
+            pages.flights = page;
+            const search = encodeURIComponent(document.getElementById('flightSearch').value.trim());
+            const status = document.getElementById('flightStatus').value;
+            const data = await api(`/admin/bookings/flights?page=${page}&pageSize=20&search=${search}&status=${encodeURIComponent(status)}`);
+            document.getElementById('flightsBody').innerHTML = (data.items || []).map(b => `
+                <tr>
+                    <td>${b.bookingReference}</td>
+                    <td>${b.passengerName}<br><small>${b.passengerEmail}</small></td>
+                    <td>${b.route || '—'} · ${b.airline || ''} ${b.flightNumber || ''}</td>
+                    <td>${money(b.totalPrice, b.currency)}${b.discountPercent ? ` (−${b.discountPercent}%)` : ''}</td>
+                    <td>${badge(b.status)}</td>
+                    <td>${badge(b.paymentStatus)}</td>
+                    <td>${fmt(b.bookingDate)}</td>
+                    <td>
+                        ${b.status !== 'Cancelled' ? `<button class="btn btn-danger btn-sm" type="button" onclick="setFlightStatus(${b.id},'Cancelled')">إلغاء</button>` : ''}
+                        ${b.status === 'PendingPayment' ? `<button class="btn btn-sm" type="button" onclick="setFlightStatus(${b.id},'Confirmed')">تأكيد</button>` : ''}
+                    </td>
+                </tr>`).join('') || '<tr><td colspan="8">لا توجد حجوزات</td></tr>';
+            document.getElementById('flightsPager').innerHTML = pagerHtml('flights', data.page, data.pageSize, data.total, 'loadFlights');
+        }
+
+        async function setFlightStatus(id, status) {
+            if (!confirm(`تغيير الحالة إلى ${status}؟`)) return;
+            await api(`/admin/bookings/flights/${id}/status`, { method: 'PUT', body: JSON.stringify({ status }) });
+            loadFlights(pages.flights);
+            if (currentPanel === 'dashboard') loadStats();
+        }
+
+        async function loadHotelBookings(page = 1) {
+            pages.hotels = page;
+            const search = encodeURIComponent(document.getElementById('hotelSearch').value.trim());
+            const status = document.getElementById('hotelStatus').value;
+            const data = await api(`/admin/bookings/hotels?page=${page}&pageSize=20&search=${search}&status=${encodeURIComponent(status)}`);
+            document.getElementById('hotelsBody').innerHTML = (data.items || []).map(b => `
+                <tr>
+                    <td>${b.bookingReference}</td>
+                    <td>${b.guestName}<br><small>${b.guestEmail}</small></td>
+                    <td>${b.hotelName || '—'} · ${b.city || ''}</td>
+                    <td>${fmt(b.checkInDate)}</td>
+                    <td>${money(b.totalPrice, b.currency)}</td>
+                    <td>${badge(b.status)}</td>
+                    <td>${badge(b.paymentStatus)}</td>
+                    <td>
+                        ${b.status !== 'Cancelled' ? `<button class="btn btn-danger btn-sm" type="button" onclick="setHotelStatus(${b.id},'Cancelled')">إلغاء</button>` : ''}
+                        ${b.status === 'PendingPayment' ? `<button class="btn btn-sm" type="button" onclick="setHotelStatus(${b.id},'Confirmed')">تأكيد</button>` : ''}
+                    </td>
+                </tr>`).join('') || '<tr><td colspan="8">لا توجد حجوزات</td></tr>';
+            document.getElementById('hotelsPager').innerHTML = pagerHtml('hotels', data.page, data.pageSize, data.total, 'loadHotelBookings');
+        }
+
+        async function setHotelStatus(id, status) {
+            if (!confirm(`تغيير الحالة إلى ${status}؟`)) return;
+            await api(`/admin/bookings/hotels/${id}/status`, { method: 'PUT', body: JSON.stringify({ status }) });
+            loadHotelBookings(pages.hotels);
+        }
+
+        async function loadMemberships(page = 1) {
+            pages.memberships = page;
+            const status = document.getElementById('memStatus').value;
+            const data = await api(`/admin/memberships?page=${page}&pageSize=20&status=${encodeURIComponent(status)}`);
+            document.getElementById('membershipsBody').innerHTML = (data.items || []).map(m => `
+                <tr>
+                    <td>${m.userName || '—'}<br><small>${m.userEmail || ''}</small></td>
+                    <td>${m.planNameAr} (${m.planCode})</td>
+                    <td>${m.discountPercent}%</td>
+                    <td>${badge(m.status)}</td>
+                    <td>${fmt(m.startUtc)}</td>
+                    <td>${fmt(m.endUtc)}</td>
+                    <td>${m.paymentId || '—'}</td>
+                </tr>`).join('') || '<tr><td colspan="7">لا توجد عضويات</td></tr>';
+            document.getElementById('membershipsPager').innerHTML = pagerHtml('memberships', data.page, data.pageSize, data.total, 'loadMemberships');
+        }
+
+        async function loadInventory() {
+            const hotels = await api('/admin/hotels');
+            document.getElementById('inventoryBody').innerHTML = (hotels || []).map(h => `
+                <tr>
+                    <td>${h.name}</td>
+                    <td>${h.city}</td>
+                    <td>${h.starRating}</td>
+                    <td>${money(h.pricePerNight)}</td>
+                    <td><input id="rooms_${h.id}" type="number" min="0" value="${h.availableRooms}" style="width:80px"></td>
+                    <td><button class="btn btn-sm" type="button" onclick="saveHotelRooms(${h.id})">حفظ</button></td>
+                </tr>`).join('') || '<tr><td colspan="6">لا توجد فنادق</td></tr>';
+        }
+
+        async function saveHotelRooms(id) {
+            const rooms = Number(document.getElementById(`rooms_${id}`).value);
+            await api(`/admin/hotels/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify({ availableRooms: rooms })
+            });
+            alert('تم الحفظ');
+        }
+
+        document.getElementById('password').addEventListener('keydown', e => {
+            if (e.key === 'Enter') doLogin();
+        });
+
+        boot();
+    </script>
+    <script src="js/admin-site-config.js"></script>
+</body>
+</html>
