@@ -1,0 +1,590 @@
+{
+  "items": [
+    {
+      "id": "lib-ieee-80211",
+      "lang": [
+        "en"
+      ],
+      "type": "standard",
+      "org": "IEEE",
+      "title": {
+        "ar": "معايير IEEE 802.11 (Wi-Fi) — مرجع",
+        "en": "IEEE 802.11 (Wi-Fi) — Reference"
+      },
+      "authors": "IEEE",
+      "year": 2020,
+      "topics": [
+        "networks",
+        "communications"
+      ],
+      "url": "https://standards.ieee.org/",
+      "note": {
+        "ar": "مرجع معياري؛ الوصول الكامل عبر عضوية/مكتبة جامعية.",
+        "en": "Standards reference; full access via membership/university library."
+      }
+    },
+    {
+      "id": "lib-iso-27001",
+      "lang": [
+        "en",
+        "ar"
+      ],
+      "type": "standard",
+      "org": "ISO",
+      "title": {
+        "ar": "ISO/IEC 27001 — إدارة أمن المعلومات",
+        "en": "ISO/IEC 27001 — Information Security Management"
+      },
+      "authors": "ISO/IEC",
+      "year": 2022,
+      "topics": [
+        "cybersecurity"
+      ],
+      "url": "https://www.iso.org/standard/27001",
+      "note": {
+        "ar": "إطار حوكمة أمني شائع للمؤسسات.",
+        "en": "Common security governance framework for organizations."
+      }
+    },
+    {
+      "id": "lib-nilsson-circuits",
+      "lang": [
+        "en"
+      ],
+      "type": "book",
+      "org": "",
+      "title": {
+        "ar": "Electric Circuits — Nilsson",
+        "en": "Electric Circuits — Nilsson"
+      },
+      "authors": "Nilsson & Riedel",
+      "year": 2019,
+      "topics": [
+        "electronics",
+        "electrical"
+      ],
+      "url": "https://openlibrary.org/search?q=Electric+Circuits+Nilsson",
+      "note": {
+        "ar": "مرجع كلاسيكي للدوائر؛ ابحث عن طبعات مكتبية.",
+        "en": "Classic circuits text; seek library editions."
+      }
+    },
+    {
+      "id": "lib-sedra-micro",
+      "lang": [
+        "en"
+      ],
+      "type": "book",
+      "org": "",
+      "title": {
+        "ar": "Microelectronic Circuits — Sedra/Smith",
+        "en": "Microelectronic Circuits — Sedra/Smith"
+      },
+      "authors": "Sedra & Smith",
+      "year": 2020,
+      "topics": [
+        "electronics"
+      ],
+      "url": "https://openlibrary.org/search?q=Microelectronic+Circuits+Sedra",
+      "note": {
+        "ar": "مرجع إلكترونيات متقدم للطلاب.",
+        "en": "Advanced electronics reference for students."
+      }
+    },
+    {
+      "id": "lib-tanenbaum-networks",
+      "lang": [
+        "en"
+      ],
+      "type": "book",
+      "org": "",
+      "title": {
+        "ar": "Computer Networks — Tanenbaum",
+        "en": "Computer Networks — Tanenbaum"
+      },
+      "authors": "Tanenbaum & Wetherall",
+      "year": 2011,
+      "topics": [
+        "networks"
+      ],
+      "url": "https://openlibrary.org/search?q=Computer+Networks+Tanenbaum",
+      "note": {
+        "ar": "أساس مفاهيمي للشبكات.",
+        "en": "Conceptual foundation for networking."
+      }
+    },
+    {
+      "id": "lib-cormen-clrs",
+      "lang": [
+        "en"
+      ],
+      "type": "book",
+      "org": "",
+      "title": {
+        "ar": "Introduction to Algorithms — CLRS",
+        "en": "Introduction to Algorithms — CLRS"
+      },
+      "authors": "Cormen et al.",
+      "year": 2009,
+      "topics": [
+        "computer",
+        "software"
+      ],
+      "url": "https://openlibrary.org/search?q=Introduction+to+Algorithms+Cormen",
+      "note": {
+        "ar": "مرجع خوارزميات وهياكل بيانات.",
+        "en": "Algorithms and data structures reference."
+      }
+    },
+    {
+      "id": "lib-ogata-control",
+      "lang": [
+        "en"
+      ],
+      "type": "book",
+      "org": "",
+      "title": {
+        "ar": "Modern Control Engineering — Ogata",
+        "en": "Modern Control Engineering — Ogata"
+      },
+      "authors": "Katsuhiko Ogata",
+      "year": 2010,
+      "topics": [
+        "control"
+      ],
+      "url": "https://openlibrary.org/search?q=Modern+Control+Engineering+Ogata",
+      "note": {
+        "ar": "مدخل قوي لأنظمة التحكم.",
+        "en": "Strong intro to control systems."
+      }
+    },
+    {
+      "id": "lib-cengel-thermo",
+      "lang": [
+        "en"
+      ],
+      "type": "book",
+      "org": "",
+      "title": {
+        "ar": "Thermodynamics — Cengel",
+        "en": "Thermodynamics — Cengel"
+      },
+      "authors": "Cengel & Boles",
+      "year": 2015,
+      "topics": [
+        "mechanical"
+      ],
+      "url": "https://openlibrary.org/search?q=Thermodynamics+Cengel",
+      "note": {
+        "ar": "مرجع ديناميكا حرارية تقنية.",
+        "en": "Engineering thermodynamics reference."
+      }
+    },
+    {
+      "id": "lib-ar-electronics-intro",
+      "lang": [
+        "ar"
+      ],
+      "type": "pdf",
+      "org": "",
+      "title": {
+        "ar": "مقدمة الإلكترونيات الرقمية (مرجع عربي مفتوح)",
+        "en": "Intro to Digital Electronics (Open Arabic Ref)"
+      },
+      "authors": "مصادر تعليم مفتوح",
+      "year": 2018,
+      "topics": [
+        "electronics",
+        "computer"
+      ],
+      "url": "https://ar.wikipedia.org/wiki/%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A7%D8%AA_%D8%B1%D9%82%D9%85%D9%8A%D8%A9",
+      "note": {
+        "ar": "نقطة انطلاق عربية؛ أكمل بمراجع جامعية.",
+        "en": "Arabic starting point; complement with university texts."
+      }
+    },
+    {
+      "id": "lib-ar-renewable",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "type": "article",
+      "org": "IRENA",
+      "title": {
+        "ar": "تقارير الطاقة المتجددة — IRENA",
+        "en": "Renewable Energy Reports — IRENA"
+      },
+      "authors": "IRENA",
+      "year": 2024,
+      "topics": [
+        "renewable"
+      ],
+      "url": "https://www.irena.org/",
+      "note": {
+        "ar": "بيانات وتقارير عالمية للطاقة المتجددة.",
+        "en": "Global renewable energy data and reports."
+      }
+    },
+    {
+      "id": "lib-ietf-rfc791",
+      "lang": [
+        "en"
+      ],
+      "type": "standard",
+      "org": "IETF",
+      "title": {
+        "ar": "RFC 791 — بروتوكول الإنترنت",
+        "en": "RFC 791 — Internet Protocol"
+      },
+      "authors": "IETF",
+      "year": 1981,
+      "topics": [
+        "networks"
+      ],
+      "url": "https://www.rfc-editor.org/rfc/rfc791",
+      "note": {
+        "ar": "أساس IPv4 التاريخي؛ مفيد للفهم العميق.",
+        "en": "Historical IPv4 foundation; useful for deep understanding."
+      }
+    },
+    {
+      "id": "lib-nist-cyber",
+      "lang": [
+        "en"
+      ],
+      "type": "article",
+      "org": "NIST",
+      "title": {
+        "ar": "إطار NIST للأمن السيبراني",
+        "en": "NIST Cybersecurity Framework"
+      },
+      "authors": "NIST",
+      "year": 2024,
+      "topics": [
+        "cybersecurity"
+      ],
+      "url": "https://www.nist.gov/cyberframework",
+      "note": {
+        "ar": "مرجع عملي لحوكمة الأمن.",
+        "en": "Practical reference for security governance."
+      }
+    },
+    {
+      "id": "lib-thesis-iot",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "type": "thesis",
+      "org": "AAMN",
+      "title": {
+        "ar": "أطروحة نموذجية: محطة IoT بيئية (بيانات وصفية)",
+        "en": "Sample thesis: IoT environment station (metadata)"
+      },
+      "authors": "Sample",
+      "year": 2025,
+      "topics": [
+        "iot"
+      ],
+      "url": "#",
+      "note": {
+        "ar": "بيانات وصفية فقط — لا استضافة ملف كامل في المخدمة ١.",
+        "en": "Metadata only — no full file hosting in Phase 1."
+      }
+    },
+    {
+      "id": "lib-matlab-scripts",
+      "lang": [
+        "en"
+      ],
+      "type": "code",
+      "org": "",
+      "title": {
+        "ar": "أمثلة MATLAB للتحكم",
+        "en": "MATLAB control examples"
+      },
+      "authors": "Open refs",
+      "year": 2023,
+      "topics": [
+        "control",
+        "matlab"
+      ],
+      "url": "https://www.mathworks.com/help/control/",
+      "note": {
+        "ar": "روابط خارجية لأمثلة وتحكم.",
+        "en": "External links for control examples."
+      }
+    },
+    {
+      "id": "lib-proteus-ref",
+      "lang": [
+        "en",
+        "ar"
+      ],
+      "type": "cad",
+      "org": "Labcenter",
+      "title": {
+        "ar": "Proteus — محاكاة دوائر (مرجع خارجي)",
+        "en": "Proteus — circuit simulation (external ref)"
+      },
+      "authors": "Labcenter",
+      "year": 2024,
+      "topics": [
+        "electronics"
+      ],
+      "url": "https://www.labcenter.com/",
+      "note": {
+        "ar": "المختبر الافتراضي الكامل في المخدمة ٣.",
+        "en": "Full virtual lab in Phase 3."
+      }
+    },
+    {
+      "id": "lib-ilo-osh",
+      "lang": [
+        "en",
+        "ar"
+      ],
+      "type": "standard",
+      "org": "ILO",
+      "title": {
+        "ar": "منظمة العمل الدولية — السلامة والصحة في العمل",
+        "en": "ILO — Safety and Health at Work"
+      },
+      "authors": "ILO",
+      "year": 2024,
+      "topics": [
+        "osh"
+      ],
+      "url": "https://www.ilo.org/topics-and-sectors/safety-and-health-work",
+      "note": {
+        "ar": "بوابة رسمية لمعايير وإرشادات OSH عالمياً.",
+        "en": "Official portal for global OSH standards and guidance."
+      }
+    },
+    {
+      "id": "lib-iso-45001",
+      "lang": [
+        "en",
+        "ar"
+      ],
+      "type": "standard",
+      "org": "ISO",
+      "title": {
+        "ar": "ISO 45001 — أنظمة إدارة الصحة والسلامة المهنية",
+        "en": "ISO 45001 — OH&S Management Systems"
+      },
+      "authors": "ISO",
+      "year": 2018,
+      "topics": [
+        "osh"
+      ],
+      "url": "https://www.iso.org/standard/63787.html",
+      "note": {
+        "ar": "مرجع معياري؛ النص الكامل عبر عضوية/مكتبة.",
+        "en": "Standards reference; full text via membership/library."
+      }
+    },
+    {
+      "id": "lib-osha-rec",
+      "lang": [
+        "en"
+      ],
+      "type": "article",
+      "org": "OSHA",
+      "title": {
+        "ar": "ممارسات OSHA الموصى بها لإدارة السلامة",
+        "en": "OSHA Recommended Practices for Safety Management"
+      },
+      "authors": "OSHA",
+      "year": 2024,
+      "topics": [
+        "osh"
+      ],
+      "url": "https://www.osha.gov/safety-management",
+      "note": {
+        "ar": "إرشادات عملية لإدارة برامج السلامة.",
+        "en": "Practical guidance for safety program management."
+      }
+    },
+    {
+      "id": "lib-nfpa",
+      "lang": [
+        "en"
+      ],
+      "type": "standard",
+      "org": "NFPA",
+      "title": {
+        "ar": "المؤسسة الوطنية للحماية من الحرائق (NFPA)",
+        "en": "National Fire Protection Association (NFPA)"
+      },
+      "authors": "NFPA",
+      "year": 2024,
+      "topics": [
+        "osh",
+        "electrical"
+      ],
+      "url": "https://www.nfpa.org/",
+      "note": {
+        "ar": "معايير الحرائق والكهرباء — روابط رسمية.",
+        "en": "Fire and electrical standards — official links."
+      }
+    },
+    {
+      "id": "lib-saudi-ncosh",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "type": "article",
+      "org": "NCOSH",
+      "title": {
+        "ar": "المجلس الوطني للسلامة والصحة المهنية (السعودية)",
+        "en": "Saudi National Council for Occupational Safety and Health"
+      },
+      "authors": "NCOSH / Saudi Arabia",
+      "year": 2024,
+      "topics": [
+        "osh"
+      ],
+      "url": "https://www.ncosh.gov.sa/",
+      "note": {
+        "ar": "مرجع وطني خليجي للسلامة المهنية — تحقق من الصفحات الرسمية.",
+        "en": "National GCC OSH reference — verify official pages."
+      }
+    },
+    {
+      "id": "lib-iosh",
+      "lang": [
+        "en"
+      ],
+      "type": "article",
+      "org": "IOSH",
+      "title": {
+        "ar": "مبادئ IOSH للسلامة والصحة المهنية الجيدة",
+        "en": "IOSH Principles of Good OSH"
+      },
+      "authors": "IOSH",
+      "year": 2024,
+      "topics": [
+        "osh"
+      ],
+      "url": "https://iosh.com/",
+      "note": {
+        "ar": "إطار مهني عالمي لممارسي السلامة.",
+        "en": "Global professional framework for safety practitioners."
+      }
+    },
+    {
+      "id": "lib-wiki-osh",
+      "lang": [
+        "en",
+        "ar"
+      ],
+      "type": "article",
+      "org": "Wikipedia",
+      "title": {
+        "ar": "السلامة والصحة المهنية — ويكيبيديا",
+        "en": "Occupational safety and health — Wikipedia"
+      },
+      "authors": "Wikipedia",
+      "year": 2024,
+      "topics": [
+        "osh"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Occupational_safety_and_health",
+      "note": {
+        "ar": "ملخص عام مفتوح؛ ليس بديلاً عن المعايير.",
+        "en": "Open overview; not a substitute for standards."
+      }
+    },
+    {
+      "id": "lib-openlib-osh",
+      "lang": [
+        "en"
+      ],
+      "type": "book",
+      "org": "Open Library",
+      "title": {
+        "ar": "كتب سلامة مهنية — Open Library",
+        "en": "Occupational safety books — Open Library"
+      },
+      "authors": "Various",
+      "year": 2020,
+      "topics": [
+        "osh"
+      ],
+      "url": "https://openlibrary.org/search?q=occupational+safety+health",
+      "note": {
+        "ar": "بحث كتب عامة — لا استضافة ملفات محمية.",
+        "en": "Public book search — no copyrighted hosting."
+      }
+    },
+    {
+      "id": "lib-niosh",
+      "lang": [
+        "en"
+      ],
+      "type": "article",
+      "org": "NIOSH",
+      "title": {
+        "ar": "المعهد الوطني الأمريكي للصحة المهنية (NIOSH)",
+        "en": "NIOSH — National Institute for Occupational Safety and Health"
+      },
+      "authors": "CDC/NIOSH",
+      "year": 2024,
+      "topics": [
+        "osh"
+      ],
+      "url": "https://www.cdc.gov/niosh/",
+      "note": {
+        "ar": "أبحاث وإرشادات صحية مهنية.",
+        "en": "Occupational health research and guidance."
+      }
+    },
+    {
+      "id": "lib-petroleum-spe",
+      "lang": [
+        "en"
+      ],
+      "type": "article",
+      "org": "SPE",
+      "title": {
+        "ar": "جمعية مهندسي البترول (SPE)",
+        "en": "Society of Petroleum Engineers (SPE)"
+      },
+      "authors": "SPE",
+      "year": 2024,
+      "topics": [
+        "petroleum"
+      ],
+      "url": "https://www.spe.org/",
+      "note": {
+        "ar": "مرجع مهني لتقنية البترول.",
+        "en": "Professional reference for petroleum engineering."
+      }
+    },
+    {
+      "id": "lib-aiche",
+      "lang": [
+        "en"
+      ],
+      "type": "article",
+      "org": "AIChE",
+      "title": {
+        "ar": "المعهد الأمريكي للمهندسين الكيميائيين",
+        "en": "AIChE — Chemical Engineering"
+      },
+      "authors": "AIChE",
+      "year": 2024,
+      "topics": [
+        "chemical"
+      ],
+      "url": "https://www.aiche.org/",
+      "note": {
+        "ar": "سلامة العمليات والتقنية الكيميائية.",
+        "en": "Process safety and chemical engineering."
+      }
+    }
+  ]
+}

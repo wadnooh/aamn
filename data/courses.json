@@ -1,0 +1,5883 @@
+{
+  "paths": [
+    {
+      "id": "path-electronics-start",
+      "title": {
+        "ar": "انطلاقة الإلكترونيات",
+        "en": "Electronics Starter"
+      },
+      "desc": {
+        "ar": "من الدوائر الأساسية إلى Arduino والمشاريع العملية.",
+        "en": "From basic circuits to Arduino and hands-on projects."
+      },
+      "courseIds": [
+        "elec-circuits",
+        "arduino-fundamentals",
+        "esp32-iot"
+      ],
+      "competencies": {
+        "ar": [
+          "أساسيات تخصصية",
+          "تطبيق عملي",
+          "توثيق مشروع"
+        ],
+        "en": [
+          "Specialty fundamentals",
+          "Hands-on application",
+          "Project documentation"
+        ]
+      }
+    },
+    {
+      "id": "path-software-eng",
+      "title": {
+        "ar": "مسار تقنية البرمجيات",
+        "en": "Software Engineering Path"
+      },
+      "desc": {
+        "ar": "برمجة، هياكل بيانات، ثم مشروع تطبيقي.",
+        "en": "Programming, data structures, then an applied project."
+      },
+      "courseIds": [
+        "prog-c-intro",
+        "ds-algorithms",
+        "soft-eng-practices"
+      ],
+      "competencies": {
+        "ar": [
+          "أساسيات تخصصية",
+          "تطبيق عملي",
+          "توثيق مشروع"
+        ],
+        "en": [
+          "Specialty fundamentals",
+          "Hands-on application",
+          "Project documentation"
+        ]
+      }
+    },
+    {
+      "id": "path-power-renewable",
+      "title": {
+        "ar": "الطاقة والكهرباء",
+        "en": "Power & Renewables"
+      },
+      "desc": {
+        "ar": "أساسيات الكهرباء ثم أنظمة الطاقة الشمسية.",
+        "en": "Electrical fundamentals then solar energy systems."
+      },
+      "courseIds": [
+        "elec-circuits",
+        "power-basics",
+        "solar-pv"
+      ],
+      "competencies": {
+        "ar": [
+          "أساسيات تخصصية",
+          "تطبيق عملي",
+          "توثيق مشروع"
+        ],
+        "en": [
+          "Specialty fundamentals",
+          "Hands-on application",
+          "Project documentation"
+        ]
+      }
+    },
+    {
+      "id": "path-networks-security",
+      "title": {
+        "ar": "الشبكات والأمن",
+        "en": "Networks & Security"
+      },
+      "desc": {
+        "ar": "شبكات الحاسوب ثم أساسيات الأمن السيبراني.",
+        "en": "Computer networks then cybersecurity fundamentals."
+      },
+      "courseIds": [
+        "networks-ccna-intro",
+        "cyber-fundamentals",
+        "iot-security"
+      ],
+      "competencies": {
+        "ar": [
+          "أساسيات تخصصية",
+          "تطبيق عملي",
+          "توثيق مشروع"
+        ],
+        "en": [
+          "Specialty fundamentals",
+          "Hands-on application",
+          "Project documentation"
+        ]
+      }
+    },
+    {
+      "id": "path-osh-hse",
+      "title": {
+        "ar": "مسار السلامة والصحة المهنية",
+        "en": "OSH / HSE Path"
+      },
+      "desc": {
+        "ar": "من الوعي إلى ISO 45001 وتقييم المخاطر وتصاريح العمل.",
+        "en": "From awareness to ISO 45001, risk assessment, and permits to work."
+      },
+      "courseIds": [
+        "osh-awareness",
+        "osh-iso45001",
+        "osh-risk-assessment",
+        "osh-fire-safety",
+        "osh-electrical",
+        "osh-loto",
+        "osh-height",
+        "osh-confined",
+        "osh-first-aid"
+      ],
+      "competencies": {
+        "ar": [
+          "وعي السلامة",
+          "تقييم المخاطر",
+          "أنظمة الإدارة",
+          "تصاريح العمل"
+        ],
+        "en": [
+          "Safety awareness",
+          "Risk assessment",
+          "Management systems",
+          "Permit to work"
+        ]
+      }
+    }
+  ],
+  "courses": [
+    {
+      "id": "elec-circuits",
+      "department": "electronics",
+      "level": "beginner",
+      "hours": 12,
+      "duration": {
+        "ar": "١٢ ساعة",
+        "en": "12 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "أساسيات الدوائر الكهربائية",
+        "en": "Electric Circuits Fundamentals"
+      },
+      "description": {
+        "ar": "قانون أوم، كيرشوف، التحليل التسلسلي والتوازي، ومقدمة التيار المتردد.",
+        "en": "Ohm’s law, Kirchhoff, series/parallel analysis, and an AC primer."
+      },
+      "objectives": {
+        "ar": [
+          "تحليل دوائر DC بسيطة",
+          "تطبيق قوانين كيرشوف",
+          "قياس الجهد والتيار بأمان"
+        ],
+        "en": [
+          "Analyze simple DC circuits",
+          "Apply Kirchhoff’s laws",
+          "Measure voltage/current safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "رياضيات ثانوية",
+          "فضول هندسي"
+        ],
+        "en": [
+          "High-school math",
+          "Engineering curiosity"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "ec1",
+          "title": {
+            "ar": "الجهد والتيار والمقاومة",
+            "en": "Voltage, current, resistance"
+          },
+          "body": {
+            "ar": "الجهد فرق جهد، التيار تدفق شحنات، والمقاومة تعيق التدفق. قانون أوم: V = I × R.",
+            "en": "Voltage is potential difference, current is charge flow, resistance opposes flow. Ohm: V = I × R."
+          }
+        },
+        {
+          "id": "ec2",
+          "title": {
+            "ar": "قوانين كيرشوف",
+            "en": "Kirchhoff’s laws"
+          },
+          "body": {
+            "ar": "KCL: مجموع التيارات عند عقدة = ٠. KVL: مجموع الجهود حول حلقة = ٠.",
+            "en": "KCL: sum of currents at a node = 0. KVL: sum of voltages around a loop = 0."
+          }
+        },
+        {
+          "id": "ec3",
+          "title": {
+            "ar": "التسلسل والتوازي",
+            "en": "Series and parallel"
+          },
+          "body": {
+            "ar": "في التسلسل التيار واحد والمقاومات تُجمع. في التوازي الجهد واحد و ١/R = Σ ١/Ri.",
+            "en": "Series: same current, resistances add. Parallel: same voltage, 1/R = Σ 1/Ri."
+          }
+        },
+        {
+          "id": "ec4",
+          "title": {
+            "ar": "مقدمة التيار المتردد",
+            "en": "AC introduction"
+          },
+          "body": {
+            "ar": "الجهد المتردد يتغير مع الزمن. نستخدم القيمة الفعّالة RMS والتردد بالهرتز.",
+            "en": "AC voltage varies with time. We use RMS values and frequency in hertz."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يحلل دوائر DC",
+          "يطبق KCL/KVL",
+          "يوثق قياسات المختبر"
+        ],
+        "en": [
+          "Analyze DC circuits",
+          "Apply KCL/KVL",
+          "Document lab measurements"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "أوم والقياس الآمن",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "كيرشوف والتسلسل/التوازي",
+            "hours": 3
+          },
+          {
+            "week": 3,
+            "topic": "مقدمة AC ومشروع قياس",
+            "hours": 3
+          },
+          {
+            "week": 4,
+            "topic": "مراجعة وامتحان قصير",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Ohm & safe measurement",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Kirchhoff & series/parallel",
+            "hours": 3
+          },
+          {
+            "week": 3,
+            "topic": "AC intro & measurement project",
+            "hours": 3
+          },
+          {
+            "week": 4,
+            "topic": "Review & short exam",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شريحة أوم",
+            "en": "Ohm slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "تجربة المختبر",
+            "en": "Lab demo"
+          },
+          "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "قياس مقاومة",
+            "en": "Resistance measurement"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب ١: حسابات أوم",
+            "en": "HW1: Ohm calculations"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "اختبار قصير ١",
+            "en": "Quiz 1"
+          },
+          "type": "quiz",
+          "soon": true
+        }
+      ],
+      "sources": [
+        {
+          "title": "Nilsson Electric Circuits",
+          "url": "https://openlibrary.org/search?q=Electric+Circuits+Nilsson"
+        }
+      ],
+      "refs": [
+        {
+          "title": "IEEE Xplore (ref)",
+          "url": "https://ieeexplore.ieee.org/"
+        }
+      ],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "arduino-fundamentals",
+      "department": "electronics",
+      "level": "beginner",
+      "hours": 10,
+      "duration": {
+        "ar": "١٠ ساعات",
+        "en": "10 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": false,
+        "code": true
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": true,
+      "title": {
+        "ar": "أساسيات Arduino",
+        "en": "Arduino Fundamentals"
+      },
+      "description": {
+        "ar": "برمجة اللوحات، المدخلات والمخرجات الرقمية، والمستشعرات البسيطة.",
+        "en": "Board programming, digital I/O, and simple sensors."
+      },
+      "objectives": {
+        "ar": [
+          "كتابة سكتشات Arduino",
+          "التحكم بـ LED والأزرار",
+          "قراءة مستشعر تناظري"
+        ],
+        "en": [
+          "Write Arduino sketches",
+          "Control LEDs and buttons",
+          "Read an analog sensor"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "أساسيات الدوائر أو موازية لها"
+        ],
+        "en": [
+          "Circuits basics or concurrent study"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "af1",
+          "title": {
+            "ar": "بيئة Arduino IDE",
+            "en": "Arduino IDE setup"
+          },
+          "body": {
+            "ar": "ثبّت IDE، اختر اللوحة والمنفذ، وارفع أول برنامج Blink.",
+            "en": "Install the IDE, select board and port, upload your first Blink sketch."
+          }
+        },
+        {
+          "id": "af2",
+          "title": {
+            "ar": "المداخل والمخارج الرقمية",
+            "en": "Digital I/O"
+          },
+          "body": {
+            "ar": "pinMode و digitalWrite و digitalRead. تذكّر المقاومات المحدِّدة للتيار.",
+            "en": "pinMode, digitalWrite, digitalRead. Remember current-limiting resistors."
+          }
+        },
+        {
+          "id": "af3",
+          "title": {
+            "ar": "القراءة التناظرية",
+            "en": "Analog reading"
+          },
+          "body": {
+            "ar": "analogRead يعيد ٠–١٠٢٣. حوّل القيمة إلى جهد أو نسبة مئوية حسب الحاجة.",
+            "en": "analogRead returns 0–1023. Convert to voltage or percentage as needed."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "كتابة سكتشات Arduino",
+          "التحكم بـ LED والأزرار",
+          "قراءة مستشعر تناظري"
+        ],
+        "en": [
+          "Write Arduino sketches",
+          "Control LEDs and buttons",
+          "Read an analog sensor"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "esp32-iot",
+      "department": "iot",
+      "level": "intermediate",
+      "hours": 14,
+      "duration": {
+        "ar": "١٤ ساعة",
+        "en": "14 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": false,
+        "code": true
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": true,
+      "title": {
+        "ar": "ESP32 وإنترنت الأشياء",
+        "en": "ESP32 & IoT"
+      },
+      "description": {
+        "ar": "Wi-Fi، MQTT، ومستشعرات متصلة بسحابة بسيطة.",
+        "en": "Wi-Fi, MQTT, and sensors connected to a simple cloud."
+      },
+      "objectives": {
+        "ar": [
+          "ربط ESP32 بشبكة Wi-Fi",
+          "نشر بيانات عبر MQTT",
+          "بناء مشروع IoT مصغّر"
+        ],
+        "en": [
+          "Connect ESP32 to Wi-Fi",
+          "Publish data via MQTT",
+          "Build a mini IoT project"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "أساسيات Arduino"
+        ],
+        "en": [
+          "Arduino fundamentals"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "ei1",
+          "title": {
+            "ar": "Wi-Fi على ESP32",
+            "en": "ESP32 Wi-Fi"
+          },
+          "body": {
+            "ar": "استخدم WiFi.begin وانتظر الاتصال قبل إرسال البيانات.",
+            "en": "Use WiFi.begin and wait for connection before sending data."
+          }
+        },
+        {
+          "id": "ei2",
+          "title": {
+            "ar": "بروتوكول MQTT",
+            "en": "MQTT protocol"
+          },
+          "body": {
+            "ar": "النشر والاشتراك (publish/subscribe) مناسب لأجهزة الاستشعار منخفضة الاستهلاك.",
+            "en": "Publish/subscribe fits low-power sensor devices well."
+          }
+        },
+        {
+          "id": "ei3",
+          "title": {
+            "ar": "مشروع محطة بيئية",
+            "en": "Environment station project"
+          },
+          "body": {
+            "ar": "اقرأ حرارة/رطوبة وانشرها دورياً. وثّق المخطط والكود.",
+            "en": "Read temp/humidity and publish periodically. Document schematic and code."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "ربط ESP32 بشبكة Wi-Fi",
+          "نشر بيانات عبر MQTT",
+          "بناء مشروع IoT مصغّر"
+        ],
+        "en": [
+          "Connect ESP32 to Wi-Fi",
+          "Publish data via MQTT",
+          "Build a mini IoT project"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "prog-c-intro",
+      "department": "software",
+      "level": "beginner",
+      "hours": 16,
+      "duration": {
+        "ar": "١٦ ساعة",
+        "en": "16 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": true
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": true,
+      "title": {
+        "ar": "مقدمة البرمجة بلغة C",
+        "en": "Introduction to C Programming"
+      },
+      "description": {
+        "ar": "المتغيرات، التحكم، الدوال، والمصفوفات — أساس هندسي قوي.",
+        "en": "Variables, control flow, functions, and arrays — a strong engineering base."
+      },
+      "objectives": {
+        "ar": [
+          "كتابة برامج C صحيحة",
+          "استخدام الدوال والمصفوفات",
+          "تصحيح أخطاء بسيطة"
+        ],
+        "en": [
+          "Write correct C programs",
+          "Use functions and arrays",
+          "Debug simple errors"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "أساسيات الحاسوب"
+        ],
+        "en": [
+          "Computer literacy"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "pc1",
+          "title": {
+            "ar": "البرنامج الأول",
+            "en": "First program"
+          },
+          "body": {
+            "ar": "main، printf، وتجميع البرنامج. افهم دورة: كتابة → ترجمة → تشغيل.",
+            "en": "main, printf, and compiling. Understand write → compile → run."
+          }
+        },
+        {
+          "id": "pc2",
+          "title": {
+            "ar": "التحكم في التدفق",
+            "en": "Control flow"
+          },
+          "body": {
+            "ar": "if/else و for و while. تجنّب الحلقات اللانهائية غير المقصودة.",
+            "en": "if/else, for, while. Avoid unintended infinite loops."
+          }
+        },
+        {
+          "id": "pc3",
+          "title": {
+            "ar": "الدوال والمصفوفات",
+            "en": "Functions and arrays"
+          },
+          "body": {
+            "ar": "قسّم المشكلة إلى دوال. راقب حدود المصفوفة لتجنب تجاوز الذاكرة.",
+            "en": "Split problems into functions. Watch array bounds to avoid memory overruns."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "كتابة برامج C صحيحة",
+          "استخدام الدوال والمصفوفات",
+          "تصحيح أخطاء بسيطة"
+        ],
+        "en": [
+          "Write correct C programs",
+          "Use functions and arrays",
+          "Debug simple errors"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "ds-algorithms",
+      "department": "computer",
+      "level": "intermediate",
+      "hours": 18,
+      "duration": {
+        "ar": "١٨ ساعة",
+        "en": "18 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": true
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": true,
+      "title": {
+        "ar": "هياكل البيانات والخوارزميات",
+        "en": "Data Structures & Algorithms"
+      },
+      "description": {
+        "ar": "المصفوفات، القوائم، المكدس، الطابور، والبحث والفرز.",
+        "en": "Arrays, lists, stacks, queues, searching and sorting."
+      },
+      "objectives": {
+        "ar": [
+          "اختيار هيكل بيانات مناسب",
+          "تحليل التعقيد الزمني الأساسي",
+          "تنفيذ خوارزميات فرز بسيطة"
+        ],
+        "en": [
+          "Choose suitable data structures",
+          "Reason about basic time complexity",
+          "Implement simple sorts"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "مقدمة البرمجة بلغة C أو ما يعادلها"
+        ],
+        "en": [
+          "Intro to C or equivalent"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "da1",
+          "title": {
+            "ar": "التعقيد Big-O",
+            "en": "Big-O complexity"
+          },
+          "body": {
+            "ar": "O(1)، O(n)، O(n log n)، O(n²). قارن الحلول قبل الكتابة.",
+            "en": "O(1), O(n), O(n log n), O(n²). Compare approaches before coding."
+          }
+        },
+        {
+          "id": "da2",
+          "title": {
+            "ar": "المكدس والطابور",
+            "en": "Stacks and queues"
+          },
+          "body": {
+            "ar": "LIFO و FIFO. تطبيقات: التراجع، جدولة المهام، وتحليل الأقواس.",
+            "en": "LIFO and FIFO. Uses: undo, scheduling, bracket matching."
+          }
+        },
+        {
+          "id": "da3",
+          "title": {
+            "ar": "البحث والفرز",
+            "en": "Search and sort"
+          },
+          "body": {
+            "ar": "البحث الخطي والثنائي. الفرز الفقاعي والإدراج كمقدمة قبل الخوارزميات الأسرع.",
+            "en": "Linear and binary search. Bubble and insertion sort before faster algorithms."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "اختيار هيكل بيانات مناسب",
+          "تحليل التعقيد الزمني الأساسي",
+          "تنفيذ خوارزميات فرز بسيطة"
+        ],
+        "en": [
+          "Choose suitable data structures",
+          "Reason about basic time complexity",
+          "Implement simple sorts"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "soft-eng-practices",
+      "department": "software",
+      "level": "intermediate",
+      "hours": 12,
+      "duration": {
+        "ar": "١٢ ساعة",
+        "en": "12 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": true
+      },
+      "assignments": true,
+      "quizzes": false,
+      "project": true,
+      "title": {
+        "ar": "ممارسات تقنية البرمجيات",
+        "en": "Software Engineering Practices"
+      },
+      "description": {
+        "ar": "متطلبات، إصدار Git، اختبارات، وتوثيق مشروع هندسي.",
+        "en": "Requirements, Git versioning, testing, and engineering documentation."
+      },
+      "objectives": {
+        "ar": [
+          "كتابة متطلبات مختصرة",
+          "استخدام Git يومياً",
+          "تسليم مشروع موثّق"
+        ],
+        "en": [
+          "Write concise requirements",
+          "Use Git daily",
+          "Deliver a documented project"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "برمجة أساسية"
+        ],
+        "en": [
+          "Basic programming"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "se1",
+          "title": {
+            "ar": "المتطلبات والنطاق",
+            "en": "Requirements and scope"
+          },
+          "body": {
+            "ar": "حدّد المستخدم، المشكلة، والقيود. تجنّب تضخيم النطاق.",
+            "en": "Define user, problem, and constraints. Avoid scope creep."
+          }
+        },
+        {
+          "id": "se2",
+          "title": {
+            "ar": "Git للمهندسين",
+            "en": "Git for engineers"
+          },
+          "body": {
+            "ar": "commit صغير ومتكرر، رسائل واضحة، وفروع للميزات.",
+            "en": "Small frequent commits, clear messages, feature branches."
+          }
+        },
+        {
+          "id": "se3",
+          "title": {
+            "ar": "الاختبار والتسليم",
+            "en": "Testing and delivery"
+          },
+          "body": {
+            "ar": "اختبر الحالات الحدّية. سلّم README ومخطط واستخدام.",
+            "en": "Test edge cases. Deliver README, diagram, and usage notes."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "كتابة متطلبات مختصرة",
+          "استخدام Git يومياً",
+          "تسليم مشروع موثّق"
+        ],
+        "en": [
+          "Write concise requirements",
+          "Use Git daily",
+          "Deliver a documented project"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "power-basics",
+      "department": "electrical",
+      "level": "beginner",
+      "hours": 10,
+      "duration": {
+        "ar": "١٠ ساعات",
+        "en": "10 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "أساسيات أنظمة القدرة",
+        "en": "Power Systems Basics"
+      },
+      "description": {
+        "ar": "التوليد، النقل، التوزيع، والسلامة الكهربائية.",
+        "en": "Generation, transmission, distribution, and electrical safety."
+      },
+      "objectives": {
+        "ar": [
+          "وصف سلسلة القدرة",
+          "فهم الجهد العالي مقابل المنزلي",
+          "تطبيق قواعد السلامة"
+        ],
+        "en": [
+          "Describe the power chain",
+          "Contrast HV vs residential voltage",
+          "Apply safety rules"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "أساسيات الدوائر"
+        ],
+        "en": [
+          "Circuit fundamentals"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "pb1",
+          "title": {
+            "ar": "من المحطة إلى المنزل",
+            "en": "Plant to home"
+          },
+          "body": {
+            "ar": "توليد → رفع جهد → نقل → تخفيض → توزيع للمستهلك.",
+            "en": "Generate → step up → transmit → step down → distribute to consumers."
+          }
+        },
+        {
+          "id": "pb2",
+          "title": {
+            "ar": "السلامة أولاً",
+            "en": "Safety first"
+          },
+          "body": {
+            "ar": "عزل، تأريض، معدات حماية شخصية. لا تعمل على دوائر حية دون تدريب.",
+            "en": "Isolation, grounding, PPE. Never work live circuits without training."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "وصف سلسلة القدرة",
+          "فهم الجهد العالي مقابل المنزلي",
+          "تطبيق قواعد السلامة"
+        ],
+        "en": [
+          "Describe the power chain",
+          "Contrast HV vs residential voltage",
+          "Apply safety rules"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "solar-pv",
+      "department": "renewable",
+      "level": "intermediate",
+      "hours": 12,
+      "duration": {
+        "ar": "١٢ ساعة",
+        "en": "12 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": true,
+      "title": {
+        "ar": "أنظمة الطاقة الشمسية الكهروضوئية",
+        "en": "Solar PV Systems"
+      },
+      "description": {
+        "ar": "الألواح، العاكسات، التخزين، وحساب الحمل الأساسي.",
+        "en": "Panels, inverters, storage, and basic load sizing."
+      },
+      "objectives": {
+        "ar": [
+          "مكوّنات نظام PV",
+          "تقدير الحمل اليومي",
+          "اختيار عاكس مناسب"
+        ],
+        "en": [
+          "PV system components",
+          "Estimate daily load",
+          "Select a suitable inverter"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "أساسيات أنظمة القدرة"
+        ],
+        "en": [
+          "Power systems basics"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "sp1",
+          "title": {
+            "ar": "اللوحة والخلية",
+            "en": "Cell and module"
+          },
+          "body": {
+            "ar": "الجهد والتيار للوحة يعتمد على الإشعاع ودرجة الحرارة.",
+            "en": "Module voltage/current depend on irradiance and temperature."
+          }
+        },
+        {
+          "id": "sp2",
+          "title": {
+            "ar": "تصميم حمل بسيط",
+            "en": "Simple load design"
+          },
+          "body": {
+            "ar": "احسب Wh/يوم، أضف هامش فقد، ثم اختر سعة بطارية وألواح.",
+            "en": "Compute Wh/day, add losses margin, then size battery and panels."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "مكوّنات نظام PV",
+          "تقدير الحمل اليومي",
+          "اختيار عاكس مناسب"
+        ],
+        "en": [
+          "PV system components",
+          "Estimate daily load",
+          "Select a suitable inverter"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "networks-ccna-intro",
+      "department": "networks",
+      "level": "beginner",
+      "hours": 14,
+      "duration": {
+        "ar": "١٤ ساعة",
+        "en": "14 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "مقدمة شبكات الحاسوب",
+        "en": "Computer Networks Intro"
+      },
+      "description": {
+        "ar": "نموذج OSI/TCP-IP، عناوين IP، والتبديل والتوجيه الأساسي.",
+        "en": "OSI/TCP-IP models, IP addressing, basic switching and routing."
+      },
+      "objectives": {
+        "ar": [
+          "شرح طبقات الشبكة",
+          "تقسيم شبكات فرعية بسيطة",
+          "وصف دور الموجّه والمبدّل"
+        ],
+        "en": [
+          "Explain network layers",
+          "Do simple subnetting",
+          "Describe router vs switch roles"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "أساسيات الحاسوب"
+        ],
+        "en": [
+          "Computer literacy"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "nc1",
+          "title": {
+            "ar": "OSI و TCP/IP",
+            "en": "OSI and TCP/IP"
+          },
+          "body": {
+            "ar": "الطبقات تفصل المسؤوليات. التطبيق يعتمد على النقل والشبكة والوصلة.",
+            "en": "Layers separate concerns. Apps ride on transport, network, and link."
+          }
+        },
+        {
+          "id": "nc2",
+          "title": {
+            "ar": "عنونة IPv4",
+            "en": "IPv4 addressing"
+          },
+          "body": {
+            "ar": "العنوان والقناع يحددان الشبكة والمضيف. تدرب على /24 و /26.",
+            "en": "Address and mask define network and host. Practice /24 and /26."
+          }
+        },
+        {
+          "id": "nc3",
+          "title": {
+            "ar": "التبديل والتوجيه",
+            "en": "Switching and routing"
+          },
+          "body": {
+            "ar": "المبدّل يعمل في الطبقة ٢، الموجّه يختار مسارات الطبقة ٣.",
+            "en": "Switches operate at L2; routers choose L3 paths."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "شرح طبقات الشبكة",
+          "تقسيم شبكات فرعية بسيطة",
+          "وصف دور الموجّه والمبدّل"
+        ],
+        "en": [
+          "Explain network layers",
+          "Do simple subnetting",
+          "Describe router vs switch roles"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "cyber-fundamentals",
+      "department": "cybersecurity",
+      "level": "beginner",
+      "hours": 10,
+      "duration": {
+        "ar": "١٠ ساعات",
+        "en": "10 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "أساسيات الأمن السيبراني",
+        "en": "Cybersecurity Fundamentals"
+      },
+      "description": {
+        "ar": "CIA، التهديدات الشائعة، وكلمات المرور والمصادقة.",
+        "en": "CIA triad, common threats, passwords and authentication."
+      },
+      "objectives": {
+        "ar": [
+          "شرح السرية والسلامة والتوافر",
+          "تمييز هجمات شائعة",
+          "تطبيق ممارسات حماية أساسية"
+        ],
+        "en": [
+          "Explain CIA triad",
+          "Recognize common attacks",
+          "Apply basic hygiene"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "مقدمة الشبكات مفيدة"
+        ],
+        "en": [
+          "Networks intro helpful"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "cf1",
+          "title": {
+            "ar": "مثلث CIA",
+            "en": "The CIA triad"
+          },
+          "body": {
+            "ar": "Confidentiality، Integrity، Availability — أساس كل سياسة أمنية.",
+            "en": "Confidentiality, Integrity, Availability — foundation of every security policy."
+          }
+        },
+        {
+          "id": "cf2",
+          "title": {
+            "ar": "تهديدات شائعة",
+            "en": "Common threats"
+          },
+          "body": {
+            "ar": "التصيد، البرمجيات الخبيثة، وهجمات كلمة المرور. الدفاع متعدد الطبقات.",
+            "en": "Phishing, malware, password attacks. Defense in depth."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "شرح السرية والسلامة والتوافر",
+          "تمييز هجمات شائعة",
+          "تطبيق ممارسات حماية أساسية"
+        ],
+        "en": [
+          "Explain CIA triad",
+          "Recognize common attacks",
+          "Apply basic hygiene"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "iot-security",
+      "department": "iot",
+      "level": "advanced",
+      "hours": 8,
+      "duration": {
+        "ar": "٨ ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": false,
+        "code": true
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": true,
+      "title": {
+        "ar": "أمن أنظمة إنترنت الأشياء",
+        "en": "IoT Systems Security"
+      },
+      "description": {
+        "ar": "تأمين الأجهزة، التحديثات، والتشفير للنقل.",
+        "en": "Device hardening, updates, and transport encryption."
+      },
+      "objectives": {
+        "ar": [
+          "تحديد مخاطر أجهزة IoT",
+          "تفعيل تحديثات آمنة",
+          "تشفير قنوات الاتصال"
+        ],
+        "en": [
+          "Identify IoT device risks",
+          "Enable secure updates",
+          "Encrypt communication channels"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "ESP32 وإنترنت الأشياء",
+          "أساسيات الأمن السيبراني"
+        ],
+        "en": [
+          "ESP32 & IoT",
+          "Cybersecurity fundamentals"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "is1",
+          "title": {
+            "ar": "سطح الهجوم للأجهزة",
+            "en": "Device attack surface"
+          },
+          "body": {
+            "ar": "منافذ مفتوحة، كلمات افتراضية، وواجهات غير محمية تزيد المخاطر.",
+            "en": "Open ports, default passwords, and unprotected interfaces raise risk."
+          }
+        },
+        {
+          "id": "is2",
+          "title": {
+            "ar": "TLS و OTA",
+            "en": "TLS and OTA"
+          },
+          "body": {
+            "ar": "استخدم TLS للنقل ووقّع تحديثات OTA قبل التطبيق.",
+            "en": "Use TLS in transit and sign OTA updates before applying."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "تحديد مخاطر أجهزة IoT",
+          "تفعيل تحديثات آمنة",
+          "تشفير قنوات الاتصال"
+        ],
+        "en": [
+          "Identify IoT device risks",
+          "Enable secure updates",
+          "Encrypt communication channels"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "plc-automation",
+      "department": "control",
+      "level": "intermediate",
+      "hours": 14,
+      "duration": {
+        "ar": "١٤ ساعة",
+        "en": "14 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": true,
+      "title": {
+        "ar": "أساسيات PLC والأتمتة",
+        "en": "PLC & Automation Basics"
+      },
+      "description": {
+        "ar": "مدخلات/مخرجات، منطق السلم، ودورة مسح PLC.",
+        "en": "I/O, ladder logic, and the PLC scan cycle."
+      },
+      "objectives": {
+        "ar": [
+          "قراءة مخطط سلم بسيط",
+          "ربط حساسات ومشغّلات",
+          "فهم دورة المسح"
+        ],
+        "en": [
+          "Read simple ladder diagrams",
+          "Wire sensors and actuators",
+          "Understand the scan cycle"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "أساسيات الكهرباء"
+        ],
+        "en": [
+          "Electrical basics"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "pa1",
+          "title": {
+            "ar": "ما هو PLC؟",
+            "en": "What is a PLC?"
+          },
+          "body": {
+            "ar": "حاسوب صناعي يقرأ مدخلات وينفّذ برنامجاً ويحدّث مخارج بشكل دوري.",
+            "en": "An industrial computer that reads inputs, runs a program, and updates outputs cyclically."
+          }
+        },
+        {
+          "id": "pa2",
+          "title": {
+            "ar": "منطق السلم",
+            "en": "Ladder logic"
+          },
+          "body": {
+            "ar": "ملامسات ومخرجات تشبه مخططات الريليه. ابدأ بـ AND/OR بسيط.",
+            "en": "Contacts and coils mirror relay diagrams. Start with simple AND/OR."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "قراءة مخطط سلم بسيط",
+          "ربط حساسات ومشغّلات",
+          "فهم دورة المسح"
+        ],
+        "en": [
+          "Read simple ladder diagrams",
+          "Wire sensors and actuators",
+          "Understand the scan cycle"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "civil-materials",
+      "department": "civil",
+      "level": "beginner",
+      "hours": 8,
+      "duration": {
+        "ar": "٨ ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "مواد البناء الأساسية",
+        "en": "Basic Construction Materials"
+      },
+      "description": {
+        "ar": "الخرسانة، الفولاذ، والأخشاب — خصائص واستخدامات.",
+        "en": "Concrete, steel, and timber — properties and uses."
+      },
+      "objectives": {
+        "ar": [
+          "تمييز خصائص المواد",
+          "ربط المادة بالاستخدام الإنشائي",
+          "مراعاة الجودة في الموقع"
+        ],
+        "en": [
+          "Distinguish material properties",
+          "Match materials to structural use",
+          "Mind site quality"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالتقنية المدنية"
+        ],
+        "en": [
+          "Interest in civil engineering"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "cm1",
+          "title": {
+            "ar": "الخرسانة",
+            "en": "Concrete"
+          },
+          "body": {
+            "ar": "خلطة إسمنت وركام وماء. القوة تعتمد على النسبة والمعالجة.",
+            "en": "Cement, aggregate, water mix. Strength depends on ratio and curing."
+          }
+        },
+        {
+          "id": "cm2",
+          "title": {
+            "ar": "الفولاذ الإنشائي",
+            "en": "Structural steel"
+          },
+          "body": {
+            "ar": "مقاومة شد عالية ومرونة. الانتباه للتآكل والحماية.",
+            "en": "High tensile strength and ductility. Watch corrosion and protection."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "تمييز خصائص المواد",
+          "ربط المادة بالاستخدام الإنشائي",
+          "مراعاة الجودة في الموقع"
+        ],
+        "en": [
+          "Distinguish material properties",
+          "Match materials to structural use",
+          "Mind site quality"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "mech-thermo",
+      "department": "mechanical",
+      "level": "intermediate",
+      "hours": 12,
+      "duration": {
+        "ar": "١٢ ساعة",
+        "en": "12 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "مقدمة الديناميكا الحرارية",
+        "en": "Thermodynamics Introduction"
+      },
+      "description": {
+        "ar": "الطاقة، القوانين الأساسية، ودورات بسيطة.",
+        "en": "Energy, fundamental laws, and simple cycles."
+      },
+      "objectives": {
+        "ar": [
+          "تطبيق القانون الأول",
+          "شرح مفهوم الإنتروبي باختصار",
+          "وصف دورة كارنو مبدئياً"
+        ],
+        "en": [
+          "Apply the first law",
+          "Summarize entropy",
+          "Describe Carnot cycle at a basic level"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "فيزياء ثانوية"
+        ],
+        "en": [
+          "High-school physics"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "mt1",
+          "title": {
+            "ar": "الطاقة والعمل والحرارة",
+            "en": "Energy, work, heat"
+          },
+          "body": {
+            "ar": "الطاقة محفوظة؛ الحرارة والعمل طريقان لنقل الطاقة عبر حدود النظام.",
+            "en": "Energy is conserved; heat and work transfer energy across system boundaries."
+          }
+        },
+        {
+          "id": "mt2",
+          "title": {
+            "ar": "القانون الأول",
+            "en": "First law"
+          },
+          "body": {
+            "ar": "ΔU = Q − W (اصطلاح شائع). راقب الإشارة والتعريف.",
+            "en": "ΔU = Q − W (common sign convention). Watch signs and definitions."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "تطبيق القانون الأول",
+          "شرح مفهوم الإنتروبي باختصار",
+          "وصف دورة كارنو مبدئياً"
+        ],
+        "en": [
+          "Apply the first law",
+          "Summarize entropy",
+          "Describe Carnot cycle at a basic level"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "ai-ml-eng",
+      "department": "ai-eng",
+      "level": "intermediate",
+      "hours": 16,
+      "duration": {
+        "ar": "١٦ ساعة",
+        "en": "16 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": true
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": true,
+      "title": {
+        "ar": "تقنية تعلم الآلة للمبتدئين",
+        "en": "ML Engineering for Beginners"
+      },
+      "description": {
+        "ar": "خط أنابيب البيانات، النماذج البسيطة، وتقييم الأداء.",
+        "en": "Data pipelines, simple models, and evaluation metrics."
+      },
+      "objectives": {
+        "ar": [
+          "تقسيم بيانات تدريب/اختبار",
+          "تدريب نموذج تصنيفي بسيط",
+          "تفسير الدقة والاستدعاء"
+        ],
+        "en": [
+          "Split train/test data",
+          "Train a simple classifier",
+          "Interpret precision and recall"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "برمجة بايثون أساسية",
+          "رياضيات أولية"
+        ],
+        "en": [
+          "Basic Python",
+          "Elementary math"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "ml1",
+          "title": {
+            "ar": "بيانات قبل النماذج",
+            "en": "Data before models"
+          },
+          "body": {
+            "ar": "نظّف البيانات، افهم التسريب، وثبّت التقسيم العشوائي.",
+            "en": "Clean data, avoid leakage, and fix the random split."
+          }
+        },
+        {
+          "id": "ml2",
+          "title": {
+            "ar": "التقييم الهندسي",
+            "en": "Engineering evaluation"
+          },
+          "body": {
+            "ar": "لا تعتمد على الدقة وحدها مع بيانات غير متوازنة.",
+            "en": "Do not rely on accuracy alone with imbalanced data."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "تقسيم بيانات تدريب/اختبار",
+          "تدريب نموذج تصنيفي بسيط",
+          "تفسير الدقة والاستدعاء"
+        ],
+        "en": [
+          "Split train/test data",
+          "Train a simple classifier",
+          "Interpret precision and recall"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "comms-signals",
+      "department": "communications",
+      "level": "intermediate",
+      "hours": 12,
+      "duration": {
+        "ar": "١٢ ساعة",
+        "en": "12 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "إشارات وأنظمة الاتصال",
+        "en": "Signals & Communication Systems"
+      },
+      "description": {
+        "ar": "تعديل أساسي، عرض النطاق، والضوضاء.",
+        "en": "Basic modulation, bandwidth, and noise."
+      },
+      "objectives": {
+        "ar": [
+          "تمييز AM/FM مبدئياً",
+          "ربط عرض النطاق بمعدل المعلومات",
+          "فهم أثر الضوضاء"
+        ],
+        "en": [
+          "Distinguish AM/FM at a basic level",
+          "Relate bandwidth to information rate",
+          "Understand noise impact"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "أساسيات الدوائر",
+          "رياضيات ثانوية"
+        ],
+        "en": [
+          "Circuit basics",
+          "High-school math"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "cs1",
+          "title": {
+            "ar": "الإشارة والمعلومات",
+            "en": "Signal and information"
+          },
+          "body": {
+            "ar": "الإشارة تحمل معلومات عبر وسيط. التشفير والتعديل يجهزانها للنقل.",
+            "en": "A signal carries information over a medium. Coding and modulation prepare it for transport."
+          }
+        },
+        {
+          "id": "cs2",
+          "title": {
+            "ar": "التعديل الأساسي",
+            "en": "Basic modulation"
+          },
+          "body": {
+            "ar": "AM يغيّر السعة، FM يغيّر التردد. لكلٍ مزايا وضوضاء مختلفة.",
+            "en": "AM varies amplitude; FM varies frequency. Each has different noise trade-offs."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "تمييز AM/FM مبدئياً",
+          "ربط عرض النطاق بمعدل المعلومات",
+          "فهم أثر الضوضاء"
+        ],
+        "en": [
+          "Distinguish AM/FM at a basic level",
+          "Relate bandwidth to information rate",
+          "Understand noise impact"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 2
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 2
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 2
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح المحاضرة",
+            "en": "Lecture slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو محاضرة (موضع)",
+            "en": "Lecture video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "مختبر / تمرين",
+            "en": "Lab / exercise"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-awareness",
+      "department": "osh",
+      "level": "beginner",
+      "hours": 8,
+      "duration": {
+        "ar": "8 ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "وعي السلامة المهنية (OSHA Awareness)",
+        "en": "OSH Awareness (OSHA-oriented)"
+      },
+      "description": {
+        "ar": "مبادئ السلامة في بيئة العمل، حقوق العمال، وثقافة الوقاية.",
+        "en": "Workplace safety principles, worker rights, and prevention culture."
+      },
+      "objectives": {
+        "ar": [
+          "يشرح ثقافة الوقاية",
+          "يميز فئات المخاطر",
+          "يصف خطوات الإبلاغ"
+        ],
+        "en": [
+          "Explain prevention culture",
+          "Classify hazards",
+          "Describe reporting steps"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "oshaware1",
+          "title": {
+            "ar": "ثقافة السلامة",
+            "en": "Safety culture"
+          },
+          "body": {
+            "ar": "السلامة مسؤولية مشتركة: قيادة، مشاركة عمال، وتواصل.",
+            "en": "Safety is shared: leadership, worker participation, communication."
+          }
+        },
+        {
+          "id": "oshaware2",
+          "title": {
+            "ar": "مخاطر شائعة",
+            "en": "Common hazards"
+          },
+          "body": {
+            "ar": "ميكانيكية، كهربائية، كيميائية، حريق، ارتفاع، أماكن محصورة.",
+            "en": "Mechanical, electrical, chemical, fire, height, confined spaces."
+          }
+        },
+        {
+          "id": "oshaware3",
+          "title": {
+            "ar": "الإبلاغ والطوارئ",
+            "en": "Reporting & emergency"
+          },
+          "body": {
+            "ar": "أبلغ عن الحوادث والوشيكة؛ اعرف مخارج الطوارئ ونقاط التجمع.",
+            "en": "Report incidents/near misses; know exits and assembly points."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يشرح ثقافة الوقاية",
+          "يميز فئات المخاطر",
+          "يصف خطوات الإبلاغ"
+        ],
+        "en": [
+          "Explain prevention culture",
+          "Classify hazards",
+          "Describe reporting steps"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [
+        {
+          "title": {
+            "ar": "OSHA — ممارسات موصى بها",
+            "en": "OSHA Recommended Practices"
+          },
+          "url": "https://www.osha.gov/safety-management"
+        }
+      ],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-iso45001",
+      "department": "osh",
+      "level": "intermediate",
+      "hours": 12,
+      "duration": {
+        "ar": "12 ساعات",
+        "en": "12 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "أنظمة إدارة السلامة ISO 45001",
+        "en": "ISO 45001 OH&S Management Systems"
+      },
+      "description": {
+        "ar": "سياسة، تخطيط، تنفيذ، مراجعة، وتحسين مستمر لأنظمة السلامة.",
+        "en": "Policy, planning, operation, review, and continual improvement for OH&S systems."
+      },
+      "objectives": {
+        "ar": [
+          "يربط PDCA بالسلامة",
+          "يصوغ سياسة أولية",
+          "يصف دورة التدقيق"
+        ],
+        "en": [
+          "Map PDCA to OH&S",
+          "Draft a basic policy",
+          "Describe audit cycle"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "oshiso451",
+          "title": {
+            "ar": "هيكل ISO 45001",
+            "en": "ISO 45001 structure"
+          },
+          "body": {
+            "ar": "PDCA، سياق المنظمة، القيادة ومشاركة العمال.",
+            "en": "PDCA, organizational context, leadership and worker participation."
+          }
+        },
+        {
+          "id": "oshiso452",
+          "title": {
+            "ar": "التخطيط والمخاطر",
+            "en": "Planning & risks"
+          },
+          "body": {
+            "ar": "تحديد المخاطر والفرص والأهداف ومؤشرات الأداء.",
+            "en": "Hazards, opportunities, objectives, and performance indicators."
+          }
+        },
+        {
+          "id": "oshiso453",
+          "title": {
+            "ar": "التدقيق والمراجعة",
+            "en": "Audit & review"
+          },
+          "body": {
+            "ar": "تدقيق داخلي، عدم المطابقة، ومراجعة الإدارة.",
+            "en": "Internal audit, nonconformity, and management review."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يربط PDCA بالسلامة",
+          "يصوغ سياسة أولية",
+          "يصف دورة التدقيق"
+        ],
+        "en": [
+          "Map PDCA to OH&S",
+          "Draft a basic policy",
+          "Describe audit cycle"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [
+        {
+          "title": {
+            "ar": "ISO 45001",
+            "en": "ISO 45001"
+          },
+          "url": "https://www.iso.org/standard/63787.html"
+        }
+      ],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-risk-assessment",
+      "department": "osh",
+      "level": "intermediate",
+      "hours": 10,
+      "duration": {
+        "ar": "10 ساعات",
+        "en": "10 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "تقييم المخاطر وJSA/JHA",
+        "en": "Risk Assessment & JSA/JHA"
+      },
+      "description": {
+        "ar": "تحديد الأخطار، التقييم، مصفوفة المخاطر، خطط التحكم، والسجل.",
+        "en": "Hazard ID, assessment, risk matrix, control plans, and risk register."
+      },
+      "objectives": {
+        "ar": [
+          "يملأ مصفوفة مخاطر",
+          "يعدّ JSA مبسّطاً",
+          "يحدّث سجل المخاطر"
+        ],
+        "en": [
+          "Fill a risk matrix",
+          "Draft a simple JSA",
+          "Update a risk register"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "oshriska1",
+          "title": {
+            "ar": "تحديد الأخطار (HAZID)",
+            "en": "Hazard identification (HAZID)"
+          },
+          "body": {
+            "ar": "تجول ميداني، مقابلات، وتحليل مهام لتحديد مصادر الضرر.",
+            "en": "Walkthroughs, interviews, and task analysis to find harm sources."
+          }
+        },
+        {
+          "id": "oshriska2",
+          "title": {
+            "ar": "مصفوفة الاحتمال×الشدة",
+            "en": "Likelihood × severity matrix"
+          },
+          "body": {
+            "ar": "رتّب المخاطر واختر ضوابط وفق التسلسل الهرمي للتحكم.",
+            "en": "Rank risks and select controls via the hierarchy of controls."
+          }
+        },
+        {
+          "id": "oshriska3",
+          "title": {
+            "ar": "JSA / JHA",
+            "en": "JSA / JHA"
+          },
+          "body": {
+            "ar": "قسّم المهمة لخطوات، حدّد الأخطار لكل خطوة، وثبّت الضوابط.",
+            "en": "Break tasks into steps, hazards per step, and fixed controls."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يملأ مصفوفة مخاطر",
+          "يعدّ JSA مبسّطاً",
+          "يحدّث سجل المخاطر"
+        ],
+        "en": [
+          "Fill a risk matrix",
+          "Draft a simple JSA",
+          "Update a risk register"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-fire-safety",
+      "department": "osh",
+      "level": "beginner",
+      "hours": 8,
+      "duration": {
+        "ar": "8 ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "السلامة من الحرائق",
+        "en": "Fire Safety"
+      },
+      "description": {
+        "ar": "مثلث الحريق، الإطفاء، الإخلاء، وطفايات الحريق وفق أنواعها.",
+        "en": "Fire triangle, suppression, evacuation, and extinguisher types."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "osh-fire-safety-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "مثلث الحريق، الإطفاء، الإخلاء، وطفايات الحريق وفق أنواعها.",
+            "en": "Fire triangle, suppression, evacuation, and extinguisher types."
+          }
+        },
+        {
+          "id": "osh-fire-safety-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [
+        {
+          "title": {
+            "ar": "NFPA",
+            "en": "NFPA"
+          },
+          "url": "https://www.nfpa.org/"
+        }
+      ],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-electrical",
+      "department": "osh",
+      "level": "intermediate",
+      "hours": 8,
+      "duration": {
+        "ar": "8 ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "السلامة الكهربائية",
+        "en": "Electrical Safety"
+      },
+      "description": {
+        "ar": "صدمات، قوس كهربائي، عزل، وأساسيات العمل الآمن على الأنظمة.",
+        "en": "Shock, arc flash, isolation, and safe work on electrical systems."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "osh-electrical-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "صدمات، قوس كهربائي، عزل، وأساسيات العمل الآمن على الأنظمة.",
+            "en": "Shock, arc flash, isolation, and safe work on electrical systems."
+          }
+        },
+        {
+          "id": "osh-electrical-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-loto",
+      "department": "osh",
+      "level": "intermediate",
+      "hours": 6,
+      "duration": {
+        "ar": "6 ساعات",
+        "en": "6 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "الإغلاق والتعليق LOTO",
+        "en": "Lockout/Tagout (LOTO)"
+      },
+      "description": {
+        "ar": "عزل مصادر الطاقة الخطرة قبل الصيانة والإصلاح.",
+        "en": "Isolate hazardous energy sources before maintenance."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "osh-loto-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "عزل مصادر الطاقة الخطرة قبل الصيانة والإصلاح.",
+            "en": "Isolate hazardous energy sources before maintenance."
+          }
+        },
+        {
+          "id": "osh-loto-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-height",
+      "department": "osh",
+      "level": "intermediate",
+      "hours": 6,
+      "duration": {
+        "ar": "6 ساعات",
+        "en": "6 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "العمل على الارتفاع",
+        "en": "Working at Height"
+      },
+      "description": {
+        "ar": "سقالات، أحزمة، نقاط تثبيت، ومنع السقوط.",
+        "en": "Scaffolds, harnesses, anchor points, and fall prevention."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "osh-height-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "سقالات، أحزمة، نقاط تثبيت، ومنع السقوط.",
+            "en": "Scaffolds, harnesses, anchor points, and fall prevention."
+          }
+        },
+        {
+          "id": "osh-height-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-confined",
+      "department": "osh",
+      "level": "intermediate",
+      "hours": 6,
+      "duration": {
+        "ar": "6 ساعات",
+        "en": "6 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "الأماكن المحصورة",
+        "en": "Confined Space Entry"
+      },
+      "description": {
+        "ar": "تصاريح الدخول، اختبار الجو، مراقب الدخول، والإنقاذ.",
+        "en": "Entry permits, atmosphere testing, attendants, and rescue."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "osh-confined-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "تصاريح الدخول، اختبار الجو، مراقب الدخول، والإنقاذ.",
+            "en": "Entry permits, atmosphere testing, attendants, and rescue."
+          }
+        },
+        {
+          "id": "osh-confined-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-first-aid",
+      "department": "osh",
+      "level": "beginner",
+      "hours": 6,
+      "duration": {
+        "ar": "6 ساعات",
+        "en": "6 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "الإسعافات الأولية في موقع العمل",
+        "en": "Workplace First Aid"
+      },
+      "description": {
+        "ar": "استجابة أولية، مجموعات الإسعاف، ومتى تستدعي الطوارئ.",
+        "en": "Initial response, first-aid kits, and when to call emergency services."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "osh-first-aid-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "استجابة أولية، مجموعات الإسعاف، ومتى تستدعي الطوارئ.",
+            "en": "Initial response, first-aid kits, and when to call emergency services."
+          }
+        },
+        {
+          "id": "osh-first-aid-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-hazop",
+      "department": "osh",
+      "level": "advanced",
+      "hours": 10,
+      "duration": {
+        "ar": "10 ساعات",
+        "en": "10 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "HAZOP وسلامة العمليات",
+        "en": "HAZOP & Process Safety"
+      },
+      "description": {
+        "ar": "دراسة المخاطر والتشغيل للوحدات العملية والكيميائية.",
+        "en": "Hazard and operability study for process/chemical units."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "osh-hazop-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "دراسة المخاطر والتشغيل للوحدات العملية والكيميائية.",
+            "en": "Hazard and operability study for process/chemical units."
+          }
+        },
+        {
+          "id": "osh-hazop-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-ptw",
+      "department": "osh",
+      "level": "intermediate",
+      "hours": 8,
+      "duration": {
+        "ar": "8 ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "تصاريح العمل (Permit to Work)",
+        "en": "Permit to Work (PTW)"
+      },
+      "description": {
+        "ar": "أعمال ساخنة، كهرباء، ارتفاع، حفر، أماكن محصورة، وLOTO.",
+        "en": "Hot work, electrical, height, excavation, confined space, and LOTO."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "osh-ptw-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "أعمال ساخنة، كهرباء، ارتفاع، حفر، أماكن محصورة، وLOTO.",
+            "en": "Hot work, electrical, height, excavation, confined space, and LOTO."
+          }
+        },
+        {
+          "id": "osh-ptw-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-inspection",
+      "department": "osh",
+      "level": "beginner",
+      "hours": 6,
+      "duration": {
+        "ar": "6 ساعات",
+        "en": "6 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "التفتيش والتدقيق والـ Housekeeping",
+        "en": "Inspection, Audit & Housekeeping"
+      },
+      "description": {
+        "ar": "قوائم تحقق، تفتيش موقع، تدقيق، وترتيب المكان.",
+        "en": "Checklists, site inspection, audits, and housekeeping."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "osh-inspection-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "قوائم تحقق، تفتيش موقع، تدقيق، وترتيب المكان.",
+            "en": "Checklists, site inspection, audits, and housekeeping."
+          }
+        },
+        {
+          "id": "osh-inspection-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "osh-incident",
+      "department": "osh",
+      "level": "intermediate",
+      "hours": 8,
+      "duration": {
+        "ar": "8 ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "التحقيق في الحوادث وRCA",
+        "en": "Incident Investigation & RCA"
+      },
+      "description": {
+        "ar": "إبلاغ، تحقيق، تحليل جذور الأسباب، وإجراءات تصحيحية.",
+        "en": "Reporting, investigation, root-cause analysis, and corrective actions."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "osh-incident-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "إبلاغ، تحقيق، تحليل جذور الأسباب، وإجراءات تصحيحية.",
+            "en": "Reporting, investigation, root-cause analysis, and corrective actions."
+          }
+        },
+        {
+          "id": "osh-incident-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "petro-intro",
+      "department": "petroleum",
+      "level": "beginner",
+      "hours": 8,
+      "duration": {
+        "ar": "8 ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "مقدمة تقنية البترول",
+        "en": "Intro to Petroleum Engineering"
+      },
+      "description": {
+        "ar": "خزانات، حفر، وإنتاج أساسي.",
+        "en": "Reservoirs, drilling, and basic production."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "petro-intro-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "خزانات، حفر، وإنتاج أساسي.",
+            "en": "Reservoirs, drilling, and basic production."
+          }
+        },
+        {
+          "id": "petro-intro-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "chem-process-intro",
+      "department": "chemical",
+      "level": "beginner",
+      "hours": 8,
+      "duration": {
+        "ar": "8 ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "مقدمة العمليات الكيميائية",
+        "en": "Intro to Chemical Processes"
+      },
+      "description": {
+        "ar": "توازنات الكتلة والطاقة ومخططات التدفق.",
+        "en": "Mass/energy balances and process flow diagrams."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "chem-process-intro-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "توازنات الكتلة والطاقة ومخططات التدفق.",
+            "en": "Mass/energy balances and process flow diagrams."
+          }
+        },
+        {
+          "id": "chem-process-intro-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "aero-fundamentals",
+      "department": "aviation",
+      "level": "beginner",
+      "hours": 8,
+      "duration": {
+        "ar": "8 ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "أساسيات تقنية الطيران",
+        "en": "Aerospace Fundamentals"
+      },
+      "description": {
+        "ar": "قوى الطيران والهياكل والدفع.",
+        "en": "Flight forces, structures, and propulsion."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "aero-fundamentals-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "قوى الطيران والهياكل والدفع.",
+            "en": "Flight forces, structures, and propulsion."
+          }
+        },
+        {
+          "id": "aero-fundamentals-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "mining-safety-basics",
+      "department": "mining",
+      "level": "beginner",
+      "hours": 8,
+      "duration": {
+        "ar": "8 ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "أساسيات سلامة التعدين",
+        "en": "Mining Safety Basics"
+      },
+      "description": {
+        "ar": "تهوية، غبار، وسلامة تحت الأرض.",
+        "en": "Ventilation, dust, and underground safety."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "mining-safety-basics-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "تهوية، غبار، وسلامة تحت الأرض.",
+            "en": "Ventilation, dust, and underground safety."
+          }
+        },
+        {
+          "id": "mining-safety-basics-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    },
+    {
+      "id": "biomed-devices",
+      "department": "biomedical",
+      "level": "beginner",
+      "hours": 8,
+      "duration": {
+        "ar": "8 ساعات",
+        "en": "8 hours"
+      },
+      "certificate": true,
+      "media": {
+        "video": true,
+        "pdf": true,
+        "ppt": true,
+        "code": false
+      },
+      "assignments": true,
+      "quizzes": true,
+      "project": false,
+      "title": {
+        "ar": "مقدمة الأجهزة الطبية",
+        "en": "Intro to Medical Devices"
+      },
+      "description": {
+        "ar": "أجهزة قياس، سلامة كهربائية طبية، وتعقيم.",
+        "en": "Sensors, medical electrical safety, and sterilization."
+      },
+      "objectives": {
+        "ar": [
+          "فهم الأساسيات",
+          "تطبيق عملي",
+          "توثيق آمن"
+        ],
+        "en": [
+          "Understand fundamentals",
+          "Apply in practice",
+          "Document safely"
+        ]
+      },
+      "prerequisites": {
+        "ar": [
+          "اهتمام بالسلامة"
+        ],
+        "en": [
+          "Interest in safety"
+        ]
+      },
+      "lessons": [
+        {
+          "id": "biomed-devices-1",
+          "title": {
+            "ar": "مقدمة",
+            "en": "Introduction"
+          },
+          "body": {
+            "ar": "أجهزة قياس، سلامة كهربائية طبية، وتعقيم.",
+            "en": "Sensors, medical electrical safety, and sterilization."
+          }
+        },
+        {
+          "id": "biomed-devices-2",
+          "title": {
+            "ar": "تطبيق",
+            "en": "Practice"
+          },
+          "body": {
+            "ar": "تمارين وقوائم تحقق.",
+            "en": "Exercises and checklists."
+          }
+        }
+      ],
+      "outcomes": {
+        "ar": [
+          "يطبّق المفاهيم",
+          "يوثّق النتائج"
+        ],
+        "en": [
+          "Apply concepts",
+          "Document results"
+        ]
+      },
+      "weeklyPlan": {
+        "ar": [
+          {
+            "week": 1,
+            "topic": "مقدمة",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "تطبيق",
+            "hours": 3
+          }
+        ],
+        "en": [
+          {
+            "week": 1,
+            "topic": "Intro",
+            "hours": 3
+          },
+          {
+            "week": 2,
+            "topic": "Practice",
+            "hours": 3
+          }
+        ]
+      },
+      "slides": [
+        {
+          "title": {
+            "ar": "شرائح",
+            "en": "Slides"
+          },
+          "url": "#"
+        }
+      ],
+      "videos": [
+        {
+          "title": {
+            "ar": "فيديو (موضع)",
+            "en": "Video (placeholder)"
+          },
+          "url": "#",
+          "placeholder": true
+        }
+      ],
+      "labs": [
+        {
+          "title": {
+            "ar": "تمرين / مختبر",
+            "en": "Exercise / lab"
+          },
+          "url": "#",
+          "soon": false
+        }
+      ],
+      "assignmentsList": [
+        {
+          "title": {
+            "ar": "واجب عملي",
+            "en": "Practical assignment"
+          },
+          "dueWeek": 2
+        }
+      ],
+      "exams": [
+        {
+          "title": {
+            "ar": "امتحان (قريباً)",
+            "en": "Exam (soon)"
+          },
+          "type": "exam",
+          "soon": true
+        }
+      ],
+      "sources": [],
+      "refs": [],
+      "discussions": {
+        "enabled": false,
+        "soon": true
+      }
+    }
+  ]
+}

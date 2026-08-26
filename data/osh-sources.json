@@ -1,0 +1,225 @@
+{
+  "title": {
+    "ar": "مجمّع مصادر السلامة والصحة المهنية",
+    "en": "OSH/HSE Sources Aggregator"
+  },
+  "disclaimer": {
+    "ar": "ملخصات وروابط رسمية فقط. لا نستضيف نصوصاً محمية بحقوق النشر.",
+    "en": "Summaries and official links only. We do not host copyrighted full texts."
+  },
+  "lastRefreshed": "2026-08-02",
+  "sources": [
+    {
+      "id": "src-saudi-ncosh",
+      "org": "NCOSH",
+      "region": "SA",
+      "title": {
+        "ar": "المجلس الوطني للسلامة والصحة المهنية",
+        "en": "Saudi National Council for Occupational Safety and Health"
+      },
+      "url": "https://www.ncosh.gov.sa/",
+      "summary": {
+        "ar": "جهة وطنية سعودية لتعزيز السلامة والصحة المهنية والتنظيم والممارسات.",
+        "en": "Saudi national body promoting OSH regulation and workplace practices."
+      },
+      "topics": [
+        "policy",
+        "national"
+      ]
+    },
+    {
+      "id": "src-osha-rec",
+      "org": "OSHA",
+      "region": "US",
+      "title": {
+        "ar": "ممارسات OSHA الموصى بها لإدارة السلامة والصحة",
+        "en": "OSHA Recommended Practices for Safety & Health Programs"
+      },
+      "url": "https://www.osha.gov/safety-management",
+      "summary": {
+        "ar": "إطار عملي: إدارة، مشاركة عمال، تحديد أخطار، تعليم، وتقييم برامج.",
+        "en": "Practical framework: management, worker participation, hazard ID, training, program evaluation."
+      },
+      "topics": [
+        "management",
+        "programs"
+      ]
+    },
+    {
+      "id": "src-iosh",
+      "org": "IOSH",
+      "region": "UK/Global",
+      "title": {
+        "ar": "مبادئ IOSH للسلامة والصحة المهنية الجيدة",
+        "en": "IOSH — Principles of good OSH"
+      },
+      "url": "https://iosh.com/",
+      "summary": {
+        "ar": "إرشاد مهني لممارسي السلامة حول القيادة، الكفاءة، وإدارة المخاطر.",
+        "en": "Professional guidance for practitioners on leadership, competence, and risk management."
+      },
+      "topics": [
+        "competence",
+        "profession"
+      ]
+    },
+    {
+      "id": "src-iso-45001",
+      "org": "ISO",
+      "region": "Global",
+      "title": {
+        "ar": "ISO 45001 — أنظمة إدارة الصحة والسلامة المهنية",
+        "en": "ISO 45001 OH&S management systems"
+      },
+      "url": "https://www.iso.org/standard/63787.html",
+      "summary": {
+        "ar": "معيار دولي لمتطلبات نظام إدارة OH&S بنهج PDCA.",
+        "en": "International standard for OH&S management system requirements using PDCA."
+      },
+      "topics": [
+        "iso45001",
+        "management"
+      ]
+    },
+    {
+      "id": "src-ilo",
+      "org": "ILO",
+      "region": "Global",
+      "title": {
+        "ar": "منظمة العمل الدولية — السلامة والصحة في العمل",
+        "en": "ILO — Safety and health at work"
+      },
+      "url": "https://www.ilo.org/topics-and-sectors/safety-and-health-work",
+      "summary": {
+        "ar": "معايير واتفاقيات وأدوات عالمية لبيئة عمل آمنة وصحية.",
+        "en": "Global standards, conventions, and tools for safe and healthy work."
+      },
+      "topics": [
+        "standards",
+        "policy"
+      ]
+    },
+    {
+      "id": "src-nfpa",
+      "org": "NFPA",
+      "region": "US/Global",
+      "title": {
+        "ar": "NFPA — الحماية من الحرائق",
+        "en": "NFPA — Fire protection"
+      },
+      "url": "https://www.nfpa.org/",
+      "summary": {
+        "ar": "معايير توافقية للحرائق والسلامة الكهربائية والطوارئ.",
+        "en": "Consensus standards for fire, electrical safety, and emergency."
+      },
+      "topics": [
+        "fire",
+        "electrical"
+      ]
+    },
+    {
+      "id": "src-niosh",
+      "org": "NIOSH",
+      "region": "US",
+      "title": {
+        "ar": "NIOSH — أبحاث الصحة المهنية",
+        "en": "NIOSH — Occupational health research"
+      },
+      "url": "https://www.cdc.gov/niosh/",
+      "summary": {
+        "ar": "أبحاث وإرشادات للوقاية من الأمراض والإصابات المهنية.",
+        "en": "Research and guidance to prevent occupational injury and illness."
+      },
+      "topics": [
+        "hygiene",
+        "research"
+      ]
+    },
+    {
+      "id": "src-wiki-osh",
+      "org": "Wikipedia",
+      "region": "Global",
+      "title": {
+        "ar": "صفحة ويكيبيديا: السلامة والصحة المهنية",
+        "en": "Wikipedia: Occupational safety and health"
+      },
+      "url": "https://en.wikipedia.org/wiki/Occupational_safety_and_health",
+      "summary": {
+        "ar": "نظرة عامة مفتوحة للمفاهيم؛ راجع المصادر الرسمية للتطبيق.",
+        "en": "Open overview of concepts; consult official sources for practice."
+      },
+      "topics": [
+        "overview"
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "id": "tpl-incident",
+      "title": {
+        "ar": "تقرير حادث",
+        "en": "Incident Report"
+      },
+      "format": "placeholder",
+      "url": "#osh-templates",
+      "note": {
+        "ar": "نموذج وصفي — حمّل/خصّص في المخدمة ٢",
+        "en": "Descriptive form — download/customize in Phase 2"
+      }
+    },
+    {
+      "id": "tpl-near-miss",
+      "title": {
+        "ar": "إبلاغ وشيك (Near Miss)",
+        "en": "Near Miss Report"
+      },
+      "format": "placeholder",
+      "url": "#osh-templates"
+    },
+    {
+      "id": "tpl-risk",
+      "title": {
+        "ar": "تقييم مخاطر",
+        "en": "Risk Assessment"
+      },
+      "format": "placeholder",
+      "url": "#osh-templates"
+    },
+    {
+      "id": "tpl-toolbox",
+      "title": {
+        "ar": "Toolbox Talk",
+        "en": "Toolbox Talk"
+      },
+      "format": "placeholder",
+      "url": "#osh-templates"
+    },
+    {
+      "id": "tpl-ptw",
+      "title": {
+        "ar": "تصريح عمل PTW",
+        "en": "Permit to Work"
+      },
+      "format": "placeholder",
+      "url": "#osh-templates"
+    },
+    {
+      "id": "tpl-inspection",
+      "title": {
+        "ar": "قائمة تفتيش",
+        "en": "Inspection Checklist"
+      },
+      "format": "placeholder",
+      "url": "#osh-templates"
+    },
+    {
+      "id": "tpl-daily",
+      "title": {
+        "ar": "تقرير سلامة يومي",
+        "en": "Daily Safety Report"
+      },
+      "format": "placeholder",
+      "url": "#osh-templates"
+    }
+  ]
+}

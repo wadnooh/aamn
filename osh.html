@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مركز السلامة والصحة المهنية | AAMN Software & Computer</title>
+  <meta name="description" content="مركز OSH/HSE في ودنوح AAMN للبرمجيات والكمبيوتر: إدارة السلامة، تقييم المخاطر، PPE، تصاريح العمل، قوالب، ومراجع رسمية.">
+  <link rel="icon" type="image/png" href="/images/wad-nooh-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nile-deep: #053d47; --nile: #0a5f6c; --kush: #c4a35a; --ink: #1c2428;
+      --muted: #5c6a70; --surface: #f7f4ee; --line: #cfc7b8;
+      --safety: #b45309; --safety-soft: rgba(180,83,9,.12);
+      --font-display: 'El Messiri', 'IBM Plex Sans Arabic', sans-serif;
+      --font-body: 'IBM Plex Sans Arabic', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body); color: var(--ink); line-height: 1.65;
+      background:
+        radial-gradient(ellipse at 10% 0%, var(--safety-soft), transparent 40%),
+        radial-gradient(ellipse at 90% 0%, rgba(196,163,90,.16), transparent 45%),
+        linear-gradient(165deg, #ebe6dc 0%, #d5e4e6 50%, #c8d9d0 100%);
+      min-height: 100vh; padding: 16px 12px 40px;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); }
+    .hero {
+      background: linear-gradient(135deg, rgba(5,61,71,.96), rgba(10,95,108,.88) 55%, rgba(180,83,9,.55));
+      color: #f5f0e6; padding: clamp(28px, 4vw, 36px) clamp(16px, 3vw, 28px); position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: auto -20% -40% 40%; height: 180px;
+      background: radial-gradient(circle, rgba(196,163,90,.35), transparent 70%); pointer-events: none;
+    }
+    .hero .crumb { font-size: .85rem; opacity: .8; margin-bottom: 10px; }
+    .hero a { color: var(--kush); }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 2.35rem); position: relative; }
+    .hero .tag { margin-top: 8px; opacity: .9; position: relative; }
+    .badge {
+      display: inline-block; margin-top: 14px; padding: 4px 10px; font-size: .75rem; font-weight: 700;
+      background: var(--kush); color: var(--nile-deep); position: relative;
+    }
+    .inner { padding: 24px 28px 36px; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+    .tab {
+      padding: 11px 13px; border: none; background: transparent; cursor: pointer; font: inherit;
+      font-weight: 600; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px;
+    }
+    .tab.active { color: var(--nile-deep); border-bottom-color: var(--safety); }
+    .panel { display: none; } .panel.active { display: block; animation: fade .28s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    h2 { font-family: var(--font-display); color: var(--nile-deep); margin: 6px 0 14px; }
+    h3 { font-family: var(--font-display); color: var(--nile-deep); font-size: 1.05rem; margin-bottom: 6px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+    .card {
+      background: #fff; border: 1px solid var(--line); border-inline-start: 3px solid var(--safety);
+      padding: 14px;
+    }
+    .card.kush { border-inline-start-color: var(--kush); }
+    .meta { font-size: .8rem; color: var(--muted); }
+    .btn {
+      display: inline-block; margin-top: 10px; padding: 10px 16px; background: var(--nile-deep);
+      color: #f5f0e6; text-decoration: none; font-weight: 600; border: none; cursor: pointer; font: inherit;
+    }
+    .btn.outline { background: transparent; color: var(--nile-deep); border: 1px solid var(--nile); }
+    ul { padding-inline-start: 18px; color: var(--muted); }
+    li { margin-bottom: 4px; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 16px; }
+    .pill {
+      padding: 6px 10px; border: 1px solid var(--line); background: #fff; font-size: .82rem; color: var(--nile-deep);
+    }
+    .src-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; margin-bottom: 12px; }
+    .disclaimer {
+      background: var(--safety-soft); border: 1px solid rgba(180,83,9,.25); padding: 12px 14px; margin-bottom: 16px;
+      font-size: .9rem; color: var(--ink);
+    }
+    @media (max-width: 700px) { .inner, .hero { padding: 20px 16px; } body { padding: 12px 10px 36px; } }
+  </style>
+  <script src="/js/wep-gate.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="crumb"><a href="/">AAMN Software & Computer</a> / OSH · HSE</div>
+      <h1 id="pageTitle">🦺 مركز السلامة والصحة المهنية</h1>
+      <p class="tag" id="pageLead">إدارة سلامة · تقييم مخاطر · PPE · تصاريح عمل · تحقيق حوادث · طوارئ · قطاعات صناعية</p>
+      <span class="badge">Code • Repair • Connect • Support</span>
+    </header>
+    <div class="inner">
+      <div id="wepAuthBanner"></div>
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-panel="overview" type="button">نظرة عامة</button>
+        <button class="tab" data-panel="mgmt" type="button">إدارة السلامة</button>
+        <button class="tab" data-panel="risk" type="button">تقييم المخاطر</button>
+        <button class="tab" data-panel="hazards" type="button">فئات الأخطار</button>
+        <button class="tab" data-panel="ppe" type="button">التحكم وPPE</button>
+        <button class="tab" data-panel="ptw" type="button">تصاريح العمل</button>
+        <button class="tab" data-panel="incident" type="button">الحوادث</button>
+        <button class="tab" data-panel="inspect" type="button">تفتيش</button>
+        <button class="tab" data-panel="emergency" type="button">طوارئ</button>
+        <button class="tab" data-panel="sectors" type="button">قطاعات</button>
+        <button class="tab" data-panel="courses" type="button">دورات</button>
+        <button class="tab" data-panel="templates" type="button">قوالب</button>
+        <button class="tab" data-panel="sources" type="button">مصادر رسمية</button>
+      </div>
+
+      <div id="overview" class="panel active">
+        <h2>مركز OSH / HSE في البوابة</h2>
+        <p class="meta" style="margin-bottom:14px">جزء أساسي من ودنوح AAMN للبرمجيات والكمبيوتر — تعليم + سلامة ميدانية + ابتكار مهني. ليس قسماً جانبياً.</p>
+        <div class="grid">
+          <div class="card"><h3>ماذا ستتعلم؟</h3><ul>
+            <li>أنظمة إدارة (ISO 45001)</li><li>مصفوفات مخاطر وJSA</li><li>تصاريح عمل وLOTO</li><li>تحقيق حوادث وRCA</li>
+          </ul></div>
+          <div class="card kush"><h3>روابط سريعة</h3>
+            <a class="btn" href="/specialty.html?dept=osh">بوابة التخصص</a>
+            <a class="btn outline" href="/#learn" onclick="sessionStorage.setItem('wep_open_tab','ai')">المساعد التقني</a>
+            <a class="btn outline" href="/guide.html">دليل البوابة</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="mgmt" class="panel" data-wep-lock="2"><h2>إدارة السلامة والسياسات</h2>
+        <div class="grid">
+          <div class="card"><h3>نظام الإدارة</h3><p class="meta">سياسة OH&S · أهداف · أدوار · مشاركة العمال · مؤشرات أداء · مراجعة الإدارة.</p></div>
+          <div class="card"><h3>ISO 45001</h3><p class="meta">PDCA: خطط → نفّذ → افحص → حسّن. التكامل مع الجودة والبيئة ممكن لاحقاً.</p></div>
+          <div class="card"><h3>ثقافة الوقاية</h3><p class="meta">قيادة ظاهرة، إبلاغ بلا عقاب غير عادل، وتعلّم من الوشيك قبل الحادث.</p></div>
+        </div>
+      </div>
+
+      <div id="risk" class="panel" data-wep-lock="2">
+        <h2>تقييم المخاطر</h2>
+        <ol style="padding-inline-start:20px;color:var(--muted);line-height:1.9">
+          <li><strong>تحديد الأخطار</strong> — HAZID / جولات / تحليل مهام</li>
+          <li><strong>تقييم</strong> — احتمال × شدة (مصفوفة)</li>
+          <li><strong>خطة تحكم</strong> — وفق التسلسل الهرمي</li>
+          <li><strong>سجل المخاطر</strong> — ملكية، موعد مراجعة، حالة</li>
+          <li><strong>JSA / JHA</strong> — خطوة بخطوة قبل التنفيذ</li>
+        </ol>
+      </div>
+
+      <div id="hazards" class="panel" data-wep-lock="2">
+        <h2>فئات الأخطار</h2>
+        <div class="pill-row" id="hazardPills"></div>
+        <p class="meta">كل فئة تتطلب ضوابط مناسبة — لا تعتمد على PPE وحدها.</p>
+      </div>
+
+      <div id="ppe" class="panel" data-wep-lock="2">
+        <h2>التسلسل الهرمي للتحكم → PPE</h2>
+        <div class="grid">
+          <div class="card"><h3>1–4 قبل PPE</h3><ul>
+            <li>إزالة</li><li>استبدال</li><li>تقنية</li><li>إدارية</li>
+          </ul></div>
+          <div class="card"><h3>أنواع PPE</h3><ul>
+            <li>رأس / عين / سمع</li><li>تنفس / يد / قدم</li><li>سقوط / ملابس واقية</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div id="ptw" class="panel" data-wep-lock="2">
+        <h2>تصاريح العمل (PTW)</h2>
+        <div class="pill-row">
+          <span class="pill">أعمال ساخنة</span><span class="pill">كهرباء</span><span class="pill">ارتفاع</span>
+          <span class="pill">حفر</span><span class="pill">أماكن محصورة</span><span class="pill">LOTO</span>
+        </div>
+        <p class="meta">التصريح لا يستبدل الكفاءة والتدريب — يوثّق الضوابط والتوقيعات والمراقبة.</p>
+      </div>
+
+      <div id="incident" class="panel" data-wep-lock="2">
+        <h2>التحقيق في الحوادث</h2>
+        <ul>
+          <li>إبلاغ فوري (حادث / وشيك)</li>
+          <li>تأمين الموقع ورعاية المصابين</li>
+          <li>تحقيق وجمع أدلة</li>
+          <li>تحليل جذور الأسباب (RCA)</li>
+          <li>إجراءات تصحيحية ووقائية</li>
+          <li>دروس مستفادة ونشرها</li>
+        </ul>
+      </div>
+
+      <div id="inspect" class="panel" data-wep-lock="2">
+        <h2>التفتيش والتدقيق</h2>
+        <div class="grid">
+          <div class="card"><h3>قوائم تحقق</h3><p class="meta">موقع، معدات، Housekeeping، معدات طوارئ.</p></div>
+          <div class="card"><h3>تدقيق</h3><p class="meta">مطابقة النظام، عيّنات، وتتبع عدم المطابقة.</p></div>
+        </div>
+      </div>
+
+      <div id="emergency" class="panel" data-wep-lock="2">
+        <h2>الاستجابة للطوارئ</h2>
+        <div class="pill-row">
+          <span class="pill">إخلاء</span><span class="pill">إسعاف أولي</span><span class="pill">حريق</span>
+          <span class="pill">أزمة</span><span class="pill">نقطة تجمع</span>
+        </div>
+      </div>
+
+      <div id="sectors" class="panel" data-wep-lock="2">
+        <h2>سلامة حسب القطاع</h2>
+        <div class="pill-row" id="sectorPills"></div>
+      </div>
+
+      <div id="courses" class="panel" data-wep-lock="2">
+        <h2>دورات OSH</h2>
+        <div class="grid" id="coursesBox"></div>
+        <a class="btn" href="/specialty.html?dept=osh">كل محتوى بوابة التخصص</a>
+      </div>
+
+      <div id="templates" class="panel" data-wep-lock="2">
+        <h2 id="osh-templates">قوالب جاهزة (بيانات وصفية)</h2>
+        <div class="disclaimer" id="tplNote">مواضع قوالب — بدون استضافة ملفات محمية. التخصيص الكامل في المخدمة ٢.</div>
+        <div class="grid" id="templatesBox"></div>
+      </div>
+
+      <div id="sources" class="panel" data-wep-lock="2">
+        <div class="src-head">
+          <h2>مجمّع المصادر الرسمية</h2>
+          <span class="meta" id="lastRef">آخر تحديث: —</span>
+        </div>
+        <div class="disclaimer" id="srcDisclaimer"></div>
+        <div class="grid" id="sourcesBox"></div>
+      </div>
+
+      <p style="margin-top:22px">
+        <a class="btn" href="/">العودة للبوابة</a>
+        <a class="btn outline" href="/specialty.html?dept=osh">بوابة التخصص OSH</a>
+      </p>
+    </div>
+  </div>
+  <script>
+    const lang = localStorage.getItem('wadnooh_lang') === 'en' ? 'en' : 'ar';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    if (lang === 'en') {
+      document.getElementById('pageTitle').textContent = '🦺 Occupational Safety & Health Center';
+      document.getElementById('pageLead').textContent = 'Safety management · Risk · PPE · PTW · Incidents · Emergency · Industry sectors';
+    }
+    function loc(o) { if (!o) return ''; return o[lang] || o.ar || o.en || String(o); }
+
+    WepGate.init();
+    WepGate.mountBanner(document.getElementById('wepAuthBanner'));
+
+    const hazards = lang === 'en'
+      ? ['Mechanical','Electrical','Chemical','Biological','Physical','Fire/Explosion','Ergonomics','Work at height','Confined space','Cranes','Rotating machinery']
+      : ['ميكانيكية','كهربائية','كيميائية','بيولوجية','فيزيائية','حريق/انفجار','إرغونوميكس','عمل على ارتفاع','أماكن محصورة','رافعات','آلات دوّارة'];
+    document.getElementById('hazardPills').innerHTML = hazards.map(h => `<span class="pill">${h}</span>`).join('');
+
+    const sectors = lang === 'en'
+      ? ['Construction','Oil & Gas','Factories','Electrical','Labs','Hospitals','Warehouses','Mining']
+      : ['إنشاءات','نفط وغاز','مصانع','كهرباء','مختبرات','مستشفيات','مستودعات','تعدين'];
+    document.getElementById('sectorPills').innerHTML = sectors.map(s => `<span class="pill">${s}</span>`).join('');
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.panel)?.classList.add('active');
+      });
+    });
+
+    async function load() {
+      if (!WepGate.isLoggedIn()) {
+        WepGate.applyLocks();
+        return;
+      }
+      const [coursesData, sourcesData] = await Promise.all([
+        fetch('/data/courses.json').then(r => r.json()),
+        fetch('/data/osh-sources.json').then(r => r.json())
+      ]);
+      const courses = (coursesData.courses || []).filter(c => c.department === 'osh');
+      document.getElementById('coursesBox').innerHTML = courses.map(c => `
+        <div class="card">
+          <h3>${loc(c.title)}</h3>
+          <p class="meta">${loc(c.description)} · ${c.hours || ''}h · ${c.level || ''}</p>
+          <a class="btn" href="/#learn" onclick="sessionStorage.setItem('wep_open_course','${c.id}')">${lang==='en'?'Open in Academy':'فتح في الشركة'}</a>
+        </div>`).join('') || `<p class="meta">${lang==='en'?'No courses yet':'لا دورات بعد'}</p>`;
+
+      document.getElementById('lastRef').textContent = (lang==='en'?'Last refreshed: ':'آخر تحديث: ') + (sourcesData.lastRefreshed || '—');
+      document.getElementById('srcDisclaimer').textContent = loc(sourcesData.disclaimer);
+      document.getElementById('sourcesBox').innerHTML = (sourcesData.sources || []).map(s => `
+        <div class="card kush">
+          <h3>${loc(s.title)}</h3>
+          <p class="meta">${s.org || ''} · ${s.region || ''}</p>
+          <p class="meta">${loc(s.summary)}</p>
+          <a class="btn outline" href="${s.url}" target="_blank" rel="noopener">${lang==='en'?'Official link':'الرابط الرسمي'}</a>
+        </div>`).join('');
+
+      document.getElementById('templatesBox').innerHTML = (sourcesData.templates || []).map(t => `
+        <div class="card">
+          <h3>${loc(t.title)}</h3>
+          <p class="meta">${t.format || 'placeholder'} · ${loc(t.note) || (lang==='en'?'Metadata / Phase-2 file':'بيانات وصفية / ملف المخدمة ٢')}</p>
+        </div>`).join('');
+      WepGate.applyLocks();
+    }
+    window.addEventListener('wep:auth', () => location.reload());
+    load().catch(err => console.warn(err));
+  </script>
+    <script src="js/admin-site-config.js"></script>
+</body>
+</html>

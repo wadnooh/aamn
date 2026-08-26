@@ -1,222 +1,653 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>المساعد الذكي</title>
-  <style>
-    :root {
-      --primary-red: #d32f2f;
-      --dark-red: #9a0007;
-      --light-red-bg: #fff5f5;
-      --bot-msg-bg: #ffebee;
-      --border-color: #ffcdd2;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-      min-height: 100vh;
-    }
-
-    /* زر فتح وإغلاق المحادثة */
-    .chat-toggle {
-      position: fixed;
-      bottom: 25px;
-      left: 25px;
-      background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
-      color: #ffffff;
-      border: none;
-      border-radius: 50%;
-      width: 58px;
-      height: 58px;
-      cursor: pointer;
-      font-size: 24px;
-      box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .chat-toggle:hover {
-      transform: scale(1.06);
-      box-shadow: 0 6px 20px rgba(211, 47, 47, 0.5);
-    }
-
-    /* نافذة المحادثة */
-    .chat-container {
-      display: none;
-      position: fixed;
-      bottom: 95px;
-      left: 25px;
-      width: 360px;
-      height: 490px;
-      background: #ffffff;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(154, 0, 7, 0.2);
-      flex-direction: column;
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-    }
-
-    .chat-header {
-      background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
-      color: white;
-      padding: 15px 18px;
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .chat-messages {
-      flex: 1;
-      padding: 16px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      background: var(--light-red-bg);
-    }
-
-    .message {
-      max-width: 80%;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 14px;
-      line-height: 1.5;
-      word-wrap: break-word;
-    }
-
-    .message.user {
-      background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
-      color: #ffffff;
-      align-self: flex-start;
-      border-bottom-right-radius: 2px;
-      box-shadow: 0 2px 6px rgba(211, 47, 47, 0.25);
-    }
-
-    .message.bot {
-      background: var(--bot-msg-bg);
-      color: #5c0000;
-      border: 1px solid #ffcdd2;
-      align-self: flex-end;
-      border-bottom-left-radius: 2px;
-    }
-
-    .chat-input-area {
-      display: flex;
-      padding: 12px;
-      border-top: 1px solid var(--border-color);
-      background: #ffffff;
-    }
-
-    .chat-input-area input {
-      flex: 1;
-      padding: 10px 14px;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      outline: none;
-      font-size: 14px;
-      background: #fffafa;
-    }
-
-    .chat-input-area input:focus {
-      border-color: var(--primary-red);
-    }
-
-    .chat-input-area button {
-      background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
-      color: white;
-      border: none;
-      padding: 0 18px;
-      margin-right: 8px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: opacity 0.2s;
-    }
-
-    .chat-input-area button:hover {
-      opacity: 0.9;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ودنوح AAMN للبرمجيات والكمبيوتر - AAMN</title>
+    <meta name="description" content="ودنوح AAMN للبرمجيات والكمبيوتر - حلول برمجية، صيانة كمبيوتر، أجهزة إلكترونية، وأنظمة كهربائية">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
 </head>
 <body>
 
-  <!-- زر فتح وإغلاق المحادثة -->
-  <button class="chat-toggle" onclick="toggleChat()">💬</button>
-
-  <!-- نافذة الشات -->
-  <div class="chat-container" id="chatContainer">
-    <div class="chat-header">
-      <span>المساعد الذكي</span>
-      <button onclick="toggleChat()" style="background:transparent; border:none; color:white; cursor:pointer; font-size:16px;">✕</button>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <span class="logo-r">AA</span><span class="logo-tc">MN</span>
+            </div>
+            <div class="loader-bar"><div class="loader-fill"></div></div>
+        </div>
     </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="message bot">مرحباً بك! كيف يمكنني مساعدتك اليوم؟</div>
+
+    <!-- Header -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <span class="logo-r">AA</span><span class="logo-tc">MN</span>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">ودنوح <span class="brand-en">AAMN</span></span><span class="logo-sub">للبرمجيات والكمبيوتر</span>
+                    </div>
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" class="active">الرئيسية</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="services.html">خدماتنا</a></li>
+                    <li><a href="projects.html">أعمالنا</a></li>
+                    <li><a href="contact.html">تواصل معنا</a></li>
+                </ul>
+                <a href="contact.html" class="btn-cta">احصل على عرض</a>
+                <button class="hamburger" id="hamburger" aria-label="قائمة التنقل">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
+        <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="about.html">من نحن</a></li>
+            <li><a href="services.html">خدماتنا</a></li>
+            <li><a href="projects.html">أعمالنا</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
+        <a href="contact.html" class="btn-mobile-cta">احصل على عرض سعر</a>
     </div>
-    <div class="chat-input-area">
-      <input type="text" id="userInput" placeholder="اكتب استفسارك..." onkeypress="handleKey(event)" />
-      <button onclick="sendMessage()">إرسال</button>
-    </div>
-  </div>
+    <div class="overlay" id="overlay"></div>
 
-  <script>
-    const API_URL = "http://localhost:8000/api/chat";
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-shape-1"></div>
+            <div class="hero-shape-2"></div>
+            <div class="hero-particles" id="particles"></div>
+        </div>
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-award"></i>
+                <span>شريكك التقني للبرمجة والكمبيوتر والإلكترونيات</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="line-1">نطوّر أعمالك</span>
+                <span class="line-2">بتقنية <em>موثوقة</em></span>
+            </h1>
+            <p class="hero-desc">
+                ودنوح AAMN للبرمجيات والكمبيوتر — نقدم حلولاً متكاملة في برمجة المواقع والتطبيقات، صيانة وبيع أجهزة الكمبيوتر، الإلكترونيات، وأنظمة الكهرباء للأفراد والشركات.
+            </p>
+            <div class="hero-buttons">
+                <a href="projects.html" class="btn-primary">
+                    <i class="fas fa-laptop-code"></i>
+                    استعرض أعمالنا
+                </a>
+                <a href="contact.html" class="btn-outline">
+                    <i class="fas fa-phone"></i>
+                    تواصل الآن
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-num" data-target="150">0</span><span>+</span>
+                    <span class="stat-label">عمل منجز</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num" data-target="15">0</span><span>+</span>
+                    <span class="stat-label">سنة خبرة</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num" data-target="200">0</span><span>+</span>
+                    <span class="stat-label">عميل راضٍ</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num" data-target="50">0</span><span>+</span>
+                    <span class="stat-label">شريك موثوق</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-indicator">
+                <span></span>
+                <p>اكتشف المزيد</p>
+            </div>
+        </div>
+    </section>
 
-    function toggleChat() {
-      const container = document.getElementById("chatContainer");
-      container.style.display = (container.style.display === "flex") ? "none" : "flex";
-    }
+    <!-- About Brief -->
+    <section class="about-brief section-pad">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrap">
+                    <div class="about-img-main">
+                        <div class="img-placeholder tech-img">
+                            <i class="fas fa-building"></i>
+                        </div>
+                    </div>
+                    <div class="about-img-badge">
+                        <div class="badge-content">
+                            <span class="badge-num">15+</span>
+                            <span class="badge-text">سنة من التميز</span>
+                        </div>
+                    </div>
+                    <div class="floating-card card-1">
+                        <i class="fas fa-check-circle"></i>
+                        <span>معتمدون رسمياً</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>ضمان الجودة</span>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <div class="section-tag">من نحن</div>
+                    <h2 class="section-title">خبرة تقنية تجمع البرمجة والكمبيوتر والإلكترونيات</h2>
+                    <p class="about-desc">
+                        تأسست ودنوح AAMN للبرمجيات والكمبيوتر لتكون وجهة موثوقة لكل من يحتاج إلى موقع، تطبيق، جهاز كمبيوتر، حل إلكتروني، أو خدمة كهربائية دقيقة. نعمل بشغف وإتقان لتحويل احتياجات العملاء إلى حلول عملية قابلة للنمو.
+                    </p>
+                    <div class="about-features">
+                        <div class="feat-item">
+                            <div class="feat-icon"><i class="fas fa-code"></i></div>
+                            <div class="feat-text">
+                                <h4>تصميم احترافي</h4>
+                                <p>تصميم واجهات وتجارب استخدام احترافية للمواقع والتطبيقات</p>
+                            </div>
+                        </div>
+                        <div class="feat-item">
+                            <div class="feat-icon"><i class="fas fa-tools"></i></div>
+                            <div class="feat-text">
+                                <h4>تنفيذ دقيق</h4>
+                                <p>أدوات تشخيص وبرمجة وتركيب حديثة تضمن نتيجة مستقرة</p>
+                            </div>
+                        </div>
+                        <div class="feat-item">
+                            <div class="feat-icon"><i class="fas fa-clock"></i></div>
+                            <div class="feat-text">
+                                <h4>التزام بالمواعيد</h4>
+                                <p>نُسلّم أعمالنا في الوقت المحدد دون تنازل عن الجودة</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="about.html" class="btn-primary">تعرف علينا أكثر <i class="fas fa-arrow-left"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    function handleKey(e) {
-      if (e.key === "Enter") sendMessage();
-    }
+    <!-- Services Section -->
+    <section class="services section-pad bg-light" id="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">خدماتنا</div>
+                <h2 class="section-title">حلول شاملة لكل أعمالك</h2>
+                <p class="section-sub">نقدم خدمات متكاملة في البرمجة، الكمبيوتر، الكهرباء، الإلكترونيات، ومبيعات المختبرات</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-delay="0">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>خدمات الكمبيوتر</h3>
+                    <p>بيع وتجميع وصيانة أجهزة الكمبيوتر واللابتوبات وترقية القطع وحل مشاكل الأنظمة.</p>
+                    <a href="services.html" class="service-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>برمجة المواقع والتطبيقات</h3>
+                    <p>تصميم وبرمجة مواقع وتطبيقات عملية وسريعة تناسب نشاطك وتظهر هويتك بوضوح.</p>
+                    <a href="services.html" class="service-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>أنظمة الكهرباء</h3>
+                    <p>تركيب وصيانة التمديدات واللوحات وأنظمة الإنارة والحماية الكهربائية.</p>
+                    <a href="services.html" class="service-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>الإلكترونيات</h3>
+                    <p>توريد وتركيب وصيانة الدوائر والملحقات والحلول الإلكترونية للأعمال والمنازل.</p>
+                    <a href="services.html" class="service-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="400">
+                    <div class="service-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>الأجهزة والإكسسوارات</h3>
+                    <p>توفير أجهزة كمبيوتر وملحقات وشاشات وطابعات وحلول شبكات حسب الاحتياج.</p>
+                    <a href="services.html" class="service-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="500">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>الدعم والصيانة</h3>
+                    <p>دعم فني مستمر، متابعة الأعطال، تحديثات البرامج، وحماية البيانات بعد التسليم.</p>
+                    <a href="services.html" class="service-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="600">
+                    <div class="service-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>مبيعات المختبرات</h3>
+                    <p>توريد أجهزة ومستهلكات المختبرات، الميزان الحساس، المجاهر، ومعدات التشغيل والسلامة.</p>
+                    <a href="services.html" class="service-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                </div>
+            </div>
+            <div class="section-cta">
+                <a href="services.html" class="btn-outline-dark">عرض جميع الخدمات <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+    </section>
 
-    async function sendMessage() {
-      const input = document.getElementById("userInput");
-      const message = input.value.trim();
-      if (!message) return;
+    <!-- Why Us -->
+    <section class="why-us section-pad">
+        <div class="container">
+            <div class="why-grid">
+                <div class="why-content">
+                    <div class="section-tag">لماذا نحن؟</div>
+                    <h2 class="section-title">نفرق في كل تفصيلة</h2>
+                    <p class="why-desc">نؤمن أن التميز يكمن في التفاصيل، لذلك نحرص على أعلى معايير الجودة في كل مخدمة من مراحل العمل.</p>
+                    <div class="why-list">
+                        <div class="why-item">
+                            <div class="why-icon"><i class="fas fa-medal"></i></div>
+                            <div>
+                                <h4>جودة لا تُضاهى</h4>
+                                <p>نستخدم قطعاً وبرمجيات موثوقة ونختبر الحل قبل تسليمه.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-icon"><i class="fas fa-users-cog"></i></div>
+                            <div>
+                                <h4>فريق متخصص ومحترف</h4>
+                                <p>مبرمجون وفنيون بخبرة في المواقع، التطبيقات، الأجهزة، الكهرباء، والإلكترونيات.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-icon"><i class="fas fa-handshake"></i></div>
+                            <div>
+                                <h4>شفافية كاملة</h4>
+                                <p>نوفر تقارير دورية وشاملة لعملائنا لضمان الشفافية في كل مراحل التنفيذ.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-icon"><i class="fas fa-leaf"></i></div>
+                            <div>
+                                <h4>الاستدامة البيئية</h4>
+                                <p>نقترح حلولاً قابلة للتطوير وتقلل الهدر وتطيل عمر الأجهزة والأنظمة.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="why-visual">
+                    <div class="why-circle-wrap">
+                        <div class="why-circle-outer">
+                            <div class="why-circle-inner">
+                                <i class="fas fa-building"></i>
+                                <span>AAMN</span>
+                            </div>
+                        </div>
+                        <div class="orbit orbit-1">
+                            <div class="orbit-dot"><i class="fas fa-laptop-code"></i></div>
+                        </div>
+                        <div class="orbit orbit-2">
+                            <div class="orbit-dot"><i class="fas fa-tools"></i></div>
+                        </div>
+                        <div class="orbit orbit-3">
+                            <div class="orbit-dot"><i class="fas fa-award"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      const chatMessages = document.getElementById("chatMessages");
+    <!-- Projects Section -->
+    <section class="projects section-pad bg-light" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">أعمالنا</div>
+                <h2 class="section-title">أعمال تتحدث عن نفسها</h2>
+                <p class="section-sub">نفخر بما أنجزناه من أعمال متنوعة تعكس قدراتنا وخبرتنا المتراكمة</p>
+            </div>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">الكل</button>
+                <button class="filter-btn" data-filter="residential">برمجة</button>
+                <button class="filter-btn" data-filter="commercial">أجهزة</button>
+                <button class="filter-btn" data-filter="infrastructure">كهرباء</button>
+                <button class="filter-btn" data-filter="industrial">إلكترونيات</button>
+            </div>
+            <div class="projects-grid" id="projectsGrid">
+                <div class="project-card" data-category="residential">
+                    <div class="project-img">
+                        <div class="img-placeholder p1"><i class="fas fa-globe"></i></div>
+                        <div class="project-overlay">
+                            <a href="projects.html" class="project-link"><i class="fas fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat">برمجة</span>
+                        <h3>متجر إلكتروني لقطع الكمبيوتر</h3>
+                        <p>الرياض، 2024</p>
+                    </div>
+                </div>
+                <div class="project-card" data-category="commercial">
+                    <div class="project-img">
+                        <div class="img-placeholder p2"><i class="fas fa-store"></i></div>
+                        <div class="project-overlay">
+                            <a href="projects.html" class="project-link"><i class="fas fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat">أجهزة</span>
+                        <h3>تجهيز معمل كمبيوتر</h3>
+                        <p>جدة، 2023</p>
+                    </div>
+                </div>
+                <div class="project-card" data-category="infrastructure">
+                    <div class="project-img">
+                        <div class="img-placeholder p3"><i class="fas fa-bolt"></i></div>
+                        <div class="project-overlay">
+                            <a href="projects.html" class="project-link"><i class="fas fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat">كهرباء</span>
+                        <h3>نظام كهرباء وإنارة</h3>
+                        <p>الدمام، 2023</p>
+                    </div>
+                </div>
+                <div class="project-card" data-category="industrial">
+                    <div class="project-img">
+                        <div class="img-placeholder p4"><i class="fas fa-industry"></i></div>
+                        <div class="project-overlay">
+                            <a href="projects.html" class="project-link"><i class="fas fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat">إلكترونيات</span>
+                        <h3>حلول إلكترونيات ذكية</h3>
+                        <p>الجبيل، 2022</p>
+                    </div>
+                </div>
+                <div class="project-card" data-category="residential">
+                    <div class="project-img">
+                        <div class="img-placeholder p5"><i class="fas fa-building"></i></div>
+                        <div class="project-overlay">
+                            <a href="projects.html" class="project-link"><i class="fas fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat">برمجة</span>
+                        <h3>تطبيق إدارة طلبات</h3>
+                        <p>الرياض، 2022</p>
+                    </div>
+                </div>
+                <div class="project-card" data-category="commercial">
+                    <div class="project-img">
+                        <div class="img-placeholder p6"><i class="fas fa-desktop"></i></div>
+                        <div class="project-overlay">
+                            <a href="projects.html" class="project-link"><i class="fas fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat">أجهزة</span>
+                        <h3>توريد أجهزة وإكسسوارات</h3>
+                        <p>مكة المكرمة، 2021</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-cta">
+                <a href="projects.html" class="btn-outline-dark">عرض جميع الأعمال <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+    </section>
 
-      // رسالة المستخدم
-      appendMessage(message, "user");
-      input.value = "";
+    <!-- Stats Banner -->
+    <section class="stats-banner">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-project-diagram"></i>
+                    <div class="stat-info">
+                        <span class="stat-big" data-target="150">0</span><span class="stat-plus">+</span>
+                        <p>عمل منجز</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-smile"></i>
+                    <div class="stat-info">
+                        <span class="stat-big" data-target="200">0</span><span class="stat-plus">+</span>
+                        <p>عميل راضٍ</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-info">
+                        <span class="stat-big" data-target="120">0</span><span class="stat-plus">+</span>
+                        <p>موظف متخصص</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-trophy"></i>
+                    <div class="stat-info">
+                        <span class="stat-big" data-target="25">0</span><span class="stat-plus">+</span>
+                        <p>جائزة تميز</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      // مؤشر الانتظار
-      const loadingMsg = appendMessage("جاري الرد...", "bot");
+    <!-- Testimonials -->
+    <section class="testimonials section-pad">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">شهادات العملاء</div>
+                <h2 class="section-title">ماذا يقول عملاؤنا؟</h2>
+            </div>
+            <div class="testimonials-slider" id="testimonialsSlider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-card">
+                        <div class="test-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="test-text">"تعاملنا مع ودنوح في تطوير موقع الشركة وتجهيز أجهزة الفريق، وكانت التجربة ممتازة من حيث السرعة والوضوح والدعم بعد التسليم."</p>
+                        <div class="test-author">
+                            <div class="author-avatar"><i class="fas fa-user"></i></div>
+                            <div>
+                                <strong>المهندس أحمد الشمري</strong>
+                                <span>مدير تقنية - شركة الإتقان</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="test-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="test-text">"شركة محترفة بكل معنى الكلمة. جهزوا لنا الأجهزة والشبكة في الوقت المحدد وبمواصفات مناسبة للاستخدام اليومي."</p>
+                        <div class="test-author">
+                            <div class="author-avatar"><i class="fas fa-user"></i></div>
+                            <div>
+                                <strong>خالد العتيبي</strong>
+                                <span>رجل أعمال - الرياض</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="test-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="test-text">"فريق عمل رائع ومتعاون. صانوا الأجهزة ونقلوا البيانات بدقة عالية وتعامل واضح. أنصح بهم لكل من يبحث عن الجودة والأمانة."</p>
+                        <div class="test-author">
+                            <div class="author-avatar"><i class="fas fa-user"></i></div>
+                            <div>
+                                <strong>سلطان المالكي</strong>
+                                <span>مالك متجر - جدة</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="test-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="test-text">"تعاملت مع عدة مزودي خدمات تقنية، لكن ودنوح كانت الأفضل في الوضوح وجودة التنفيذ وسرعة الاستجابة."</p>
+                        <div class="test-author">
+                            <div class="author-avatar"><i class="fas fa-user"></i></div>
+                            <div>
+                                <strong>فيصل الحربي</strong>
+                                <span>مدير عام - مجموعة الحربي للاستثمار</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-btn prev" id="prevBtn"><i class="fas fa-chevron-right"></i></button>
+                    <div class="slider-dots" id="sliderDots"></div>
+                    <button class="slider-btn next" id="nextBtn"><i class="fas fa-chevron-left"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      try {
-        const res = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: message })
-        });
+    <!-- Partners -->
+    <section class="partners section-pad bg-light">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">شركاؤنا</div>
+                <h2 class="section-title">نثق بهم ويثقون بنا</h2>
+            </div>
+            <div class="partners-track">
+                <div class="partners-inner" id="partnersInner">
+                    <div class="partner-logo"><i class="fas fa-building"></i><span>منصة أعمال</span></div>
+                    <div class="partner-logo"><i class="fas fa-city"></i><span>مجموعة الرياض التقنية</span></div>
+                    <div class="partner-logo"><i class="fas fa-landmark"></i><span>شريك دفع</span></div>
+                    <div class="partner-logo"><i class="fas fa-industry"></i><span>شركة إلكترونيات</span></div>
+                    <div class="partner-logo"><i class="fas fa-laptop-code"></i><span>شركاء التقنية</span></div>
+                    <div class="partner-logo"><i class="fas fa-tools"></i><span>شركة التقنية</span></div>
+                    <div class="partner-logo"><i class="fas fa-building"></i><span>منصة أعمال</span></div>
+                    <div class="partner-logo"><i class="fas fa-city"></i><span>مجموعة الرياض التقنية</span></div>
+                    <div class="partner-logo"><i class="fas fa-landmark"></i><span>شريك دفع</span></div>
+                    <div class="partner-logo"><i class="fas fa-industry"></i><span>شركة إلكترونيات</span></div>
+                    <div class="partner-logo"><i class="fas fa-laptop-code"></i><span>شركاء التقنية</span></div>
+                    <div class="partner-logo"><i class="fas fa-tools"></i><span>شركة التقنية</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        const data = await res.json();
-        loadingMsg.textContent = data.reply || "تعذر الحصول على رد.";
-      } catch (err) {
-        loadingMsg.textContent = "حدث خطأ أثناء الاتصال بالخادم.";
-      }
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-bg">
+            <div class="cta-shape-1"></div>
+            <div class="cta-shape-2"></div>
+        </div>
+        <div class="container cta-content">
+            <h2>هل لديك فكرة أو جهاز يحتاج حل؟</h2>
+            <p>تواصل معنا اليوم واحصل على استشارة مجانية وعرض سعر بدون التزام</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn-white">
+                    <i class="fas fa-envelope"></i>
+                    تواصل معنا
+                </a>
+                <a href="tel:+966500000000" class="btn-outline-white">
+                    <i class="fas fa-phone"></i>
+                    اتصل الآن
+                </a>
+            </div>
+        </div>
+    </section>
 
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <a href="index.html" class="footer-logo">
+                            <span class="logo-r">AA</span><span class="logo-tc">MN</span>
+                            <span class="footer-logo-text">ودنوح · AAMN</span>
+                        </a>
+                        <p>ودنوح AAMN للبرمجيات والكمبيوتر - شريكك في البرمجة والكمبيوتر والكهرباء والإلكترونيات بجودة والتزام.</p>
+                        <div class="footer-social">
+                            <a href="#" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="انستغرام"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="لينكد إن"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="واتساب"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <h4>روابط سريعة</h4>
+                        <ul>
+                            <li><a href="index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                            <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                            <li><a href="services.html"><i class="fas fa-angle-left"></i> خدماتنا</a></li>
+                            <li><a href="projects.html"><i class="fas fa-angle-left"></i> أعمالنا</a></li>
+                            <li><a href="contact.html"><i class="fas fa-angle-left"></i> تواصل معنا</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-services">
+                        <h4>خدماتنا</h4>
+                        <ul>
+                            <li><a href="services.html"><i class="fas fa-angle-left"></i> خدمات الكمبيوتر</a></li>
+                            <li><a href="services.html"><i class="fas fa-angle-left"></i> برمجة المواقع والتطبيقات</a></li>
+                            <li><a href="services.html"><i class="fas fa-angle-left"></i> الكهرباء</a></li>
+                            <li><a href="services.html"><i class="fas fa-angle-left"></i> الإلكترونيات</a></li>
+                            <li><a href="services.html"><i class="fas fa-angle-left"></i> مبيعات المختبرات</a></li>
+                            <li><a href="services.html"><i class="fas fa-angle-left"></i> الدعم والصيانة</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>تواصل معنا</h4>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>المملكة العربية السعودية، الرياض</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span dir="ltr">+966 50 000 0000</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@wadnooh.tech</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>الأحد - الخميس: 8ص - 5م</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2025 ودنوح AAMN للبرمجيات والكمبيوتر. جميع الحقوق محفوظة.</p>
+                <p>تصميم وتطوير بـ <i class="fas fa-heart"></i> لبناء المستقبل</p>
+            </div>
+        </div>
+    </footer>
 
-    function appendMessage(text, sender) {
-      const chatMessages = document.getElementById("chatMessages");
-      const msgDiv = document.createElement("div");
-      msgDiv.className = `message ${sender}`;
-      msgDiv.textContent = text;
-      chatMessages.appendChild(msgDiv);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-      return msgDiv;
-    }
-  </script>
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="العودة للأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="js/admin-site-config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/auth-portal.js"></script>
 </body>
 </html>

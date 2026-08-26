@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-label="H/ FH- DD3A1 H'D3J'-) � Wad Nooh Software &amp; Computer">
+  <defs>
+    <style>
+      .ar { font-family: 'El Messiri', 'Segoe UI', Tahoma, sans-serif; font-weight: 700; }
+      .en { font-family: 'IBM Plex Sans Arabic', 'Segoe UI', Arial, sans-serif; font-weight: 700; letter-spacing: 0.12em; }
+      .tag { font-family: 'IBM Plex Sans Arabic', 'Segoe UI', Arial, sans-serif; font-weight: 500; letter-spacing: 0.08em; }
+    </style>
+  </defs>
+  <!-- Emblem -->
+  <g transform="translate(18,18)">
+    <path fill="#c4a35a" d="M28 8c-14 4-22 16-22 30 0-2 1-4 2-6 8-14 20-22 34-24-6-2-10-2-14 0z"/>
+    <path fill="#053d47" d="M62 8 L118 118 H6 Z"/>
+    <path fill="#f5f0e6" d="M54 88 h16 v18 h-16 z"/>
+    <path fill="#0a5f6c" d="M8 118 C28 108 42 122 62 112 C82 102 96 118 118 108 L118 124 H8 Z"/>
+  </g>
+  <!-- Wordmark -->
+  <text class="ar" x="150" y="58" fill="#053d47" font-size="28">H/ F@@@@@@@@@@@@H- DD3A1 H'D3J'-)</text>
+  <text class="en" x="150" y="98" fill="#053d47" font-size="26">AAMN</text>
+  <text class="tag" x="150" y="128" fill="#5c6a70" font-size="14">TRAVEL &amp; TOURISM � 'D3A1 H'D3J'-)</text>
+</svg>
