@@ -16,7 +16,7 @@ Write-Host "==========================================================" -Foregro
 
 # 1. Sync files from wwwroot to repo root
 Write-Host "`n[1/3] Synchronizing web assets to repository root..." -ForegroundColor Yellow
-$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "specialty.html", "osh.html", "guide.html", "verify.html")
+$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "specialty.html", "osh.html", "guide.html", "verify.html", "send-mail.php")
 foreach ($f in $htmlFiles) {
     $srcPath = Join-Path $src $f
     if (Test-Path $srcPath) { Copy-Item $srcPath $root -Force }
