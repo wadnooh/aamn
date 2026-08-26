@@ -1,4 +1,4 @@
-﻿#Requires -Version 5.1
+#Requires -Version 5.1
 <#
 .SYNOPSIS
     Wad Nooh AAMN - Professional One-Click Auto-Deploy & Sync Pipeline
@@ -64,9 +64,14 @@ Compress-Archive -Path (Join-Path $dest "*") -DestinationPath $cleanZip -Force
 Write-Host "[3/4] Pushing updates to GitHub (wadnooh/aamn)..." -ForegroundColor Yellow
 Set-Location $root
 git add -A
-$timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-git commit -m "Auto-Deploy: Sync latest updates and clean production assets ($timestamp)" -ErrorAction SilentlyContinue
-git push origin main
+$status = git status --porcelain
+if ($status) {
+    git commit -m "Auto-Deploy: Sync production assets and site updates"
+    git push origin main
+} else {
+    Write-Host "Working tree clean, pushing current branch..." -ForegroundColor Gray
+    git push origin main
+}
 
 # 4. Success Summary
 Write-Host "`n[4/4] Pipeline completed successfully!" -ForegroundColor Green
