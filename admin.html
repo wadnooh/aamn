@@ -21,16 +21,16 @@
 </head>
 <body>
   <section class="login" id="login">
-    <form class="login-card" id="loginForm">
+    <form class="login-card" id="loginForm" autocomplete="off">
       <div class="brand"><div class="mark">AAMN</div><div><h1>لوحة تحكم الإدارة والموظفين</h1><p>ودنوح AAMN للبرمجيات والكمبيوتر</p></div></div>
-      <div class="field"><label>البريد الوظيفي</label><input id="loginEmail" type="email" value="admin@wadnooh.com" dir="ltr" required></div>
-      <div class="field"><label>كلمة المرور</label><input id="loginPassword" type="password" value="Admin@123456" required></div>
+      <div class="field"><label>البريد الوظيفي</label><input id="loginEmail" type="email" placeholder="أدخل البريد الوظيفي" dir="ltr" autocomplete="off" required></div>
+      <div class="field"><label>كلمة المرور</label><input id="loginPassword" type="password" placeholder="أدخل كلمة المرور" autocomplete="new-password" required></div>
       <button class="btn btn-primary" style="width:100%; padding:12px; font-size:1rem;"><i class="fas fa-lock-open"></i> دخول إلى لوحة التحكم</button>
       <div style="display:flex; justify-content:space-between; margin-top:14px; font-size:0.86rem;">
         <a href="index.html" style="color:var(--gold); font-weight:700;"><i class="fas fa-home"></i> العودة للرئيسية</a>
         <a href="client.html" style="color:var(--navy); font-weight:700;"><i class="fas fa-user-circle"></i> بوابة العملاء</a>
       </div>
-      <p class="hint" style="margin-top:12px">بيانات الدخول الافتراضية: admin@wadnooh.com / Admin@123456</p>
+      <p class="hint" style="margin-top:12px; color:#64748b;"><i class="fas fa-shield-halved"></i> تسجيل الدخول آمن ويتطلب إدخال البيانات يدوياً في كل جلسة.</p>
     </form>
   </section>
 
@@ -211,7 +211,7 @@
       <section class="panel" id="admin">
         <div class="grid2">
           <form class="card" id="adminForm"><div class="head"><h3>بيانات الدخول</h3></div><div class="field"><label>بريد الأدمن</label><input name="adminEmail" type="email" dir="ltr"></div><div class="field"><label>كلمة المرور</label><input name="adminPassword" type="password"></div><button class="btn btn-primary"><i class="fas fa-key"></i> حفظ</button></form>
-          <div class="card"><div class="head"><h3>منطقة حساسة</h3></div><p class="hint" style="margin-bottom:12px">احفظ نسخة تصدير قبل حذف السجل.</p><div class="actions"><button class="btn btn-danger" id="clearOps"><i class="fas fa-trash"></i> حذف سجل العمليات</button><button class="btn btn-danger" id="clearLabs"><i class="fas fa-trash"></i> حذف منتجات المختبرات</button></div></div>
+          <div class="card"><div class="head"><h3>منطقة الأمان والحساسة</h3></div><p class="hint" style="margin-bottom:12px">يمكنك إنهاء وتسجيل الخروج من كافة الجلسات المفتوحة على جميع الأجهزة فورياً، أو حذف السجلات بعد التصدير.</p><div class="actions"><button class="btn btn-warning" id="forceLogoutAll" style="background:#f59e0b; color:#fff; border:0;"><i class="fas fa-right-from-bracket"></i> تسجيل الخروج من كافة الأجهزة</button><button class="btn btn-danger" id="clearOps"><i class="fas fa-trash"></i> حذف سجل العمليات</button><button class="btn btn-danger" id="clearLabs"><i class="fas fa-trash"></i> حذف منتجات المختبرات</button></div></div>
         </div>
       </section>
 
@@ -323,7 +323,8 @@
       items: 'aamn_department_items',
       logged: 'aamn_logged',
       staff: 'aamn_staff_users',
-      currentUser: 'aamn_current_user'
+      currentUser: 'aamn_current_user',
+      authEpoch: 'aamn_auth_epoch'
     };
 
     const defaultStaff = [
@@ -356,6 +357,138 @@
     const L={sale:'بيع',consultation:'استشارة',subscription:'اشتراك',support:'دعم وصيانة',other:'أخرى'}, S={open:'مفتوحة',done:'مكتملة',cancelled:'ملغاة'};
     const C={equipment:'أجهزة مختبر',consumables:'مستهلكات',electronics:'إلكترونيات مختبر',electric:'كهرباء وتشغيل',safety:'سلامة وتجهيز',maintenance:'صيانة ومعايرة',other:'أخرى'}, LS={available:'متاح',unavailable:'غير متاح'};
     const PERM_LABELS = { ops: 'متابعة الطلبات', services: 'الخدمات والأسعار', customers: 'سجل العملاء', site: 'إعدادات الموقع', staff: 'إدارة الموظفين', backup: 'النسخ الاحتياطي' };
+
+    function id(){return'op_'+Date.now().toString(36)+Math.random().toString(36).slice(2,8)} function today(){return new Date().toISOString().slice(0,10)}
+    function get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}} function set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+
+    function settings(){return get(K.settings,D.settings)}
+    function admin(){return get(K.admin,D.admin)}
+    function ops(){return get(K.ops,D.ops)}
+    function labs(){return get(K.labs,D.labs)}
+    function departments(){return get(K.departments,D.departments)}
+    function deptItems(){return get(K.items,D.items)}
+    function staffList(){return get(K.staff,defaultStaff)}
+    function currentUser(){return get(K.currentUser,null)}
+    function setCurrentUser(u){set(K.currentUser,u)}
+    function getAuthEpoch(){return localStorage.getItem(K.authEpoch) || '1'}
+
+    function saveOps(v){set(K.ops,v);renderAll()}
+    function saveLabs(v){set(K.labs,v);syncLabItems(v);renderAll()}
+    function saveDepartments(v){set(K.departments,v);renderAll()}
+    function saveDeptItems(v){set(K.items,v);syncLabsFromItems(v);renderAll()}
+    function saveStaff(v){set(K.staff,v);renderStaff()}
+
+    function esc(v){return String(v??'').replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]))}
+    function money(v){return Number(v||0).toLocaleString('ar-SA',{maximumFractionDigits:2})}
+    function toast(m){const e=document.getElementById('toast');e.textContent=m;e.style.display='block';clearTimeout(window.t);window.t=setTimeout(()=>e.style.display='none',2400)}
+
+    function applyUserPermissions() {
+      const user = currentUser();
+      if (!user) return;
+      const perms = user.perms || [];
+      const isMaster = user.email === 'admin@wadnooh.com' || perms.includes('staff');
+
+      // Adjust UI navigation based on permissions
+      if (document.getElementById('navStaff')) document.getElementById('navStaff').style.display = perms.includes('staff') || isMaster ? 'flex' : 'none';
+      if (document.getElementById('navSite')) document.getElementById('navSite')?.style.setProperty('display', perms.includes('site') || isMaster ? 'flex' : 'none';
+      if (document.getElementById('navBackup')) document.getElementById('navBackup').style.display = perms.includes('backup') || isMaster ? 'flex' : 'none';
+      if (document.getElementById('navAdmin')) document.getElementById('navAdmin').style.display = isMaster ? 'flex' : 'none';
+      if (document.getElementById('navCustomers')) document.getElementById('navCustomers').style.display = perms.includes('customers') || isMaster ? 'flex' : 'none';
+
+      // Update Top Title with Staff Profile
+      const badgeText = `<span style="font-size:0.8rem; background:rgba(220,38,38,0.12); color:#dc2626; padding:3px 10px; border-radius:12px; font-weight:800; margin-right:8px;">${esc(user.name)} (${esc(user.role || user.department)})</span>`;
+      subtitle.innerHTML = 'مرحباً بك، ' + badgeText + ' · لوحة تحكم ودنوح AAMN';
+    }
+
+    function showApp(){
+      login.style.display='none';
+      app.style.display='grid';
+      applyUserPermissions();
+      fillForms();
+      renderAll();
+    }
+
+    function showLogin(){
+      login.style.display='grid';
+      app.style.display='none';
+      setCurrentUser(null);
+      sessionStorage.removeItem(K.logged);
+      sessionStorage.removeItem('aamn_session_epoch');
+      if (window.loginPassword) loginPassword.value = '';
+    }
+
+    // Force Logout from All Devices
+    function logoutAllDevices() {
+      const newEpoch = 'epoch_' + Date.now().toString(36);
+      localStorage.setItem(K.authEpoch, newEpoch);
+      sessionStorage.clear();
+      showLogin();
+      toast('تم تسجيل الخروج الفوري وإبطال الجلسات من كافة الأجهزة بنجاح.');
+    }
+    window.logoutAllDevices = logoutAllDevices;
+    document.getElementById('forceLogoutAll')?.addEventListener('click', () => {
+      if (confirm('هل تريد فعلاً إنهاء وتسجيل الخروج من كافة الجلسات المفتوحة على جميع الأجهزة فوراً؟')) {
+        logoutAllDevices();
+      }
+    });
+
+    // Init storage
+    if(!localStorage.getItem(K.settings))set(K.settings,D.settings);
+    if(!localStorage.getItem(K.admin))set(K.admin,D.admin);
+    if(!localStorage.getItem(K.ops))set(K.ops,D.ops);
+    if(!localStorage.getItem(K.departments))set(K.departments,D.departments);
+    if(!localStorage.getItem(K.items))set(K.items,D.items);
+    if(!localStorage.getItem(K.labs))set(K.labs,D.labs);
+    if(!localStorage.getItem(K.staff))set(K.staff,defaultStaff);
+    if(!localStorage.getItem(K.authEpoch))localStorage.setItem(K.authEpoch, 'epoch_' + Date.now().toString(36));
+
+    // Check existing session epoch validity
+    const currentEpoch = getAuthEpoch();
+    const sessionEpoch = sessionStorage.getItem('aamn_session_epoch');
+    if (sessionStorage.getItem(K.logged) === '1' && currentUser() && sessionEpoch === currentEpoch) {
+      showApp();
+    } else {
+      showLogin();
+    }
+
+    // Login Handler (Requires Manual Input Every Time)
+    loginForm.onsubmit = e => {
+      e.preventDefault();
+      const email = loginEmail.value.trim().toLowerCase();
+      const pwd = loginPassword.value;
+      const a = admin();
+      const allStaff = staffList();
+      const activeEpoch = getAuthEpoch();
+
+      if (email === a.adminEmail.toLowerCase() && pwd === a.adminPassword) {
+        sessionStorage.setItem(K.logged, '1');
+        sessionStorage.setItem('aamn_session_epoch', activeEpoch);
+        setCurrentUser({ name: 'المدير العام', email: a.adminEmail, department: 'الإدارة العامة', role: 'المدير العام', perms: ['ops','services','customers','site','staff','backup'] });
+        loginPassword.value = '';
+        showApp();
+        return;
+      }
+
+      const foundStaff = allStaff.find(s => s.email.toLowerCase() === email && s.password === pwd);
+      if (foundStaff) {
+        if (foundStaff.status === 'inactive') {
+          toast('حساب الموظف معطل حالياً. يرجى مراجعة الإدارة.');
+          return;
+        }
+        sessionStorage.setItem(K.logged, '1');
+        sessionStorage.setItem('aamn_session_epoch', activeEpoch);
+        setCurrentUser(foundStaff);
+        loginPassword.value = '';
+        showApp();
+      } else {
+        toast('بيانات الدخول غير صحيحة');
+      }
+    };
+
+    logout.onclick = () => {
+      sessionStorage.clear();
+      showLogin();
+    };ت', services: 'الخدمات والأسعار', customers: 'سجل العملاء', site: 'إعدادات الموقع', staff: 'إدارة الموظفين', backup: 'النسخ الاحتياطي' };
 
     function id(){return'op_'+Date.now().toString(36)+Math.random().toString(36).slice(2,8)} function today(){return new Date().toISOString().slice(0,10)}
     function get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}} function set(k,v){localStorage.setItem(k,JSON.stringify(v))}

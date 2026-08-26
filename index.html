@@ -409,10 +409,10 @@
                         <p style="color: #64748b; font-size: 0.9rem;">تسجيل الدخول للموظفين لمتابعة طلبات العملاء وتحديث الأقسام</p>
                     </div>
 
-                    <form id="inpageFormStaffLogin" style="max-width: 480px; margin: 0 auto;">
+                    <form id="inpageFormStaffLogin" autocomplete="off" style="max-width: 480px; margin: 0 auto;">
                         <div style="margin-bottom: 14px;">
                             <label style="display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 6px;">البريد الوظيفي</label>
-                            <input type="email" id="inpStaffLogEmail" value="admin@wadnooh.com" placeholder="staff@wadnooh.com" dir="ltr" required style="width: 100%; padding: 12px 14px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: inherit; font-size: 0.95rem;">
+                            <input type="email" id="inpStaffLogEmail" placeholder="staff@wadnooh.com" dir="ltr" autocomplete="off" required style="width: 100%; padding: 12px 14px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: inherit; font-size: 0.95rem;">
                         </div>
                         <div style="margin-bottom: 14px;">
                             <label style="display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 6px;">القسم أو التخصص</label>
@@ -426,7 +426,7 @@
                         </div>
                         <div style="margin-bottom: 20px;">
                             <label style="display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 6px;">كلمة المرور الوظيفية</label>
-                            <input type="password" id="inpStaffLogPass" value="Admin@123456" placeholder="••••••••" required style="width: 100%; padding: 12px 14px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: inherit; font-size: 0.95rem;">
+                            <input type="password" id="inpStaffLogPass" placeholder="••••••••" autocomplete="new-password" required style="width: 100%; padding: 12px 14px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: inherit; font-size: 0.95rem;">
                         </div>
                         <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 14px; font-size: 1rem; border-radius: 10px; background: linear-gradient(135deg, #1A2744, #0f172a);">
                             <i class="fas fa-shield-alt"></i> دخول لوحة الموظفين المباشرة

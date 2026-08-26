@@ -180,19 +180,19 @@
       </div>
       <div class="auth-body">
         <!-- Login Form -->
-        <form id="formClientLogin">
+        <form id="formClientLogin" autocomplete="off">
           <div class="form-group">
             <label>البريد الإلكتروني</label>
             <div class="input-box">
               <i class="fas fa-envelope"></i>
-              <input type="email" id="loginEmail" value="client@wadnooh.com" placeholder="client@wadnooh.com" dir="ltr" required>
+              <input type="email" id="loginEmail" placeholder="name@example.com" dir="ltr" autocomplete="off" required>
             </div>
           </div>
           <div class="form-group">
             <label>كلمة المرور</label>
             <div class="input-box">
               <i class="fas fa-lock"></i>
-              <input type="password" id="loginPassword" value="123456" placeholder="••••••••" required>
+              <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" required>
             </div>
           </div>
           <button type="submit" class="btn-submit"><i class="fas fa-sign-in-alt"></i> دخول لحساب العميل</button>
