@@ -488,7 +488,7 @@
     logout.onclick = () => {
       sessionStorage.clear();
       showLogin();
-    };ت', services: 'الخدمات والأسعار', customers: 'سجل العملاء', site: 'إعدادات الموقع', staff: 'إدارة الموظفين', backup: 'النسخ الاحتياطي' };
+    };
 
     function id(){return'op_'+Date.now().toString(36)+Math.random().toString(36).slice(2,8)} function today(){return new Date().toISOString().slice(0,10)}
     function get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}} function set(k,v){localStorage.setItem(k,JSON.stringify(v))}
@@ -543,55 +543,6 @@
       login.style.display='grid';
       app.style.display='none';
       setCurrentUser(null);
-    }
-
-    // Init storage
-    if(!localStorage.getItem(K.settings))set(K.settings,D.settings);
-    if(!localStorage.getItem(K.admin))set(K.admin,D.admin);
-    if(!localStorage.getItem(K.ops))set(K.ops,D.ops);
-    if(!localStorage.getItem(K.departments))set(K.departments,D.departments);
-    if(!localStorage.getItem(K.items))set(K.items,D.items);
-    if(!localStorage.getItem(K.labs))set(K.labs,D.labs);
-    if(!localStorage.getItem(K.staff))set(K.staff,defaultStaff);
-
-    // Login Handler (Master Admin or Registered Staff)
-    loginForm.onsubmit = e => {
-      e.preventDefault();
-      const email = loginEmail.value.trim().toLowerCase();
-      const pwd = loginPassword.value;
-      const a = admin();
-      const allStaff = staffList();
-
-      if (email === a.adminEmail.toLowerCase() && pwd === a.adminPassword) {
-        sessionStorage.setItem(K.logged, '1');
-        setCurrentUser({ name: 'المدير العام', email: a.adminEmail, department: 'الإدارة العامة', role: 'المدير العام', perms: ['ops','services','customers','site','staff','backup'] });
-        showApp();
-        return;
-      }
-
-      const foundStaff = allStaff.find(s => s.email.toLowerCase() === email && s.password === pwd);
-      if (foundStaff) {
-        if (foundStaff.status === 'inactive') {
-          toast('حساب الموظف معطل حالياً. يرجى مراجعة الإدارة.');
-          return;
-        }
-        sessionStorage.setItem(K.logged, '1');
-        setCurrentUser(foundStaff);
-        showApp();
-      } else {
-        toast('بيانات الدخول غير صحيحة');
-      }
-    };
-
-    logout.onclick = () => {
-      sessionStorage.removeItem(K.logged);
-      showLogin();
-    };
-
-    if(sessionStorage.getItem(K.logged) === '1' && currentUser()) {
-      showApp();
-    } else {
-      showLogin();
     }
 
     let currentDept='computers';
