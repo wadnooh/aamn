@@ -32,9 +32,21 @@ foreach ($d in $dirs) {
     }
 }
 
-if (Test-Path (Join-Path $src ".htaccess")) {
-    Copy-Item (Join-Path $src ".htaccess") (Join-Path $root ".htaccess") -Force
+# 1.1 Apply Cache Busting to all HTML assets
+$ts = (Get-Date).ToString("yyyyMMddHHmm")
+$allHtml = Get-ChildItem -Path $src -Filter "*.html"
+foreach ($h in $allHtml) {
+    $content = [IO.File]::ReadAllText($h.FullName, [Text.UTF8Encoding]::new($false))
+    $content = [regex]::Replace($content, 'href="css/style\.css(\?v=[^"]*)?"', "href=`"css/style.css?v=$ts`"")
+    $content = [regex]::Replace($content, 'href="css/pages\.css(\?v=[^"]*)?"', "href=`"css/pages.css?v=$ts`"")
+    $content = [regex]::Replace($content, 'src="js/main\.js(\?v=[^"]*)?"', "src=`"js/main.js?v=$ts`"")
+    $content = [regex]::Replace($content, 'src="js/auth-portal\.js(\?v=[^"]*)?"', "src=`"js/auth-portal.js?v=$ts`"")
+    $content = [regex]::Replace($content, 'src="js/admin-site-config\.js(\?v=[^"]*)?"', "src=`"js/admin-site-config.js?v=$ts`"")
+    [IO.File]::WriteAllText($h.FullName, $content, [Text.UTF8Encoding]::new($false))
+    $rootTarget = Join-Path $root $h.Name
+    [IO.File]::WriteAllText($rootTarget, $content, [Text.UTF8Encoding]::new($false))
 }
+Write-Host "Cache busting version tag ($ts) applied to all pages." -ForegroundColor Green
 
 # 2. Build Clean Production Package
 Write-Host "[2/4] Building clean production package for Hostinger..." -ForegroundColor Yellow
