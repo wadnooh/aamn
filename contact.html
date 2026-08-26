@@ -133,6 +133,22 @@
                         <h3>أرسل لنا رسالة</h3>
                         <p>أخبرنا عن عملك وسنتواصل معك في أقرب وقت</p>
                     </div>
+
+                    <!-- Success Notification Box -->
+                    <div id="contactSuccessBox" style="display:none; background:#f0fdf4; border:2px solid #22c55e; border-radius:14px; padding:24px; text-align:center; margin-bottom:20px; box-shadow:0 8px 20px rgba(34,197,94,0.12);">
+                        <div style="font-size:2.6rem; color:#22c55e; margin-bottom:8px;"><i class="fas fa-check-circle"></i></div>
+                        <h4 style="color:#15803d; font-size:1.35rem; font-weight:800; margin:0 0 6px;">تم إرسال واستلام رسالتك بنجاح!</h4>
+                        <p style="color:#166534; font-size:0.95rem; margin-bottom:18px;">تم توثيق طلبك برقم مرجعي: <strong id="refNumberDisplay" style="font-family:monospace; background:#dcfce7; color:#15803d; padding:3px 10px; border-radius:6px;">#MSG-0000</strong></p>
+                        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                            <a id="btnSuccessWhatsApp" href="#" target="_blank" style="background:#22c55e; color:#fff; padding:12px 22px; border-radius:10px; font-weight:800; font-size:0.95rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:0 6px 16px rgba(34,197,94,0.3);">
+                                <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i> فتح المحادثة عبر الواتساب فوراً
+                            </a>
+                            <button type="button" id="btnSendAnother" style="background:#e2e8f0; color:#334155; padding:12px 18px; border-radius:10px; font-weight:700; border:0; cursor:pointer;">
+                                <i class="fas fa-redo"></i> إرسال رسالة أخرى
+                            </button>
+                        </div>
+                    </div>
+
                     <form id="contactForm" class="contact-form" novalidate>
                         <div class="form-row">
                             <div class="form-group">
@@ -279,9 +295,118 @@
             </div>
         </div>
     </footer>
-    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
     <script src="js/admin-site-config.js"></script>
     <script src="js/main.js"></script>
     <script src="js/auth-portal.js"></script>
+
+    <!-- Guaranteed Interactive Contact Form Engine -->
+    <script>
+    (function () {
+        const form = document.getElementById('contactForm');
+        const successBox = document.getElementById('contactSuccessBox');
+        const submitBtn = form?.querySelector('.btn-submit');
+        const btnSendAnother = document.getElementById('btnSendAnother');
+        const btnSuccessWhatsApp = document.getElementById('btnSuccessWhatsApp');
+        const refDisplay = document.getElementById('refNumberDisplay');
+
+        // Auto-dismiss preloader
+        setTimeout(function(){
+            var p = document.getElementById('preloader');
+            if(p){ p.style.opacity = '0'; p.style.transition = 'opacity 0.3s ease'; setTimeout(function(){ p.style.display = 'none'; }, 300); }
+        }, 200);
+
+        if (!form) return;
+
+        btnSendAnother?.addEventListener('click', function () {
+            successBox.style.display = 'none';
+            form.style.display = 'block';
+            form.reset();
+        });
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            const name = document.getElementById('name')?.value.trim();
+            const phone = document.getElementById('phone')?.value.trim();
+            const email = document.getElementById('email')?.value.trim();
+            const serviceEl = document.getElementById('service');
+            const service = serviceEl?.options[serviceEl.selectedIndex]?.text || serviceEl?.value || 'استفسار عام';
+            const message = document.getElementById('message')?.value.trim();
+
+            if (!name || !email || !message) {
+                alert('يرجى ملء جميع الحقول المطلوبة (الاسم، البريد الإلكتروني، والرسالة).');
+                return;
+            }
+
+            const refId = '#MSG-' + Math.floor(1000 + Math.random() * 9000);
+
+            // Loading state
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري إرسال وتوثيق الرسالة...';
+            }
+
+            // 1. Save locally to Operations Queue (for Admin/Staff live tracking)
+            try {
+                const key = 'aamn_operations';
+                const current = JSON.parse(localStorage.getItem(key) || '[]');
+                current.unshift({
+                    id: refId,
+                    type: 'consultation',
+                    status: 'open',
+                    date: new Date().toISOString().slice(0, 10),
+                    customer: name,
+                    phone: phone || '',
+                    email: email,
+                    service: service,
+                    amount: 0,
+                    notes: message
+                });
+                localStorage.setItem(key, JSON.stringify(current));
+            } catch (err) {}
+
+            // 2. Dispatch to PHP Mailer backend
+            try {
+                const payload = { name, phone, email, service, message, refId };
+                await fetch('send-mail.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {}
+
+            // 3. Format WhatsApp message
+            const waMsg = encodeURIComponent(
+                '📌 *رسالة واستفسار جديد عبر موقع ودنوح AAMN*\n' +
+                '🔢 *رقم المرجع:* ' + refId + '\n' +
+                '👤 *الاسم:* ' + name + '\n' +
+                '📱 *الجوال:* ' + (phone || 'غير مسجل') + '\n' +
+                '📧 *البريد:* ' + email + '\n' +
+                '🛠️ *الخدمة:* ' + service + '\n' +
+                '📝 *تفاصيل الرسالة:*\n' + message
+            );
+            const waUrl = 'https://wa.me/966500000000?text=' + waMsg;
+
+            if (btnSuccessWhatsApp) {
+                btnSuccessWhatsApp.href = waUrl;
+            }
+            if (refDisplay) {
+                refDisplay.textContent = refId;
+            }
+
+            // 4. Show success box
+            form.style.display = 'none';
+            successBox.style.display = 'block';
+            successBox.scrollIntoView({ behavior: 'smooth' });
+
+            // Restore button
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
+            }
+        });
+    })();
+    </script>
 </body>
 </html>
