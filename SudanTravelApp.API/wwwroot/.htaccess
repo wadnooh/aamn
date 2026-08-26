@@ -1,11 +1,15 @@
-DirectoryIndex index.html
-Options -Indexes
-RewriteEngine On
-RewriteRule ^$ index.html [L]
-RewriteRule ^app/?$ / [R=302,L]
+DirectoryIndex index.html index.php
 
-<Files "admin.html">
-  Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
-  Header set Pragma "no-cache"
-  Header set Expires "0"
-</Files>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^app/?$ / [R=302,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "(admin\.html|client\.html)">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>
