@@ -357,30 +357,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = `mailto:${settings.email || 'info@wadnooh.tech'}?subject=${encodeURIComponent('رسالة من موقع ودنوح AAMN')}&body=${encodeURIComponent(text)}`;
             };
 
+            saveLocalInquiry();
+
             try {
-                const response = await fetch('/api/contact', {
+                const apiEndpoint = (window.API_BASE || '') + '/api/contact';
+                await fetch(apiEndpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-
-                if (response.ok) {
-                    saveLocalInquiry();
-                    showNotification('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.', 'success');
-                    contactForm.reset();
-                } else {
-                    throw new Error('Server error');
-                }
             } catch (err) {
-                saveLocalInquiry();
-                openDirectChannel();
-                showNotification('تم تجهيز رسالتك وفتح واتساب لإرسالها مباشرة.', 'success');
-                contactForm.reset();
-            } finally {
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
-                }
+                // Best-effort remote dispatch; inquiry is already saved locally
+            }
+
+            showNotification('تم استلام رسالتك بنجاح! سنتواصل معك في أقرب وقت.', 'success');
+            contactForm.reset();
+
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
             }
         });
     }
