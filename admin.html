@@ -274,6 +274,7 @@
       <div class="field"><label>ملاحظات</label><textarea name="notes"></textarea></div>
       <div class="actions"><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ العنصر</button><button class="btn btn-light" type="button" id="cancelDeptItemModal">إلغاء</button></div>
     </form>
+  </div>
   <div class="modal-bg" id="staffModal">
     <form class="modal" id="staffForm" style="max-width: 650px;">
       <div class="head"><h3 id="staffModalTitle">إضافة موظف جديد</h3><button class="btn btn-sm btn-light" type="button" id="closeStaffModal"><i class="fas fa-times"></i></button></div>
@@ -806,9 +807,15 @@
       staffModalTitle.textContent = s ? 'تعديل بيانات وصلاحيات الموظف' : 'إضافة موظف جديد';
       staffModal.style.display = 'grid';
     }
+    window.openStaffModal = openStaffModal;
 
     function closeStaffModalFn() { staffModal.style.display = 'none'; }
-    document.getElementById('addStaff')?.addEventListener('click', () => openStaffModal());
+    window.closeStaffModalFn = closeStaffModalFn;
+
+    const addStaffBtn = document.getElementById('addStaff');
+    if (addStaffBtn) {
+      addStaffBtn.onclick = () => openStaffModal();
+    }
     document.getElementById('closeStaffModal')?.addEventListener('click', closeStaffModalFn);
     document.getElementById('cancelStaffModal')?.addEventListener('click', closeStaffModalFn);
 
