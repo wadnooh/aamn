@@ -15,8 +15,8 @@ Write-Host "   WAD NOOH AAMN - AUTOMATED DEPLOYMENT & SYNC PIPELINE   " -Foregro
 Write-Host "==========================================================" -ForegroundColor Cyan
 
 # 1. Sync files from wwwroot to repo root
-Write-Host "`n[1/4] Synchronizing web assets to repository root..." -ForegroundColor Yellow
-$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "specialty.html", "osh.html", "guide.html", "verify.html")
+Write-Host "`n[1/3] Synchronizing web assets to repository root..." -ForegroundColor Yellow
+$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "specialty.html", "osh.html", "guide.html", "verify.html")
 foreach ($f in $htmlFiles) {
     $srcPath = Join-Path $src $f
     if (Test-Path $srcPath) { Copy-Item $srcPath $root -Force }
@@ -73,10 +73,9 @@ if ($status) {
     git push origin main
 }
 
-# 4. Success Summary
-Write-Host "`n[4/4] Pipeline completed successfully!" -ForegroundColor Green
+# 3. Success Summary
+Write-Host "`n[3/3] Direct deployment to domain triggered successfully!" -ForegroundColor Green
 Write-Host "----------------------------------------------------------" -ForegroundColor Green
-Write-Host "  GitHub Repo: https://github.com/wadnooh/aamn" -ForegroundColor White
-Write-Host "  Live Domain: https://wadnooh.com" -ForegroundColor White
-Write-Host "  Clean Zip:   $cleanZip" -ForegroundColor White
+Write-Host "  Live Domain : https://wadnooh.com" -ForegroundColor Cyan
+Write-Host "  Status      : Synced and Pushed Directly to Server" -ForegroundColor Green
 Write-Host "==========================================================`n" -ForegroundColor Cyan
