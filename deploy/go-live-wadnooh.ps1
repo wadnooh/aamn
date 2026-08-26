@@ -29,8 +29,9 @@ $env:DISABLE_HTTPS_REDIRECT = "1"
 $appOut = Join-Path $logDir "app.out.log"
 $appErr = Join-Path $logDir "app.err.log"
 Remove-Item $appOut, $appErr -Force -ErrorAction SilentlyContinue
+$dllPath = Join-Path $root "SudanTravelApp.API\bin\Debug\net10.0\SudanTravelApp.API.dll"
 $app = Start-Process -FilePath "dotnet" -ArgumentList @(
-    "run","--project",$project,"--no-build","--no-launch-profile","-c","Debug"
+    "exec", $dllPath
 ) -WorkingDirectory (Join-Path $root "SudanTravelApp.API") -PassThru -WindowStyle Hidden `
     -RedirectStandardOutput $appOut -RedirectStandardError $appErr
 
