@@ -50,9 +50,10 @@
       <button class="nav" data-dept="labs"><i class="fas fa-flask"></i> مبيعات المختبرات</button>
       <button class="nav" data-dept="support"><i class="fas fa-screwdriver-wrench"></i> الدعم والصيانة</button>
       <div class="nav-label">بيانات إضافية</div>
-      <button class="nav" data-panel="customers"><i class="fas fa-address-book"></i> العملاء</button>
-      <button class="nav" data-panel="admin"><i class="fas fa-user-shield"></i> إعدادات الأدمن</button>
-      <button class="nav" data-panel="backup"><i class="fas fa-database"></i> نسخ وملفات</button>
+      <button class="nav" data-panel="customers" id="navCustomers"><i class="fas fa-address-book"></i> العملاء</button>
+      <button class="nav" data-panel="staff" id="navStaff"><i class="fas fa-users-gear"></i> الموظفين والصلاحيات</button>
+      <button class="nav" data-panel="admin" id="navAdmin"><i class="fas fa-user-shield"></i> إعدادات الأدمن</button>
+      <button class="nav" data-panel="backup" id="navBackup"><i class="fas fa-database"></i> نسخ وملفات</button>
       <div class="nav-label">روابط</div>
       <a class="nav" href="index.html"><i class="fas fa-globe"></i> عرض الموقع</a>
       <button class="nav" id="logout"><i class="fas fa-sign-out-alt"></i> خروج</button>
@@ -143,6 +144,70 @@
         </div>
       </section>
 
+      <section class="panel" id="customers">
+        <div class="card">
+          <div class="head">
+            <h3><i class="fas fa-address-book" style="color:var(--gold);"></i> قائمة العملاء والمسجلين</h3>
+            <button class="btn btn-sm btn-outline" id="copyCustomers"><i class="fas fa-copy"></i> نسخ القائمة</button>
+          </div>
+          <div class="table">
+            <table>
+              <thead>
+                <tr>
+                  <th>العميل</th>
+                  <th>البريد الإلكتروني</th>
+                  <th>رقم الهاتف</th>
+                  <th>عدد العمليات</th>
+                  <th>آخر تواصل</th>
+                  <th>إجمالي المبالغ</th>
+                </tr>
+              </thead>
+              <tbody id="customersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="staff">
+        <div class="card">
+          <div class="head">
+            <div>
+              <h3><i class="fas fa-users-gear" style="color:var(--gold);"></i> طاقم العمل وإدارة الصلاحيات</h3>
+              <p class="hint">إضافة موظفي الشركة الجدد وتحديد صلاحيات كل موظف على أقسام ولوحات النظام.</p>
+            </div>
+            <button class="btn btn-primary" id="addStaff"><i class="fas fa-user-plus"></i> إضافة موظف جديد</button>
+          </div>
+          <div class="toolbar">
+            <input id="staffSearch" placeholder="بحث في الموظفين...">
+            <select id="staffDeptFilter">
+              <option value="all">كل الأقسام</option>
+              <option value="الإدارة العامة">الإدارة العامة</option>
+              <option value="قسم البرمجة">قسم البرمجة</option>
+              <option value="قسم الكمبيوتر والصيانة">قسم الكمبيوتر والصيانة</option>
+              <option value="قسم الكهرباء والإلكترونيات">قسم الكهرباء والإلكترونيات</option>
+              <option value="مبيعات المختبرات">مبيعات المختبرات</option>
+              <option value="الدعم الفني">الدعم الفني</option>
+            </select>
+          </div>
+          <div class="table">
+            <table>
+              <thead>
+                <tr>
+                  <th>اسم الموظف</th>
+                  <th>البريد الوظيفي</th>
+                  <th>الهاتف</th>
+                  <th>القسم / المسمى</th>
+                  <th>الصلاحيات الممنوحة</th>
+                  <th>الحالة</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="staffBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       <section class="panel" id="admin">
         <div class="grid2">
           <form class="card" id="adminForm"><div class="head"><h3>بيانات الدخول</h3></div><div class="field"><label>بريد الأدمن</label><input name="adminEmail" type="email" dir="ltr"></div><div class="field"><label>كلمة المرور</label><input name="adminPassword" type="password"></div><button class="btn btn-primary"><i class="fas fa-key"></i> حفظ</button></form>
@@ -209,11 +274,63 @@
       <div class="field"><label>ملاحظات</label><textarea name="notes"></textarea></div>
       <div class="actions"><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ العنصر</button><button class="btn btn-light" type="button" id="cancelDeptItemModal">إلغاء</button></div>
     </form>
+  <div class="modal-bg" id="staffModal">
+    <form class="modal" id="staffForm" style="max-width: 650px;">
+      <div class="head"><h3 id="staffModalTitle">إضافة موظف جديد</h3><button class="btn btn-sm btn-light" type="button" id="closeStaffModal"><i class="fas fa-times"></i></button></div>
+      <input type="hidden" name="id">
+      <div class="grid2">
+        <div class="field"><label>الاسم الكامل للموظف *</label><input name="name" required placeholder="مثال: م. أحمد صالح"></div>
+        <div class="field"><label>البريد الإلكتروني الوظيفي *</label><input name="email" type="email" dir="ltr" required placeholder="ahmed@wadnooh.com"></div>
+        <div class="field"><label>رقم الجوال *</label><input name="phone" dir="ltr" required placeholder="05xxxxxxxx"></div>
+        <div class="field"><label>كلمة المرور *</label><input name="password" type="password" required placeholder="••••••••"></div>
+        <div class="field">
+          <label>القسم الأساسي</label>
+          <select name="department">
+            <option value="الإدارة العامة">الإدارة العامة والمتابعة</option>
+            <option value="قسم البرمجة">قسم البرمجة والتطبيقات</option>
+            <option value="قسم الكمبيوتر والصيانة">قسم الكمبيوتر والصيانة</option>
+            <option value="قسم الكهرباء والإلكترونيات">قسم الكهرباء والإلكترونيات</option>
+            <option value="مبيعات المختبرات">مبيعات المختبرات</option>
+            <option value="الدعم الفني">الدعم الفني والخدمات</option>
+          </select>
+        </div>
+        <div class="field"><label>المسمى الوظيفي</label><input name="role" placeholder="مثال: مسؤول مبيعات / مهندس صيانة"></div>
+      </div>
+      <div style="margin: 16px 0; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+        <label style="display: block; font-weight: 800; margin-bottom: 10px; color: var(--navy);"><i class="fas fa-key" style="color:var(--gold);"></i> الصلاحيات الممنوحة لهذا الموظف:</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.88rem;">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;"><input type="checkbox" name="perm_ops" value="1" checked> استلام ومتابعة طلبات العملاء</label>
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;"><input type="checkbox" name="perm_services" value="1" checked> تعديل أسعار وخدمات الأقسام</label>
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;"><input type="checkbox" name="perm_customers" value="1" checked> الاطلاع على قائمة العملاء</label>
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;"><input type="checkbox" name="perm_site" value="1"> تعديل تفاصيل وإعدادات الموقع</label>
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;"><input type="checkbox" name="perm_staff" value="1"> إدارة الموظفين والصلاحيات</label>
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;"><input type="checkbox" name="perm_backup" value="1"> تصدير واستيراد النسخ الاحتياطية</label>
+        </div>
+      </div>
+      <div class="actions"><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ الموظف والصلاحيات</button><button class="btn btn-light" type="button" id="cancelStaffModal">إلغاء</button></div>
+    </form>
   </div>
   <div class="toast" id="toast"></div>
 
   <script>
-    const K={settings:'aamn_site_settings',admin:'aamn_admin_login',ops:'aamn_operations',labs:'aamn_lab_sales',departments:'aamn_departments',items:'aamn_department_items',logged:'aamn_logged'};
+    const K = {
+      settings: 'aamn_site_settings',
+      admin: 'aamn_admin_login',
+      ops: 'aamn_operations',
+      labs: 'aamn_lab_sales',
+      departments: 'aamn_departments',
+      items: 'aamn_department_items',
+      logged: 'aamn_logged',
+      staff: 'aamn_staff_users',
+      currentUser: 'aamn_current_user'
+    };
+
+    const defaultStaff = [
+      { id: 'st_admin', name: 'المدير العام', email: 'admin@wadnooh.com', phone: '+966 50 000 0000', password: 'Admin@123456', department: 'الإدارة العامة', role: 'المدير العام', status: 'active', perms: ['ops','services','customers','site','staff','backup'] },
+      { id: 'st_dev', name: 'م. خالد إبراهيم', email: 'dev@wadnooh.com', phone: '+966 55 111 2233', password: 'Staff@123456', department: 'قسم البرمجة', role: 'مهندس برمجيات أول', status: 'active', perms: ['ops','services','customers'] },
+      { id: 'st_tech', name: 'م. سامي عثمان', email: 'support@wadnooh.com', phone: '+966 54 222 3344', password: 'Staff@123456', department: 'قسم الكمبيوتر والصيانة', role: 'مشرف الصيانة والدعم', status: 'active', perms: ['ops','services'] }
+    ];
+
     const defaultDepartments=[
       {key:'computers',title:'خدمات الكمبيوتر',icon:'fas fa-computer',order:1,status:'active',description:'بيع وتجميع وصيانة أجهزة الكمبيوتر واللابتوبات وترقية القطع وحل مشاكل الأنظمة.'},
       {key:'programming',title:'برمجة المواقع والتطبيقات',icon:'fas fa-code',order:2,status:'active',description:'تصميم وبرمجة مواقع وتطبيقات عملية وسريعة تناسب نشاطك وتظهر هويتك بوضوح.'},
@@ -223,6 +340,7 @@
       {key:'labs',title:'مبيعات المختبرات',icon:'fas fa-flask',order:6,status:'active',description:'توريد أجهزة ومستهلكات المختبرات، الميزان الحساس، المجاهر، ومعدات التشغيل والسلامة.'},
       {key:'support',title:'الدعم والصيانة',icon:'fas fa-screwdriver-wrench',order:7,status:'active',description:'دعم فني مستمر، متابعة الأعطال، تحديثات البرامج، وحماية البيانات بعد التسليم.'}
     ];
+
     const defaultItems={
       computers:[{id:id(),name:'تجميع أجهزة مكتبية واحترافية',status:'available',price:'',currency:'SAR',warranty:'حسب القطع',notes:'اختيار القطع والتركيب والاختبار.'},{id:id(),name:'صيانة لابتوبات وكمبيوتر',status:'available',price:'',currency:'SAR',warranty:'حسب العطل',notes:'تشخيص وترقية ونقل بيانات.'}],
       programming:[{id:id(),name:'تصميم موقع تعريفي',status:'available',price:'',currency:'SAR',warranty:'دعم بعد التسليم',notes:'صفحات تعريفية متجاوبة وسريعة.'},{id:id(),name:'تطبيق ويب ولوحة تحكم',status:'available',price:'',currency:'SAR',warranty:'حسب الاتفاق',notes:'أنظمة إدارة وربط نماذج وبيانات.'}],
@@ -232,58 +350,535 @@
       labs:[{id:id(),name:'مجهر رقمي',status:'available',price:850,currency:'SAR',warranty:'ضمان سنة',notes:'مناسب للمدارس والمختبرات التدريبية.'},{id:id(),name:'ميزان حساس إلكتروني',status:'available',price:320,currency:'SAR',warranty:'متوفر خلال 3 أيام',notes:'دقة عالية مع شاشة رقمية.'},{id:id(),name:'مزود طاقة مختبر',status:'available',price:450,currency:'SAR',warranty:'ضمان 6 أشهر',notes:'تيار وجهد قابلان للضبط.'}],
       support:[{id:id(),name:'زيارة صيانة دورية',status:'available',price:'',currency:'SAR',warranty:'حسب العقد',notes:'متابعة أعطال وتحديثات.'},{id:id(),name:'نسخ احتياطي وحماية بيانات',status:'available',price:'',currency:'SAR',warranty:'حسب النظام',notes:'تنظيم البيانات وتقليل مخاطر الفقد.'}]
     };
+
     const D={settings:{brandAr:'ودنوح',brandEn:'AAMN',email:'info@wadnooh.tech',phone:'+966 50 000 0000',whatsapp:'+966500000000',domain:'https://wadnooh.com',address:'المملكة العربية السعودية، الرياض',hours:'الأحد - الخميس: 8ص - 5م',description:'حلول برمجية، صيانة كمبيوتر، أجهزة إلكترونية، وأنظمة كهربائية.',services:'برمجة المواقع والتطبيقات\nخدمات الكمبيوتر\nالكهرباء\nالإلكترونيات\nالأجهزة والإكسسوارات\nمعدات ومبيعات المختبرات\nالدعم والصيانة'},admin:{adminEmail:'admin@wadnooh.com',adminPassword:'Admin@123456'},ops:[{id:id(),type:'consultation',status:'open',date:today(),customer:'عميل تجريبي',phone:'+966500000000',email:'client@example.com',service:'استشارة موقع',amount:0,followUp:today(),notes:'يمكن تعديل أو حذف هذه العملية.'}],departments:defaultDepartments,items:defaultItems,labs:defaultItems.labs.map(x=>({...x,category:x.name.includes('مزود')?'electric':x.name.includes('ميزان')?'electronics':'equipment'}))};
     const L={sale:'بيع',consultation:'استشارة',subscription:'اشتراك',support:'دعم وصيانة',other:'أخرى'}, S={open:'مفتوحة',done:'مكتملة',cancelled:'ملغاة'};
     const C={equipment:'أجهزة مختبر',consumables:'مستهلكات',electronics:'إلكترونيات مختبر',electric:'كهرباء وتشغيل',safety:'سلامة وتجهيز',maintenance:'صيانة ومعايرة',other:'أخرى'}, LS={available:'متاح',unavailable:'غير متاح'};
+    const PERM_LABELS = { ops: 'متابعة الطلبات', services: 'الخدمات والأسعار', customers: 'سجل العملاء', site: 'إعدادات الموقع', staff: 'إدارة الموظفين', backup: 'النسخ الاحتياطي' };
+
     function id(){return'op_'+Date.now().toString(36)+Math.random().toString(36).slice(2,8)} function today(){return new Date().toISOString().slice(0,10)}
     function get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}} function set(k,v){localStorage.setItem(k,JSON.stringify(v))}
-    function settings(){return get(K.settings,D.settings)} function admin(){return get(K.admin,D.admin)} function ops(){return get(K.ops,D.ops)} function labs(){return get(K.labs,D.labs)} function departments(){return get(K.departments,D.departments)} function deptItems(){return get(K.items,D.items)} function saveOps(v){set(K.ops,v);renderAll()} function saveLabs(v){set(K.labs,v);syncLabItems(v);renderAll()} function saveDepartments(v){set(K.departments,v);renderAll()} function saveDeptItems(v){set(K.items,v);syncLabsFromItems(v);renderAll()}
-    function esc(v){return String(v??'').replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]))} function money(v){return Number(v||0).toLocaleString('ar-SA',{maximumFractionDigits:2})}
+
+    function settings(){return get(K.settings,D.settings)}
+    function admin(){return get(K.admin,D.admin)}
+    function ops(){return get(K.ops,D.ops)}
+    function labs(){return get(K.labs,D.labs)}
+    function departments(){return get(K.departments,D.departments)}
+    function deptItems(){return get(K.items,D.items)}
+    function staffList(){return get(K.staff,defaultStaff)}
+    function currentUser(){return get(K.currentUser,null)}
+    function setCurrentUser(u){set(K.currentUser,u)}
+
+    function saveOps(v){set(K.ops,v);renderAll()}
+    function saveLabs(v){set(K.labs,v);syncLabItems(v);renderAll()}
+    function saveDepartments(v){set(K.departments,v);renderAll()}
+    function saveDeptItems(v){set(K.items,v);syncLabsFromItems(v);renderAll()}
+    function saveStaff(v){set(K.staff,v);renderStaff()}
+
+    function esc(v){return String(v??'').replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]))}
+    function money(v){return Number(v||0).toLocaleString('ar-SA',{maximumFractionDigits:2})}
     function toast(m){const e=document.getElementById('toast');e.textContent=m;e.style.display='block';clearTimeout(window.t);window.t=setTimeout(()=>e.style.display='none',2400)}
-    function showApp(){login.style.display='none';app.style.display='grid';fillForms();renderAll()} function showLogin(){login.style.display='grid';app.style.display='none'}
-    if(!localStorage.getItem(K.settings))set(K.settings,D.settings); if(!localStorage.getItem(K.admin))set(K.admin,D.admin); if(!localStorage.getItem(K.ops))set(K.ops,D.ops); if(!localStorage.getItem(K.departments))set(K.departments,D.departments); if(!localStorage.getItem(K.items))set(K.items,D.items); if(!localStorage.getItem(K.labs))set(K.labs,D.labs);
-    loginForm.onsubmit=e=>{e.preventDefault();const a=admin(); if(loginEmail.value.trim()===a.adminEmail&&loginPassword.value===a.adminPassword){sessionStorage.setItem(K.logged,'1');showApp()}else toast('بيانات الدخول غير صحيحة')};
-    logout.onclick=()=>{sessionStorage.removeItem(K.logged);showLogin()}; if(sessionStorage.getItem(K.logged)==='1')showApp();else showLogin();
+
+    function applyUserPermissions() {
+      const user = currentUser();
+      if (!user) return;
+      const perms = user.perms || [];
+      const isMaster = user.email === 'admin@wadnooh.com' || perms.includes('staff');
+
+      // Adjust UI navigation based on permissions
+      if (document.getElementById('navStaff')) document.getElementById('navStaff').style.display = perms.includes('staff') || isMaster ? 'flex' : 'none';
+      if (document.getElementById('navSite')) document.getElementById('navSite')?.style.setProperty('display', perms.includes('site') || isMaster ? 'flex' : 'none');
+      if (document.getElementById('navBackup')) document.getElementById('navBackup').style.display = perms.includes('backup') || isMaster ? 'flex' : 'none';
+      if (document.getElementById('navAdmin')) document.getElementById('navAdmin').style.display = isMaster ? 'flex' : 'none';
+      if (document.getElementById('navCustomers')) document.getElementById('navCustomers').style.display = perms.includes('customers') || isMaster ? 'flex' : 'none';
+
+      // Update Top Title with Staff Profile
+      const badgeText = `<span style="font-size:0.8rem; background:rgba(220,38,38,0.12); color:#dc2626; padding:3px 10px; border-radius:12px; font-weight:800; margin-right:8px;">${esc(user.name)} (${esc(user.role || user.department)})</span>`;
+      subtitle.innerHTML = 'مرحباً بك، ' + badgeText + ' · لوحة تحكم ودنوح AAMN';
+    }
+
+    function showApp(){
+      login.style.display='none';
+      app.style.display='grid';
+      applyUserPermissions();
+      fillForms();
+      renderAll();
+    }
+
+    function showLogin(){
+      login.style.display='grid';
+      app.style.display='none';
+      setCurrentUser(null);
+    }
+
+    // Init storage
+    if(!localStorage.getItem(K.settings))set(K.settings,D.settings);
+    if(!localStorage.getItem(K.admin))set(K.admin,D.admin);
+    if(!localStorage.getItem(K.ops))set(K.ops,D.ops);
+    if(!localStorage.getItem(K.departments))set(K.departments,D.departments);
+    if(!localStorage.getItem(K.items))set(K.items,D.items);
+    if(!localStorage.getItem(K.labs))set(K.labs,D.labs);
+    if(!localStorage.getItem(K.staff))set(K.staff,defaultStaff);
+
+    // Login Handler (Master Admin or Registered Staff)
+    loginForm.onsubmit = e => {
+      e.preventDefault();
+      const email = loginEmail.value.trim().toLowerCase();
+      const pwd = loginPassword.value;
+      const a = admin();
+      const allStaff = staffList();
+
+      if (email === a.adminEmail.toLowerCase() && pwd === a.adminPassword) {
+        sessionStorage.setItem(K.logged, '1');
+        setCurrentUser({ name: 'المدير العام', email: a.adminEmail, department: 'الإدارة العامة', role: 'المدير العام', perms: ['ops','services','customers','site','staff','backup'] });
+        showApp();
+        return;
+      }
+
+      const foundStaff = allStaff.find(s => s.email.toLowerCase() === email && s.password === pwd);
+      if (foundStaff) {
+        if (foundStaff.status === 'inactive') {
+          toast('حساب الموظف معطل حالياً. يرجى مراجعة الإدارة.');
+          return;
+        }
+        sessionStorage.setItem(K.logged, '1');
+        setCurrentUser(foundStaff);
+        showApp();
+      } else {
+        toast('بيانات الدخول غير صحيحة');
+      }
+    };
+
+    logout.onclick = () => {
+      sessionStorage.removeItem(K.logged);
+      showLogin();
+    };
+
+    if(sessionStorage.getItem(K.logged) === '1' && currentUser()) {
+      showApp();
+    } else {
+      showLogin();
+    }
+
     let currentDept='computers';
-    document.querySelectorAll('.nav[data-panel]').forEach(b=>b.onclick=()=>openPanel(b.dataset.panel)); document.querySelectorAll('.nav[data-dept]').forEach(b=>b.onclick=()=>openDept(b.dataset.dept)); document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>openPanel(b.dataset.jump)); openSide.onclick=()=>side.classList.add('open');
-    function openPanel(p){document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===p));document.querySelectorAll('.nav[data-panel]').forEach(x=>x.classList.toggle('active',x.dataset.panel===p));document.querySelectorAll('.nav[data-dept]').forEach(x=>x.classList.remove('active'));const t={dashboard:['الرئيسية','ملخص سريع لكل مبيعات واستشارات واشتراكات ودنوح AAMN.'],site:['تفاصيل الموقع','تغيير الاسم والبريد والهاتف والخدمات.'],ops:['العمليات والمتابعة','تسجيل أي عملية بيع أو استشارة أو اشتراك أو دعم.'],labs:['مبيعات المختبرات','إدارة منتجات ومعدات المختبرات وأسعارها مثل باقي الأجهزة.'],customers:['العملاء','قائمة تلقائية للعملاء من سجل العمليات.'],admin:['إعدادات الأدمن','تغيير بريد وكلمة مرور لوحة التحكم.'],backup:['نسخ وملفات','تصدير واستيراد بيانات لوحة التحكم.']};title.textContent=t[p][0];subtitle.textContent=t[p][1];side.classList.remove('open')}
-    function openDept(k){currentDept=k;document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id==='departments'));document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.dept===k));const d=departments().find(x=>x.key===k)||D.departments[0];title.textContent=d.title;subtitle.textContent='إدارة مستقلة لهذا القسم وربطه مباشرة مع خدمات الموقع ونموذج التواصل.';fillDeptForm();renderDeptItems();side.classList.remove('open')}
-    function fillForms(){Object.entries(settings()).forEach(([k,v])=>{const e=document.querySelector(`#siteForm [name="${k}"]`);if(e)e.value=v});Object.entries(admin()).forEach(([k,v])=>{const e=document.querySelector(`#adminForm [name="${k}"]`);if(e)e.value=v});fillDeptForm()}
+    document.querySelectorAll('.nav[data-panel]').forEach(b=>b.onclick=()=>openPanel(b.dataset.panel));
+    document.querySelectorAll('.nav[data-dept]').forEach(b=>b.onclick=()=>openDept(b.dataset.dept));
+    document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>openPanel(b.dataset.jump));
+    openSide.onclick=()=>side.classList.add('open');
+
+    function openPanel(p){
+      const user = currentUser();
+      const perms = user?.perms || [];
+      const isMaster = user?.email === 'admin@wadnooh.com' || perms.includes('staff');
+
+      if (p === 'staff' && !perms.includes('staff') && !isMaster) {
+        toast('عفواً، لا تملك صلاحية إدارة الموظفين.');
+        return;
+      }
+      if (p === 'site' && !perms.includes('site') && !isMaster) {
+        toast('عفواً، لا تملك صلاحية تعديل إعدادات الموقع.');
+        return;
+      }
+      if (p === 'backup' && !perms.includes('backup') && !isMaster) {
+        toast('عفواً، لا تملك صلاحية تصدير النسخ الاحتياطية.');
+        return;
+      }
+      if (p === 'admin' && !isMaster) {
+        toast('خاصة بالمدير العام فقط.');
+        return;
+      }
+
+      document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===p));
+      document.querySelectorAll('.nav[data-panel]').forEach(x=>x.classList.toggle('active',x.dataset.panel===p));
+      document.querySelectorAll('.nav[data-dept]').forEach(x=>x.classList.remove('active'));
+
+      const t={
+        dashboard:['الرئيسية','ملخص سريع لكل مبيعات واستشارات واشتراكات ودنوح AAMN.'],
+        site:['تفاصيل الموقع','تغيير الاسم والبريد والهاتف والخدمات.'],
+        ops:['العمليات والمتابعة','تسجيل أي عملية بيع أو استشارة أو اشتراك أو دعم.'],
+        labs:['مبيعات المختبرات','إدارة منتجات ومعدات المختبرات وأسعارها مثل باقي الأجهزة.'],
+        customers:['العملاء','قائمة تلقائية للعملاء من سجل العمليات.'],
+        staff:['طاقم العمل والصلاحيات','إدارة موظفي الشركة وتحديد صلاحيات كل موظف على أقسام النظام.'],
+        admin:['إعدادات الأدمن','تغيير بريد وكلمة مرور لوحة التحكم.'],
+        backup:['نسخ وملفات','تصدير واستيراد بيانات لوحة التحكم.']
+      };
+      if (t[p]) {
+        title.textContent=t[p][0];
+        subtitle.textContent=t[p][1];
+      }
+      side.classList.remove('open');
+    }
+
+    function openDept(k){
+      currentDept=k;
+      document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id==='departments'));
+      document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.dept===k));
+      const d=departments().find(x=>x.key===k)||D.departments[0];
+      title.textContent=d.title;
+      subtitle.textContent='إدارة مستقلة لهذا القسم وربطه مباشرة مع خدمات الموقع ونموذج التواصل.';
+      fillDeptForm();
+      renderDeptItems();
+      side.classList.remove('open');
+    }
+
+    function fillForms(){
+      Object.entries(settings()).forEach(([k,v])=>{const e=document.querySelector(`#siteForm [name="${k}"]`);if(e)e.value=v});
+      Object.entries(admin()).forEach(([k,v])=>{const e=document.querySelector(`#adminForm [name="${k}"]`);if(e)e.value=v});
+      fillDeptForm();
+    }
+
     siteForm.onsubmit=e=>{e.preventDefault();set(K.settings,Object.fromEntries(new FormData(siteForm).entries()));renderAll();toast('تم حفظ تفاصيل الموقع')};
     adminForm.onsubmit=e=>{e.preventDefault();set(K.admin,Object.fromEntries(new FormData(adminForm).entries()));toast('تم تحديث بيانات الأدمن')};
-    function renderAll(){renderStats();renderLatest();renderSite();renderOps();renderLabs();renderDeptItems();renderCustomers()}
-    function renderStats(){const a=ops(),it=deptItems();stTotal.textContent=a.length;stSales.textContent=a.filter(x=>x.type==='sale').length;stConsult.textContent=a.filter(x=>x.type==='consultation').length;stLabs.textContent=(it.labs||labs()).length;stRevenue.textContent=money(a.reduce((s,x)=>s+Number(x.amount||0),0))}
-    function renderLatest(){const r=ops().slice().sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,6);latest.innerHTML=r.length?`<div class="table"><table><thead><tr><th>النوع</th><th>العميل</th><th>الحالة</th></tr></thead><tbody>${r.map(o=>`<tr><td><span class="badge ${o.type}">${L[o.type]}</span></td><td>${esc(o.customer)}</td><td><span class="badge ${o.status}">${S[o.status]}</span></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">لا توجد عمليات بعد</div>'}
-    function renderSite(){const s=settings();siteSummary.innerHTML=`<p><b>الاسم:</b> ${esc(s.brandAr)} · ${esc(s.brandEn)}</p><p><b>البريد:</b> <span dir="ltr">${esc(s.email)}</span></p><p><b>الهاتف:</b> <span dir="ltr">${esc(s.phone)}</span></p><p><b>العنوان:</b> ${esc(s.address)}</p><p><b>الخدمات:</b> ${esc((s.services||'').split('\n').filter(Boolean).join('، '))}</p>`}
-    function filtered(){const q=search.value.trim().toLowerCase(),t=typeFilter.value,s=statusFilter.value;return ops().filter(o=>(t==='all'||o.type===t)&&(s==='all'||o.status===s)&&(!q||`${o.customer} ${o.phone} ${o.email} ${o.service} ${o.notes}`.toLowerCase().includes(q))).sort((a,b)=>String(b.date).localeCompare(String(a.date)))}
-    function renderOps(){const r=filtered();opsBody.innerHTML=r.length?r.map(o=>`<tr><td>${esc(o.date||'')}<br><span class="hint">${o.followUp?'متابعة: '+esc(o.followUp):''}</span></td><td><span class="badge ${o.type}">${L[o.type]||o.type}</span><br><span class="hint">${esc(o.service||'')}</span></td><td>${esc(o.customer||'')}</td><td dir="ltr">${esc(o.phone||'')}<br>${esc(o.email||'')}</td><td>${money(o.amount)}</td><td><span class="badge ${o.status}">${S[o.status]||o.status}</span></td><td>${esc(o.notes||'')}</td><td><button class="btn btn-sm btn-light" onclick="editOp('${o.id}')"><i class="fas fa-pen"></i></button> <button class="btn btn-sm btn-danger" onclick="delOp('${o.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join(''):`<tr><td colspan="8"><div class="empty">لا توجد عمليات مطابقة</div></td></tr>`}
+
+    function renderAll(){
+      renderStats();
+      renderLatest();
+      renderSite();
+      renderOps();
+      renderLabs();
+      renderDeptItems();
+      renderCustomers();
+      renderStaff();
+    }
+
+    function renderStats(){
+      const a=ops(),it=deptItems();
+      stTotal.textContent=a.length;
+      stSales.textContent=a.filter(x=>x.type==='sale').length;
+      stConsult.textContent=a.filter(x=>x.type==='consultation').length;
+      stLabs.textContent=(it.labs||labs()).length;
+      stRevenue.textContent=money(a.reduce((s,x)=>s+Number(x.amount||0),0));
+    }
+
+    function renderLatest(){
+      const r=ops().slice().sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,6);
+      latest.innerHTML=r.length?`<div class="table"><table><thead><tr><th>النوع</th><th>العميل</th><th>الحالة</th></tr></thead><tbody>${r.map(o=>`<tr><td><span class="badge ${o.type}">${L[o.type]}</span></td><td>${esc(o.customer)}</td><td><span class="badge ${o.status}">${S[o.status]}</span></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">لا توجد عمليات بعد</div>';
+    }
+
+    function renderSite(){
+      const s=settings();
+      siteSummary.innerHTML=`<p><b>الاسم:</b> ${esc(s.brandAr)} · ${esc(s.brandEn)}</p><p><b>البريد:</b> <span dir="ltr">${esc(s.email)}</span></p><p><b>الهاتف:</b> <span dir="ltr">${esc(s.phone)}</span></p><p><b>العنوان:</b> ${esc(s.address)}</p><p><b>الخدمات:</b> ${esc((s.services||'').split('\n').filter(Boolean).join('، '))}</p>`;
+    }
+
+    function filtered(){
+      const q=search.value.trim().toLowerCase(),t=typeFilter.value,s=statusFilter.value;
+      return ops().filter(o=>(t==='all'||o.type===t)&&(s==='all'||o.status===s)&&(!q||`${o.customer} ${o.phone} ${o.email} ${o.service} ${o.notes}`.toLowerCase().includes(q))).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+    }
+
+    function renderOps(){
+      const r=filtered();
+      opsBody.innerHTML=r.length?r.map(o=>`<tr><td>${esc(o.date||'')}<br><span class="hint">${o.followUp?'متابعة: '+esc(o.followUp):''}</span></td><td><span class="badge ${o.type}">${L[o.type]||o.type}</span><br><span class="hint">${esc(o.service||'')}</span></td><td>${esc(o.customer||'')}</td><td dir="ltr">${esc(o.phone||'')}<br>${esc(o.email||'')}</td><td>${money(o.amount)}</td><td><span class="badge ${o.status}">${S[o.status]||o.status}</span></td><td>${esc(o.notes||'')}</td><td><button class="btn btn-sm btn-light" onclick="editOp('${o.id}')"><i class="fas fa-pen"></i></button> <button class="btn btn-sm btn-danger" onclick="delOp('${o.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join(''):`<tr><td colspan="8"><div class="empty">لا توجد عمليات مطابقة</div></td></tr>`;
+    }
+
     search.oninput=renderOps;typeFilter.oninput=renderOps;statusFilter.oninput=renderOps;
-    function openModal(o){opForm.reset();opForm.id.value=o?.id||'';opForm.type.value=o?.type||'sale';opForm.status.value=o?.status||'open';opForm.date.value=o?.date||today();opForm.customer.value=o?.customer||'';opForm.phone.value=o?.phone||'';opForm.email.value=o?.email||'';opForm.service.value=o?.service||'';opForm.amount.value=o?.amount||'';opForm.followUp.value=o?.followUp||'';opForm.notes.value=o?.notes||'';modalTitle.textContent=o?'تعديل عملية':'إضافة عملية';opModal.style.display='grid'}
-    function closeModalFn(){opModal.style.display='none'} addOp.onclick=()=>openModal();newTop.onclick=()=>{openPanel('ops');openModal()};closeModal.onclick=closeModalFn;cancelModal.onclick=closeModalFn;
-    opForm.onsubmit=e=>{e.preventDefault();const d=Object.fromEntries(new FormData(opForm).entries()),a=ops();if(d.id){const i=a.findIndex(x=>x.id===d.id);if(i>=0)a[i]=d}else{d.id=id();a.unshift(d)}saveOps(a);closeModalFn();toast('تم حفظ العملية')};
-    window.editOp=i=>openModal(ops().find(x=>x.id===i)); window.delOp=i=>{if(confirm('حذف هذه العملية؟')){saveOps(ops().filter(x=>x.id!==i));toast('تم الحذف')}};
-    function filteredLabs(){const q=labSearch.value.trim().toLowerCase(),c=labCategoryFilter.value,s=labStatusFilter.value;return labs().filter(x=>(c==='all'||x.category===c)&&(s==='all'||x.status===s)&&(!q||`${x.name} ${x.category} ${x.price} ${x.currency} ${x.warranty} ${x.notes}`.toLowerCase().includes(q))).sort((a,b)=>String(a.name).localeCompare(String(b.name),'ar'))}
-    function renderLabs(){const r=filteredLabs();labsBody.innerHTML=r.length?r.map(x=>`<tr><td><b>${esc(x.name||'')}</b></td><td>${C[x.category]||esc(x.category||'')}</td><td dir="ltr">${money(x.price)} ${esc(x.currency||'')}</td><td>${esc(x.warranty||'')}</td><td><span class="badge ${x.status}">${LS[x.status]||x.status}</span></td><td>${esc(x.notes||'')}</td><td><button class="btn btn-sm btn-light" onclick="editLab('${x.id}')"><i class="fas fa-pen"></i></button> <button class="btn btn-sm btn-danger" onclick="delLab('${x.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join(''):`<tr><td colspan="7"><div class="empty">لا توجد منتجات مختبرات مطابقة</div></td></tr>`}
+
+    function openModal(o){
+      opForm.reset();
+      opForm.id.value=o?.id||'';
+      opForm.type.value=o?.type||'sale';
+      opForm.status.value=o?.status||'open';
+      opForm.date.value=o?.date||today();
+      opForm.customer.value=o?.customer||'';
+      opForm.phone.value=o?.phone||'';
+      opForm.email.value=o?.email||'';
+      opForm.service.value=o?.service||'';
+      opForm.amount.value=o?.amount||'';
+      opForm.followUp.value=o?.followUp||'';
+      opForm.notes.value=o?.notes||'';
+      modalTitle.textContent=o?'تعديل عملية':'إضافة عملية';
+      opModal.style.display='grid';
+    }
+
+    function closeModalFn(){opModal.style.display='none'}
+    addOp.onclick=()=>openModal();
+    newTop.onclick=()=>{openPanel('ops');openModal()};
+    closeModal.onclick=closeModalFn;
+    cancelModal.onclick=closeModalFn;
+
+    opForm.onsubmit=e=>{
+      e.preventDefault();
+      const d=Object.fromEntries(new FormData(opForm).entries()),a=ops();
+      if(d.id){const i=a.findIndex(x=>x.id===d.id);if(i>=0)a[i]=d}else{d.id=id();a.unshift(d)}
+      saveOps(a);
+      closeModalFn();
+      toast('تم حفظ العملية');
+    };
+
+    window.editOp=i=>openModal(ops().find(x=>x.id===i));
+    window.delOp=i=>{if(confirm('حذف هذه العملية؟')){saveOps(ops().filter(x=>x.id!==i));toast('تم الحذف')}};
+
+    function filteredLabs(){
+      const q=labSearch.value.trim().toLowerCase(),c=labCategoryFilter.value,s=labStatusFilter.value;
+      return labs().filter(x=>(c==='all'||x.category===c)&&(s==='all'||x.status===s)&&(!q||`${x.name} ${x.category} ${x.price} ${x.currency} ${x.warranty} ${x.notes}`.toLowerCase().includes(q))).sort((a,b)=>String(a.name).localeCompare(String(b.name),'ar'));
+    }
+
+    function renderLabs(){
+      const r=filteredLabs();
+      labsBody.innerHTML=r.length?r.map(x=>`<tr><td><b>${esc(x.name||'')}</b></td><td>${C[x.category]||esc(x.category||'')}</td><td dir="ltr">${money(x.price)} ${esc(x.currency||'')}</td><td>${esc(x.warranty||'')}</td><td><span class="badge ${x.status}">${LS[x.status]||x.status}</span></td><td>${esc(x.notes||'')}</td><td><button class="btn btn-sm btn-light" onclick="editLab('${x.id}')"><i class="fas fa-pen"></i></button> <button class="btn btn-sm btn-danger" onclick="delLab('${x.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join(''):`<tr><td colspan="7"><div class="empty">لا توجد منتجات مختبرات مطابقة</div></td></tr>`;
+    }
+
     labSearch.oninput=renderLabs;labCategoryFilter.oninput=renderLabs;labStatusFilter.oninput=renderLabs;
-    function openLabModal(x){labForm.reset();labForm.id.value=x?.id||'';labForm.name.value=x?.name||'';labForm.category.value=x?.category||'equipment';labForm.status.value=x?.status||'available';labForm.price.value=x?.price||'';labForm.currency.value=x?.currency||'SAR';labForm.warranty.value=x?.warranty||'';labForm.notes.value=x?.notes||'';labModalTitle.textContent=x?'تعديل منتج مختبر':'إضافة منتج مختبر';labModal.style.display='grid'}
-    function closeLabModalFn(){labModal.style.display='none'} addLab.onclick=()=>openLabModal();closeLabModal.onclick=closeLabModalFn;cancelLabModal.onclick=closeLabModalFn;
-    labForm.onsubmit=e=>{e.preventDefault();const d=Object.fromEntries(new FormData(labForm).entries()),a=labs();if(d.id){const i=a.findIndex(x=>x.id===d.id);if(i>=0)a[i]=d}else{d.id=id();a.unshift(d)}saveLabs(a);closeLabModalFn();toast('تم حفظ منتج المختبر')};
-    window.editLab=i=>openLabModal(labs().find(x=>x.id===i)); window.delLab=i=>{if(confirm('حذف هذا المنتج؟')){saveLabs(labs().filter(x=>x.id!==i));toast('تم حذف المنتج')}};
+
+    function openLabModal(x){
+      labForm.reset();
+      labForm.id.value=x?.id||'';
+      labForm.name.value=x?.name||'';
+      labForm.category.value=x?.category||'equipment';
+      labForm.status.value=x?.status||'available';
+      labForm.price.value=x?.price||'';
+      labForm.currency.value=x?.currency||'SAR';
+      labForm.warranty.value=x?.warranty||'';
+      labForm.notes.value=x?.notes||'';
+      labModalTitle.textContent=x?'تعديل منتج مختبر':'إضافة منتج مختبر';
+      labModal.style.display='grid';
+    }
+
+    function closeLabModalFn(){labModal.style.display='none'}
+    addLab.onclick=()=>openLabModal();
+    closeLabModal.onclick=closeLabModalFn;
+    cancelLabModal.onclick=closeLabModalFn;
+
+    labForm.onsubmit=e=>{
+      e.preventDefault();
+      const d=Object.fromEntries(new FormData(labForm).entries()),a=labs();
+      if(d.id){const i=a.findIndex(x=>x.id===d.id);if(i>=0)a[i]=d}else{d.id=id();a.unshift(d)}
+      saveLabs(a);
+      closeLabModalFn();
+      toast('تم حفظ منتج المختبر');
+    };
+
+    window.editLab=i=>openLabModal(labs().find(x=>x.id===i));
+    window.delLab=i=>{if(confirm('حذف هذا المنتج؟')){saveLabs(labs().filter(x=>x.id!==i));toast('تم حذف المنتج')}};
+
     function syncLabItems(v){const all=deptItems();all.labs=v.map(x=>({id:x.id,name:x.name,status:x.status,price:x.price,currency:x.currency,warranty:x.warranty,notes:x.notes}));set(K.items,all)}
     function syncLabsFromItems(all){const labList=(all.labs||[]).map(x=>({id:x.id,name:x.name,category:'equipment',status:x.status,price:x.price,currency:x.currency,warranty:x.warranty,notes:x.notes}));set(K.labs,labList)}
-    function fillDeptForm(){if(!window.deptForm)return;const d=departments().find(x=>x.key===currentDept)||D.departments[0];deptForm.key.value=d.key;deptForm.title.value=d.title||'';deptForm.icon.value=d.icon||'';deptForm.order.value=d.order||1;deptForm.status.value=d.status||'active';deptForm.description.value=d.description||'';deptFormTitle.textContent='بيانات قسم ' + (d.title||'');deptItemsTitle.textContent='عناصر ' + (d.title||'');const count=(deptItems()[d.key]||[]).length;deptSummary.innerHTML=`<p><b>المفتاح:</b> <span dir="ltr">${esc(d.key)}</span></p><p><b>الحالة:</b> <span class="badge ${d.status==='hidden'?'hidden-status':'active-status'}">${d.status==='hidden'?'مخفي':'ظاهر'}</span></p><p><b>عدد العناصر:</b> ${count}</p>`}
-    deptForm.onsubmit=e=>{e.preventDefault();const d=Object.fromEntries(new FormData(deptForm).entries()),a=departments(),i=a.findIndex(x=>x.key===d.key);d.order=Number(d.order||1);if(i>=0)a[i]=d;saveDepartments(a);fillDeptForm();toast('تم حفظ القسم وربطه بالموقع')};
-    function filteredDeptItems(){const all=deptItems(),q=deptItemSearch.value.trim().toLowerCase(),s=deptItemStatus.value;return (all[currentDept]||[]).filter(x=>(s==='all'||x.status===s)&&(!q||`${x.name} ${x.price} ${x.currency} ${x.warranty} ${x.notes}`.toLowerCase().includes(q))).sort((a,b)=>String(a.name).localeCompare(String(b.name),'ar'))}
-    function renderDeptItems(){if(!window.deptItemsBody)return;fillDeptForm();const r=filteredDeptItems();deptItemsBody.innerHTML=r.length?r.map(x=>`<tr><td><b>${esc(x.name||'')}</b></td><td dir="ltr">${x.price?money(x.price):'حسب الطلب'} ${esc(x.currency||'')}</td><td>${esc(x.warranty||'')}</td><td><span class="badge ${x.status}">${LS[x.status]||x.status}</span></td><td>${esc(x.notes||'')}</td><td><button class="btn btn-sm btn-light" onclick="editDeptItem('${x.id}')"><i class="fas fa-pen"></i></button> <button class="btn btn-sm btn-danger" onclick="delDeptItem('${x.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join(''):`<tr><td colspan="6"><div class="empty">لا توجد عناصر في هذا القسم</div></td></tr>`}
+
+    function fillDeptForm(){
+      if(!window.deptForm)return;
+      const d=departments().find(x=>x.key===currentDept)||D.departments[0];
+      deptForm.key.value=d.key;
+      deptForm.title.value=d.title||'';
+      deptForm.icon.value=d.icon||'';
+      deptForm.order.value=d.order||1;
+      deptForm.status.value=d.status||'active';
+      deptForm.description.value=d.description||'';
+      deptFormTitle.textContent='بيانات قسم ' + (d.title||'');
+      deptItemsTitle.textContent='عناصر ' + (d.title||'');
+      const count=(deptItems()[d.key]||[]).length;
+      deptSummary.innerHTML=`<p><b>المفتاح:</b> <span dir="ltr">${esc(d.key)}</span></p><p><b>الحالة:</b> <span class="badge ${d.status==='hidden'?'hidden-status':'active-status'}">${d.status==='hidden'?'مخفي':'ظاهر'}</span></p><p><b>عدد العناصر:</b> ${count}</p>`;
+    }
+
+    deptForm.onsubmit=e=>{
+      e.preventDefault();
+      const d=Object.fromEntries(new FormData(deptForm).entries()),a=departments(),i=a.findIndex(x=>x.key===d.key);
+      d.order=Number(d.order||1);
+      if(i>=0)a[i]=d;
+      saveDepartments(a);
+      fillDeptForm();
+      toast('تم حفظ القسم وربطه بالموقع');
+    };
+
+    function filteredDeptItems(){
+      const all=deptItems(),q=deptItemSearch.value.trim().toLowerCase(),s=deptItemStatus.value;
+      return (all[currentDept]||[]).filter(x=>(s==='all'||x.status===s)&&(!q||`${x.name} ${x.price} ${x.currency} ${x.warranty} ${x.notes}`.toLowerCase().includes(q))).sort((a,b)=>String(a.name).localeCompare(String(b.name),'ar'));
+    }
+
+    function renderDeptItems(){
+      if(!window.deptItemsBody)return;
+      fillDeptForm();
+      const r=filteredDeptItems();
+      deptItemsBody.innerHTML=r.length?r.map(x=>`<tr><td><b>${esc(x.name||'')}</b></td><td dir="ltr">${x.price?money(x.price):'حسب الطلب'} ${esc(x.currency||'')}</td><td>${esc(x.warranty||'')}</td><td><span class="badge ${x.status}">${LS[x.status]||x.status}</span></td><td>${esc(x.notes||'')}</td><td><button class="btn btn-sm btn-light" onclick="editDeptItem('${x.id}')"><i class="fas fa-pen"></i></button> <button class="btn btn-sm btn-danger" onclick="delDeptItem('${x.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join(''):`<tr><td colspan="6"><div class="empty">لا توجد عناصر في هذا القسم</div></td></tr>`;
+    }
+
     deptItemSearch.oninput=renderDeptItems;deptItemStatus.oninput=renderDeptItems;
-    function openDeptItemModal(x){deptItemForm.reset();deptItemForm.id.value=x?.id||'';deptItemForm.department.value=currentDept;deptItemForm.name.value=x?.name||'';deptItemForm.status.value=x?.status||'available';deptItemForm.price.value=x?.price||'';deptItemForm.currency.value=x?.currency||'SAR';deptItemForm.warranty.value=x?.warranty||'';deptItemForm.notes.value=x?.notes||'';deptItemModalTitle.textContent=x?'تعديل عنصر':'إضافة عنصر';deptItemModal.style.display='grid'}
-    function closeDeptItemModalFn(){deptItemModal.style.display='none'} addDeptItem.onclick=()=>openDeptItemModal();closeDeptItemModal.onclick=closeDeptItemModalFn;cancelDeptItemModal.onclick=closeDeptItemModalFn;previewDept.onclick=()=>window.open('services.html','_blank');
-    deptItemForm.onsubmit=e=>{e.preventDefault();const d=Object.fromEntries(new FormData(deptItemForm).entries()),all=deptItems(),a=all[currentDept]||[];if(d.id){const i=a.findIndex(x=>x.id===d.id);if(i>=0)a[i]=d}else{d.id=id();a.unshift(d)}all[currentDept]=a;saveDeptItems(all);closeDeptItemModalFn();toast('تم حفظ عنصر القسم')};
-    window.editDeptItem=i=>openDeptItemModal((deptItems()[currentDept]||[]).find(x=>x.id===i)); window.delDeptItem=i=>{if(confirm('حذف هذا العنصر؟')){const all=deptItems();all[currentDept]=(all[currentDept]||[]).filter(x=>x.id!==i);saveDeptItems(all);toast('تم حذف العنصر')}};
-    function renderCustomers(){const m=new Map();ops().forEach(o=>{const k=(o.email||o.phone||o.customer||'غير محدد').toLowerCase(),c=m.get(k)||{customer:o.customer,email:o.email,phone:o.phone,count:0,last:o.date,total:0};c.count++;c.total+=Number(o.amount||0);if(String(o.date)>String(c.last))c.last=o.date;m.set(k,c)});const r=[...m.values()].sort((a,b)=>String(b.last).localeCompare(String(a.last)));customersBody.innerHTML=r.length?r.map(c=>`<tr><td>${esc(c.customer)}</td><td dir="ltr">${esc(c.email)}</td><td dir="ltr">${esc(c.phone)}</td><td>${c.count}</td><td>${esc(c.last)}</td><td>${money(c.total)}</td></tr>`).join(''):`<tr><td colspan="6"><div class="empty">لا يوجد عملاء بعد</div></td></tr>`}
-    copyCustomers.onclick=async()=>{await navigator.clipboard.writeText([...document.querySelectorAll('#customersBody tr')].map(tr=>[...tr.children].map(td=>td.innerText.trim()).join('\t')).join('\n'));toast('تم نسخ قائمة العملاء')};
-    function payload(){return{exportedAt:new Date().toISOString(),settings:settings(),admin:admin(),operations:ops(),departments:departments(),departmentItems:deptItems(),labSales:labs()}} function download(){const b=new Blob([JSON.stringify(payload(),null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`aamn-admin-${today()}.json`;a.click();URL.revokeObjectURL(a.href);toast('تم تنزيل النسخة الاحتياطية')}
-    exportData.onclick=download;exportQuick.onclick=download;importData.onclick=async()=>{const f=importFile.files[0];if(!f)return toast('اختر ملف JSON أولاً');const d=JSON.parse(await f.text());if(d.settings)set(K.settings,d.settings);if(d.admin)set(K.admin,d.admin);if(Array.isArray(d.operations))set(K.ops,d.operations);if(Array.isArray(d.departments))set(K.departments,d.departments);if(d.departmentItems)set(K.items,d.departmentItems);if(Array.isArray(d.labSales))set(K.labs,d.labSales);fillForms();renderAll();toast('تم الاستيراد')};clearOps.onclick=()=>{if(confirm('حذف كل سجل العمليات؟')){saveOps([]);toast('تم حذف السجل')}};clearLabs.onclick=()=>{if(confirm('حذف كل منتجات المختبرات؟')){saveLabs([]);toast('تم حذف منتجات المختبرات')}};
+
+    function openDeptItemModal(x){
+      deptItemForm.reset();
+      deptItemForm.id.value=x?.id||'';
+      deptItemForm.department.value=currentDept;
+      deptItemForm.name.value=x?.name||'';
+      deptItemForm.status.value=x?.status||'available';
+      deptItemForm.price.value=x?.price||'';
+      deptItemForm.currency.value=x?.currency||'SAR';
+      deptItemForm.warranty.value=x?.warranty||'';
+      deptItemForm.notes.value=x?.notes||'';
+      deptItemModalTitle.textContent=x?'تعديل عنصر':'إضافة عنصر';
+      deptItemModal.style.display='grid';
+    }
+
+    function closeDeptItemModalFn(){deptItemModal.style.display='none'}
+    addDeptItem.onclick=()=>openDeptItemModal();
+    closeDeptItemModal.onclick=closeDeptItemModalFn;
+    cancelDeptItemModal.onclick=closeDeptItemModalFn;
+    previewDept.onclick=()=>window.open('services.html','_blank');
+
+    deptItemForm.onsubmit=e=>{
+      e.preventDefault();
+      const d=Object.fromEntries(new FormData(deptItemForm).entries()),all=deptItems(),a=all[currentDept]||[];
+      if(d.id){const i=a.findIndex(x=>x.id===d.id);if(i>=0)a[i]=d}else{d.id=id();a.unshift(d)}
+      all[currentDept]=a;
+      saveDeptItems(all);
+      closeDeptItemModalFn();
+      toast('تم حفظ عنصر القسم');
+    };
+
+    window.editDeptItem=i=>openDeptItemModal((deptItems()[currentDept]||[]).find(x=>x.id===i));
+    window.delDeptItem=i=>{if(confirm('حذف هذا العنصر؟')){const all=deptItems();all[currentDept]=(all[currentDept]||[]).filter(x=>x.id!==i);saveDeptItems(all);toast('تم حذف العنصر')}};
+
+    function renderCustomers(){
+      const m=new Map();
+      ops().forEach(o=>{
+        const k=(o.email||o.phone||o.customer||'غير محدد').toLowerCase(),c=m.get(k)||{customer:o.customer,email:o.email,phone:o.phone,count:0,last:o.date,total:0};
+        c.count++;
+        c.total+=Number(o.amount||0);
+        if(String(o.date)>String(c.last))c.last=o.date;
+        m.set(k,c);
+      });
+      const r=[...m.values()].sort((a,b)=>String(b.last).localeCompare(String(a.last)));
+      customersBody.innerHTML=r.length?r.map(c=>`<tr><td>${esc(c.customer)}</td><td dir="ltr">${esc(c.email)}</td><td dir="ltr">${esc(c.phone)}</td><td>${c.count}</td><td>${esc(c.last)}</td><td>${money(c.total)}</td></tr>`).join(''):`<tr><td colspan="6"><div class="empty">لا يوجد عملاء بعد</div></td></tr>`;
+    }
+
+    copyCustomers.onclick=async()=>{
+      await navigator.clipboard.writeText([...document.querySelectorAll('#customersBody tr')].map(tr=>[...tr.children].map(td=>td.innerText.trim()).join('\t')).join('\n'));
+      toast('تم نسخ قائمة العملاء');
+    };
+
+    // ==========================================
+    // Staff & Granular RBAC Permissions Logic
+    // ==========================================
+    function filteredStaff(){
+      const q = (staffSearch?.value || '').trim().toLowerCase();
+      const d = staffDeptFilter?.value || 'all';
+      return staffList().filter(s => (d === 'all' || s.department === d) && (!q || `${s.name} ${s.email} ${s.phone} ${s.department} ${s.role}`.toLowerCase().includes(q)));
+    }
+
+    function renderStaff(){
+      if (!window.staffBody) return;
+      const list = filteredStaff();
+      if (!list.length) {
+        staffBody.innerHTML = `<tr><td colspan="7"><div class="empty">لا يوجد موظفون مطابقون</div></td></tr>`;
+        return;
+      }
+
+      staffBody.innerHTML = list.map(s => {
+        const permsHtml = (s.perms || []).map(p => `<span style="display:inline-block; font-size:0.75rem; background:#fee2e2; color:#b91c1c; padding:2px 6px; border-radius:6px; margin:2px;">${PERM_LABELS[p] || p}</span>`).join(' ') || '<span class="hint">بلا صلاحيات</span>';
+        const isMaster = s.email === 'admin@wadnooh.com';
+        return `
+          <tr>
+            <td><strong>${esc(s.name)}</strong></td>
+            <td dir="ltr">${esc(s.email)}</td>
+            <td dir="ltr">${esc(s.phone)}</td>
+            <td><span class="badge sale">${esc(s.department)}</span><br><small class="hint">${esc(s.role || 'موظف')}</small></td>
+            <td>${permsHtml}</td>
+            <td>
+              <span class="badge ${s.status === 'inactive' ? 'cancelled' : 'done'}">
+                ${s.status === 'inactive' ? 'معطل' : 'نشط'}
+              </span>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-light" onclick="editStaff('${s.id}')" title="تعديل"><i class="fas fa-pen"></i></button>
+              ${!isMaster ? `<button class="btn btn-sm btn-danger" onclick="delStaff('${s.id}')" title="حذف"><i class="fas fa-trash"></i></button>` : ''}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    staffSearch?.addEventListener('input', renderStaff);
+    staffDeptFilter?.addEventListener('change', renderStaff);
+
+    function openStaffModal(s) {
+      staffForm.reset();
+      staffForm.id.value = s?.id || '';
+      staffForm.name.value = s?.name || '';
+      staffForm.email.value = s?.email || '';
+      staffForm.phone.value = s?.phone || '';
+      staffForm.password.value = s?.password || '';
+      staffForm.department.value = s?.department || 'الإدارة العامة';
+      staffForm.role.value = s?.role || '';
+
+      const perms = s?.perms || ['ops', 'services', 'customers'];
+      document.querySelectorAll('#staffForm input[name^="perm_"]').forEach(cb => {
+        const key = cb.name.replace('perm_', '');
+        cb.checked = perms.includes(key);
+      });
+
+      staffModalTitle.textContent = s ? 'تعديل بيانات وصلاحيات الموظف' : 'إضافة موظف جديد';
+      staffModal.style.display = 'grid';
+    }
+
+    function closeStaffModalFn() { staffModal.style.display = 'none'; }
+    document.getElementById('addStaff')?.addEventListener('click', () => openStaffModal());
+    document.getElementById('closeStaffModal')?.addEventListener('click', closeStaffModalFn);
+    document.getElementById('cancelStaffModal')?.addEventListener('click', closeStaffModalFn);
+
+    staffForm?.addEventListener('submit', e => {
+      e.preventDefault();
+      const list = staffList();
+      const idVal = staffForm.id.value;
+      const checkedPerms = [];
+      document.querySelectorAll('#staffForm input[name^="perm_"]:checked').forEach(cb => {
+        checkedPerms.push(cb.name.replace('perm_', ''));
+      });
+
+      const staffData = {
+        id: idVal || 'st_' + Date.now().toString(36),
+        name: staffForm.name.value.trim(),
+        email: staffForm.email.value.trim().toLowerCase(),
+        phone: staffForm.phone.value.trim(),
+        password: staffForm.password.value,
+        department: staffForm.department.value,
+        role: staffForm.role.value.trim() || 'موظف',
+        status: 'active',
+        perms: checkedPerms
+      };
+
+      if (idVal) {
+        const idx = list.findIndex(x => x.id === idVal);
+        if (idx >= 0) list[idx] = { ...list[idx], ...staffData };
+      } else {
+        if (list.some(x => x.email.toLowerCase() === staffData.email)) {
+          toast('البريد الإلكتروني مسجل لموظف آخر بالفعل.');
+          return;
+        }
+        list.push(staffData);
+      }
+
+      saveStaff(list);
+      closeStaffModalFn();
+      toast('تم حفظ بيانات وصلاحيات الموظف بنجاح');
+    });
+
+    window.editStaff = id => openStaffModal(staffList().find(x => x.id === id));
+    window.delStaff = id => {
+      if (confirm('هل أنت متأكد من حذف هذا الموظف؟')) {
+        saveStaff(staffList().filter(x => x.id !== id));
+        toast('تم حذف الموظف');
+      }
+    };
+
+    function payload(){return{exportedAt:new Date().toISOString(),settings:settings(),admin:admin(),staff:staffList(),operations:ops(),departments:departments(),departmentItems:deptItems(),labSales:labs()}}
+    function download(){const b=new Blob([JSON.stringify(payload(),null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`aamn-admin-${today()}.json`;a.click();URL.revokeObjectURL(a.href);toast('تم تنزيل النسخة الاحتياطية')}
+
+    exportData.onclick=download;exportQuick.onclick=download;
+    importData.onclick=async()=>{
+      const f=importFile.files[0];
+      if(!f)return toast('اختر ملف JSON أولاً');
+      const d=JSON.parse(await f.text());
+      if(d.settings)set(K.settings,d.settings);
+      if(d.admin)set(K.admin,d.admin);
+      if(Array.isArray(d.staff))set(K.staff,d.staff);
+      if(Array.isArray(d.operations))set(K.ops,d.operations);
+      if(Array.isArray(d.departments))set(K.departments,d.departments);
+      if(d.departmentItems)set(K.items,d.departmentItems);
+      if(Array.isArray(d.labSales))set(K.labs,d.labSales);
+      fillForms();
+      renderAll();
+      toast('تم الاستيراد');
+    };
+
+    clearOps.onclick=()=>{if(confirm('حذف كل سجل العمليات؟')){saveOps([]);toast('تم حذف السجل')}};
+    clearLabs.onclick=()=>{if(confirm('حذف كل منتجات المختبرات؟')){saveLabs([]);toast('تم حذف منتجات المختبرات')}};
   </script>
 </body>
 </html>
