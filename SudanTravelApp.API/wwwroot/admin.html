@@ -22,11 +22,15 @@
 <body>
   <section class="login" id="login">
     <form class="login-card" id="loginForm">
-      <div class="brand"><div class="mark">AAMN</div><div><h1>لوحة تحكم الأدمن</h1><p>ودنوح AAMN للبرمجيات والكمبيوتر</p></div></div>
-      <div class="field"><label>بريد الأدمن</label><input id="loginEmail" type="email" value="admin@wadnooh.com" dir="ltr"></div>
-      <div class="field"><label>كلمة المرور</label><input id="loginPassword" type="password" value="Admin@123456"></div>
-      <button class="btn btn-primary" style="width:100%"><i class="fas fa-lock-open"></i> دخول</button>
-      <p class="hint" style="margin-top:12px">البيانات تحفظ في متصفح الأدمن. استخدم التصدير لحفظ نسخة احتياطية.</p>
+      <div class="brand"><div class="mark">AAMN</div><div><h1>لوحة تحكم الإدارة والموظفين</h1><p>ودنوح AAMN للبرمجيات والكمبيوتر</p></div></div>
+      <div class="field"><label>البريد الوظيفي</label><input id="loginEmail" type="email" value="admin@wadnooh.com" dir="ltr" required></div>
+      <div class="field"><label>كلمة المرور</label><input id="loginPassword" type="password" value="Admin@123456" required></div>
+      <button class="btn btn-primary" style="width:100%; padding:12px; font-size:1rem;"><i class="fas fa-lock-open"></i> دخول إلى لوحة التحكم</button>
+      <div style="display:flex; justify-content:space-between; margin-top:14px; font-size:0.86rem;">
+        <a href="index.html" style="color:var(--gold); font-weight:700;"><i class="fas fa-home"></i> العودة للرئيسية</a>
+        <a href="client.html" style="color:var(--navy); font-weight:700;"><i class="fas fa-user-circle"></i> بوابة العملاء</a>
+      </div>
+      <p class="hint" style="margin-top:12px">بيانات الدخول الافتراضية: admin@wadnooh.com / Admin@123456</p>
     </form>
   </section>
 
