@@ -1,0 +1,15 @@
+DirectoryIndex index.html index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^app/?$ / [R=302,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "(admin\.html|client\.html)">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>

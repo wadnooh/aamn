@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة العملاء والأعضاء | ودنوح AAMN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #DC2626;
+      --primary-dark: #B91C1C;
+      --primary-light: #EF4444;
+      --secondary: #1A2744;
+      --secondary-dark: #0f172a;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', 'Tajawal', sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font: inherit; }
+
+    /* Top Navbar */
+    .client-nav {
+      background: #ffffff; border-bottom: 1px solid var(--border); padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100;
+    }
+    .client-brand { display: flex; align-items: center; gap: 12px; }
+    .client-logo-badge {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff; font-weight: 900; padding: 6px 12px; border-radius: 10px; font-size: 1.1rem;
+    }
+    .client-brand h1 { font-size: 1.15rem; font-weight: 800; color: var(--secondary); }
+    .client-nav-links { display: flex; align-items: center; gap: 12px; }
+    .btn-site {
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+      border-radius: 8px; font-size: 0.88rem; font-weight: 700; background: #f1f5f9; color: var(--secondary);
+      border: 1px solid var(--border); transition: all 0.2s;
+    }
+    .btn-site:hover { background: #e2e8f0; }
+    .btn-logout {
+      background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca;
+    }
+    .btn-logout:hover { background: #fca5a5; }
+
+    /* Auth Screen */
+    .auth-section {
+      min-height: calc(100vh - 70px); display: flex; align-items: center; justify-content: center; padding: 30px 20px;
+      background: radial-gradient(circle at top, rgba(220,38,38,0.06) 0%, transparent 70%);
+    }
+    .auth-card {
+      background: var(--card); width: min(480px, 100%); border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08); border: 1px solid var(--border); overflow: hidden;
+    }
+    .auth-tabs { display: flex; background: #f1f5f9; border-bottom: 1px solid var(--border); }
+    .auth-tab {
+      flex: 1; padding: 14px; border: 0; background: transparent; font-weight: 800; font-size: 0.95rem;
+      color: var(--text-muted); cursor: pointer; transition: all 0.2s; border-bottom: 3px solid transparent;
+    }
+    .auth-tab.active { color: var(--primary); background: #fff; border-bottom-color: var(--primary); }
+    .auth-body { padding: 28px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-weight: 700; font-size: 0.88rem; margin-bottom: 6px; color: #334155; }
+    .input-box {
+      display: flex; align-items: center; position: relative;
+    }
+    .input-box i { position: absolute; right: 14px; color: #94a3b8; font-size: 1rem; }
+    .input-box input, .input-box select, .input-box textarea {
+      width: 100%; padding: 12px 42px 12px 14px; border: 1.5px solid var(--border); border-radius: 10px;
+      font-size: 0.94rem; background: #f8fafc; transition: all 0.2s; font-family: inherit;
+    }
+    .input-box input:focus, .input-box select:focus, .input-box textarea:focus {
+      outline: none; border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(220,38,38,0.12);
+    }
+    .btn-submit {
+      width: 100%; padding: 13px; background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff; border: 0; border-radius: 10px; font-weight: 800; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;
+      box-shadow: 0 4px 14px rgba(220,38,38,0.3); transition: all 0.2s;
+    }
+    .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(220,38,38,0.4); }
+
+    /* Dashboard */
+    .dashboard-container { max-width: 1200px; margin: 0 auto; width: 100%; padding: 30px 20px; flex: 1; display: none; }
+    .client-header-card {
+      background: linear-gradient(135deg, #1A2744 0%, #0f172a 100%); color: #fff;
+      border-radius: var(--radius); padding: 28px; margin-bottom: 24px; display: flex;
+      align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+      box-shadow: 0 14px 40px rgba(15,23,42,0.15); position: relative; overflow: hidden;
+    }
+    .client-header-card::after {
+      content: ''; position: absolute; top: -50%; left: -10%; width: 250px; height: 250px;
+      background: rgba(220,38,38,0.15); border-radius: 50%; filter: blur(50px); pointer-events: none;
+    }
+    .client-info h2 { font-size: 1.6rem; font-weight: 900; margin-bottom: 4px; }
+    .client-info p { color: #cbd5e1; font-size: 0.92rem; }
+    .client-badge-box {
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+      padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); text-align: center;
+    }
+    .client-badge-box strong { display: block; font-size: 1.2rem; color: #f87171; }
+    .client-badge-box span { font-size: 0.82rem; color: #94a3b8; }
+
+    /* Dashboard Grid */
+    .dash-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+    .dash-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; box-shadow: var(--shadow); margin-bottom: 24px;
+    }
+    .dash-card-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+      padding-bottom: 14px; border-bottom: 1px solid var(--border);
+    }
+    .dash-card-header h3 { font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+    .dash-card-header h3 i { color: var(--primary); }
+
+    /* Orders Table */
+    .order-item {
+      padding: 16px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px;
+      display: flex; align-items: center; justify-content: space-between; background: #fff; transition: all 0.2s;
+    }
+    .order-item:hover { border-color: var(--primary-light); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.05); }
+    .order-info h4 { font-size: 1rem; font-weight: 800; margin-bottom: 4px; }
+    .order-info span { font-size: 0.84rem; color: var(--text-muted); }
+    .badge-status {
+      display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px;
+      border-radius: 20px; font-size: 0.8rem; font-weight: 800;
+    }
+    .status-new { background: #e0f2fe; color: #0369a1; }
+    .status-progress { background: #fef3c7; color: #92400e; }
+    .status-completed { background: #dcfce7; color: #15803d; }
+
+    /* Quick Action Buttons */
+    .action-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .quick-action-btn {
+      padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: #f8fafc;
+      text-align: center; font-weight: 800; font-size: 0.92rem; color: var(--secondary); transition: all 0.2s;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .quick-action-btn i { font-size: 1.4rem; color: var(--primary); }
+    .quick-action-btn:hover { background: #fff; border-color: var(--primary); transform: translateY(-2px); }
+
+    @media (max-width: 900px) {
+      .dash-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <nav class="client-nav">
+    <div class="client-brand">
+      <div class="client-logo-badge">AAMN</div>
+      <div>
+        <h1>بوابة العملاء والأعضاء</h1>
+        <small style="color:var(--text-muted);">ودنوح AAMN للبرمجيات والكمبيوتر</small>
+      </div>
+    </div>
+    <div class="client-nav-links">
+      <a href="index.html" class="btn-site"><i class="fas fa-home"></i> الرئيسية</a>
+      <a href="admin.html" class="btn-site"><i class="fas fa-id-badge"></i> بوابة الموظفين</a>
+      <button id="btnTopLogout" class="btn-site btn-logout" style="display:none;"><i class="fas fa-sign-out-alt"></i> خروج</button>
+    </div>
+  </nav>
+
+  <!-- Login & Register Screen -->
+  <section class="auth-section" id="authSection">
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin">تسجيل الدخول</button>
+        <button class="auth-tab" id="tabRegister">حساب جديد / عضوية</button>
+      </div>
+      <div class="auth-body">
+        <!-- Login Form -->
+        <form id="formClientLogin" autocomplete="off">
+          <div class="form-group">
+            <label>البريد الإلكتروني</label>
+            <div class="input-box">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="loginEmail" placeholder="name@example.com" dir="ltr" autocomplete="off" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>كلمة المرور</label>
+            <div class="input-box">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit"><i class="fas fa-sign-in-alt"></i> دخول لحساب العميل</button>
+          <div style="display:flex; justify-content:space-between; margin-top:14px; font-size:0.86rem;">
+            <a href="index.html" style="color:var(--primary); font-weight:700;"><i class="fas fa-home"></i> العودة للرئيسية</a>
+            <a href="admin.html" style="color:var(--secondary); font-weight:700;"><i class="fas fa-id-badge"></i> بوابة الموظفين</a>
+          </div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="formClientRegister" style="display:none;">
+          <div class="form-group">
+            <label>الاسم الكامل / اسم الشركة *</label>
+            <div class="input-box">
+              <i class="fas fa-user"></i>
+              <input type="text" id="regName" placeholder="أدخل اسمك أو اسم المؤسسة" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>البريد الإلكتروني *</label>
+            <div class="input-box">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="regEmail" placeholder="name@example.com" dir="ltr" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>رقم الجوال / الواتساب *</label>
+            <div class="input-box">
+              <i class="fas fa-phone"></i>
+              <input type="tel" id="regPhone" placeholder="05xxxxxxxx" dir="ltr" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>نوع باقة العضوية</label>
+            <div class="input-box">
+              <i class="fas fa-gem"></i>
+              <select id="regTier">
+                <option value="Bronze">العضوية البرونزية (مجانية - خصم 5%)</option>
+                <option value="Silver">العضوية الفضية (خصم 10% على البرمجة والصيانة)</option>
+                <option value="Gold">العضوية الذهبية (دعم مباشر + خصم 15%)</option>
+                <option value="VIP">عضوية الشركات والأعمال VIP</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>كلمة المرور *</label>
+            <div class="input-box">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="regPassword" placeholder="••••••••" minlength="6" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit"><i class="fas fa-user-plus"></i> تفعيل حساب العضوية</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Dashboard -->
+  <main class="dashboard-container" id="dashboardContainer">
+    <!-- Header Banner -->
+    <div class="client-header-card">
+      <div class="client-info">
+        <h2 id="userNameDisplay">مرحباً بك</h2>
+        <p id="userEmailDisplay">client@example.com</p>
+      </div>
+      <div class="client-badge-box">
+        <strong id="userTierDisplay">العضوية الذهبية</strong>
+        <span id="userNumberDisplay">رقم العميل: #MEM-2025</span>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <!-- Main Column: Requests & Orders -->
+      <div>
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3><i class="fas fa-list-check"></i> طلباتي وخدماتي الحالية</h3>
+            <button class="btn-site" id="btnOpenNewReq"><i class="fas fa-plus"></i> طلب خدمة جديدة</button>
+          </div>
+          <div id="ordersList">
+            <!-- Dynamically Loaded -->
+          </div>
+        </div>
+
+        <!-- New Request Modal / Box -->
+        <div class="dash-card" id="boxNewRequest" style="display:none;">
+          <div class="dash-card-header">
+            <h3><i class="fas fa-laptop-code"></i> تقديم طلب خدمة أو استشارة</h3>
+          </div>
+          <form id="formNewRequest">
+            <div class="form-group">
+              <label>نوع الخدمة المطلوبة</label>
+              <div class="input-box">
+                <i class="fas fa-tag"></i>
+                <select id="reqService" required>
+                  <option value="برمجة المواقع والتطبيقات">برمجة المواقع والتطبيقات</option>
+                  <option value="خدمات الكمبيوتر والصيانة">خدمات الكمبيوتر والصيانة</option>
+                  <option value="الكهرباء والإلكترونيات">الكهرباء والإلكترونيات</option>
+                  <option value="الأجهزة والإكسسوارات">الأجهزة والإكسسوارات والشبكات</option>
+                  <option value="مبيعات المختبرات">مبيعات ومعدات المختبرات</option>
+                  <option value="دعم فني واستشارة">دعم فني واستشارة متخصصة</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>تفاصيل العمل أو المتطلبات</label>
+              <div class="input-box">
+                <i class="fas fa-comment"></i>
+                <textarea id="reqDetails" rows="4" placeholder="اكتب تفاصيل طلبك بدقة..." required></textarea>
+              </div>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> إرسال الطلب</button>
+              <button type="button" class="btn-site" id="btnCancelNewReq" style="margin-top:10px;">إلغاء</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Side Column: Fast Actions & Support -->
+      <div>
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3><i class="fas fa-bolt"></i> روابط سريعة</h3>
+          </div>
+          <div class="action-btn-grid">
+            <a href="services.html" class="quick-action-btn">
+              <i class="fas fa-th-large"></i>
+              <span>كتالوج الخدمات</span>
+            </a>
+            <a href="projects.html" class="quick-action-btn">
+              <i class="fas fa-briefcase"></i>
+              <span>نماذج أعمالنا</span>
+            </a>
+            <a href="contact.html" class="quick-action-btn">
+              <i class="fas fa-headset"></i>
+              <span>تواصل مباشر</span>
+            </a>
+            <a href="https://wa.me/966500000000" target="_blank" class="quick-action-btn">
+              <i class="fab fa-whatsapp" style="color:#22c55e;"></i>
+              <span>واتساب VIP</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3><i class="fas fa-shield-alt"></i> مزايا عضويتك</h3>
+          </div>
+          <ul style="list-style:none; line-height:2; font-size:0.9rem; color:var(--text-muted);">
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> خصم مباشر على البرمجة والصيانة</li>
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> أولوية في التنفيذ والدعم الفني</li>
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> استشارات تقنية دورية مجانية</li>
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> تقارير صيانة ومتابعة مباشرة</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const STORAGE_KEY = 'wadnooh_member_data';
+    const OPS_KEY = 'aamn_operations';
+
+    function getUser() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch { return null; }
+    }
+    function setUser(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+    function logout() {
+      localStorage.removeItem(STORAGE_KEY);
+      render();
+    }
+
+    // Tabs
+    const tabLogin = document.getElementById('tabLogin');
+    const tabRegister = document.getElementById('tabRegister');
+    const formLogin = document.getElementById('formClientLogin');
+    const formRegister = document.getElementById('formClientRegister');
+
+    tabLogin.addEventListener('click', () => {
+      tabLogin.classList.add('active'); tabRegister.classList.remove('active');
+      formLogin.style.display = 'block'; formRegister.style.display = 'none';
+    });
+    tabRegister.addEventListener('click', () => {
+      tabRegister.classList.add('active'); tabLogin.classList.remove('active');
+      formRegister.style.display = 'block'; formLogin.style.display = 'none';
+    });
+
+    // Login submit
+    formLogin.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const user = {
+        id: '#MEM-' + Math.floor(1000 + Math.random()*9000),
+        fullName: email.split('@')[0],
+        email: email,
+        tier: 'العضوية الذهبية',
+        joinedAt: new Date().toISOString()
+      };
+      setUser(user);
+      render();
+    });
+
+    // Register submit
+    formRegister.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const phone = document.getElementById('regPhone').value.trim();
+      const tier = document.getElementById('regTier').options[document.getElementById('regTier').selectedIndex].text;
+
+      const user = {
+        id: '#MEM-' + Math.floor(1000 + Math.random()*9000),
+        fullName: name, email, phone, tier,
+        joinedAt: new Date().toISOString()
+      };
+      setUser(user);
+      render();
+    });
+
+    document.getElementById('btnTopLogout').addEventListener('click', logout);
+
+    // New Request
+    const btnOpenNewReq = document.getElementById('btnOpenNewReq');
+    const btnCancelNewReq = document.getElementById('btnCancelNewReq');
+    const boxNewRequest = document.getElementById('boxNewRequest');
+    const formNewRequest = document.getElementById('formNewRequest');
+
+    btnOpenNewReq.addEventListener('click', () => { boxNewRequest.style.display = 'block'; });
+    btnCancelNewReq.addEventListener('click', () => { boxNewRequest.style.display = 'none'; });
+
+    formNewRequest.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const user = getUser();
+      const service = document.getElementById('reqService').value;
+      const details = document.getElementById('reqDetails').value;
+
+      const ops = JSON.parse(localStorage.getItem(OPS_KEY) || '[]');
+      const newOp = {
+        id: 'op_' + Date.now().toString(36),
+        type: 'consultation',
+        status: 'open',
+        date: new Date().toISOString().slice(0, 10),
+        customer: user ? user.fullName : 'عميل',
+        phone: user ? user.phone || '' : '',
+        email: user ? user.email || '' : '',
+        service: service,
+        amount: 0,
+        notes: details
+      };
+      ops.unshift(newOp);
+      localStorage.setItem(OPS_KEY, JSON.stringify(ops));
+
+      alert('تم إرسال طلبك بنجاح! سيتم التواصل معك من قبل فريق العمل.');
+      formNewRequest.reset();
+      boxNewRequest.style.display = 'none';
+      renderOrders();
+    });
+
+    function renderOrders() {
+      const user = getUser();
+      const ops = JSON.parse(localStorage.getItem(OPS_KEY) || '[]');
+      const userOps = ops.filter(o => (user && o.email === user.email) || !o.email || o.customer === user?.fullName);
+      const container = document.getElementById('ordersList');
+
+      if (!userOps.length) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:30px; color:var(--text-muted);">
+            <i class="fas fa-inbox" style="font-size:2.5rem; margin-bottom:10px; color:#cbd5e1;"></i>
+            <p>لا توجد طلبات سابقة حتى الآن. يمكنك تقديم طلب جديد الآن!</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = userOps.map(op => `
+        <div class="order-item">
+          <div class="order-info">
+            <h4>${op.service || 'طلب خدمة'}</h4>
+            <span><i class="fas fa-calendar-alt"></i> ${op.date} · رقم الطلب: ${op.id}</span>
+          </div>
+          <div>
+            <span class="badge-status ${op.status === 'done' ? 'status-completed' : 'status-progress'}">
+              <i class="fas fa-circle" style="font-size:0.5rem;"></i> ${op.status === 'done' ? 'مكتمل' : 'قيد المتابعة'}
+            </span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function render() {
+      const user = getUser();
+      const authSec = document.getElementById('authSection');
+      const dashSec = document.getElementById('dashboardContainer');
+      const btnLogout = document.getElementById('btnTopLogout');
+
+      if (user) {
+        authSec.style.display = 'none';
+        dashSec.style.display = 'block';
+        btnLogout.style.display = 'inline-flex';
+
+        document.getElementById('userNameDisplay').textContent = 'مرحباً، ' + user.fullName;
+        document.getElementById('userEmailDisplay').textContent = user.email;
+        document.getElementById('userTierDisplay').textContent = user.tier || 'عضو مميز';
+        document.getElementById('userNumberDisplay').textContent = 'رقم العميل: ' + (user.id || '#MEM-2025');
+
+        renderOrders();
+      } else {
+        authSec.style.display = 'flex';
+        dashSec.style.display = 'none';
+        btnLogout.style.display = 'none';
+      }
+    }
+
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابات التخصصات | AAMN Software & Computer</title>
+  <meta name="description" content="بوابة تخصص هندسي — خارطة طريق، دورات، مختبرات، كتب، بحث، مشاريع، تحميلات، وظائف، نقاش">
+  <link rel="icon" type="image/png" href="/images/wad-nooh-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nile-deep: #053d47; --nile: #0a5f6c; --kush: #c4a35a; --ink: #1c2428;
+      --muted: #5c6a70; --surface: #f7f4ee; --line: #cfc7b8; --safety: #b45309;
+      --font-display: 'El Messiri', 'IBM Plex Sans Arabic', sans-serif;
+      --font-body: 'IBM Plex Sans Arabic', sans-serif;
+      --wep-space-4: 16px; --wep-space-5: 24px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body); color: var(--ink); line-height: 1.65;
+      background: radial-gradient(ellipse at 80% 0%, rgba(196,163,90,.16), transparent 45%),
+                  linear-gradient(165deg, #ebe6dc 0%, #d5e4e6 50%, #c8d9d0 100%);
+      min-height: 100vh; padding: 16px 12px 40px;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); }
+    .hero {
+      background: linear-gradient(135deg, rgba(5,61,71,.94), rgba(10,95,108,.88));
+      color: #f5f0e6; padding: clamp(24px, 4vw, 32px) clamp(16px, 3vw, 28px); position: relative;
+    }
+    .hero.osh-hero { background: linear-gradient(135deg, rgba(5,61,71,.96), rgba(180,83,9,.55)); }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.2rem); }
+    .hero p { opacity: .88; margin-top: 8px; }
+    .hero .crumb { font-size: .85rem; opacity: .75; margin-bottom: 10px; }
+    .hero a { color: var(--kush); }
+    .inner { padding: clamp(20px, 3vw, 28px) clamp(16px, 3vw, 28px) clamp(28px, 4vw, 36px); }
+    .dept-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; max-height: 140px; overflow: auto; }
+    .dept-nav button {
+      border: 1px solid var(--line); background: #fff; padding: 8px 12px; cursor: pointer;
+      font: inherit; font-size: .82rem; color: var(--nile-deep);
+    }
+    .dept-nav button.active { border-color: var(--nile); background: rgba(10,95,108,.08); font-weight: 700; }
+    .dept-nav button.osh-active { border-color: var(--safety); background: rgba(180,83,9,.08); }
+    .tabs { display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+    .tab {
+      padding: 10px 12px; border: none; background: transparent; cursor: pointer; font: inherit;
+      font-weight: 600; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; font-size: .88rem;
+    }
+    .tab.active { color: var(--nile-deep); border-bottom-color: var(--kush); }
+    .tab.soon { opacity: .65; }
+    .panel { display: none; }
+    .panel.active { display: block; animation: fade .3s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    h2 { font-family: var(--font-display); color: var(--nile-deep); margin-bottom: 12px; }
+    .card { background: #fff; border: 1px solid var(--line); border-inline-start: 3px solid var(--kush); padding: 14px; margin-bottom: 10px; }
+    .card h3 { font-family: var(--font-display); color: var(--nile-deep); font-size: 1.05rem; margin-bottom: 6px; }
+    .meta { font-size: .8rem; color: var(--muted); }
+    .soon-badge { font-size: .7rem; font-weight: 700; background: var(--kush); color: var(--nile-deep); padding: 1px 6px; }
+    .btn {
+      display: inline-block; margin-top: 10px; padding: 10px 16px; background: var(--nile-deep);
+      color: #f5f0e6; text-decoration: none; font-weight: 600; border: none; cursor: pointer; font: inherit;
+    }
+    ul { padding-inline-start: 18px; color: var(--muted); }
+    @media (max-width: 700px) { .inner, .hero { padding: var(--wep-space-4, 16px); } body { padding: 12px 10px 36px; } }
+  </style>
+  <script src="/js/wep-gate.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero" id="heroBox">
+      <div class="crumb"><a href="/">Portal</a> / <span id="crumbDept">التخصصات</span></div>
+      <h1 id="portalTitle">بوابة التخصص</h1>
+      <p id="portalDesc">خارطة طريق · دورات · مختبرات · كتب · بحث · مشاريع · تحميلات · وظائف · نقاش</p>
+    </header>
+    <div class="inner">
+      <div id="wepAuthBanner"></div>
+      <div class="dept-nav" id="deptNav"></div>
+      <div class="tabs">
+        <button class="tab active" data-panel="plan" type="button">الخارطة / Roadmap</button>
+        <button class="tab" data-panel="courses" type="button">الدورات</button>
+        <button class="tab soon" data-panel="labs" type="button">مختبرات <span class="soon-badge">قريباً</span></button>
+        <button class="tab" data-panel="refs" type="button">كتب / مكتبة</button>
+        <button class="tab soon" data-panel="research" type="button">بحث <span class="soon-badge">قريباً</span></button>
+        <button class="tab" data-panel="projects" type="button">مشاريع</button>
+        <button class="tab" data-panel="downloads" type="button">تحميلات</button>
+        <button class="tab soon" data-panel="jobs" type="button">وظائف <span class="soon-badge">قريباً</span></button>
+        <button class="tab soon" data-panel="forum" type="button">نقاش <span class="soon-badge">قريباً</span></button>
+        <button class="tab" data-panel="exams" type="button">امتحانات</button>
+      </div>
+
+      <div id="plan" class="panel active" data-wep-lock="2"><h2>الخارطة الدراسية</h2><div id="planBox"></div></div>
+      <div id="courses" class="panel" data-wep-lock="2"><h2>الدورات</h2><div id="coursesBox"></div></div>
+      <div id="labs" class="panel"><h2>المختبرات الافتراضية</h2><p class="meta">المخدمة ٢/٣ — محاكيات ومختبرات افتراضية حسب التخصص.</p></div>
+      <div id="refs" class="panel" data-wep-lock="2"><h2>الكتب والمراجع</h2><div id="refsBox"></div></div>
+      <div id="research" class="panel"><h2>مركز البحث</h2><p class="meta">المخدمة ٢ — مستودع أبحاث وملخصات وروابط DOI (بدون استضافة نصوص محمية).</p></div>
+      <div id="projects" class="panel" data-wep-lock="2"><h2>المشاريع</h2><div id="projectsBox"></div></div>
+      <div id="downloads" class="panel" data-wep-lock="2"><h2>تحميلات وقوالب</h2><div id="downloadsBox"></div></div>
+      <div id="jobs" class="panel"><h2>وظائف وتدريب</h2><p class="meta">المخدمة ٣ — فرص للشركات والجهات التدريبية حسب التخصص.</p></div>
+      <div id="forum" class="panel"><h2>نقاش التخصص</h2><p class="meta">المخدمة ٢ — منتدى الطلاب والمعلّمين.</p></div>
+      <div id="exams" class="panel" data-wep-lock="2"><h2>امتحانات / بنوك أسئلة</h2><div id="examsBox"></div></div>
+
+      <p style="margin-top:16px">
+        <a class="btn" href="/#learn">مساحة الشركة</a>
+        <a class="btn" href="/osh.html" id="oshCenterBtn" style="display:none;background:var(--safety)">مركز OSH</a>
+      </p>
+    </div>
+  </div>
+  <script>
+    const ALIASES = { hse: 'osh', 'occupational-safety': 'osh', 'occupational_safety': 'osh' };
+    const params = new URLSearchParams(location.search);
+    let deptId = params.get('dept') || 'electronics';
+    deptId = ALIASES[deptId] || deptId;
+    let DEPARTMENTS = [], COURSES = [], LIBRARY = [], PROJECTS = [], EVENTS = [], OSH_SRC = null;
+    const lang = localStorage.getItem('wadnooh_lang') === 'en' ? 'en' : 'ar';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    const GUEST_DEPTS = [
+      { id: 'electronics', icon: '⚡', name: { ar: 'إلكترونيات', en: 'Electronics' } },
+      { id: 'electrical', icon: '🔌', name: { ar: 'كهربائية', en: 'Electrical' } },
+      { id: 'civil', icon: '🏗', name: { ar: 'مدنية', en: 'Civil' } },
+      { id: 'mechanical', icon: '⚙', name: { ar: 'ميكانيكية', en: 'Mechanical' } },
+      { id: 'computer', icon: '💻', name: { ar: 'حاسوب', en: 'Computer' } },
+      { id: 'osh', icon: '🦺', name: { ar: 'سلامة مهنية OSH', en: 'OSH / HSE' } },
+      { id: 'chemical', icon: '🧪', name: { ar: 'كيميائية', en: 'Chemical' } },
+      { id: 'architecture', icon: '🏛', name: { ar: 'عمارة', en: 'Architecture' } }
+    ];
+
+    function loc(o) { if (!o) return ''; return o[lang] || o.ar || o.en || String(o); }
+
+    const OSH_PLAN = lang === 'en' ? [
+      'Safety management & ISO 45001 / policy / culture',
+      'Risk assessment: identify → assess → matrix → control plan → register',
+      'Hazard classes (mechanical → cranes / rotating machinery)',
+      'Hierarchy of controls → PPE types',
+      'Permit to Work (hot work, electrical, height, excavation, confined, LOTO)',
+      'Incident investigation & RCA',
+      'Inspection, audit, housekeeping',
+      'Emergency: evacuation, first aid, fire, crisis, assembly',
+      'Sector safety: construction, oil&gas, factories, labs, hospitals, mining'
+    ] : [
+      'إدارة السلامة وISO 45001 / سياسات / ثقافة',
+      'تقييم المخاطر: تحديد → تقييم → مصفوفة → خطة تحكم → سجل',
+      'فئات الأخطار (ميكانيكية حتى الرافعات والآلات الدوّارة)',
+      'التسلسل الهرمي للتحكم → أنواع PPE',
+      'تصاريح العمل (ساخن، كهرباء، ارتفاع، حفر، محصور، LOTO)',
+      'التحقيق في الحوادث وRCA',
+      'تفتيش وتدقيق وHousekeeping',
+      'طوارئ: إخلاء، إسعاف، حريق، أزمة، تجمع',
+      'سلامة القطاعات: إنشاءات، نفط وغاز، مصانع، مختبرات، مستشفيات، تعدين'
+    ];
+
+    function renderGuestNav() {
+      const list = DEPARTMENTS.length ? DEPARTMENTS : GUEST_DEPTS;
+      document.getElementById('deptNav').innerHTML = list.map(d =>
+        `<button type="button" class="${d.id === deptId ? 'active' : ''} ${d.id === 'osh' && d.id === deptId ? 'osh-active' : ''}" onclick="selectDept('${d.id}')">${d.icon || ''} ${loc(d.name)}</button>`
+      ).join('');
+      const dep = list.find(d => d.id === deptId) || list[0];
+      if (dep) {
+        document.getElementById('portalTitle').textContent = `${dep.icon || ''} ${loc(dep.name)}`;
+        document.getElementById('portalDesc').textContent = lang === 'en'
+          ? 'Sign in free to open the specialty roadmap, courses, library, and downloads.'
+          : 'سجّل مجاناً لفتح خارطة التخصص والدورات والمكتبة والتحميلات.';
+        document.getElementById('crumbDept').textContent = loc(dep.name);
+        document.getElementById('heroBox').classList.toggle('osh-hero', deptId === 'osh');
+        document.getElementById('oshCenterBtn').style.display = deptId === 'osh' ? 'inline-block' : 'none';
+      }
+      WepGate.applyLocks();
+      WepGate.mountBanner(document.getElementById('wepAuthBanner'));
+    }
+
+    async function load() {
+      WepGate.init();
+      WepGate.mountBanner(document.getElementById('wepAuthBanner'));
+      if (!WepGate.isLoggedIn()) {
+        renderGuestNav();
+        return;
+      }
+      const [d, c, l, p, e, o] = await Promise.all([
+        fetch('/data/departments.json').then(r => r.json()),
+        fetch('/data/courses.json').then(r => r.json()),
+        fetch('/data/library.json').then(r => r.json()),
+        fetch('/data/projects.json').then(r => r.json()),
+        fetch('/data/events.json').then(r => r.json()).catch(() => ({ qbankTeasers: [] })),
+        fetch('/data/osh-sources.json').then(r => r.json()).catch(() => null)
+      ]);
+      DEPARTMENTS = d.departments || [];
+      COURSES = c.courses || [];
+      LIBRARY = l.items || [];
+      PROJECTS = p.projects || [];
+      EVENTS = e.qbankTeasers || [];
+      OSH_SRC = o;
+      if (!DEPARTMENTS.find(x => x.id === deptId)) deptId = DEPARTMENTS[0]?.id || deptId;
+      renderNav();
+      renderPortal();
+      WepGate.applyLocks();
+      WepGate.mountBanner(document.getElementById('wepAuthBanner'));
+    }
+
+    function renderNav() {
+      const box = document.getElementById('deptNav');
+      box.innerHTML = DEPARTMENTS.map(d =>
+        `<button type="button" class="${d.id === deptId ? 'active' : ''} ${d.id === 'osh' && d.id === deptId ? 'osh-active' : ''}" onclick="selectDept('${d.id}')">${d.icon || ''} ${loc(d.name)}</button>`
+      ).join('');
+    }
+
+    function selectDept(id) {
+      deptId = ALIASES[id] || id;
+      history.replaceState(null, '', `?dept=${encodeURIComponent(deptId)}`);
+      if (!WepGate.isLoggedIn()) { renderGuestNav(); return; }
+      renderNav();
+      renderPortal();
+    }
+
+    function renderPortal() {
+      const dep = DEPARTMENTS.find(d => d.id === deptId);
+      if (!dep) return;
+      const isOsh = deptId === 'osh';
+      document.getElementById('heroBox').classList.toggle('osh-hero', isOsh);
+      document.getElementById('oshCenterBtn').style.display = isOsh ? 'inline-block' : 'none';
+      document.getElementById('portalTitle').textContent = `${dep.icon || ''} ${loc(dep.name)}`;
+      document.getElementById('portalDesc').textContent = loc(dep.desc);
+      document.getElementById('crumbDept').textContent = loc(dep.name);
+      document.title = `${loc(dep.name)} | AAMN Software & Computer`;
+
+      const courses = COURSES.filter(c => c.department === deptId);
+      const libs = LIBRARY.filter(i => (i.topics || []).includes(deptId) || (i.topics || []).some(t => deptId.includes(t)));
+      const projs = PROJECTS.filter(p => p.department === deptId);
+      const qb = EVENTS.filter(q => q.department === deptId);
+
+      if (isOsh) {
+        document.getElementById('planBox').innerHTML = `
+          <div class="card">
+            <h3>${lang === 'en' ? 'OSH / HSE study roadmap' : 'خارطة دراسة السلامة والصحة المهنية'}</h3>
+            <ul>${OSH_PLAN.map(x => `<li>${x}</li>`).join('')}</ul>
+            <a class="btn" href="/osh.html">${lang === 'en' ? 'Open OSH Center' : 'افتح مركز OSH'}</a>
+          </div>`;
+      } else {
+        const planLines = courses.slice(0, 5).map((c, i) =>
+          `<li><strong>${lang === 'en' ? 'Stage' : 'مخدمة'} ${i + 1}:</strong> ${loc(c.title)}</li>`
+        ).join('');
+        document.getElementById('planBox').innerHTML = `
+          <div class="card">
+            <h3>${lang === 'en' ? 'Suggested study sequence' : 'تسلسل دراسي مقترح'}</h3>
+            <ul>${planLines || `<li>${lang === 'en' ? 'Courses coming for this specialty' : 'دورات قادمة لهذا التخصص'}</li>`}</ul>
+            <p class="meta">${lang === 'en' ? 'Full adaptive plans in Phase 2.' : 'خطط تكيفية كاملة في المخدمة ٢.'}</p>
+          </div>`;
+      }
+
+      document.getElementById('coursesBox').innerHTML = courses.map(c => `
+        <div class="card">
+          <h3>${loc(c.title)}</h3>
+          <p class="meta">${loc(c.description)} · ${c.hours || ''}h · ${c.level || ''}</p>
+          <a class="btn" href="/#learn" onclick="sessionStorage.setItem('wep_open_course','${c.id}')">${lang === 'en' ? 'Open in Academy' : 'فتح في الشركة'}</a>
+        </div>`).join('') || `<p class="meta">${lang === 'en' ? 'No courses yet' : 'لا دورات بعد'}</p>`;
+
+      document.getElementById('refsBox').innerHTML = (libs.length ? libs : LIBRARY.slice(0, 4)).map(i => `
+        <div class="card">
+          <h3>${loc(i.title)}</h3>
+          <p class="meta">${i.authors || ''} · ${i.type || ''} · ${i.year || ''}</p>
+          <a class="btn" href="${i.url}" target="_blank" rel="noopener">${lang === 'en' ? 'Open' : 'فتح'}</a>
+        </div>`).join('');
+
+      document.getElementById('projectsBox').innerHTML = projs.map(p => `
+        <div class="card">
+          <h3>${loc(p.title)}</h3>
+          <p class="meta">${loc(p.description)}</p>
+        </div>`).join('') || `<p class="meta">${lang === 'en' ? 'Browse projects on the home page.' : 'تصفّح المشاريع في الصفحة الرئيسية.'}</p>`;
+
+      const tpls = isOsh && OSH_SRC ? (OSH_SRC.templates || []) : [];
+      document.getElementById('downloadsBox').innerHTML = tpls.length
+        ? tpls.map(t => `<div class="card"><h3>${loc(t.title)}</h3><p class="meta">${t.format || ''} · ${loc(t.note) || ''}</p></div>`).join('')
+        : `<p class="meta">${lang === 'en' ? 'Specialty downloads expand in Phase 2. OSH templates: /osh.html' : 'التحميلات تتوسع في المخدمة ٢. قوالب OSH: /osh.html'}</p>`;
+
+      document.getElementById('examsBox').innerHTML = qb.length
+        ? qb.map(q => `<div class="card"><h3>${loc(q.title)} <span class="soon-badge">${lang === 'en' ? 'Soon' : 'قريباً'}</span></h3><p class="meta">${loc(q.summary)}</p></div>`).join('')
+        : `<div class="card"><h3>${lang === 'en' ? 'Exam engine — Phase 2' : 'محرك الامتحانات — المخدمة ٢'}</h3><p class="meta">${lang === 'en' ? 'Q-bank teasers will appear here.' : 'معاينات بنوك الأسئلة ستظهر هنا.'}</p></div>`;
+    }
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.panel)?.classList.add('active');
+      });
+    });
+
+    window.addEventListener('wep:auth', () => { location.reload(); });
+    load();
+  </script>
+    <script src="js/admin-site-config.js"></script>
+    <script src="js/auth-portal.js"></script>
+</body>
+</html>

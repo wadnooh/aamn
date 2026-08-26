@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عن ودنوح AAMN للبرمجيات والكمبيوتر | Portal Guide</title>
+  <meta name="description" content="دليل ودنوح AAMN للبرمجيات والكمبيوتر: برمجة، كهرباء، إلكترونيات، صيانة، أجهزة، وخدمات تقنية.">
+  <link rel="icon" type="image/png" href="/images/wad-nooh-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nile-deep: #053d47; --nile: #0a5f6c; --kush: #c4a35a; --ink: #1c2428;
+      --muted: #5c6a70; --surface: #f7f4ee; --line: #cfc7b8; --safety: #b45309;
+      --font-display: 'El Messiri', 'IBM Plex Sans Arabic', sans-serif;
+      --font-body: 'IBM Plex Sans Arabic', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body); color: var(--ink); line-height: 1.7;
+      background: radial-gradient(ellipse at 80% 0%, rgba(196,163,90,.18), transparent 45%),
+                  linear-gradient(165deg, #ebe6dc 0%, #d5e4e6 50%, #c8d9d0 100%);
+      min-height: 100vh; padding: 16px 12px 40px;
+    }
+    .container { max-width: 1080px; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); }
+    .guide-hero {
+      background: linear-gradient(135deg, rgba(5,61,71,.92), rgba(10,95,108,.85));
+      color: #f5f0e6; padding: clamp(28px, 4vw, 36px) clamp(16px, 3vw, 28px) clamp(24px, 3vw, 32px); text-align: center;
+    }
+    .brand { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; }
+    .subtitle { margin-top: 10px; color: rgba(245,240,230,.85); }
+    .inner { padding: clamp(20px, 3vw, 28px) clamp(16px, 3vw, 28px) 0; }
+    .tabs { display: flex; gap: 0; flex-wrap: wrap; margin-bottom: 22px; border-bottom: 1px solid var(--line); }
+    .tab {
+      padding: 12px 14px; background: transparent; border: none; border-bottom: 2px solid transparent;
+      margin-bottom: -1px; cursor: pointer; font-family: inherit; font-weight: 600; color: var(--muted);
+    }
+    .tab.active { color: var(--nile-deep); border-bottom-color: var(--kush); }
+    .content { display: none; } .content.active { display: block; animation: fade .3s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    h2 { font-family: var(--font-display); color: var(--nile-deep); margin: 8px 0 16px; }
+    h3 { font-family: var(--font-display); color: var(--nile-deep); margin: 18px 0 10px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 18px 0 24px; }
+    .stat { text-align: center; padding: 18px 12px; background: var(--nile-deep); color: #f5f0e6; border-bottom: 3px solid var(--kush); }
+    .stat-number { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--kush); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 16px 0; }
+    .card, .info-box, .step { background: #fff; border: 1px solid var(--line); padding: 16px; border-inline-start: 3px solid var(--kush); }
+    .step { margin-bottom: 10px; }
+    .step-num { font-family: var(--font-display); font-weight: 700; color: var(--kush); margin-bottom: 6px; }
+    .btn-back { display: inline-block; margin: 28px 28px 0; padding: 11px 22px; background: var(--nile-deep); color: #f5f0e6; text-decoration: none; font-weight: 600; }
+    ul { padding-inline-start: 18px; color: var(--muted); line-height: 1.8; }
+    p { color: var(--muted); margin-bottom: 10px; }
+    .soon { font-size: .75rem; background: var(--kush); color: var(--nile-deep); padding: 1px 6px; font-weight: 700; }
+    a { color: var(--nile); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="guide-hero">
+      <div class="brand">ودنوح AAMN للبرمجيات والكمبيوتر</div>
+      <p class="subtitle">Code • Repair • Connect • Support — دليل الاستخدام</p>
+    </header>
+    <div class="inner">
+      <div class="tabs">
+        <button class="tab active" type="button" data-tab="about">عن البوابة</button>
+        <button class="tab" type="button" data-tab="howto">طريقة الطلب</button>
+        <button class="tab" type="button" data-tab="portals">الأقسام والخدمات</button>
+        <button class="tab" type="button" data-tab="roadmap">خارطة الطريق</button>
+      </div>
+
+      <div id="about" class="content active">
+        <h2>مرحباً بك في البوابة</h2>
+        <div class="stats">
+          <div class="stat"><div class="stat-number">٢٢+</div><div>تخصصاً هندسياً</div></div>
+          <div class="stat"><div class="stat-number">OSH</div><div>مركز سلامة مهنية</div></div>
+          <div class="stat"><div class="stat-number">AR/EN</div><div>واجهة ثنائية</div></div>
+          <div class="stat"><div class="stat-number">AI</div><div>مساعد هندسي</div></div>
+        </div>
+        <div class="info-box">
+          <h3>التموضع</h3>
+          <p>شركة تقنية تقدم حلول البرمجة والمواقع والتطبيقات وخدمات الكمبيوتر والكهرباء والإلكترونيات والأجهزة.</p>
+        </div>
+        <div class="grid">
+          <div class="card"><h3>البرمجة</h3><p>مواقع، تطبيقات، لوحات تحكم، وربط أنظمة.</p></div>
+          <div class="card"><h3>الكمبيوتر</h3><p>صيانة، تجهيزات، شبكات، دعم فني وملحقات.</p></div>
+          <div class="card"><h3>الإلكترونيات</h3><p>أجهزة، قطع، حساسات، حلول ذكية ومتابعة.</p></div>
+          <div class="card"><h3>الكهرباء</h3><p>أنظمة كهربائية، متابعة أعمال، توريد وخدمات.</p></div>
+        </div>
+      </div>
+
+      <div id="howto" class="content">
+        <h2>أربع خطوات</h2>
+        <div class="step"><div class="step-num">١</div><h3>اختر الخدمة</h3><p>حدد هل تحتاج موقعاً، تطبيقاً، صيانة كمبيوتر، أجهزة إلكترونية، أو خدمة كهرباء.</p></div>
+        <div class="step"><div class="step-num">٢</div><h3>أرسل التفاصيل</h3><p>شارك الاسم وبيانات التواصل ووصف الطلب حتى يتم تسجيله ومتابعته من لوحة الأدمن.</p></div>
+        <div class="step"><div class="step-num">٣</div><h3>استلم العرض</h3><p>يتم تقدير التكلفة والمدة وتوضيح خطوات التنفيذ أو التوريد أو الصيانة.</p></div>
+        <div class="step"><div class="step-num">٤</div><h3>تابع التنفيذ</h3><p>كل عملية بيع أو استشارة أو اشتراك أو توريد أجهزة مختبرات يمكن تتبعها من لوحة التحكم.</p></div>
+        <p style="margin:18px 0"><a class="btn-back" href="/#" onclick="sessionStorage.setItem('wep_open_register','1');">إنشاء حساب مجاني من الرئيسية</a></p>
+      </div>
+
+      <div id="portals" class="content">
+        <h2>الأقسام والخدمات</h2>
+        <p>الأقسام الحالية: الكهرباء، الإلكترونيات، البرمجة، الكمبيوتر، الأجهزة، ومبيعات المختبرات.</p>
+        <div class="info-box">
+          <h3>روابط</h3>
+          <ul>
+            <li><a href="/services.html">services.html</a> — الخدمات</li>
+            <li><a href="/projects.html">projects.html</a> — المشاريع</li>
+            <li><a href="/contact.html">contact.html</a> — التواصل وطلبات الاستشارة</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h3>أقسام مضافة</h3>
+          <p>البرمجة · الكهرباء · الإلكترونيات · الكمبيوتر · الأجهزة · مبيعات المختبرات.</p>
+        </div>
+      </div>
+
+      <div id="roadmap" class="content">
+        <h2>المراحل</h2>
+        <div class="grid">
+          <div class="card"><h3>المرحلة ١ (الآن)</h3><p>موقع تعريفي ولوحة أدمن لتفاصيل الموقع والعمليات والعملاء ومبيعات المختبرات.</p></div>
+          <div class="card"><h3>المرحلة ٢</h3><p>قاعدة بيانات مشتركة وصلاحيات أدمن وتقارير مبيعات واستشارات واشتراكات.</p></div>
+          <div class="card"><h3>المرحلة ٣</h3><p>متجر أجهزة إلكترونية وكمبيوتر وربط دفع وفواتير وتطبيق جوال.</p></div>
+        </div>
+        <div class="info-box">
+          <h3>ما سيأتي لاحقاً</h3>
+          <ul>
+            <li>قاعدة بيانات مركزية للوحة التحكم</li>
+            <li>متجر إلكتروني وفواتير ودفع مباشر</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a class="btn-back" href="/">العودة للبوابة</a>
+  </div>
+  <script>
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+    <script src="js/admin-site-config.js"></script>
+</body>
+</html>
