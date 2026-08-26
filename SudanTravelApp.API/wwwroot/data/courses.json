@@ -1,6 +1,34 @@
 {
   "paths": [
     {
+      "id": "path-python-core-ai",
+      "title": {
+        "ar": "مسار هندسة بايثون والذكاء الاصطناعي (Python Core)",
+        "en": "Python Core & AI Engineering Path"
+      },
+      "desc": {
+        "ar": "المسار الأساسي: برمجة بايثون المتقدمة، الأتمتة، الذكاء الاصطناعي، وواجهات FastAPI.",
+        "en": "Core track: Advanced Python, automation, AI/ML, and FastAPI backends."
+      },
+      "courseIds": [
+        "python-core-fundamentals",
+        "python-automation-data",
+        "python-fastapi-ai"
+      ],
+      "competencies": {
+        "ar": [
+          "محرك بايثون الأساسي",
+          "أتمتة الأعمال وتحليل البيانات",
+          "نماذج الذكاء الاصطناعي والـ API"
+        ],
+        "en": [
+          "Python Core Architecture",
+          "Business Automation & Analytics",
+          "AI Models & REST APIs"
+        ]
+      }
+    },
+    {
       "id": "path-electronics-start",
       "title": {
         "ar": "انطلاقة الإلكترونيات",

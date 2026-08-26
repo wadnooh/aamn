@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استوديو بايثون واللغات البرمجية | ودنوح AAMN للبرمجيات والكمبيوتر</title>
+    <meta name="description" content="استوديو ومختبر البرمجة المتقدم من ودنوح AAMN - تطوير وبرمجة بلغة بايثون Python الأساسية وحزمة اللغات البرمجية الشاملة للأتمتة والذكاء الاصطناعي وتطبيقات الويب.">
+    <link rel="stylesheet" href="css/style.css?v=202608262350">
+    <link rel="stylesheet" href="css/pages.css?v=202608262350">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;500;700;800&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --ide-bg: #0b1120;
+            --ide-card: #131d33;
+            --ide-border: #1e293b;
+            --ide-accent: #38bdf8;
+            --ide-py: #3b82f6;
+            --ide-py-yellow: #fbbf24;
+            --ide-green: #22c55e;
+            --ide-red: #ef4444;
+        }
+
+        body {
+            background: #090e17;
+            color: #f1f5f9;
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+        }
+
+        .code-hero {
+            background: radial-gradient(circle at 50% 0%, #1e293b 0%, #090e17 75%);
+            padding: 80px 0 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .code-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--ide-py-yellow), transparent);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 18px;
+            border-radius: 30px;
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            font-size: 0.9rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .code-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 14px;
+            line-height: 1.3;
+        }
+
+        .code-hero p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 780px;
+            margin: 0 auto 28px;
+            line-height: 1.8;
+        }
+
+        .lang-tabs-nav {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 36px;
+        }
+
+        .lang-tab-btn {
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid rgba(255,255,255,0.08);
+            color: #cbd5e1;
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.25s;
+        }
+
+        .lang-tab-btn:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+
+        .lang-tab-btn.active {
+            background: linear-gradient(135deg, #1e3a8a, #1e40af);
+            border-color: #3b82f6;
+            color: #ffffff;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+        }
+
+        .lang-tab-btn.active.py-btn {
+            background: linear-gradient(135deg, #0369a1, #0284c7);
+            border-color: #38bdf8;
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.4);
+        }
+
+        .studio-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            background: var(--ide-bg);
+            border: 1px solid var(--ide-border);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 980px) {
+            .studio-container { grid-template-columns: 1fr; }
+        }
+
+        .ide-card {
+            background: var(--ide-card);
+            border: 1px solid var(--ide-border);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ide-header {
+            background: rgba(15, 23, 42, 0.85);
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--ide-border);
+        }
+
+        .ide-dots {
+            display: flex;
+            gap: 6px;
+        }
+        .ide-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+        }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #eab308; }
+        .dot-green { background: #22c55e; }
+
+        .ide-title {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            color: #94a3b8;
+            font-weight: 600;
+            direction: ltr;
+        }
+
+        .code-textarea {
+            width: 100%;
+            height: 380px;
+            background: #080d1a;
+            color: #38bdf8;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            padding: 18px;
+            border: 0;
+            outline: none;
+            resize: vertical;
+            direction: ltr;
+            text-align: left;
+            tab-size: 4;
+            box-sizing: border-box;
+        }
+
+        .ide-toolbar {
+            padding: 14px 18px;
+            background: rgba(15, 23, 42, 0.85);
+            border-top: 1px solid var(--ide-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-run {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #ffffff;
+            border: 0;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+            transition: all 0.2s;
+        }
+
+        .btn-run:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.45);
+        }
+
+        .btn-template {
+            background: rgba(255,255,255,0.06);
+            color: #cbd5e1;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-template:hover {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+        }
+
+        .terminal-screen {
+            background: #040812;
+            color: #a7f3d0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            padding: 18px;
+            height: 380px;
+            overflow-y: auto;
+            direction: ltr;
+            text-align: left;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .terminal-screen .prompt { color: #38bdf8; font-weight: 700; }
+        .terminal-screen .success { color: #4ade80; }
+        .terminal-screen .info { color: #fbbf24; }
+        .terminal-screen .error { color: #f87171; }
+
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .lang-card {
+            background: #0f172a;
+            border: 1px solid var(--ide-border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lang-card:hover {
+            transform: translateY(-4px);
+            border-color: #38bdf8;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+        }
+
+        .lang-card.py-featured {
+            border: 1.5px solid #38bdf8;
+            background: linear-gradient(180deg, rgba(14, 165, 233, 0.08) 0%, #0f172a 100%);
+            box-shadow: 0 8px 30px rgba(14, 165, 233, 0.15);
+        }
+
+        .lang-badge-top {
+            position: absolute;
+            top: 14px; left: 14px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+        }
+
+        .lang-card-icon {
+            width: 52px; height: 52px;
+            border-radius: 12px;
+            display: grid; place-items: center;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .icon-py { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+        .icon-js { background: rgba(234, 179, 8, 0.15); color: #facc15; }
+        .icon-cs { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+        .icon-php { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+        .icon-cpp { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+        .icon-sql { background: rgba(249, 115, 22, 0.15); color: #fb923c; }
+
+        .lang-card h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .lang-card p {
+            color: #94a3b8;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .lang-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 18px;
+        }
+
+        .lang-features li {
+            color: #cbd5e1;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-features li i {
+            color: #38bdf8;
+            font-size: 0.75rem;
+        }
+
+        .btn-load-code {
+            width: 100%;
+            padding: 9px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #ffffff;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-load-code:hover {
+            background: #38bdf8;
+            color: #0b1120;
+            border-color: #38bdf8;
+        }
+
+        .project-banner {
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+            border: 1.5px solid #3730a3;
+            border-radius: 20px;
+            padding: clamp(24px, 5vw, 44px);
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-banner h2 {
+            font-size: 1.9rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .project-banner p {
+            color: #c7d2fe;
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin: 0 auto 24px;
+            line-height: 1.7;
+        }
+
+        .btn-project-cta {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: #fff;
+            padding: 14px 34px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .btn-project-cta:hover {
+            transform: translateY(-2px);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header" style="background: rgba(11, 17, 32, 0.95); border-bottom: 1px solid rgba(255,255,255,0.08);">
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><span class="logo-r">AA</span><span class="logo-tc">MN</span></div>
+                    <div class="logo-text"><span class="logo-main" style="color:#fff;">ودنوح <span class="brand-en" style="color:#38bdf8;">AAMN</span></span><span class="logo-sub" style="color:#94a3b8;">للبرمجيات والكمبيوتر</span></div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html" style="color:#e2e8f0;">الرئيسية</a></li>
+                    <li><a href="code-hub.html" class="active" style="color:#38bdf8; font-weight:800;"><i class="fab fa-python" style="color:#38bdf8;"></i> استوديو البرمجة</a></li>
+                    <li><a href="services.html" style="color:#e2e8f0;">خدماتنا</a></li>
+                    <li><a href="projects.html" style="color:#e2e8f0;">أعمالنا</a></li>
+                    <li><a href="client.html" style="color:#e2e8f0;">بوابة الأعضاء</a></li>
+                    <li><a href="contact.html" style="color:#e2e8f0;">تواصل معنا</a></li>
+                </ul>
+                <a href="contact.html" class="btn-cta">احصل على عرض</a>
+                <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
+        <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="code-hub.html">استوديو البرمجة (Python)</a></li>
+            <li><a href="services.html">خدماتنا</a></li>
+            <li><a href="projects.html">أعمالنا</a></li>
+            <li><a href="client.html">بوابة الأعضاء</a></li>
+            <li><a href="admin.html">بوابة الموظفين</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
+        <a href="contact.html" class="btn-mobile-cta">احصل على عرض سعر</a>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Code Hero -->
+    <section class="code-hero">
+        <div class="container">
+            <div class="hero-badge">
+                <i class="fab fa-python" style="font-size:1.2rem; color:#38bdf8;"></i> بايثون الأساس · Python Core & Multi-Language Ecosystem
+            </div>
+            <h1>استوديو ومنظومة اللغات البرمجية المتكاملة</h1>
+            <p>
+                نطور حلولاً برمجية ذكية تعتمد على <strong>لغة بايثون (Python) كأساس ومحرك رئيسي</strong> للأتمتة والذكاء الاصطناعي وعلوم البيانات، بالإضافة إلى حزمة اللغات المتطورة لكافة تطبيقات الويب والجوال والأنظمة المدمجة.
+            </p>
+
+            <div class="lang-tabs-nav">
+                <button class="lang-tab-btn active py-btn" data-lang="python"><i class="fab fa-python"></i> 🐍 بايثون (الأساس - Core)</button>
+                <button class="lang-tab-btn" data-lang="javascript"><i class="fab fa-js-square"></i> JavaScript / Web</button>
+                <button class="lang-tab-btn" data-lang="csharp"><i class="fas fa-code"></i> C# / .NET</button>
+                <button class="lang-tab-btn" data-lang="php"><i class="fab fa-php"></i> PHP / Backend</button>
+                <button class="lang-tab-btn" data-lang="cpp"><i class="fas fa-microchip"></i> C++ / Embedded</button>
+                <button class="lang-tab-btn" data-lang="sql"><i class="fas fa-database"></i> SQL / Analytics</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Interactive Code Studio -->
+    <section style="padding: 40px 0 60px;">
+        <div class="container">
+            
+            <div class="studio-container">
+                <!-- Code Editor Column -->
+                <div class="ide-card">
+                    <div class="ide-header">
+                        <div class="ide-dots">
+                            <span class="ide-dot dot-red"></span>
+                            <span class="ide-dot dot-yellow"></span>
+                            <span class="ide-dot dot-green"></span>
+                        </div>
+                        <span class="ide-title" id="ideFileName">main.py - Python 3.12 Core Engine</span>
+                        <div style="font-size:0.75rem; color:#38bdf8; font-weight:700;"><i class="fas fa-bolt"></i> Live Sandbox</div>
+                    </div>
+
+                    <textarea id="codeEditor" class="code-textarea" spellcheck="false"></textarea>
+
+                    <div class="ide-toolbar">
+                        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                            <button class="btn-template" onclick="loadSnippet('py_ai')">🤖 نموذج الذكاء الاصطناعي</button>
+                            <button class="btn-template" onclick="loadSnippet('py_auto')">⚡ نموذج أتمتة التقارير</button>
+                            <button class="btn-template" onclick="loadSnippet('py_iot')">🔌 تحكم الدوائر (IoT)</button>
+                        </div>
+                        <button class="btn-run" id="btnRunCode">
+                            <i class="fas fa-play"></i> تشغيل الكود فوراً (Run)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Terminal / Output Column -->
+                <div class="ide-card">
+                    <div class="ide-header">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <i class="fas fa-terminal" style="color:#22c55e;"></i>
+                            <span class="ide-title" style="color:#f1f5f9;">Terminal Output (Live Execution)</span>
+                        </div>
+                        <button onclick="clearTerminal()" style="background:transparent; border:0; color:#94a3b8; font-size:0.8rem; cursor:pointer;"><i class="fas fa-trash"></i> مسح</button>
+                    </div>
+                    <div class="terminal-screen" id="terminalOutput"></div>
+                </div>
+            </div>
+
+            <!-- Language Ecosystem Cards -->
+            <div style="text-align: center; margin-bottom: 30px;">
+                <div class="section-tag" style="background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:4px 16px; border-radius:20px; font-weight:800; font-size:0.88rem; display:inline-block; margin-bottom:8px;">حزمة اللغات البرمجية</div>
+                <h2 style="font-size:2rem; font-weight:900; color:#fff; margin-bottom:8px;">تغطية شاملة لكافة المنصات والأنظمة</h2>
+                <p style="color:#94a3b8; font-size:1rem; max-width:680px; margin:0 auto;">
+                    نختار اللغة والأداة المثالية لكل مشروع لضمان أعلى أداء وأمان وسرعة تنفيذ.
+                </p>
+            </div>
+
+            <div class="lang-grid">
+                <div class="lang-card py-featured">
+                    <span class="lang-badge-top">⭐ اللغة الأساسية والمحرك</span>
+                    <div class="lang-card-icon icon-py"><i class="fab fa-python"></i></div>
+                    <h3>Python 3.12 (Core)</h3>
+                    <p>المحرك الأساسي للأتمتة الذكية، خوارزميات الذكاء الاصطناعي، معالجة البيانات، وأنظمة FastAPI و Django.</p>
+                    <ul class="lang-features">
+                        <li><i class="fas fa-check-circle"></i> أتمتة الأعمال ومعالجة الملفات والتقارير</li>
+                        <li><i class="fas fa-check-circle"></i> نماذج تعلم الآلة والذكاء الاصطناعي (AI/ML)</li>
+                        <li><i class="fas fa-check-circle"></i> واجهات برمجة التطبيقات عالية السرعة (REST APIs)</li>
+                        <li><i class="fas fa-check-circle"></i> برمجة أجهزة وإنترنت الأشياء (MicroPython)</li>
+                    </ul>
+                    <button class="btn-load-code" onclick="switchLanguage('python')"><i class="fas fa-code"></i> فتح نموذج بايثون في الاستوديو</button>
+                </div>
+
+                <div class="lang-card">
+                    <div class="lang-card-icon icon-js"><i class="fab fa-js-square"></i></div>
+                    <h3>JavaScript & TypeScript</h3>
+                    <p>تطوير واجهات المستخدم التفاعلية، منصات الويب الحديثة (React/Vue/Node.js)، وتطبيقات الجوال والويب الفورية.</p>
+                    <ul class="lang-features">
+                        <li><i class="fas fa-check-circle"></i> واجهات مستخدم سريعة وتفاعلية (SPA)</li>
+                        <li><i class="fas fa-check-circle"></i> خدمات الباك إند عبر Node.js & Express</li>
+                        <li><i class="fas fa-check-circle"></i> تطبيقات آنية (Real-time WebSockets)</li>
+                    </ul>
+                    <button class="btn-load-code" onclick="switchLanguage('javascript')"><i class="fas fa-code"></i> فتح كود JavaScript</button>
+                </div>
+
+                <div class="lang-card">
+                    <div class="lang-card-icon icon-cs"><i class="fas fa-code"></i></div>
+                    <h3>C# & .NET Core</h3>
+                    <p>بناء الأنظمة المؤسسية الضخمة، برمجيات سطح المكتب، تطبيقات نقاط البيع، وخدمات مايكروسوفت السحابية.</p>
+                    <ul class="lang-features">
+                        <li><i class="fas fa-check-circle"></i> برمجيات إدارة الشركات والمخازن (ERP)</li>
+                        <li><i class="fas fa-check-circle"></i> أنظمة سطح المكتب الآمنة عالية الأداء</li>
+                        <li><i class="fas fa-check-circle"></i> معمارية مايكروسيرفسز المؤسسية</li>
+                    </ul>
+                    <button class="btn-load-code" onclick="switchLanguage('csharp')"><i class="fas fa-code"></i> فتح كود C#</button>
+                </div>
+
+                <div class="lang-card">
+                    <div class="lang-card-icon icon-php"><i class="fab fa-php"></i></div>
+                    <h3>PHP & Laravel</h3>
+                    <p>تطوير المواقع الديناميكية، المتاجر الإلكترونية، بوابات الدفع، وإدارة قواعد البيانات بكفاءة عالية.</p>
+                    <ul class="lang-features">
+                        <li><i class="fas fa-check-circle"></i> منصات وتطبيقات الويب المخصصة</li>
+                        <li><i class="fas fa-check-circle"></i> ربط بوابات الدفع المحلية والعالمية</li>
+                        <li><i class="fas fa-check-circle"></i> إدارة الخوادم وقواعد بيانات MySQL</li>
+                    </ul>
+                    <button class="btn-load-code" onclick="switchLanguage('php')"><i class="fas fa-code"></i> فتح كود PHP</button>
+                </div>
+
+                <div class="lang-card">
+                    <div class="lang-card-icon icon-cpp"><i class="fas fa-microchip"></i></div>
+                    <h3>C & C++ (Embedded)</h3>
+                    <p>برمجة النظم المدمجة، المتحكمات الدقيقة (Microcontrollers)، لوحات Arduino و STM32، وأنظمة الاتصال بالأجهزة.</p>
+                    <ul class="lang-features">
+                        <li><i class="fas fa-check-circle"></i> برمجة المتحكمات والدوائر الإلكترونية</li>
+                        <li><i class="fas fa-check-circle"></i> قراءة الحساسات والتحكم في المحركات</li>
+                        <li><i class="fas fa-check-circle"></i> برامج ذات متطلبات أداء وسرعة فائقة</li>
+                    </ul>
+                    <button class="btn-load-code" onclick="switchLanguage('cpp')"><i class="fas fa-code"></i> فتح كود C++</button>
+                </div>
+
+                <div class="lang-card">
+                    <div class="lang-card-icon icon-sql"><i class="fas fa-database"></i></div>
+                    <h3>SQL & Database Architecture</h3>
+                    <p>تصميم وهيكلة قواعد البيانات العلائقية والتحليلية، استعلامات متقدمة، وتحسين أداء السيرفرات الضخمة.</p>
+                    <ul class="lang-features">
+                        <li><i class="fas fa-check-circle"></i> تصميم المخططات وقواعد البيانات (PostgreSQL / MySQL)</li>
+                        <li><i class="fas fa-check-circle"></i> تحسين سرعة الفهارس والاستعلامات المعقدة</li>
+                        <li><i class="fas fa-check-circle"></i> النسخ الاحتياطي والأمان وعزل البيانات</li>
+                    </ul>
+                    <button class="btn-load-code" onclick="switchLanguage('sql')"><i class="fas fa-code"></i> فتح كود SQL</button>
+                </div>
+            </div>
+
+            <!-- Custom Project CTA Banner -->
+            <div class="project-banner">
+                <h2>هل لديك مشروع برمجي أو فكرة تحتاج تنفيذاً احترافياً؟</h2>
+                <p>
+                    فريق ودنوح AAMN جاهز لهندسة وتطوير مشروعك بأفضل لغة برمجية ومعمارية تقنية ملائمة لنشاطك، مع الدعم والضمان الكامل.
+                </p>
+                <a href="contact.html" class="btn-project-cta">
+                    <i class="fas fa-paper-plane"></i> اطلب استشارة أو مشروعك البرمجي الآن
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="background:#080d1a; border-top:1px solid rgba(255,255,255,0.08);">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <a href="index.html" class="footer-logo">
+                            <span class="logo-r">AA</span><span class="logo-tc">MN</span>
+                            <span class="footer-logo-text" style="color:#fff;">ودنوح · AAMN</span>
+                        </a>
+                        <p style="color:#94a3b8;">ودنوح AAMN للبرمجيات والكمبيوتر - هندسة بايثون والحلول البرمجية والكمبيوتر والكهرباء والإلكترونيات.</p>
+                    </div>
+                    <div class="footer-links">
+                        <h4 style="color:#fff;">روابط سريعة</h4>
+                        <ul>
+                            <li><a href="index.html" style="color:#cbd5e1;"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                            <li><a href="code-hub.html" style="color:#38bdf8;"><i class="fas fa-angle-left"></i> استوديو البرمجة (Python)</a></li>
+                            <li><a href="services.html" style="color:#cbd5e1;"><i class="fas fa-angle-left"></i> خدماتنا</a></li>
+                            <li><a href="projects.html" style="color:#cbd5e1;"><i class="fas fa-angle-left"></i> أعمالنا</a></li>
+                            <li><a href="contact.html" style="color:#cbd5e1;"><i class="fas fa-angle-left"></i> تواصل معنا</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-services">
+                        <h4 style="color:#fff;">اللغات والحلول</h4>
+                        <ul>
+                            <li><a href="code-hub.html" style="color:#cbd5e1;"><i class="fab fa-python" style="color:#38bdf8;"></i> لغة Python (الأساس)</a></li>
+                            <li><a href="code-hub.html" style="color:#cbd5e1;"><i class="fab fa-js-square" style="color:#facc15;"></i> JavaScript & TypeScript</a></li>
+                            <li><a href="code-hub.html" style="color:#cbd5e1;"><i class="fas fa-code" style="color:#c084fc;"></i> C# & .NET Core</a></li>
+                            <li><a href="code-hub.html" style="color:#cbd5e1;"><i class="fas fa-microchip" style="color:#f87171;"></i> C++ والأنظمة المدمجة</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-contact">
+                        <h4 style="color:#fff;">تواصل معنا</h4>
+                        <div class="contact-item"><i class="fas fa-map-marker-alt" style="color:#38bdf8;"></i><span style="color:#cbd5e1;">المملكة العربية السعودية، الرياض</span></div>
+                        <div class="contact-item"><i class="fas fa-phone-alt" style="color:#38bdf8;"></i><span dir="ltr" style="color:#cbd5e1;">+966 50 000 0000</span></div>
+                        <div class="contact-item"><i class="fas fa-envelope" style="color:#38bdf8;"></i><span style="color:#cbd5e1;">info@wadnooh.tech</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.05); color:#64748b;">
+            <div class="container">
+                <p>© 2026 ودنوح AAMN للبرمجيات والكمبيوتر. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Code Studio Engine Script -->
+    <script src="js/code-studio.js?v=202608262350"></script>
+</body>
+</html>
