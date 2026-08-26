@@ -1,20 +1,13 @@
 # Patch Hostinger static site to current tunnel URL and redeploy (WNC Phase 1).
 $ErrorActionPreference = "Stop"
-$root = "d:\FLY"
+$root = "e:\FLY"
 $tunnel = (Get-Content (Join-Path $root "deploy\runtime\public-url.txt") -Raw).Trim()
 if (-not $tunnel) { throw "public-url.txt empty" }
 
 $src = Join-Path $root "SudanTravelApp.API\wwwroot"
 $dest = Join-Path $root "publish\hostinger-site"
 if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
-New-Item -ItemType Directory -Force -Path (Join-Path $dest "images") | Out-Null
-New-Item -ItemType Directory -Force -Path (Join-Path $dest "data") | Out-Null
-New-Item -ItemType Directory -Force -Path (Join-Path $dest "js") | Out-Null
-
-Copy-Item (Join-Path $src "index.html"), (Join-Path $src "guide.html"), (Join-Path $src "admin.html"), (Join-Path $src "specialty.html"), (Join-Path $src "osh.html") -Destination $dest -Force
-Copy-Item (Join-Path $src "images\*") -Destination (Join-Path $dest "images") -Force -ErrorAction SilentlyContinue
-Copy-Item (Join-Path $src "data\*") -Destination (Join-Path $dest "data") -Force
-Copy-Item (Join-Path $src "js\*") -Destination (Join-Path $dest "js") -Force
+Copy-Item (Join-Path $src "*") -Destination $dest -Recurse -Force
 
 # Static hosting: point API_BASE at Cloudflare tunnel
 $apiBase = "$tunnel/api"

@@ -2,7 +2,7 @@
 param([int]$Port = 5162)
 
 $ErrorActionPreference = "Stop"
-$root = "d:\FLY"
+$root = "e:\FLY"
 $cf = "C:\Program Files (x86)\cloudflared\cloudflared.exe"
 $project = Join-Path $root "SudanTravelApp.API\SudanTravelApp.API.csproj"
 $logDir = Join-Path $root "deploy\runtime"

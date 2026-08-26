@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory = $false)]
     [string]$ApiToken = $env:HOSTINGER_API_TOKEN,
     [string]$Domain = "wadnooh.com",
-    [string]$ArchivePath = "d:\FLY\publish\hostinger-site.zip"
+    [string]$ArchivePath = "e:\FLY\publish\hostinger-site.zip"
 )
 
 $ErrorActionPreference = "Stop"
@@ -15,7 +15,7 @@ if ([string]::IsNullOrWhiteSpace($ApiToken)) {
     Write-Host "1) Open: https://hpanel.hostinger.com/profile/api"
     Write-Host "2) Create token, then run:"
     Write-Host '   $env:HOSTINGER_API_TOKEN="YOUR_TOKEN"'
-    Write-Host '   powershell -ExecutionPolicy Bypass -File d:\FLY\deploy\hostinger-deploy.ps1'
+    Write-Host '   powershell -ExecutionPolicy Bypass -File e:\FLY\deploy\hostinger-deploy.ps1'
     Write-Host ""
     Write-Host "Or paste token now:"
     $ApiToken = Read-Host "HOSTINGER_API_TOKEN"

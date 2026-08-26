@@ -24,7 +24,7 @@
 
 .service-detail-card:hover {
     box-shadow: var(--shadow-md);
-    border-color: rgba(212,136,27,0.2);
+    border-color: rgba(220,38,38,0.2);
 }
 
 .service-detail-card.reverse {
@@ -128,7 +128,7 @@
 .step-num {
     font-size: 42px;
     font-weight: 900;
-    color: rgba(212,136,27,0.1);
+    color: rgba(220,38,38,0.1);
     line-height: 1;
     margin-bottom: 12px;
     font-family: var(--font-primary);
@@ -220,7 +220,7 @@
 
 .info-card:hover {
     border-color: var(--primary);
-    background: rgba(212,136,27,0.03);
+    background: rgba(220,38,38,0.03);
     transform: translateX(-4px);
 }
 
@@ -378,7 +378,7 @@
 .input-wrap textarea:focus {
     border-color: var(--primary);
     background: var(--white);
-    box-shadow: 0 0 0 3px rgba(212,136,27,0.1);
+    box-shadow: 0 0 0 3px rgba(220,38,38,0.1);
 }
 
 .input-wrap textarea {
@@ -434,7 +434,7 @@ select {
 
 .btn-submit:hover:not(:disabled) {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(212,136,27,0.5);
+    box-shadow: 0 15px 40px rgba(220,38,38,0.5);
 }
 
 .btn-submit:disabled {
@@ -490,7 +490,7 @@ select {
 .vmv-card:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow-md);
-    border-color: rgba(212,136,27,0.3);
+    border-color: rgba(220,38,38,0.3);
 }
 
 .vmv-icon {

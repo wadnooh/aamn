@@ -1,11 +1,11 @@
 #Requires -Version 5.1
 param(
-    [string]$OutputDir = "d:\FLY\publish\wadnooh",
+    [string]$OutputDir = "e:\FLY\publish\wadnooh",
     [string]$Configuration = "Release"
 )
 
 $ErrorActionPreference = "Stop"
-$project = "d:\FLY\SudanTravelApp.API\SudanTravelApp.API.csproj"
+$project = "e:\FLY\SudanTravelApp.API\SudanTravelApp.API.csproj"
 
 Write-Host "==> Building production package for wadnooh.com" -ForegroundColor Cyan
 
@@ -19,12 +19,12 @@ dotnet publish $project -c $Configuration -o $OutputDir --nologo
 if ($LASTEXITCODE -ne 0) { throw "Publish failed" }
 
 # Ensure production config and web.config are present
-Copy-Item "d:\FLY\SudanTravelApp.API\appsettings.Production.json" (Join-Path $OutputDir "appsettings.Production.json") -Force
-if (Test-Path "d:\FLY\SudanTravelApp.API\web.config") {
-    Copy-Item "d:\FLY\SudanTravelApp.API\web.config" (Join-Path $OutputDir "web.config") -Force
+Copy-Item "e:\FLY\SudanTravelApp.API\appsettings.Production.json" (Join-Path $OutputDir "appsettings.Production.json") -Force
+if (Test-Path "e:\FLY\SudanTravelApp.API\web.config") {
+    Copy-Item "e:\FLY\SudanTravelApp.API\web.config" (Join-Path $OutputDir "web.config") -Force
 }
 
-$zipPath = "d:\FLY\publish\wadnooh-site.zip"
+$zipPath = "e:\FLY\publish\wadnooh-site.zip"
 if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
 Compress-Archive -Path (Join-Path $OutputDir "*") -DestinationPath $zipPath -Force
 

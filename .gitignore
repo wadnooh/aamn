@@ -33,4 +33,19 @@ node_modules/
 *.log
 *.tmp
 *.cache
+deploy/runtime/
+__pycache__/
+
+# Mobile / Android SDK & Gradle
+kids-learn/
+.android-sdk
+.android-sdk/**
+**/.android-sdk/**
+.gradle
+.gradle/**
+**/.gradle/**
+*.apk
+*.aab
+
+
 

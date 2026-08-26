@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المساعد الذكي</title>
+  <style>
+    :root {
+      --primary-red: #d32f2f;
+      --dark-red: #9a0007;
+      --light-red-bg: #fff5f5;
+      --bot-msg-bg: #ffebee;
+      --border-color: #ffcdd2;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+      min-height: 100vh;
+    }
+
+    /* زر فتح وإغلاق المحادثة */
+    .chat-toggle {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+      color: #ffffff;
+      border: none;
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      cursor: pointer;
+      font-size: 24px;
+      box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .chat-toggle:hover {
+      transform: scale(1.06);
+      box-shadow: 0 6px 20px rgba(211, 47, 47, 0.5);
+    }
+
+    /* نافذة المحادثة */
+    .chat-container {
+      display: none;
+      position: fixed;
+      bottom: 95px;
+      left: 25px;
+      width: 360px;
+      height: 490px;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(154, 0, 7, 0.2);
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+      color: white;
+      padding: 15px 18px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--light-red-bg);
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .message.user {
+      background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+      color: #ffffff;
+      align-self: flex-start;
+      border-bottom-right-radius: 2px;
+      box-shadow: 0 2px 6px rgba(211, 47, 47, 0.25);
+    }
+
+    .message.bot {
+      background: var(--bot-msg-bg);
+      color: #5c0000;
+      border: 1px solid #ffcdd2;
+      align-self: flex-end;
+      border-bottom-left-radius: 2px;
+    }
+
+    .chat-input-area {
+      display: flex;
+      padding: 12px;
+      border-top: 1px solid var(--border-color);
+      background: #ffffff;
+    }
+
+    .chat-input-area input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+      background: #fffafa;
+    }
+
+    .chat-input-area input:focus {
+      border-color: var(--primary-red);
+    }
+
+    .chat-input-area button {
+      background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+      color: white;
+      border: none;
+      padding: 0 18px;
+      margin-right: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .chat-input-area button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- زر فتح وإغلاق المحادثة -->
+  <button class="chat-toggle" onclick="toggleChat()">💬</button>
+
+  <!-- نافذة الشات -->
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+      <span>المساعد الذكي</span>
+      <button onclick="toggleChat()" style="background:transparent; border:none; color:white; cursor:pointer; font-size:16px;">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="message bot">مرحباً بك! كيف يمكنني مساعدتك اليوم؟</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="userInput" placeholder="اكتب استفسارك..." onkeypress="handleKey(event)" />
+      <button onclick="sendMessage()">إرسال</button>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = "http://localhost:8000/api/chat";
+
+    function toggleChat() {
+      const container = document.getElementById("chatContainer");
+      container.style.display = (container.style.display === "flex") ? "none" : "flex";
+    }
+
+    function handleKey(e) {
+      if (e.key === "Enter") sendMessage();
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+      if (!message) return;
+
+      const chatMessages = document.getElementById("chatMessages");
+
+      // رسالة المستخدم
+      appendMessage(message, "user");
+      input.value = "";
+
+      // مؤشر الانتظار
+      const loadingMsg = appendMessage("جاري الرد...", "bot");
+
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: message })
+        });
+
+        const data = await res.json();
+        loadingMsg.textContent = data.reply || "تعذر الحصول على رد.";
+      } catch (err) {
+        loadingMsg.textContent = "حدث خطأ أثناء الاتصال بالخادم.";
+      }
+
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function appendMessage(text, sender) {
+      const chatMessages = document.getElementById("chatMessages");
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `message ${sender}`;
+      msgDiv.textContent = text;
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return msgDiv;
+    }
+  </script>
+</body>
+</html>

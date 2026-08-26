@@ -5,7 +5,7 @@ param(
 )
 
 $ErrorActionPreference = "Continue"
-$root = "d:\FLY"
+$root = "e:\FLY"
 $urlFile = Join-Path $root "deploy\runtime\public-url.txt"
 $logFile = Join-Path $root "deploy\runtime\watchdog.log"
 $goLive = Join-Path $root "deploy\go-live-wadnooh.ps1"

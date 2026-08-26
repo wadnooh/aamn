@@ -8,11 +8,11 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$envFile = "d:\FLY\deploy\.hostinger-token.env"
+$envFile = "e:\FLY\deploy\.hostinger-token.env"
 $token = (Select-String -Path $envFile -Pattern 'HOSTINGER_API_TOKEN=(.+)').Matches.Groups[1].Value
 $base = "https://developers.hostinger.com"
 $domain = "wadnooh.com"
-$archive = "d:\FLY\publish\hostinger-site.zip"
+$archive = "e:\FLY\publish\hostinger-site.zip"
 $headers = @{ Authorization = "Bearer $token"; Accept = "application/json" }
 
 if (-not (Test-Path $archive)) { throw "Missing $archive - run go-live / hostinger package build first" }
