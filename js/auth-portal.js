@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Wad Nooh AAMN - Member & Staff Auth Portal
  * Handles Member Registration, Member Login, Membership Tiers, and Employee/Staff Login.
  */
@@ -271,6 +271,10 @@
               <div>حالة الحساب: <strong style="color:#4ade80;">نشط ومفعّل</strong></div>
             </div>
           </div>
+
+          <a href="client.html" class="aamn-btn-submit" style="background:#dc2626; color:#fff; font-size:0.95rem; text-decoration:none; margin-bottom:12px;">
+            <i class="fas fa-columns"></i> لوحة تحكم حسابي والطلبات
+          </a>
 
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 16px;">
             <a href="services.html" class="aamn-btn-submit" style="background:#f1f5f9; color:#1e293b; font-size:0.9rem; text-decoration:none; margin:0;">
