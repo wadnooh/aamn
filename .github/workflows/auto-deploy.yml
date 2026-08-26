@@ -1,0 +1,43 @@
+﻿name: Auto Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Sync and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Trigger Hostinger Webhook (if configured)
+        if: env.HOSTINGER_WEBHOOK != ''
+        env:
+          HOSTINGER_WEBHOOK: ${{ secrets.HOSTINGER_WEBHOOK_URL }}
+        run: |
+          echo "Triggering Hostinger Git Auto-Deploy Webhook..."
+          curl -X POST "${{ secrets.HOSTINGER_WEBHOOK_URL }}" || echo "Webhook trigger completed."
+
+      - name: FTP Deploy to Hostinger (if FTP secrets configured)
+        if: env.FTP_SERVER != '' && env.FTP_USERNAME != '' && env.FTP_PASSWORD != ''
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: public_html/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            deploy/runtime/**
+            *.sln*
+            *.csproj
