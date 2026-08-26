@@ -1,0 +1,11 @@
+DirectoryIndex index.html
+Options -Indexes
+RewriteEngine On
+RewriteRule ^$ index.html [L]
+RewriteRule ^app/?$ / [R=302,L]
+
+<Files "admin.html">
+  Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  Header set Pragma "no-cache"
+  Header set Expires "0"
+</Files>
