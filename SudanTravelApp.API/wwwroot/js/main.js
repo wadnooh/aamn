@@ -360,17 +360,22 @@ document.addEventListener('DOMContentLoaded', () => {
             saveLocalInquiry();
 
             try {
-                const apiEndpoint = (window.API_BASE || '') + '/api/contact';
+                const apiBase = window.API_BASE || '';
+                const apiEndpoint = apiBase.endsWith('/api') ? `${apiBase}/contact` : `${apiBase}/api/contact`;
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2500);
                 await fetch(apiEndpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(payload),
+                    signal: controller.signal
                 });
+                clearTimeout(timeoutId);
             } catch (err) {
-                // Best-effort remote dispatch; inquiry is already saved locally
+                // Best-effort remote dispatch; inquiry is already stored locally
             }
 
-            showNotification('تم استلام رسالتك بنجاح! سنتواصل معك في أقرب وقت.', 'success');
+            showNotification('تم استلام رسالتك وتوثيق طلبك بنجاح! سنتواصل معك في أقرب وقت.', 'success');
             contactForm.reset();
 
             if (submitBtn) {
