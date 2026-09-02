@@ -112,7 +112,7 @@ public class AdminNotificationService : IAdminNotificationService
             return;
 
         var from = string.IsNullOrWhiteSpace(smtp.From)
-            ? (string.IsNullOrWhiteSpace(smtp.UserName) ? "noreply@wadnooh.com" : smtp.UserName)
+            ? (string.IsNullOrWhiteSpace(smtp.UserName) ? "noreply@2-aa.com" : smtp.UserName)
             : smtp.From;
 
         // Prefer shared sender when registered; keep inline fallback for isolation.

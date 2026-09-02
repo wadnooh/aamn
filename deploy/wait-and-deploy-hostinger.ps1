@@ -1,6 +1,6 @@
 #Requires -Version 5.1
 <#
-Waits until Hostinger web hosting appears for wadnooh.com, then deploys static site.
+Waits until Hostinger web hosting appears for 2-aa.com, then deploys static site.
 #>
 param(
     [int]$TimeoutMinutes = 45,
@@ -11,14 +11,14 @@ $ErrorActionPreference = "Stop"
 $envFile = "e:\FLY\deploy\.hostinger-token.env"
 $token = (Select-String -Path $envFile -Pattern 'HOSTINGER_API_TOKEN=(.+)').Matches.Groups[1].Value
 $base = "https://developers.hostinger.com"
-$domain = "wadnooh.com"
+$domain = "2-aa.com"
 $archive = "e:\FLY\publish\hostinger-site.zip"
 $headers = @{ Authorization = "Bearer $token"; Accept = "application/json" }
 
 if (-not (Test-Path $archive)) { throw "Missing $archive - run go-live / hostinger package build first" }
 
 Write-Host "Waiting for Hostinger website on $domain ..." -ForegroundColor Cyan
-Write-Host "Buy Web Hosting in hPanel if not purchased yet, then attach domain wadnooh.com"
+Write-Host "Buy Web Hosting in hPanel if not purchased yet, then attach domain 2-aa.com"
 Start-Process "https://hpanel.hostinger.com/"
 
 $deadline = (Get-Date).AddMinutes($TimeoutMinutes)

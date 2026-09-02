@@ -255,7 +255,7 @@
 
   <div class="toast" id="toast"></div>
 
-  <script src="js/admin-site-config.js"></script>
+  <script src="js/admin-site-config.js?v=202609021016"></script>
   <script>
   (function () {
     const K = {
@@ -278,14 +278,14 @@
         email: 'info@wadnooh.tech',
         phone: '+966500000000',
         whatsapp: '966500000000',
-        domain: 'wadnooh.com',
+        domain: '2-aa.com',
         address: 'المملكة العربية السعودية، الرياض، حي الملك فهد',
         hours: 'الأحد - الخميس: 8:00 ص - 5:00 م',
         description: 'ودنوح AAMN للبرمجيات والكمبيوتر - شريكك في البرمجة والكمبيوتر والكهرباء والإلكترونيات.',
         services: 'خدمات الكمبيوتر والصيانة\nبرمجة المواقع والتطبيقات\nأنظمة الكهرباء واللوحات\nالحلول الإلكترونية\nالأجهزة والإكسسوارات\nمبيعات المختبرات\nالدعم الفني والصيانة'
       },
       admin: {
-        adminEmail: 'admin@wadnooh.com',
+        adminEmail: 'admin@2-aa.com',
         adminPassword: 'Admin@123456'
       },
       ops: [
@@ -349,7 +349,7 @@
       const user = currentUser();
       if (!user) return;
       const perms = user.perms || [];
-      const isMaster = user.email === 'admin@wadnooh.com' || perms.includes('staff');
+      const isMaster = user.email === 'admin@2-aa.com' || user.email === 'admin@wadnooh.com' || perms.includes('staff');
 
       const elStaff = document.getElementById('navStaff');
       const elSite = document.getElementById('navSite');
@@ -481,7 +481,7 @@
     function openPanel(p) {
       const user = currentUser();
       const perms = user?.perms || [];
-      const isMaster = user?.email === 'admin@wadnooh.com' || perms.includes('staff');
+      const isMaster = user?.email === 'admin@2-aa.com' || user?.email === 'admin@wadnooh.com' || perms.includes('staff');
 
       if (p === 'staff' && !perms.includes('staff') && !isMaster) { toast('ليس لديك صلاحية لإدارة الموظفين'); return; }
       if (p === 'site' && !perms.includes('site') && !isMaster) { toast('ليس لديك صلاحية لتعديل الموقع'); return; }

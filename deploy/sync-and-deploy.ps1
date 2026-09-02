@@ -88,6 +88,6 @@ if ($status) {
 # 3. Success Summary
 Write-Host "`n[3/3] Direct deployment to domain triggered successfully!" -ForegroundColor Green
 Write-Host "----------------------------------------------------------" -ForegroundColor Green
-Write-Host "  Live Domain : https://wadnooh.com" -ForegroundColor Cyan
+Write-Host "  Live Domain : https://2-aa.com" -ForegroundColor Cyan
 Write-Host "  Status      : Synced and Pushed Directly to Server" -ForegroundColor Green
 Write-Host "==========================================================`n" -ForegroundColor Cyan

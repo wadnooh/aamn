@@ -51,7 +51,7 @@ public class SmtpEmailSender : IEmailSender
             throw new InvalidOperationException("SMTP host is not configured");
 
         var from = string.IsNullOrWhiteSpace(smtp.From)
-            ? (string.IsNullOrWhiteSpace(smtp.UserName) ? "noreply@wadnooh.com" : smtp.UserName)
+            ? (string.IsNullOrWhiteSpace(smtp.UserName) ? "noreply@2-aa.com" : smtp.UserName)
             : smtp.From;
 
         using var client = new SmtpClient(smtp.Host, smtp.Port)
@@ -124,7 +124,7 @@ public class EmailVerificationService : IEmailVerificationService
         _db.EmailConfirmationTokens.Add(row);
         await _db.SaveChangesAsync(ct);
 
-        var publicBase = (_config["PublicBaseUrl"] ?? "https://wadnooh.com").TrimEnd('/');
+        var publicBase = (_config["PublicBaseUrl"] ?? "https://2-aa.com").TrimEnd('/');
         var verifyUrl = $"{publicBase}/verify.html?token={Uri.EscapeDataString(token)}";
 
         var emailSent = false;

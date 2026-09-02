@@ -2,7 +2,7 @@
 param(
     [Parameter(Mandatory = $false)]
     [string]$ApiToken = $env:HOSTINGER_API_TOKEN,
-    [string]$Domain = "wadnooh.com",
+    [string]$Domain = "2-aa.com",
     [string]$ArchivePath = "e:\FLY\publish\hostinger-site.zip"
 )
 
@@ -79,7 +79,7 @@ if (-not $uploaded) {
     Write-Host ""
     Write-Host "API deploy endpoints may differ on your plan." -ForegroundColor Yellow
     Write-Host "Manual upload (guaranteed):" -ForegroundColor Cyan
-    Write-Host "1) https://hpanel.hostinger.com/ -> Websites -> wadnooh.com -> File Manager"
+    Write-Host "1) https://hpanel.hostinger.com/ -> Websites -> 2-aa.com -> File Manager"
     Write-Host "2) Open public_html"
     Write-Host "3) Upload: $ArchivePath"
     Write-Host "4) Extract zip, ensure index.html is in public_html root"

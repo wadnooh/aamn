@@ -28,12 +28,12 @@ builder.Services.AddHttpClient();
 builder.Services.AddHttpClient("openai");
 builder.Services.AddHttpClient("openlibrary", c =>
 {
-    c.DefaultRequestHeaders.UserAgent.ParseAdd("WadNoohAcademy/1.0 (educational; contact@wadnooh.com)");
+    c.DefaultRequestHeaders.UserAgent.ParseAdd("WadNoohAcademy/1.0 (educational; contact@2-aa.com)");
     c.Timeout = TimeSpan.FromSeconds(20);
 });
 builder.Services.AddHttpClient("wikipedia", c =>
 {
-    c.DefaultRequestHeaders.UserAgent.ParseAdd("WadNoohAcademy/1.0 (educational; contact@wadnooh.com)");
+    c.DefaultRequestHeaders.UserAgent.ParseAdd("WadNoohAcademy/1.0 (educational; contact@2-aa.com)");
     c.Timeout = TimeSpan.FromSeconds(15);
 });
 
@@ -145,12 +145,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-var publicBaseUrl = builder.Configuration["PublicBaseUrl"] ?? "https://wadnooh.com";
+var publicBaseUrl = builder.Configuration["PublicBaseUrl"] ?? "https://2-aa.com";
 
 app.MapGet("/api/info", (IFlightProvider flights, IFlightOfferCache cache, IPaymentService payments) => new
 {
     name = "ود نــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــوح للسفر والتقنية",
-    domain = "wadnooh.com",
+    domain = "2-aa.com",
     publicUrl = publicBaseUrl,
     message = "مرحباً بك في ود نــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــوح للسفر والتقنية",
     description = "Membership · Payments · Global flights · AI",
@@ -242,7 +242,7 @@ using (var scope = app.Services.CreateScope())
         Console.WriteLine($"فنادق: {context.Hotels.Count()} | باقات عضوية: {context.MembershipPlans.Count()}");
         Console.WriteLine($"لوحة الأدمن: /admin.html  ·  {adminOpts.Email}");
         Console.WriteLine("");
-        Console.WriteLine("https://wadnooh.com");
+        Console.WriteLine("https://2-aa.com");
         Console.WriteLine("http://localhost:5162");
         Console.WriteLine("");
     }

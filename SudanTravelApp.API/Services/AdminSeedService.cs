@@ -44,7 +44,7 @@ public class AdminSeedService : IAdminSeedService
             }
         }
 
-        var email = string.IsNullOrWhiteSpace(_options.Email) ? "admin@wadnooh.com" : _options.Email.Trim();
+        var email = string.IsNullOrWhiteSpace(_options.Email) ? "admin@2-aa.com" : _options.Email.Trim();
         var password = string.IsNullOrWhiteSpace(_options.Password) ? "Admin@123456" : _options.Password;
         var fullName = string.IsNullOrWhiteSpace(_options.FullName) ? "مدير الشركة" : _options.FullName.Trim();
 

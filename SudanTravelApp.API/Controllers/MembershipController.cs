@@ -90,7 +90,7 @@ public class MembershipController : ControllerBase
             Description = $"Wad Nooh {plan.NameEn} Membership"
         };
 
-        var publicBase = _config["PublicBaseUrl"] ?? "https://wadnooh.com";
+        var publicBase = _config["PublicBaseUrl"] ?? "https://2-aa.com";
         var success = string.IsNullOrWhiteSpace(_paymentOptions.SuccessUrl) ? $"{publicBase}/?paid=1" : _paymentOptions.SuccessUrl;
         var cancel = string.IsNullOrWhiteSpace(_paymentOptions.CancelUrl) ? $"{publicBase}/?paid=0" : _paymentOptions.CancelUrl;
 

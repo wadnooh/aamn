@@ -1,4 +1,4 @@
-#Requires -Version 5.1
+﻿#Requires -Version 5.1
 param([int]$Port = 5162)
 
 $ErrorActionPreference = "Stop"
@@ -8,7 +8,7 @@ $project = Join-Path $root "SudanTravelApp.API\SudanTravelApp.API.csproj"
 $logDir = Join-Path $root "deploy\runtime"
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 
-Write-Host "==> Building Debug (avoids Smart App Control block on Release publish)..." -ForegroundColor Cyan
+Write-Host "==> Building Debug for 2-aa.com..." -ForegroundColor Cyan
 dotnet build $project -c Debug --nologo
 if ($LASTEXITCODE -ne 0) { throw "build failed" }
 
@@ -21,7 +21,7 @@ Get-CimInstance Win32_Process -Filter "Name = 'dotnet.exe'" |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
 Start-Sleep -Seconds 2
 
-Write-Host "==> Starting app via dotnet run (Debug)..." -ForegroundColor Cyan
+Write-Host "==> Starting app via dotnet exec (Debug)..." -ForegroundColor Cyan
 $env:ASPNETCORE_ENVIRONMENT = "Development"
 $env:ASPNETCORE_URLS = "http://127.0.0.1:$Port"
 $env:PublicBaseUrl = "https://2-aa.com"
@@ -32,7 +32,7 @@ Remove-Item $appOut, $appErr -Force -ErrorAction SilentlyContinue
 $dllPath = Join-Path $root "SudanTravelApp.API\bin\Debug\net10.0\SudanTravelApp.API.dll"
 $app = Start-Process -FilePath "dotnet" -ArgumentList @(
     "exec", $dllPath
-) -WorkingDirectory (Join-Path $root "SudanTravelApp.API") -PassThru -WindowStyle Hidden `
+) -WorkingDirectory (Join-Path $root "SudanTravelApp.API") -PassThru -WindowStyle Hidden 
     -RedirectStandardOutput $appOut -RedirectStandardError $appErr
 
 $ok = $false
@@ -49,15 +49,15 @@ if (-not $ok) {
     if (Test-Path $appOut) { Write-Host (Get-Content $appOut -Raw) }
     throw "App failed to start"
 }
-Write-Host "App healthy (PID $($app.Id))" -ForegroundColor Green
+Write-Host "App healthy (PID $(.Id))" -ForegroundColor Green
 
 Write-Host "==> Starting Cloudflare tunnel (http2)..." -ForegroundColor Cyan
 $tunnelOut = Join-Path $logDir "tunnel.out.log"
 $tunnelErr = Join-Path $logDir "tunnel.err.log"
 Remove-Item $tunnelOut, $tunnelErr -Force -ErrorAction SilentlyContinue
-$tunnel = Start-Process -FilePath $cf `
-    -ArgumentList @("tunnel","--url","http://127.0.0.1:$Port","--no-autoupdate","--protocol","http2") `
-    -PassThru -WindowStyle Hidden `
+$tunnel = Start-Process -FilePath $cf 
+    -ArgumentList @("tunnel","--url","http://127.0.0.1:$Port","--no-autoupdate","--protocol","http2") 
+    -PassThru -WindowStyle Hidden 
     -RedirectStandardOutput $tunnelOut -RedirectStandardError $tunnelErr
 
 $url = $null
@@ -78,7 +78,8 @@ if (-not $url) {
 }
 
 Set-Content (Join-Path $logDir "public-url.txt") $url
-Set-Content (Join-Path $logDir "pids.txt") "app=$($app.Id)`ntunnel=$($tunnel.Id)"
+Set-Content (Join-Path $logDir "pids.txt") "app=$(.Id)
+tunnel=$(.Id)"
 
 # Wait for public DNS
 $publicOk = $false
@@ -94,6 +95,6 @@ for ($i = 0; $i -lt 20; $i++) {
 if (-not $publicOk) { Write-Host "Public check still warming: $url" -ForegroundColor Yellow }
 
 Write-Host ""
-Write-Host "LIVE: $url" -ForegroundColor Green
-Write-Host "TARGET DOMAIN: https://2-aa.com"
+Write-Host "LIVE TUNNEL: $url" -ForegroundColor Green
+Write-Host "TARGET DOMAIN: https://2-aa.com" -ForegroundColor Cyan
 Write-Host $url

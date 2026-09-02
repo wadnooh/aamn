@@ -13,6 +13,6 @@ RUN mkdir -p /app/logs
 COPY --from=build /app/publish .
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV ASPNETCORE_URLS=http://0.0.0.0:8080
-ENV PublicBaseUrl=https://wadnooh.com
+ENV PublicBaseUrl=https://2-aa.com
 EXPOSE 8080
 ENTRYPOINT ["dotnet", "SudanTravelApp.API.dll"]

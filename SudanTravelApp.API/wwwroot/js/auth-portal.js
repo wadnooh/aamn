@@ -310,7 +310,7 @@
               <label>البريد الوظيفي *</label>
               <div class="aamn-input-wrap">
                 <i class="fas fa-user-tie"></i>
-                <input type="email" id="staffEmail" value="admin@wadnooh.com" placeholder="staff@wadnooh.com" dir="ltr" required>
+                <input type="email" id="staffEmail" value="admin@2-aa.com" placeholder="staff@2-aa.com" dir="ltr" required>
               </div>
             </div>
             <div class="aamn-form-group">

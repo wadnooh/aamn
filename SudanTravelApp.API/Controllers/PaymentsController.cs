@@ -110,7 +110,7 @@ public class PaymentsController : ControllerBase
             Description = description
         };
 
-        var publicBase = _config["PublicBaseUrl"] ?? "https://wadnooh.com";
+        var publicBase = _config["PublicBaseUrl"] ?? "https://2-aa.com";
         var success = string.IsNullOrWhiteSpace(_options.SuccessUrl) ? $"{publicBase}/?paid=1" : _options.SuccessUrl;
         var cancel = string.IsNullOrWhiteSpace(_options.CancelUrl) ? $"{publicBase}/?paid=0" : _options.CancelUrl;
 

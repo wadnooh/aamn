@@ -1,4 +1,4 @@
-﻿#Requires -Version 5.1
+#Requires -Version 5.1
 param(
     [string]$FtpHost = "2.57.91.91",
     [string]$FtpUser = "u798103903",
@@ -49,4 +49,4 @@ function Upload-Directory {
 
 Upload-Directory $LocalDir $RemoteDir
 Write-Host ""
-Write-Host "==> Automated Deployment to https://wadnooh.com Complete!" -ForegroundColor Green
+Write-Host "==> Automated Deployment to https://2-aa.com Complete!" -ForegroundColor Green
