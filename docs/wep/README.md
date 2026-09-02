@@ -11,11 +11,11 @@
 
 ## Live Phase-1 entry points
 
-- Portal home: `https://wadnooh.com/`
-- OSH center: `https://wadnooh.com/osh.html`
-- Specialty OSH: `https://wadnooh.com/specialty.html?dept=osh`
-- Guide: `https://wadnooh.com/guide.html`
-- Local API/wwwroot: `D:\FLY\SudanTravelApp.API\wwwroot`
+- Portal home: `https://2-aa.com/`
+- OSH center: `https://2-aa.com/osh.html`
+- Specialty OSH: `https://2-aa.com/specialty.html?dept=osh`
+- Guide: `https://2-aa.com/guide.html`
+- Local API/wwwroot: `e:\FLY\SudanTravelApp.API\wwwroot`
 
 ## Brand
 

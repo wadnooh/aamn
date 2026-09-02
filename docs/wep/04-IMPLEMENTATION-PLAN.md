@@ -21,7 +21,7 @@
 | 1–2 | Hostinger deploy + tunnel `API_BASE`, verify OSH live, docs pack (`docs/wep`) |
 | Buffer | Content enrichment (more library/projects), admin polish |
 
-**Exit criteria:** wadnooh.com shows Portal branding; `/osh.html` live; AI books/study via tunnel; SRS/ERD/UIUX/plan published.
+**Exit criteria:** 2-aa.com shows Portal branding; `/osh.html` live; AI books/study via tunnel; SRS/ERD/UIUX/plan published.
 
 ## Phase 2 — LMS & engagement (≈ 8–12 weeks)
 

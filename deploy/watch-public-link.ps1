@@ -8,7 +8,7 @@ $ErrorActionPreference = "Continue"
 $root = "e:\FLY"
 $urlFile = Join-Path $root "deploy\runtime\public-url.txt"
 $logFile = Join-Path $root "deploy\runtime\watchdog.log"
-$goLive = Join-Path $root "deploy\go-live-wadnooh.ps1"
+$goLive = Join-Path $root "deploy\go-live-2-aa.ps1"
 $refresh = Join-Path $root "deploy\refresh-hostinger-api.ps1"
 
 function Write-Log([string]$msg) {

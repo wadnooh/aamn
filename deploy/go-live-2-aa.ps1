@@ -1,4 +1,4 @@
-﻿#Requires -Version 5.1
+#Requires -Version 5.1
 param([int]$Port = 5162)
 
 $ErrorActionPreference = "Stop"
@@ -30,10 +30,7 @@ $appOut = Join-Path $logDir "app.out.log"
 $appErr = Join-Path $logDir "app.err.log"
 Remove-Item $appOut, $appErr -Force -ErrorAction SilentlyContinue
 $dllPath = Join-Path $root "SudanTravelApp.API\bin\Debug\net10.0\SudanTravelApp.API.dll"
-$app = Start-Process -FilePath "dotnet" -ArgumentList @(
-    "exec", $dllPath
-) -WorkingDirectory (Join-Path $root "SudanTravelApp.API") -PassThru -WindowStyle Hidden 
-    -RedirectStandardOutput $appOut -RedirectStandardError $appErr
+$app = Start-Process -FilePath "dotnet" -ArgumentList @("exec", $dllPath) -WorkingDirectory (Join-Path $root "SudanTravelApp.API") -PassThru -WindowStyle Hidden -RedirectStandardOutput $appOut -RedirectStandardError $appErr
 
 $ok = $false
 for ($i = 0; $i -lt 60; $i++) {
@@ -49,16 +46,13 @@ if (-not $ok) {
     if (Test-Path $appOut) { Write-Host (Get-Content $appOut -Raw) }
     throw "App failed to start"
 }
-Write-Host "App healthy (PID $(.Id))" -ForegroundColor Green
+Write-Host "App healthy (PID $($app.Id))" -ForegroundColor Green
 
 Write-Host "==> Starting Cloudflare tunnel (http2)..." -ForegroundColor Cyan
 $tunnelOut = Join-Path $logDir "tunnel.out.log"
 $tunnelErr = Join-Path $logDir "tunnel.err.log"
 Remove-Item $tunnelOut, $tunnelErr -Force -ErrorAction SilentlyContinue
-$tunnel = Start-Process -FilePath $cf 
-    -ArgumentList @("tunnel","--url","http://127.0.0.1:$Port","--no-autoupdate","--protocol","http2") 
-    -PassThru -WindowStyle Hidden 
-    -RedirectStandardOutput $tunnelOut -RedirectStandardError $tunnelErr
+$tunnel = Start-Process -FilePath $cf -ArgumentList @("tunnel","--url","http://127.0.0.1:$Port","--no-autoupdate","--protocol","http2") -PassThru -WindowStyle Hidden -RedirectStandardOutput $tunnelOut -RedirectStandardError $tunnelErr
 
 $url = $null
 for ($i = 0; $i -lt 60; $i++) {
@@ -78,8 +72,7 @@ if (-not $url) {
 }
 
 Set-Content (Join-Path $logDir "public-url.txt") $url
-Set-Content (Join-Path $logDir "pids.txt") "app=$(.Id)
-tunnel=$(.Id)"
+Set-Content (Join-Path $logDir "pids.txt") "app=$($app.Id)`ntunnel=$($tunnel.Id)"
 
 # Wait for public DNS
 $publicOk = $false

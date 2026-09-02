@@ -84,7 +84,7 @@ Virtual labs runtime, blockchain certificates, GraphQL, production MFA/SSO, Redi
 
 ### 8. Constraints & assumptions
 
-- Phase 1 runtime remains **ASP.NET Core + wwwroot** on local/tunnel; static site on Hostinger (`wadnooh.com`) with `API_BASE` → Cloudflare tunnel.  
+- Phase 1 runtime remains **ASP.NET Core + wwwroot** on local/tunnel; static site on Hostinger (`2-aa.com`) with `API_BASE` → Cloudflare tunnel.  
 - Enterprise rewrite is planned, not executed in this pass.
 
 ### 9. Acceptance (Phase 1)
@@ -94,4 +94,4 @@ Virtual labs runtime, blockchain certificates, GraphQL, production MFA/SSO, Redi
 - [x] Expanded specialties list  
 - [x] Aggregator JSON with official links  
 - [x] Docs pack under `docs/wep/`  
-- [x] Deployable to wadnooh.com with working AI/catalog API
+- [x] Deployable to 2-aa.com with working AI/catalog API
