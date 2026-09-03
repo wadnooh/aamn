@@ -50,6 +50,9 @@ The portal serves students, faculty, practicing engineers, training bodies, and 
 | F-08 | Full LMS, exam engine, verified certs, forums, notifications | 2 |
 | F-09 | Virtual labs, jobs marketplace, mobile apps, deep university APIs | 3 |
 | F-10 | Copyright-safe linking only — no pirated PDFs | All |
+| F-11 | Interactive Code Studio `code-hub.html` (Python Core runner + Web Sandbox) | 1 |
+| F-12 | Client service tracking and support requests `client.html` | 1 |
+| F-13 | Certificate verification interface `verify.html` (serial & QR code validation) | 1 |
 
 ### 5. Non-functional requirements
 
@@ -69,14 +72,16 @@ The portal serves students, faculty, practicing engineers, training bodies, and 
 5. Digital library  
 6. Projects / innovation hub  
 7. Engineering Copilot  
-8. News & events  
-9. Certificates (placeholder → verified)  
-10. Research center (soon)  
-11. Forum (soon)  
-12. Jobs (soon)  
-13. Virtual labs (soon)  
-14. Engineering store (soon)  
-15. Admin shell  
+8. **Code Studio / Code Hub** (`code-hub.html`)  
+9. **Client portal & repair tickets** (`client.html`)  
+10. **Certificate verification** (`verify.html`)  
+11. News & events  
+12. Research center (soon)  
+13. Forum (soon)  
+14. Jobs (soon)  
+15. Virtual labs (soon)  
+16. Engineering store (soon)  
+17. Admin shell (`admin.html`)  
 
 ### 7. Out of scope (Phase 1)
 
