@@ -3,7 +3,7 @@ chcp 65001 >nul
 echo.
 echo ═══════════════════════════════════════════
 echo 🇸🇩 ود نوح للبرمجيات والكمبيوتر
-echo Wad Nouh Software ^& Tourism
+echo Wad Nouh Software ^& Computer
 echo ═══════════════════════════════════════════
 echo.
 

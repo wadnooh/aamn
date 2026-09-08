@@ -4,10 +4,6 @@ DirectoryIndex index.html index.php
   RewriteEngine On
   RewriteBase /
 
-  # 301 Permanent Redirect from old domain wadnooh.com to 2-aa.com
-  RewriteCond %{HTTP_HOST} ^(www\.)?wadnooh\.com$ [NC]
-  RewriteRule ^(.*)$ https://2-aa.com/$1 [R=301,L]
-
   RewriteRule ^app/?$ / [R=302,L]
 </IfModule>
 

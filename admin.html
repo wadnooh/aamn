@@ -349,7 +349,7 @@
       const user = currentUser();
       if (!user) return;
       const perms = user.perms || [];
-      const isMaster = user.email === 'admin@2-aa.com' || user.email === 'admin@wadnooh.com' || perms.includes('staff');
+      const isMaster = user.email === 'admin@2-aa.com' || perms.includes('staff');
 
       const elStaff = document.getElementById('navStaff');
       const elSite = document.getElementById('navSite');
@@ -481,7 +481,7 @@
     function openPanel(p) {
       const user = currentUser();
       const perms = user?.perms || [];
-      const isMaster = user?.email === 'admin@2-aa.com' || user?.email === 'admin@wadnooh.com' || perms.includes('staff');
+      const isMaster = user?.email === 'admin@2-aa.com' || perms.includes('staff');
 
       if (p === 'staff' && !perms.includes('staff') && !isMaster) { toast('ليس لديك صلاحية لإدارة الموظفين'); return; }
       if (p === 'site' && !perms.includes('site') && !isMaster) { toast('ليس لديك صلاحية لتعديل الموقع'); return; }

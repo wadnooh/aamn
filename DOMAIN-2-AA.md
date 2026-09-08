@@ -20,15 +20,7 @@
 
 ---
 
-## 2) توجيه الدومين القديم wadnooh.com (301 Permanent Redirect)
-
-لضمان تحويل أي زوار قادمين من الدومين القديم wadnooh.com إلى 2-aa.com:
-- تم إعداد توجيه IIS في web.config.
-- تم إعداد ملف توجيه Nginx في deploy/nginx-wadnooh.com.conf.
-
----
-
-## 3) النشر السريع (Windows / IIS)
+## 2) النشر السريع (Windows / IIS)
 
 `powershell
 cd e:\FLY
@@ -46,7 +38,7 @@ cd e:\FLY
 
 ---
 
-## 4) النشر على Linux / VPS باستخدام Nginx و Docker
+## 3) النشر على Linux / VPS باستخدام Nginx و Docker
 
 `ash
 # 1. تشغيل التطبيق عبر Docker
@@ -62,7 +54,7 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ---
 
-## 5) نشر الواجهة الأمامية على Hostinger Web Hosting
+## 4) نشر الواجهة الأمامية على Hostinger Web Hosting
 
 1. افتح [hPanel](https://hpanel.hostinger.com/)
 2. Websites → **2-aa.com** → **File Manager**
@@ -74,7 +66,7 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ---
 
-## 6) روابط التحقق بعد الربط
+## 5) روابط التحقق بعد الربط
 
 - الصفحة الرئيسية: **https://2-aa.com/**
 - فحص معلومات النظام والـ API: **https://2-aa.com/api/info**
