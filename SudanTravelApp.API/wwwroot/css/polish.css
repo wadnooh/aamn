@@ -66,6 +66,8 @@ body {
   font-weight: 900;
   line-height: 1.35;
   letter-spacing: 0;
+  margin-bottom: 12px;
+  text-wrap: balance;
 }
 
 .section-sub,
@@ -127,6 +129,18 @@ body {
 .page-hero h1 {
   letter-spacing: 0;
   line-height: 1.25;
+  text-wrap: balance;
+}
+
+.page-hero h1 {
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+.page-hero .breadcrumb,
+.page-hero .breadcrumb span,
+.page-hero .breadcrumb a {
+  font-weight: 800;
 }
 
 .btn-primary,

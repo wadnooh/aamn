@@ -102,7 +102,7 @@ img { max-width: 100%; height: auto; display: block; }
 .loader-logo {
     font-size: 48px;
     font-weight: 900;
-    letter-spacing: -2px;
+    letter-spacing: 0;
     margin-bottom: 20px;
 }
 
@@ -176,7 +176,7 @@ img { max-width: 100%; height: auto; display: block; }
 .logo-icon {
     font-size: 28px;
     font-weight: 900;
-    letter-spacing: -1px;
+    letter-spacing: 0;
     background: linear-gradient(135deg, var(--primary), var(--primary-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

@@ -1,5 +1,5 @@
 /**
- * Shared auth gate for AAMN Software & Computer (satellite pages).
+ * Shared auth gate for ودنوح AAMN للبرمجيات والكمبيوتر (satellite pages).
  * Token key matches wadnooh-eng.js: localStorage 'wadnooh_token'
  */
 (function (global) {

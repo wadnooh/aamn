@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بوابات التخصصات | AAMN Software & Computer</title>
+  <title>بوابات التخصصات - ودنوح AAMN للبرمجيات والكمبيوتر</title>
   <meta name="description" content="بوابة تخصص هندسي — خارطة طريق، دورات، مختبرات، كتب، بحث، مشاريع، تحميلات، وظائف، نقاش">
   <link rel="icon" type="image/png" href="/images/wad-nooh-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -222,7 +222,7 @@
       document.getElementById('portalTitle').textContent = `${dep.icon || ''} ${loc(dep.name)}`;
       document.getElementById('portalDesc').textContent = loc(dep.desc);
       document.getElementById('crumbDept').textContent = loc(dep.name);
-      document.title = `${loc(dep.name)} | AAMN Software & Computer`;
+      document.title = `${loc(dep.name)} - ودنوح AAMN للبرمجيات والكمبيوتر`;
 
       const courses = COURSES.filter(c => c.department === deptId);
       const libs = LIBRARY.filter(i => (i.topics || []).includes(deptId) || (i.topics || []).some(t => deptId.includes(t)));

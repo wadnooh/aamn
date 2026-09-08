@@ -11,7 +11,7 @@ $src = Join-Path $root "SudanTravelApp.API\wwwroot"
 $dest = Join-Path $root "publish\wadnooh-clean-site"
 
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host "   WAD NOOH AAMN - AUTOMATED DEPLOYMENT & SYNC PIPELINE   " -ForegroundColor Cyan
+Write-Host "   Wadnooh AAMN - Automated Deployment & Sync Pipeline   " -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
 
 # 1. Sync files from wwwroot to repo root

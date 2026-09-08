@@ -1,5 +1,5 @@
 /**
- * AAMN Software & Computer Platform (AAMN) — Phase 1 client
+ * Wadnooh AAMN Platform — Phase 1 client
  * Institutional Arabic EdTech: education + research + training + career path.
  * Roles scaffold (full server RBAC → Phase 2):
  */
@@ -330,7 +330,7 @@ let currentLang = (() => {
 const I18N = {
   ar: {
         brand: 'ودنوح AAMN للبرمجيات والكمبيوتر',
-        brandEnSmall: 'AAMN Software & Computer',
+        brandEnSmall: 'Wadnooh AAMN',
         heroHeadline: 'Code • Repair • Connect • Support',
         heroLead: 'منظومة رقمية عربية للتقنية: تعليم + بحث + ابتكار + وظائف — للطلاب والكليات والمهندسين والجهات الصناعية. ليست مجرد دورات.',
         ctaCourses: 'استكشف الدورات',
@@ -535,7 +535,7 @@ const I18N = {
         week: 'أسبوع'
   },
   en: {
-        brand: 'AAMN Software & Computer',
+        brand: 'Wadnooh AAMN',
         brandEnSmall: 'ودنوح AAMN للبرمجيات والكمبيوتر',
         heroHeadline: 'Code • Repair • Connect • Support',
         heroLead: 'An Arabic engineering digital ecosystem: education + research + innovation + jobs — for students, colleges, engineers, and industry. Not just courses.',
@@ -678,7 +678,7 @@ const I18N = {
         sourcesTitle: 'Knowledge source',
         aiLoading: 'Fetching information…',
         aiFailed: 'Could not reach the assistant — check that the server is running',
-        membershipTitle: 'AAMN Software & Computer membership',
+        membershipTitle: 'Wadnooh AAMN membership',
         membershipHint: 'Register free to unlock content — optional upgrades later.',
         subscribe: 'Subscribe',
         searchLabel: 'Search', searchPh: 'Course name or keyword',
@@ -888,8 +888,8 @@ function setLang(lang) {
     if (key && I18N[currentLang][key]) el.setAttribute('placeholder', I18N[currentLang][key]);
   });
   document.title = currentLang === 'en'
-    ? 'AAMN Software & Computer | ودنوح AAMN للبرمجيات والكمبيوتر'
-    : 'ودنوح AAMN للبرمجيات والكمبيوتر | AAMN Software & Computer';
+    ? 'Wadnooh AAMN | ودنوح AAMN للبرمجيات والكمبيوتر'
+    : 'ودنوح AAMN للبرمجيات والكمبيوتر | Wadnooh AAMN';
   if (catalogReady) {
     renderAllLanding();
     renderDepartmentChips();
