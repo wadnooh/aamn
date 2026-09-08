@@ -45,8 +45,14 @@
 
   const settings = read(settingsKey, null);
   if (settings) {
-    const brandAr = settings.brandAr || 'ودنوح';
-    const brandEn = settings.brandEn || 'AAMN';
+    const savedBrandEn = (settings.brandEn || 'AAMN').trim();
+    const brandEn = /AAMN/i.test(savedBrandEn) ? 'AAMN' : savedBrandEn;
+    const savedBrandAr = (settings.brandAr || 'ودنوح').trim();
+    const brandAr = /ود\s*نوح|ودنوح/.test(savedBrandAr) ? 'ودنوح' : savedBrandAr
+      .replace(new RegExp(brandEn, 'gi'), '')
+      .replace(/WAD\s*NOOH/gi, '')
+      .replace(/للبرمجيات والكمبيوتر/g, '')
+      .trim() || 'ودنوح';
     const fullName = `${brandAr} ${brandEn} للبرمجيات والكمبيوتر`;
 
     document.querySelectorAll('.logo-main').forEach((el) => {
@@ -88,7 +94,8 @@
       });
     }
     if (document.title.includes('ودنوح') || document.title.includes('AAMN')) {
-      document.title = document.title.replace(/ودنوح\s*AAMN\s*للبرمجيات والكمبيوتر|ودنوح|AAMN/g, fullName);
+      const pageName = document.title.split('-')[0].split('|')[0].trim();
+      document.title = pageName && !/ودنوح|AAMN/i.test(pageName) ? `${pageName} - ${fullName}` : fullName;
     }
   }
 

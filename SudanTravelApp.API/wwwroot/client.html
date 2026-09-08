@@ -10,9 +10,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #DC2626;
-      --primary-dark: #B91C1C;
-      --primary-light: #EF4444;
+      --primary: #D4881B;
+      --primary-dark: #A96510;
+      --primary-light: #F0A633;
       --secondary: #1A2744;
       --secondary-dark: #0f172a;
       --text: #1e293b;
@@ -20,7 +20,7 @@
       --bg: #f8fafc;
       --card: #ffffff;
       --border: #e2e8f0;
-      --radius: 14px;
+      --radius: 8px;
       --shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', 'Tajawal', sans-serif; }
@@ -57,7 +57,7 @@
       background: radial-gradient(circle at top, rgba(220,38,38,0.06) 0%, transparent 70%);
     }
     .auth-card {
-      background: var(--card); width: min(480px, 100%); border-radius: 20px;
+      background: var(--card); width: min(480px, 100%); border-radius: var(--radius);
       box-shadow: 0 20px 50px rgba(0,0,0,0.08); border: 1px solid var(--border); overflow: hidden;
     }
     .auth-tabs { display: flex; background: #f1f5f9; border-bottom: 1px solid var(--border); }
