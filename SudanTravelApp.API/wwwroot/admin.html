@@ -14,7 +14,7 @@
     .app{display:none;min-height:100vh;grid-template-columns:280px 1fr}.side{background:var(--navy);color:#fff;padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}.side-brand{display:flex;gap:12px;align-items:center;padding:8px 8px 18px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:14px}.side .mark{width:46px;height:46px}.side small{color:rgba(255,255,255,.55)}.nav-label{color:rgba(255,255,255,.38);font-size:.72rem;font-weight:900;padding:12px 10px 7px}.nav{width:100%;border:0;background:transparent;color:rgba(255,255,255,.76);padding:11px 12px;border-radius:var(--r);display:flex;gap:10px;align-items:center;text-align:start;font-weight:800;margin-bottom:4px}.nav:hover,.nav.active{background:rgba(255,255,255,.08);color:#fff}.nav.active{box-shadow:inset -4px 0 0 var(--gold)}
     .main{padding:22px clamp(14px,3vw,34px) 38px;min-width:0}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.top h2{font-size:clamp(1.35rem,3vw,1.9rem)}.top p{color:var(--muted);margin-top:3px}.actions{display:flex;gap:8px;flex-wrap:wrap}.panel{display:none}.panel.active{display:block;animation:fade .18s ease both}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
     .stats{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:12px;margin-bottom:16px}.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}.stat{padding:16px}.stat i{color:var(--gold);font-size:1.2rem;margin-bottom:9px}.stat strong{display:block;font-size:1.5rem;direction:ltr;text-align:right}.stat span{color:var(--muted);font-size:.85rem}.card{padding:18px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.toolbar input,.toolbar select{border:1px solid var(--line);border-radius:var(--r);padding:9px 10px;background:#fff;min-width:150px}
-    .table{overflow:auto;border:1px solid var(--line);border-radius:var(--r)}table{width:100%;border-collapse:collapse;min-width:900px;background:#fff}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}th{background:#f7f9fc;font-size:.84rem;position:sticky;top:0}td{font-size:.88rem;color:#344054}tr:last-child td{border-bottom:0}.badge{display:inline-flex;border-radius:999px;padding:3px 9px;font-size:.76rem;font-weight:900;background:#eef2f7}.sale{background:#e9f7ef;color:var(--green)}.consultation{background:#eef4ff;color:var(--blue)}.subscription{background:#fff3df;color:#a96b14}.support{background:#f4f3ff;color:#6941c6}.open{background:#fff7e6;color:#a15c00}.done,.available,.active-status{background:#e9f7ef;color:var(--green)}.cancelled,.unavailable,.hidden-status{background:#fdecec;color:var(--red)}.empty{text-align:center;color:var(--muted);padding:22px;background:#fff}.notice{background:#fff8ed;border:1px solid #f6d7a6;color:#7a4a0b;padding:12px 14px;border-radius:var(--r);line-height:1.8;margin-bottom:14px}
+    .table{overflow:auto;border:1px solid var(--line);border-radius:var(--r)}table{width:100%;border-collapse:collapse;min-width:980px;background:#fff}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}th{background:#f7f9fc;font-size:.84rem;position:sticky;top:0}td{font-size:.88rem;color:#344054}tr:last-child td{border-bottom:0}.badge{display:inline-flex;border-radius:999px;padding:3px 9px;font-size:.76rem;font-weight:900;background:#eef2f7}.sale{background:#e9f7ef;color:var(--green)}.consultation{background:#eef4ff;color:var(--blue)}.subscription{background:#fff3df;color:#a96b14}.support{background:#f4f3ff;color:#6941c6}.open{background:#fff7e6;color:#a15c00}.done,.available,.active-status,.paid{background:#e9f7ef;color:var(--green)}.pending-payment{background:#fff7e6;color:#a15c00}.cancelled,.unavailable,.hidden-status,.unpaid{background:#fdecec;color:var(--red)}.empty{text-align:center;color:var(--muted);padding:22px;background:#fff}.notice{background:#fff8ed;border:1px solid #f6d7a6;color:#7a4a0b;padding:12px 14px;border-radius:var(--r);line-height:1.8;margin-bottom:14px}
     .modal-bg{position:fixed;inset:0;background:rgba(16,26,44,.58);display:none;place-items:center;z-index:90;padding:18px}.modal{width:min(780px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:var(--r);padding:18px}.toast{position:fixed;left:18px;bottom:18px;background:var(--ink);color:#fff;padding:12px 14px;border-radius:var(--r);box-shadow:var(--shadow);display:none;z-index:100}.mobile{display:none}
     @media(max-width:1050px){.app{grid-template-columns:1fr}.side{position:fixed;inset:0 0 0 auto;width:min(300px,86vw);z-index:80;transform:translateX(110%);transition:.2s}.side.open{transform:none}.mobile{display:inline-flex}.stats,.grid2,.grid3{grid-template-columns:1fr}}
   </style>
@@ -101,7 +101,7 @@
         <div class="card">
           <div class="head"><h3>سجل الحجوزات والعمليات</h3><button class="btn btn-primary" id="addOp"><i class="fas fa-plus"></i> إضافة حجز</button></div>
           <div class="toolbar"><input id="search" placeholder="بحث..."><select id="typeFilter"><option value="all">كل الأنواع</option><option value="sale">حجز رحلة</option><option value="consultation">طلب صاحب بص</option><option value="subscription">اشتراك أعمال</option><option value="support">دعم ومتابعة</option><option value="other">أخرى</option></select><select id="statusFilter"><option value="all">كل الحالات</option><option value="open">مفتوحة</option><option value="done">مكتملة</option><option value="cancelled">ملغاة</option></select></div>
-          <div class="table"><table><thead><tr><th>التاريخ</th><th>النوع</th><th>العميل / صاحب البص</th><th>التواصل</th><th>المبلغ</th><th>الحالة</th><th>الرحلة / ملاحظات</th><th>إجراءات</th></tr></thead><tbody id="opsBody"></tbody></table></div>
+          <div class="table"><table><thead><tr><th>التاريخ</th><th>النوع</th><th>العميل / صاحب البص</th><th>التواصل</th><th>المبلغ</th><th>السداد</th><th>الحالة</th><th>الرحلة / ملاحظات</th><th>إجراءات</th></tr></thead><tbody id="opsBody"></tbody></table></div>
         </div>
       </section>
 
@@ -219,7 +219,7 @@
   </section>
 
   <!-- Modals -->
-  <div class="modal-bg" id="opModal"><div class="modal"><div class="head"><h3 id="opModalTitle">حجز أو عملية جديدة</h3><button class="btn btn-sm btn-light" id="closeOpModal"><i class="fas fa-times"></i></button></div><form id="opForm"><input type="hidden" name="id"><div class="grid2"><div class="field"><label>التاريخ</label><input name="date" type="date" required></div><div class="field"><label>النوع</label><select name="type"><option value="sale">حجز رحلة</option><option value="consultation">طلب صاحب بص</option><option value="subscription">اشتراك أعمال</option><option value="support">دعم ومتابعة</option><option value="other">أخرى</option></select></div><div class="field"><label>اسم العميل / صاحب البص</label><input name="customer" required></div><div class="field"><label>رقم الهاتف</label><input name="phone" dir="ltr"></div><div class="field"><label>البريد</label><input name="email" type="email" dir="ltr"></div><div class="field"><label>المبلغ</label><input name="amount" type="number" step="0.01" value="0"></div><div class="field"><label>الرحلة / البيان</label><input name="service" placeholder="مثال: الخرطوم إلى مدني - بص مميز"></div><div class="field"><label>الحالة</label><select name="status"><option value="open">مفتوحة</option><option value="done">مكتملة</option><option value="cancelled">ملغاة</option></select></div></div><div class="field"><label>ملاحظات</label><textarea name="notes"></textarea></div><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ الحجز أو العملية</button></form></div></div>
+  <div class="modal-bg" id="opModal"><div class="modal"><div class="head"><h3 id="opModalTitle">حجز أو عملية جديدة</h3><button class="btn btn-sm btn-light" id="closeOpModal"><i class="fas fa-times"></i></button></div><form id="opForm"><input type="hidden" name="id"><div class="grid2"><div class="field"><label>التاريخ</label><input name="date" type="date" required></div><div class="field"><label>النوع</label><select name="type"><option value="sale">حجز رحلة</option><option value="consultation">طلب صاحب بص</option><option value="subscription">اشتراك أعمال</option><option value="support">دعم ومتابعة</option><option value="other">أخرى</option></select></div><div class="field"><label>اسم العميل / صاحب البص</label><input name="customer" required></div><div class="field"><label>رقم الهاتف</label><input name="phone" dir="ltr"></div><div class="field"><label>البريد</label><input name="email" type="email" dir="ltr"></div><div class="field"><label>المبلغ</label><input name="amount" type="number" step="0.01" value="0"></div><div class="field"><label>حالة السداد</label><select name="paymentStatus"><option value="pending">بانتظار السداد</option><option value="paid">مدفوع ومؤكد</option><option value="unpaid">غير مدفوع</option></select></div><div class="field"><label>رقم / مرجع السداد</label><input name="paymentRef" placeholder="مثال: رقم التحويل أو المحفظة"></div><div class="field"><label>الرحلة / البيان</label><input name="service" placeholder="مثال: الخرطوم إلى مدني - بص مميز"></div><div class="field"><label>الحالة</label><select name="status"><option value="open">مفتوحة</option><option value="done">مكتملة</option><option value="cancelled">ملغاة</option></select></div></div><div class="field"><label>ملاحظات</label><textarea name="notes"></textarea></div><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ الحجز أو العملية</button></form></div></div>
 
   <div class="modal-bg" id="deptItemModal"><div class="modal"><div class="head"><h3 id="deptItemModalTitle">عنصر جديد</h3><button class="btn btn-sm btn-light" id="closeDeptItemModal"><i class="fas fa-times"></i></button></div><form id="deptItemForm"><input type="hidden" name="id"><div class="grid2"><div class="field"><label>اسم العنصر / الرحلة / الباقة</label><input name="name" required></div><div class="field"><label>السعر (جنيه سوداني)</label><input name="price" type="number" step="0.01" value="0"></div><div class="field"><label>الحالة</label><select name="status"><option value="available">متاح</option><option value="unavailable">غير متاح</option></select></div><div class="field"><label>رمز مميز / كود</label><input name="badge" placeholder="مثال: رحلة مميزة"></div></div><div class="field"><label>الوصف / التفاصيل</label><textarea name="desc"></textarea></div><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ العنصر</button></form></div></div>
 
@@ -255,7 +255,7 @@
 
   <div class="toast" id="toast"></div>
 
-    <script src="js/admin-site-config.js?v=202609111352"></script>
+    <script src="js/admin-site-config.js?v=202609111405"></script>
   <script>
   (function () {
     const K = {
@@ -289,9 +289,9 @@
         adminPassword: 'Admin@123456'
       },
       ops: [
-        { id: 'op_1', date: '2026-09-08', type: 'sale', customer: 'عميل تجريبي', phone: '0912345678', email: 'client@example.com', service: 'الخرطوم إلى مدني - مقعدين', amount: 17000, status: 'done', notes: 'تم تأكيد الحجز عبر المحفظة' },
-        { id: 'op_2', date: '2026-09-08', type: 'consultation', customer: 'شركة نقل النيل', phone: '0998765432', email: 'operator@example.com', service: 'تسجيل 3 بصات وخط الخرطوم - بورتسودان', amount: 0, status: 'open', notes: 'بانتظار توثيق بيانات البصات' },
-        { id: 'op_3', date: '2026-09-08', type: 'subscription', customer: 'صاحب بص مستقل', phone: '0922222222', email: '', service: 'اشتراك أعمال شهري', amount: 45000, status: 'open', notes: 'يتم التفعيل بعد السداد' }
+        { id: 'op_1', date: '2026-09-08', type: 'sale', customer: 'عميل تجريبي', phone: '0912345678', email: 'client@example.com', service: 'الخرطوم إلى مدني - مقعدين', amount: 17000, status: 'done', paymentStatus: 'paid', paymentRef: 'محفظة تجريبية', notes: 'تم تأكيد الحجز عبر المحفظة' },
+        { id: 'op_2', date: '2026-09-08', type: 'consultation', customer: 'شركة نقل النيل', phone: '0998765432', email: 'operator@example.com', service: 'تسجيل 3 بصات وخط الخرطوم - بورتسودان', amount: 0, status: 'open', paymentStatus: 'unpaid', paymentRef: '', notes: 'بانتظار توثيق بيانات البصات' },
+        { id: 'op_3', date: '2026-09-08', type: 'subscription', customer: 'صاحب بص مستقل', phone: '0922222222', email: '', service: 'اشتراك أعمال شهري', amount: 45000, status: 'open', paymentStatus: 'pending', paymentRef: '', notes: 'يتم التفعيل بعد السداد' }
       ],
       departments: {
         booking: { title: 'حجز التذاكر', icon: 'fas fa-ticket', order: 1, status: 'active', desc: 'بحث وحجز مقاعد البصات السفرية.' },
@@ -346,6 +346,33 @@
     function esc(v) { return String(v ?? '').replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s])); }
     function money(v) { return Number(v || 0).toLocaleString('ar-SA', { maximumFractionDigits: 2 }); }
     function toast(m) { const e = document.getElementById('toast'); if (!e) return; e.textContent = m; e.style.display = 'block'; clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => e.style.display = 'none', 2800); }
+    function paymentStatus(value, amount) {
+      if (value) return value;
+      return Number(amount || 0) > 0 ? 'pending' : 'unpaid';
+    }
+    function paymentLabel(value) {
+      return value === 'paid' ? 'مدفوع ومؤكد' : (value === 'unpaid' ? 'غير مدفوع' : 'بانتظار السداد');
+    }
+    function whatsAppNumber(value) {
+      return String(value || '').replace(/[^\d]/g, '');
+    }
+    function paymentMessage(o) {
+      return [
+        'إشعار سداد من منصة الاتحاد للخدمات',
+        'رقم العملية: ' + (o.id || ''),
+        'العميل / صاحب البص: ' + (o.customer || ''),
+        'البيان: ' + (o.service || ''),
+        'المبلغ: ' + money(o.amount) + ' جنيه',
+        'حالة السداد: ' + paymentLabel(paymentStatus(o.paymentStatus, o.amount)),
+        'مرجع السداد: ' + (o.paymentRef || 'لم يرفق بعد'),
+        'يرجى تأكيد السداد في لوحة التحكم بعد المراجعة.'
+      ].join('\n');
+    }
+    function openWhatsApp(number, message) {
+      const phone = whatsAppNumber(number || settings().whatsapp || D.settings.whatsapp);
+      if (!phone) { toast('أضف رقم الواتساب أولاً من تفاصيل الموقع'); return; }
+      window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+    }
 
     function applyUserPermissions() {
       const user = currentUser();
@@ -401,9 +428,13 @@
     }
 
     // Init storage defaults
+    const legacyOpsKey = 'aa' + 'mn_operations';
+    const legacyOps = get(legacyOpsKey, []);
     if (!localStorage.getItem(K.settings)) set(K.settings, D.settings);
     if (!localStorage.getItem(K.admin)) set(K.admin, D.admin);
-    if (!localStorage.getItem(K.ops)) set(K.ops, D.ops);
+    if (!localStorage.getItem(K.ops)) {
+      set(K.ops, Array.isArray(legacyOps) && legacyOps.length ? legacyOps.map(o => ({ paymentStatus: paymentStatus(o.paymentStatus, o.amount), paymentRef: o.paymentRef || '', ...o })) : D.ops);
+    }
     if (!localStorage.getItem(K.departments)) set(K.departments, D.departments);
     if (!localStorage.getItem(K.items)) set(K.items, D.items);
     if (!localStorage.getItem(K.staff)) set(K.staff, defaultStaff);
@@ -614,10 +645,14 @@
       if (status !== 'all') list = list.filter(o => o.status === status);
       if (search) list = list.filter(o => (o.customer && o.customer.toLowerCase().includes(search)) || (o.service && o.service.toLowerCase().includes(search)) || (o.phone && o.phone.includes(search)));
 
-      if (!list.length) { body.innerHTML = '<tr><td colspan="8" class="empty">لا توجد نتائج مطابقة</td></tr>'; return; }
+      if (!list.length) { body.innerHTML = '<tr><td colspan="9" class="empty">لا توجد نتائج مطابقة</td></tr>'; return; }
 
       const typeLabels = { sale: 'حجز رحلة', consultation: 'طلب صاحب بص', subscription: 'اشتراك أعمال', support: 'دعم ومتابعة', other: 'أخرى' };
-      body.innerHTML = list.map(o => '<tr><td>' + esc(o.date) + '</td><td><span class="badge ' + esc(o.type) + '">' + esc(typeLabels[o.type] || o.type) + '</span></td><td><strong>' + esc(o.customer) + '</strong></td><td dir="ltr" style="text-align:right;">' + esc(o.phone || o.email) + '</td><td><strong>' + money(o.amount) + ' جنيه</strong></td><td><span class="badge ' + esc(o.status) + '">' + esc(o.status === 'done' ? 'مكتملة' : (o.status === 'open' ? 'مفتوحة' : 'ملغاة')) + '</span></td><td>' + esc(o.notes || o.service) + '</td><td><button class="btn btn-sm btn-light" onclick="window.editOp(\'' + o.id + '\')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="window.delOp(\'' + o.id + '\')"><i class="fas fa-trash"></i></button></td></tr>').join('');
+      body.innerHTML = list.map(o => {
+        const pay = paymentStatus(o.paymentStatus, o.amount);
+        const paymentClass = pay === 'paid' ? 'paid' : (pay === 'unpaid' ? 'unpaid' : 'pending-payment');
+        return '<tr><td>' + esc(o.date) + '</td><td><span class="badge ' + esc(o.type) + '">' + esc(typeLabels[o.type] || o.type) + '</span></td><td><strong>' + esc(o.customer) + '</strong></td><td dir="ltr" style="text-align:right;">' + esc(o.phone || o.email) + '</td><td><strong>' + money(o.amount) + ' جنيه</strong></td><td><span class="badge ' + paymentClass + '">' + esc(paymentLabel(pay)) + '</span><br><small>' + esc(o.paymentRef || 'بدون مرجع') + '</small></td><td><span class="badge ' + esc(o.status) + '">' + esc(o.status === 'done' ? 'مكتملة' : (o.status === 'open' ? 'مفتوحة' : 'ملغاة')) + '</span></td><td>' + esc(o.notes || o.service) + '</td><td><button class="btn btn-sm btn-light" title="تعديل" onclick="window.editOp(\'' + o.id + '\')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-light" title="إرسال إشعار واتساب" onclick="window.sendPaymentWhatsApp(\'' + o.id + '\')"><i class="fab fa-whatsapp"></i></button> <button class="btn btn-sm btn-light" title="تأكيد السداد" onclick="window.confirmPayment(\'' + o.id + '\')"><i class="fas fa-wallet"></i></button> <button class="btn btn-sm btn-danger" title="حذف" onclick="window.delOp(\'' + o.id + '\')"><i class="fas fa-trash"></i></button></td></tr>';
+      }).join('');
     }
 
     function renderDeptItems() {
@@ -681,6 +716,8 @@
       e.preventDefault();
       const d = Object.fromEntries(new FormData(opForm));
       d.amount = Number(d.amount || 0);
+      d.paymentStatus = d.paymentStatus || paymentStatus('', d.amount);
+      d.paymentRef = d.paymentRef || '';
       const list = ops();
       if (d.id) {
         const idx = list.findIndex(x => x.id === d.id);
@@ -707,6 +744,23 @@
         saveOps(ops().filter(x => x.id !== opId));
         toast('تم حذف الحجز أو العملية');
       }
+    };
+
+    window.confirmPayment = function (opId) {
+      const list = ops();
+      const o = list.find(x => x.id === opId);
+      if (!o) return;
+      o.paymentStatus = 'paid';
+      o.status = 'done';
+      if (!o.paymentRef) o.paymentRef = 'تأكيد أدمن - ' + new Date().toLocaleString('ar-SA');
+      saveOps(list);
+      toast('تم تأكيد سداد المبلغ وتحديث حالة العملية');
+    };
+
+    window.sendPaymentWhatsApp = function (opId) {
+      const o = ops().find(x => x.id === opId);
+      if (!o) return;
+      openWhatsApp(o.phone || settings().whatsapp, paymentMessage(o));
     };
 
     // Dept Item Modal

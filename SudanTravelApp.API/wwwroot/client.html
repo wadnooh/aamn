@@ -443,6 +443,8 @@
         email: user ? user.email || '' : '',
         service: service,
         amount: 0,
+        paymentStatus: 'unpaid',
+        paymentRef: '',
         notes: details
       };
       ops.unshift(newOp);
@@ -475,11 +477,13 @@
           <div class="order-info">
             <h4>${op.service || 'حجز رحلة'}</h4>
             <span><i class="fas fa-calendar-alt"></i> ${op.date} · رقم الحجز/الطلب: ${op.id}</span>
+            <span><i class="fas fa-wallet"></i> السداد: ${op.paymentStatus === 'paid' ? 'مدفوع ومؤكد' : (op.paymentStatus === 'pending' ? 'بانتظار السداد' : 'غير مدفوع')}</span>
           </div>
           <div>
             <span class="badge-status ${op.status === 'done' ? 'status-completed' : 'status-progress'}">
               <i class="fas fa-circle" style="font-size:0.5rem;"></i> ${op.status === 'done' ? 'مكتمل' : 'قيد المتابعة'}
             </span>
+            <a class="btn-site" style="padding:7px 10px; font-size:0.78rem; margin-top:6px;" target="_blank" rel="noopener noreferrer" href="https://wa.me/966500000000?text=${encodeURIComponent('إشعار سداد محفظة من منصة الاتحاد للخدمات\nرقم الطلب: ' + op.id + '\nالبيان: ' + (op.service || 'حجز رحلة') + '\nالعميل: ' + (op.customer || '') + '\nيرجى تأكيد السداد والمتابعة.')}"><i class="fab fa-whatsapp"></i> إشعار السداد</a>
           </div>
         </div>
       `).join('');

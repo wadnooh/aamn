@@ -1051,15 +1051,15 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="js/admin-site-config.js?v=202609111352"></script>
-    <script src="js/main.js?v=202609111352"></script>
+    <script src="js/admin-site-config.js?v=202609111405"></script>
+    <script src="js/main.js?v=202609111405"></script>
 
     <!-- In-Page Portal Controller Script -->
     <script>
     (function () {
         const MEMBER_DATA_KEY = 'الاتحاد للخدمات_member_data';
         const STAFF_DATA_KEY = 'الاتحاد للخدمات_staff_session';
-        const OPS_KEY = 'aamn_operations';
+        const OPS_KEY = 'aamn_bus_operations_v2';
 
         // Elements
         const tabClient = document.getElementById('inpageTabClient');
@@ -1188,6 +1188,8 @@
                 email: user.email || '',
                 service: service,
                 amount: 0,
+                paymentStatus: 'unpaid',
+                paymentRef: '',
                 notes: notes
             };
             ops.unshift(newOp);
@@ -1217,10 +1219,14 @@
                     <div>
                         <strong style="display:block; font-size:0.95rem; color:#1e293b;">${o.service || 'طلب خدمة'}</strong>
                         <span style="font-size:0.8rem; color:#64748b;"><i class="fas fa-calendar-alt"></i> ${o.date} · رقم: ${o.id}</span>
+                        <span style="display:block; font-size:0.78rem; color:#64748b; margin-top:3px;"><i class="fas fa-wallet"></i> السداد: ${o.paymentStatus === 'paid' ? 'مدفوع ومؤكد' : (o.paymentStatus === 'pending' ? 'بانتظار السداد' : 'غير مدفوع')}</span>
                     </div>
-                    <span style="background:${o.status === 'done' ? '#dcfce7' : '#fef3c7'}; color:${o.status === 'done' ? '#15803d' : '#92400e'}; padding:4px 10px; border-radius:20px; font-weight:800; font-size:0.78rem;">
-                        ${o.status === 'done' ? 'مكتمل' : 'قيد المتابعة'}
-                    </span>
+                    <div style="display:grid; gap:6px; justify-items:end;">
+                        <span style="background:${o.status === 'done' ? '#dcfce7' : '#fef3c7'}; color:${o.status === 'done' ? '#15803d' : '#92400e'}; padding:4px 10px; border-radius:20px; font-weight:800; font-size:0.78rem;">
+                            ${o.status === 'done' ? 'مكتمل' : 'قيد المتابعة'}
+                        </span>
+                        <a target="_blank" rel="noopener noreferrer" href="https://wa.me/966500000000?text=${encodeURIComponent('إشعار سداد محفظة من منصة الاتحاد للخدمات\nرقم الطلب: ' + o.id + '\nالبيان: ' + (o.service || 'طلب خدمة') + '\nالعميل: ' + (o.customer || '') + '\nيرجى تأكيد السداد والمتابعة.')}" style="background:#dcfce7; color:#15803d; padding:4px 10px; border-radius:20px; font-weight:800; font-size:0.76rem;"><i class="fab fa-whatsapp"></i> إشعار السداد</a>
+                    </div>
                 </div>
             `).join('');
         }
@@ -1275,9 +1281,11 @@
                         <div style="color:#64748b; font-size:0.82rem; margin-top:2px;">
                             <span><i class="fas fa-phone"></i> ${o.phone || 'غير مسجل'}</span> | <span><i class="fas fa-envelope"></i> ${o.email || 'غير مسجل'}</span>
                         </div>
+                        <div style="color:#64748b; font-size:0.82rem; margin-top:2px;"><i class="fas fa-wallet"></i> السداد: ${o.paymentStatus === 'paid' ? 'مدفوع ومؤكد' : (o.paymentStatus === 'pending' ? 'بانتظار السداد' : 'غير مدفوع')} ${o.paymentRef ? '· ' + o.paymentRef : ''}</div>
                         ${o.notes ? `<div style="color:#475569; font-size:0.84rem; margin-top:4px; background:#f1f5f9; padding:4px 8px; border-radius:6px;">${o.notes}</div>` : ''}
                     </div>
                     <div style="display:flex; align-items:center; gap:8px;">
+                        <a target="_blank" rel="noopener noreferrer" href="https://wa.me/966500000000?text=${encodeURIComponent('إشعار سداد محفظة من منصة الاتحاد للخدمات\nرقم الطلب: ' + o.id + '\nالبيان: ' + (o.service || 'طلب خدمة') + '\nالعميل: ' + (o.customer || '') + '\nيرجى تأكيد السداد والمتابعة.')}" style="background:#dcfce7; color:#15803d; border:0; padding:6px 12px; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer;"><i class="fab fa-whatsapp"></i> واتساب</a>
                         <button type="button" onclick="window.updateInpageOpStatus('${o.id}')" style="background:#e0f2fe; color:#0369a1; border:0; padding:6px 12px; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer;">
                             ${o.status === 'done' ? '✓ مكتمل' : '⏳ قيد المتابعة'} (تغيير)
                         </button>
@@ -1291,6 +1299,10 @@
             const item = ops.find(o => o.id === id);
             if (item) {
                 item.status = item.status === 'done' ? 'open' : 'done';
+                item.paymentStatus = item.status === 'done' ? 'paid' : (item.paymentStatus || 'pending');
+                if (item.status === 'done' && !item.paymentRef) {
+                    item.paymentRef = 'تأكيد موظف - ' + new Date().toLocaleString('ar-SA');
+                }
                 localStorage.setItem(OPS_KEY, JSON.stringify(ops));
                 renderStaffOps();
                 renderClientOrders();

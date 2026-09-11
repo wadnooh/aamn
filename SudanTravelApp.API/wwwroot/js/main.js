@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const saveLocalInquiry = () => {
                 try {
-                    const key = 'aamn_operations';
+                    const key = 'aamn_bus_operations_v2';
                     const current = JSON.parse(localStorage.getItem(key) || '[]');
                     current.unshift({
                         id: `op_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`,
@@ -328,6 +328,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         email,
                         service: service || 'رسالة تواصل',
                         amount: 0,
+                        paymentStatus: 'unpaid',
+                        paymentRef: '',
                         followUp: '',
                         notes: message
                     });
@@ -463,6 +465,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <a class="owner-card" href="contact.html">
                     <i class="fas fa-wallet"></i>
                     <span>الدفع عبر المحفظة مع حفظ المبلغ حتى تأكيد الرحلة وتسوية حق صاحب البص.</span>
+                </a>
+                <a class="owner-card" href="https://wa.me/966500000000?text=${encodeURIComponent(`طلب سداد محفظة من منصة الاتحاد للخدمات\nالمسار: ${from} إلى ${to}\nالتاريخ: ${date}\nعدد الركاب: ${passengers}\nيرجى إرسال بيانات السداد وتأكيد الحجز.`)}" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>إرسال إشعار واتساب لتأكيد سداد المحفظة.</span>
                 </a>
             `;
         });

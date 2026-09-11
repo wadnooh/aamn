@@ -296,8 +296,8 @@
             </div>
         </div>
     </footer>
-    <script src="js/admin-site-config.js?v=202609111352"></script>
-    <script src="js/main.js?v=202609111352"></script>
+    <script src="js/admin-site-config.js?v=202609111405"></script>
+    <script src="js/main.js?v=202609111405"></script>
 
     <!-- Guaranteed Interactive Contact Form Engine -->
     <script>
@@ -349,7 +349,7 @@
 
             // 1. Save locally to Operations Queue (for Admin/Staff live tracking)
             try {
-                const key = 'aamn_operations';
+                const key = 'aamn_bus_operations_v2';
                 const current = JSON.parse(localStorage.getItem(key) || '[]');
                 current.unshift({
                     id: refId,
@@ -361,6 +361,8 @@
                     email: email,
                     service: service,
                     amount: 0,
+                    paymentStatus: 'unpaid',
+                    paymentRef: '',
                     notes: message
                 });
                 localStorage.setItem(key, JSON.stringify(current));
