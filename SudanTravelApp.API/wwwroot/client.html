@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بوابة الركاب والأعمال - الاتحاد للخدمات</title>
+  <title>دخول المستخدمين - الاتحاد للخدمات</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -166,13 +166,14 @@
     <div class="client-brand">
       <div class="client-logo-badge">الاتحاد</div>
       <div>
-        <h1>بوابة الركاب وأصحاب البصات</h1>
+        <h1>دخول المستخدمين والركاب</h1>
         <small style="color:var(--text-muted);">الاتحاد للخدمات</small>
       </div>
     </div>
     <div class="client-nav-links">
       <a href="index.html" class="btn-site"><i class="fas fa-home"></i> الرئيسية</a>
-      <a href="admin.html" class="btn-site"><i class="fas fa-id-badge"></i> بوابة الموظفين</a>
+      <a href="operator.html" class="btn-site"><i class="fas fa-bus"></i> أصحاب البصات</a>
+      <a href="admin.html" class="btn-site"><i class="fas fa-id-badge"></i> الأدمن</a>
       <button id="btnTopLogout" class="btn-site btn-logout" style="display:none;"><i class="fas fa-sign-out-alt"></i> خروج</button>
     </div>
   </nav>
@@ -182,7 +183,7 @@
     <div class="auth-card">
       <div class="auth-tabs">
         <button class="auth-tab active" id="tabLogin">تسجيل الدخول</button>
-        <button class="auth-tab" id="tabRegister">حساب راكب / صاحب بص</button>
+        <button class="auth-tab" id="tabRegister">حساب مستخدم جديد</button>
       </div>
       <div class="auth-body">
         <!-- Login Form -->
@@ -204,17 +205,17 @@
           <button type="submit" class="btn-submit"><i class="fas fa-sign-in-alt"></i> دخول لحساب العميل</button>
           <div style="display:flex; justify-content:space-between; margin-top:14px; font-size:0.86rem;">
             <a href="index.html" style="color:var(--primary); font-weight:700;"><i class="fas fa-home"></i> العودة للرئيسية</a>
-            <a href="admin.html" style="color:var(--secondary); font-weight:700;"><i class="fas fa-id-badge"></i> بوابة الموظفين</a>
+            <a href="operator.html" style="color:var(--secondary); font-weight:700;"><i class="fas fa-bus"></i> دخول أصحاب البصات</a>
           </div>
         </form>
 
         <!-- Register Form -->
         <form id="formClientRegister" style="display:none;">
           <div class="form-group">
-            <label>الاسم الكامل / اسم الشركة *</label>
+            <label>الاسم الكامل *</label>
             <div class="input-box">
               <i class="fas fa-user"></i>
-              <input type="text" id="regName" placeholder="أدخل اسمك أو اسم المؤسسة" required>
+              <input type="text" id="regName" placeholder="أدخل اسمك الكامل" required>
             </div>
           </div>
           <div class="form-group">
@@ -232,14 +233,11 @@
             </div>
           </div>
           <div class="form-group">
-            <label>نوع الحساب أو الاشتراك</label>
+            <label>نوع الحساب</label>
             <div class="input-box">
               <i class="fas fa-gem"></i>
               <select id="regTier">
-                <option value="Passenger">راكب - حجز ومتابعة الرحلات</option>
-                <option value="BusOwner">صاحب بص - تسجيل بص واحد</option>
-                <option value="Company">شركة نقل - عدة بصات وخطوط</option>
-                <option value="premium">اشتراك أعمال مميز</option>
+                <option value="Passenger">مستخدم / راكب</option>
               </select>
             </div>
           </div>
@@ -292,7 +290,7 @@
         <!-- New Request Modal / Box -->
         <div class="dash-card" id="boxNewRequest" style="display:none;">
           <div class="dash-card-header">
-            <h3><i class="fas fa-bus"></i> تقديم حجز أو طلب أعمال</h3>
+            <h3><i class="fas fa-ticket"></i> تقديم حجز أو طلب مستخدم</h3>
           </div>
           <form id="formNewRequest">
             <div class="form-group">
@@ -302,9 +300,6 @@
                 <select id="reqService" required>
                   <option value="حجز رحلة">حجز رحلة</option>
                   <option value="تعديل أو إلغاء حجز">تعديل أو إلغاء حجز</option>
-                  <option value="تسجيل صاحب بص">تسجيل صاحب بص</option>
-                  <option value="إضافة بص">إضافة بص للنشر</option>
-                  <option value="اشتراك أعمال">اشتراك أعمال لصاحب بص</option>
                   <option value="المحفظة والضمان">المحفظة والضمان</option>
                 </select>
               </div>
@@ -313,7 +308,7 @@
               <label>تفاصيل الرحلة أو بيانات البص</label>
               <div class="input-box">
                 <i class="fas fa-comment"></i>
-                <textarea id="reqDetails" rows="4" placeholder="اكتب خط الرحلة، التاريخ، عدد الركاب، أو بيانات البص والشركة..." required></textarea>
+                <textarea id="reqDetails" rows="4" placeholder="اكتب خط الرحلة، التاريخ، وعدد الركاب..." required></textarea>
               </div>
             </div>
             <div class="form-group">
@@ -364,7 +359,7 @@
           <ul style="list-style:none; line-height:2; font-size:0.9rem; color:var(--text-muted);">
             <li><i class="fas fa-check" style="color:var(--primary);"></i> متابعة الحجوزات والرحلات</li>
             <li><i class="fas fa-check" style="color:var(--primary);"></i> محفظة لحفظ المدفوعات والرصيد</li>
-            <li><i class="fas fa-check" style="color:var(--primary);"></i> تسجيل بصات وخطوط لأصحاب الأعمال</li>
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> طلب سداد المحفظة وتأكيد الرحلات</li>
             <li><i class="fas fa-check" style="color:var(--primary);"></i> تقارير حجوزات وتسويات شهرية</li>
           </ul>
         </div>

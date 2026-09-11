@@ -343,8 +343,8 @@
             </div>
 
             <div style="text-align: center;">
-                <a href="admin.html" class="btn-primary" style="background: linear-gradient(135deg, #0284c7, #0369a1); border: 0; padding: 14px 36px; font-size: 1.1rem; font-weight: 900; box-shadow: 0 8px 25px rgba(2, 132, 199, 0.4); display: inline-flex; align-items: center; gap: 10px; border-radius: 12px; color: #fff;">
-                    <i class="fas fa-chart-line" style="font-size: 1.3rem;"></i> دخول بوابة الأعمال ومتابعة الرحلات <i class="fas fa-arrow-left"></i>
+                <a href="operator.html" class="btn-primary" style="background: linear-gradient(135deg, #0284c7, #0369a1); border: 0; padding: 14px 36px; font-size: 1.1rem; font-weight: 900; box-shadow: 0 8px 25px rgba(2, 132, 199, 0.4); display: inline-flex; align-items: center; gap: 10px; border-radius: 12px; color: #fff;">
+                    <i class="fas fa-chart-line" style="font-size: 1.3rem;"></i> دخول أصحاب البصات والشركات <i class="fas fa-arrow-left"></i>
                 </a>
             </div>
         </div>
@@ -362,8 +362,8 @@
                 <div class="section-tag" style="background: rgba(220,38,38,0.2); color: #f87171; border: 1px solid rgba(220,38,38,0.3); display: inline-flex; align-items: center; gap: 8px; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.88rem; margin-bottom: 12px;">
                     <i class="fas fa-shield-halved"></i> المنظومة الرقمية الموحدة الاتحاد للخدمات
                 </div>
-                        <h2 class="section-title" style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; color: #ffffff; margin-bottom: 12px; letter-spacing: 0;">بوابة العملاء والفريق</h2>
-                <p class="section-sub" style="color: #94a3b8; font-size: 1.05rem; max-width: 680px; margin: 0 auto; line-height: 1.7;">منظومة تفاعلية لمتابعة الحجوزات، تسجيل البصات، نشر الرحلات، إدارة المحافظ، وتفعيل اشتراكات أصحاب الأعمال.</p>
+                        <h2 class="section-title" style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; color: #ffffff; margin-bottom: 12px; letter-spacing: 0;">بوابات الدخول المنفصلة</h2>
+                <p class="section-sub" style="color: #94a3b8; font-size: 1.05rem; max-width: 680px; margin: 0 auto; line-height: 1.7;">لكل جهة بوابة مستقلة: المستخدم يحجز ويتابع محفظته، صاحب البص يدير بياناته واشتراكه، والأدمن يدير المنصة كاملة.</p>
             </div>
 
             <!-- Tiers Overview Banner (Interactive Perks) -->
@@ -392,16 +392,19 @@
 
             <!-- In-Page Role Switcher Tabs -->
             <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap;">
-                <button type="button" id="inpageTabClient" style="padding: 13px 32px; border-radius: 12px; font-weight: 800; font-size: 1rem; background: #dc2626; color: #fff; border: 2px solid #dc2626; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 8px 24px rgba(220,38,38,0.35); cursor: pointer; transition: all 0.2s;">
-                    <i class="fas fa-users-viewfinder"></i> بوابة العملاء والأعضاء
-                </button>
-                <button type="button" id="inpageTabStaff" style="padding: 13px 32px; border-radius: 12px; font-weight: 800; font-size: 1rem; background: rgba(255,255,255,0.06); color: #e2e8f0; border: 2px solid rgba(255,255,255,0.12); display: inline-flex; align-items: center; gap: 10px; cursor: pointer; transition: all 0.2s;">
-                    <i class="fas fa-id-badge"></i> بوابة طاقم العمل والإدارة
-                </button>
+                <a href="client.html" style="padding: 13px 32px; border-radius: 12px; font-weight: 800; font-size: 1rem; background: #dc2626; color: #fff; border: 2px solid #dc2626; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 8px 24px rgba(220,38,38,0.35); cursor: pointer; transition: all 0.2s;">
+                    <i class="fas fa-users-viewfinder"></i> دخول المستخدمين
+                </a>
+                <a href="operator.html" style="padding: 13px 32px; border-radius: 12px; font-weight: 800; font-size: 1rem; background: #0284c7; color: #fff; border: 2px solid #0284c7; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 8px 24px rgba(2,132,199,0.28); cursor: pointer; transition: all 0.2s;">
+                    <i class="fas fa-bus"></i> دخول أصحاب البصات
+                </a>
+                <a href="admin.html" style="padding: 13px 32px; border-radius: 12px; font-weight: 800; font-size: 1rem; background: rgba(255,255,255,0.06); color: #e2e8f0; border: 2px solid rgba(255,255,255,0.12); display: inline-flex; align-items: center; gap: 10px; cursor: pointer; transition: all 0.2s;">
+                    <i class="fas fa-user-shield"></i> دخول الأدمن
+                </a>
             </div>
 
             <!-- Client Portal Container (In-Page) -->
-            <div id="inpageClientPanel" style="max-width: 980px; margin: 0 auto; background: #ffffff; color: #1e293b; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); padding: clamp(20px, 4vw, 36px); border: 1px solid rgba(255,255,255,0.15);">
+            <div id="inpageClientPanel" style="display: none; max-width: 980px; margin: 0 auto; background: #ffffff; color: #1e293b; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); padding: clamp(20px, 4vw, 36px); border: 1px solid rgba(255,255,255,0.15);">
                 <!-- Client Logged Out View -->
                 <div id="inpageClientLoggedOut">
                     <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 28px; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px;">
@@ -1055,8 +1058,8 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="js/admin-site-config.js?v=202609111430"></script>
-    <script src="js/main.js?v=202609111430"></script>
+    <script src="js/admin-site-config.js?v=202609112150"></script>
+    <script src="js/main.js?v=202609112150"></script>
 
     <!-- In-Page Portal Controller Script -->
     <script>

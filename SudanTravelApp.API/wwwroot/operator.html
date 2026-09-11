@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>دخول المستخدمين - الاتحاد للخدمات</title>
+  <title>دخول أصحاب البصات - الاتحاد للخدمات</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -166,13 +166,13 @@
     <div class="client-brand">
       <div class="client-logo-badge">الاتحاد</div>
       <div>
-        <h1>دخول المستخدمين والركاب</h1>
+        <h1>دخول أصحاب البصات والشركات</h1>
         <small style="color:var(--text-muted);">الاتحاد للخدمات</small>
       </div>
     </div>
     <div class="client-nav-links">
       <a href="index.html" class="btn-site"><i class="fas fa-home"></i> الرئيسية</a>
-      <a href="operator.html" class="btn-site"><i class="fas fa-bus"></i> أصحاب البصات</a>
+      <a href="client.html" class="btn-site"><i class="fas fa-users"></i> المستخدمين</a>
       <a href="admin.html" class="btn-site"><i class="fas fa-id-badge"></i> الأدمن</a>
       <button id="btnTopLogout" class="btn-site btn-logout" style="display:none;"><i class="fas fa-sign-out-alt"></i> خروج</button>
     </div>
@@ -183,7 +183,7 @@
     <div class="auth-card">
       <div class="auth-tabs">
         <button class="auth-tab active" id="tabLogin">تسجيل الدخول</button>
-        <button class="auth-tab" id="tabRegister">حساب مستخدم جديد</button>
+        <button class="auth-tab" id="tabRegister">حساب صاحب بص أو شركة</button>
       </div>
       <div class="auth-body">
         <!-- Login Form -->
@@ -202,20 +202,20 @@
               <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" required>
             </div>
           </div>
-          <button type="submit" class="btn-submit"><i class="fas fa-sign-in-alt"></i> دخول لحساب العميل</button>
+          <button type="submit" class="btn-submit"><i class="fas fa-sign-in-alt"></i> دخول حساب صاحب البص</button>
           <div style="display:flex; justify-content:space-between; margin-top:14px; font-size:0.86rem;">
             <a href="index.html" style="color:var(--primary); font-weight:700;"><i class="fas fa-home"></i> العودة للرئيسية</a>
-            <a href="operator.html" style="color:var(--secondary); font-weight:700;"><i class="fas fa-bus"></i> دخول أصحاب البصات</a>
+            <a href="client.html" style="color:var(--secondary); font-weight:700;"><i class="fas fa-users"></i> دخول المستخدمين</a>
           </div>
         </form>
 
         <!-- Register Form -->
         <form id="formClientRegister" style="display:none;">
           <div class="form-group">
-            <label>الاسم الكامل *</label>
+            <label>الاسم الكامل / اسم الشركة *</label>
             <div class="input-box">
               <i class="fas fa-user"></i>
-              <input type="text" id="regName" placeholder="أدخل اسمك الكامل" required>
+              <input type="text" id="regName" placeholder="أدخل اسمك أو اسم الشركة" required>
             </div>
           </div>
           <div class="form-group">
@@ -237,7 +237,7 @@
             <div class="input-box">
               <i class="fas fa-gem"></i>
               <select id="regTier">
-                <option value="Passenger">مستخدم / راكب</option>
+                <option value="BusOwner">صاحب بص فردي</option><option value="Company">شركة / مجموعة بصات</option><option value="premium">شركة نقل مميزة</option>
               </select>
             </div>
           </div>
@@ -264,14 +264,14 @@
       </div>
       <div class="client-badge-box">
         <strong id="userTierDisplay">العضوية الذهبية</strong>
-        <span id="userNumberDisplay">رقم العميل: #MEM-2025</span>
+        <span id="userNumberDisplay">رقم الحساب: #MEM-2025</span>
       </div>
     </div>
 
     <div class="wallet-grid">
       <div class="wallet-box"><i class="fas fa-wallet"></i><strong id="walletPaid">0 جنيه</strong><span>رصيد مؤكد</span></div>
       <div class="wallet-box"><i class="fas fa-hourglass-half"></i><strong id="walletPending">0 جنيه</strong><span>بانتظار السداد</span></div>
-      <div class="wallet-box"><i class="fas fa-id-card"></i><strong id="walletType">عميل / راكب</strong><span>نوع المحفظة</span></div>
+      <div class="wallet-box"><i class="fas fa-id-card"></i><strong id="walletType">صاحب بص فردي</strong><span>نوع المحفظة</span></div>
     </div>
 
     <div class="dash-grid">
@@ -279,8 +279,8 @@
       <div>
         <div class="dash-card">
           <div class="dash-card-header">
-            <h3><i class="fas fa-list-check"></i> حجوزاتي وطلباتي الحالية</h3>
-            <button class="btn-site" id="btnOpenNewReq"><i class="fas fa-plus"></i> حجز أو طلب جديد</button>
+            <h3><i class="fas fa-list-check"></i> طلبات البصات والاشتراكات</h3>
+            <button class="btn-site" id="btnOpenNewReq"><i class="fas fa-plus"></i> تسجيل بص أو اشتراك</button>
           </div>
           <div id="ordersList">
             <!-- Dynamically Loaded -->
@@ -290,7 +290,7 @@
         <!-- New Request Modal / Box -->
         <div class="dash-card" id="boxNewRequest" style="display:none;">
           <div class="dash-card-header">
-            <h3><i class="fas fa-ticket"></i> تقديم حجز أو طلب مستخدم</h3>
+            <h3><i class="fas fa-ticket"></i> تقديم طلب صاحب بص أو شركة</h3>
           </div>
           <form id="formNewRequest">
             <div class="form-group">
@@ -298,8 +298,8 @@
               <div class="input-box">
                 <i class="fas fa-ticket"></i>
                 <select id="reqService" required>
-                  <option value="حجز رحلة">حجز رحلة</option>
-                  <option value="تعديل أو إلغاء حجز">تعديل أو إلغاء حجز</option>
+                  <option value="تسجيل صاحب بص">تسجيل صاحب بص</option>
+                  <option value="إضافة بص">إضافة بص للنشر</option><option value="اشتراك أعمال">اشتراك أعمال لصاحب بص</option>
                   <option value="المحفظة والضمان">المحفظة والضمان</option>
                 </select>
               </div>
@@ -308,7 +308,7 @@
               <label>تفاصيل الرحلة أو بيانات البص</label>
               <div class="input-box">
                 <i class="fas fa-comment"></i>
-                <textarea id="reqDetails" rows="4" placeholder="اكتب خط الرحلة، التاريخ، وعدد الركاب..." required></textarea>
+                <textarea id="reqDetails" rows="4" placeholder="اكتب بيانات البص، عدد المقاعد، خطوط التشغيل، أو بيانات الشركة..." required></textarea>
               </div>
             </div>
             <div class="form-group">
@@ -357,10 +357,10 @@
             <h3><i class="fas fa-shield-alt"></i> مزايا حسابك</h3>
           </div>
           <ul style="list-style:none; line-height:2; font-size:0.9rem; color:var(--text-muted);">
-            <li><i class="fas fa-check" style="color:var(--primary);"></i> متابعة الحجوزات والرحلات</li>
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> متابعة البصات والرحلات المنشورة</li>
             <li><i class="fas fa-check" style="color:var(--primary);"></i> محفظة لحفظ المدفوعات والرصيد</li>
-            <li><i class="fas fa-check" style="color:var(--primary);"></i> طلب سداد المحفظة وتأكيد الرحلات</li>
-            <li><i class="fas fa-check" style="color:var(--primary);"></i> تقارير حجوزات وتسويات شهرية</li>
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> محفظة أعمال لصاحب البص أو الشركة</li>
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> تقارير حجوزات وتسويات واشتراكات</li>
           </ul>
         </div>
       </div>
@@ -368,7 +368,7 @@
   </main>
 
   <script>
-    const STORAGE_KEY = 'aamn_bus_member_data_v2';
+    const STORAGE_KEY = 'aamn_bus_operator_data_v2';
     const OPS_KEY = 'aamn_bus_operations_v2';
 
     function getUser() {
@@ -390,7 +390,7 @@
       return 'customer';
     }
     function walletKindLabel(value) {
-      return value === 'company' ? 'شركة / مجموعة بصات' : (value === 'operator' ? 'صاحب بص فردي' : 'عميل / راكب');
+      return value === 'company' ? 'شركة / مجموعة بصات' : (value === 'operator' ? 'صاحب بص فردي' : 'صاحب بص فردي');
     }
 
     // Tabs
@@ -416,8 +416,8 @@
         id: '#MEM-' + Math.floor(1000 + Math.random()*9000),
         fullName: email.split('@')[0],
         email: email,
-        tier: 'راكب مميز',
-        accountKind: 'customer',
+        tier: 'صاحب بص فردي',
+        accountKind: 'operator',
         joinedAt: new Date().toISOString()
       };
       setUser(user);
@@ -467,8 +467,8 @@
         type: 'consultation',
         status: 'open',
         date: new Date().toISOString().slice(0, 10),
-        accountKind: user ? (user.accountKind || 'customer') : 'customer',
-        customer: user ? user.fullName : 'عميل',
+        accountKind: user ? (user.accountKind || 'operator') : 'operator',
+        customer: user ? user.fullName : 'صاحب بص',
         phone: user ? user.phone || '' : '',
         email: user ? user.email || '' : '',
         service: service,
@@ -497,7 +497,7 @@
         container.innerHTML = `
           <div style="text-align:center; padding:30px; color:var(--text-muted);">
             <i class="fas fa-inbox" style="font-size:2.5rem; margin-bottom:10px; color:#cbd5e1;"></i>
-            <p>لا توجد حجوزات أو طلبات سابقة حتى الآن. يمكنك تقديم حجز جديد الآن!</p>
+            <p>لا توجد طلبات بصات أو اشتراكات حتى الآن. يمكنك تسجيل بص أو طلب اشتراك جديد.</p>
           </div>
         `;
         return;
@@ -506,7 +506,7 @@
       container.innerHTML = userOps.map(op => `
         <div class="order-item">
           <div class="order-info">
-            <h4>${op.service || 'حجز رحلة'}</h4>
+            <h4>${op.service || 'طلب صاحب بص'}</h4>
             <span><i class="fas fa-calendar-alt"></i> ${op.date} · رقم الحجز/الطلب: ${op.id}</span>
             <span><i class="fas fa-wallet"></i> السداد: ${op.paymentStatus === 'paid' ? 'مدفوع ومؤكد' : (op.paymentStatus === 'pending' ? 'بانتظار السداد' : 'غير مدفوع')}</span>
           </div>
@@ -514,7 +514,7 @@
             <span class="badge-status ${op.status === 'done' ? 'status-completed' : 'status-progress'}">
               <i class="fas fa-circle" style="font-size:0.5rem;"></i> ${op.status === 'done' ? 'مكتمل' : 'قيد المتابعة'}
             </span>
-            <a class="btn-site" style="padding:7px 10px; font-size:0.78rem; margin-top:6px;" target="_blank" rel="noopener noreferrer" href="https://wa.me/966500000000?text=${encodeURIComponent('إشعار سداد محفظة من منصة الاتحاد للخدمات\nرقم الطلب: ' + op.id + '\nالبيان: ' + (op.service || 'حجز رحلة') + '\nالعميل: ' + (op.customer || '') + '\nيرجى تأكيد السداد والمتابعة.')}"><i class="fab fa-whatsapp"></i> إشعار السداد</a>
+            <a class="btn-site" style="padding:7px 10px; font-size:0.78rem; margin-top:6px;" target="_blank" rel="noopener noreferrer" href="https://wa.me/966500000000?text=${encodeURIComponent('إشعار سداد محفظة من منصة الاتحاد للخدمات\nرقم الطلب: ' + op.id + '\nالبيان: ' + (op.service || 'طلب صاحب بص') + '\nصاحب البص / الشركة: ' + (op.customer || '') + '\nيرجى تأكيد السداد والمتابعة.')}"><i class="fab fa-whatsapp"></i> إشعار السداد</a>
           </div>
         </div>
       `).join('');
@@ -525,7 +525,7 @@
       const pending = userOps.filter(o => o.paymentStatus === 'pending').reduce((sum, o) => sum + Number(o.amount || 0), 0);
       document.getElementById('walletPaid').textContent = money(paid);
       document.getElementById('walletPending').textContent = money(pending);
-      document.getElementById('walletType').textContent = walletKindLabel(user?.accountKind || 'customer');
+      document.getElementById('walletType').textContent = walletKindLabel(user?.accountKind || 'operator');
     }
 
     function render() {
@@ -542,7 +542,7 @@
         document.getElementById('userNameDisplay').textContent = 'مرحباً، ' + user.fullName;
         document.getElementById('userEmailDisplay').textContent = user.email;
         document.getElementById('userTierDisplay').textContent = user.tier || 'عضو مميز';
-        document.getElementById('userNumberDisplay').textContent = 'رقم العميل: ' + (user.id || '#MEM-2025');
+        document.getElementById('userNumberDisplay').textContent = 'رقم حساب الأعمال: ' + (user.id || '#MEM-2025');
 
         renderOrders();
       } else {
@@ -557,3 +557,4 @@
   </script>
 </body>
 </html>
+
