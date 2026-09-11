@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>احجز أو سجل بصك - الاتحاد للخدمات</title>
+    <title>تواصل ودعم - الاتحاد للخدمات</title>
     <link rel="stylesheet" href="css/style.css?v=202609021016">
     <link rel="stylesheet" href="css/pages.css?v=202609021016">
-    <link rel="stylesheet" href="css/polish.css?v=202609112310">
+    <link rel="stylesheet" href="css/polish.css?v=202609112335">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
 </head>
@@ -37,7 +37,7 @@
                     <li><a href="projects.html">الخطوط والرحلات</a></li>
                     <li><a href="contact.html" class="active">تواصل معنا</a></li>
                 </ul>
-                <a href="contact.html" class="btn-cta">احجز أو سجل بصك</a>
+                <a href="client.html" class="btn-cta">احجز تذكرتك</a>
                 <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
             </div>
         </nav>
@@ -51,7 +51,7 @@
             <li><a href="projects.html">الخطوط والرحلات</a></li>
             <li><a href="contact.html">تواصل معنا</a></li>
         </ul>
-        <a href="contact.html" class="btn-mobile-cta">احجز أو سجل بصك</a>
+        <a href="client.html" class="btn-mobile-cta">احجز تذكرتك</a>
     </div>
     <div class="overlay" id="overlay"></div>
 
@@ -64,8 +64,8 @@
                     <i class="fas fa-chevron-left"></i>
                     <span>تواصل معنا</span>
                 </div>
-                <h1>احجز رحلة أو سجل بصك</h1>
-                <p>أرسل طلب حجز، أو سجل شركة النقل والبصات، أو اطلب تفعيل محفظة واشتراك أعمال</p>
+                <h1>تواصل ودعم</h1>
+                <p>للحجز استخدم بوابة المستخدمين، ولتسجيل البصات استخدم بوابة أصحاب البصات. هذه الصفحة للدعم والاستفسارات فقط.</p>
             </div>
         </div>
     </section>
@@ -77,9 +77,9 @@
                 <!-- Contact Info -->
                 <div class="contact-info-wrap">
                     <div class="section-tag">معلومات التواصل</div>
-                    <h2 class="section-title" style="text-align:right">ابدأ طلبك الآن</h2>
+                    <h2 class="section-title" style="text-align:right">كيف نساعدك؟</h2>
                     <p style="color:var(--text-body);line-height:1.8;margin-bottom:36px;">
-                        فريقنا جاهز لمساعدتك في الحجز، متابعة الرحلات، تسجيل أصحاب البصات، تفعيل الاشتراكات، وتسوية المحفظة.
+                        فريق الدعم جاهز لمتابعة الاستفسارات والشكاوى وتحديثات الرحلات والمحفظة.
                     </p>
 
                     <div class="info-cards">
@@ -132,7 +132,7 @@
                 <div class="contact-form-wrap">
                     <div class="form-header">
                         <h3>أرسل لنا رسالة</h3>
-                        <p>اكتب بيانات الرحلة أو بيانات صاحب البص وسنتواصل معك للتأكيد</p>
+                        <p>اكتب استفسارك أو رقم التذكرة وسنتواصل معك للمتابعة</p>
                     </div>
 
                     <!-- Success Notification Box -->
@@ -180,13 +180,9 @@
                                     <i class="fas fa-bus"></i>
                                     <select id="service" name="service">
                                     <option value="">اختر نوع الطلب</option>
-                                    <option value="booking">حجز رحلة</option>
-                                    <option value="operator">تسجيل صاحب بص أو شركة نقل</option>
-                                    <option value="bus">إضافة بص للنشر</option>
-                                    <option value="route">إضافة خط أو مدينة</option>
+                                    <option value="support">دعم ومتابعة تذكرة</option>
                                     <option value="wallet">المحفظة والضمان</option>
-                                    <option value="subscription">اشتراك أعمال لصاحب بص</option>
-                                    <option value="support">دعم ومتابعة حجز</option>
+                                    <option value="route">استفسار عن خط أو مدينة</option>
                                     <option value="other">أخرى</option>
                                 </select>
                             </div>
@@ -195,7 +191,7 @@
                             <label for="message">رسالتك *</label>
                             <div class="input-wrap textarea-wrap">
                                 <i class="fas fa-comment"></i>
-                                <textarea id="message" name="message" rows="5" placeholder="مثال: من الخرطوم إلى مدني يوم الخميس، عدد الركاب 2. أو: أملك بص 49 مقعد وأريد نشر الرحلات..." required></textarea>
+                                <textarea id="message" name="message" rows="5" placeholder="اكتب رقم التذكرة أو الاستفسار أو المشكلة التي تريد متابعتها..." required></textarea>
                             </div>
                         </div>
                         <button type="submit" class="btn-submit">
@@ -414,4 +410,5 @@
     </script>
 </body>
 </html>
+
 

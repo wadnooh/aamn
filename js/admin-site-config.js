@@ -188,7 +188,7 @@
           <ul class="sd-features">
             ${itemNames(dept.key).map((name) => `<li><i class="fas fa-check"></i> ${esc(name)}</li>`).join('')}
           </ul>
-          <a href="contact.html" class="btn-primary">ابدأ الآن <i class="fas fa-arrow-left"></i></a>
+          <a href="${dept.key === 'booking' || dept.key === 'wallet' ? 'client.html' : (dept.key === 'operators' || dept.key === 'buses' || dept.key === 'routes' || dept.key === 'subscriptions' ? 'operator.html' : 'contact.html')}" class="btn-primary">${dept.key === 'booking' ? 'احجز الآن' : (dept.key === 'support' ? 'طلب دعم' : 'ابدأ الآن')} <i class="fas fa-arrow-left"></i></a>
         </div>
       </div>
     `).join('');
@@ -196,7 +196,18 @@
 
   const serviceSelect = document.querySelector('select[name="service"]');
   if (serviceSelect) {
-    serviceSelect.innerHTML = '<option value="">اختر نوع الطلب</option>' + departments.map((dept) => `<option value="${esc(dept.key)}">${esc(dept.title)}</option>`).join('') + '<option value="other">أخرى</option>';
+    const isContactPage = /contact\.html$/i.test(location.pathname);
+    if (isContactPage) {
+      serviceSelect.innerHTML = [
+        '<option value="">اختر نوع الطلب</option>',
+        '<option value="support">دعم ومتابعة تذكرة</option>',
+        '<option value="wallet">المحفظة والضمان</option>',
+        '<option value="route">استفسار عن خط أو مدينة</option>',
+        '<option value="other">أخرى</option>'
+      ].join('');
+    } else {
+      serviceSelect.innerHTML = '<option value="">اختر نوع الطلب</option>' + departments.map((dept) => `<option value="${esc(dept.key)}">${esc(dept.title)}</option>`).join('') + '<option value="other">أخرى</option>';
+    }
   }
 
   document.querySelectorAll('.footer-services ul').forEach((list) => {

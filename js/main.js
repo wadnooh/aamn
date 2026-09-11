@@ -471,7 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <a class="owner-card" href="client.html">
                         <i class="fas fa-ticket"></i>
-                        <span>افتح حساب مستخدم وأرسل طلب حجز ليظهر للإدارة.</span>
+                        <span>افتح حساب مستخدم وأرسل طلب الحجز من بوابة الحجز مباشرة.</span>
                     </a>
                     <a class="owner-card" href="operator.html">
                         <i class="fas fa-bus"></i>
@@ -489,9 +489,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <a href="client.html?trip=${encodeURIComponent(trip.id)}&passengers=${encodeURIComponent(passengers)}" class="service-link">حجز وإصدار تذكرة <i class="fas fa-arrow-left"></i></a>
                 </div>
             `).join('') + `
-                <a class="owner-card" href="contact.html">
+                <a class="owner-card" href="client.html">
                     <i class="fas fa-wallet"></i>
-                    <span>الدفع عبر المحفظة مع حفظ المبلغ حتى تأكيد الرحلة وتسوية حق صاحب البص.</span>
+                    <span>أكمل الحجز داخل بوابة المستخدمين ليتم إنشاء تذكرة ومحفظة ضمان.</span>
                 </a>
                 <a class="owner-card" href="https://wa.me/966500000000?text=${encodeURIComponent(`طلب سداد محفظة من منصة الاتحاد للخدمات\nالمسار: ${from} إلى ${to}\nالتاريخ: ${date}\nعدد الركاب: ${passengers}\nيرجى إرسال بيانات السداد وتأكيد الحجز.`)}" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-whatsapp"></i>
