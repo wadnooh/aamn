@@ -142,6 +142,11 @@
     .wallet-box i { color: var(--primary); margin-bottom: 8px; }
     .wallet-box strong { display: block; font-size: 1.25rem; direction: ltr; text-align: right; }
     .wallet-box span { color: var(--text-muted); font-size: 0.82rem; }
+    .business-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:14px; }
+    .published-trip { border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:10px; background:#fff; display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
+    .published-trip h4 { color:var(--secondary); margin-bottom:5px; }
+    .published-trip p { color:var(--text-muted); font-size:.86rem; line-height:1.7; }
+    .status-chip { display:inline-flex; border-radius:999px; padding:4px 10px; background:#dcfce7; color:#15803d; font-size:.78rem; font-weight:900; }
 
     /* Quick Action Buttons */
     .action-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -156,6 +161,7 @@
     @media (max-width: 900px) {
       .dash-grid { grid-template-columns: 1fr; }
       .wallet-grid { grid-template-columns: 1fr; }
+      .business-grid, .published-trip { grid-template-columns: 1fr; display:grid; }
     }
   </style>
 </head>
@@ -279,6 +285,59 @@
       <div>
         <div class="dash-card">
           <div class="dash-card-header">
+            <h3><i class="fas fa-bus"></i> إدارة البصات والرحلات</h3>
+          </div>
+          <div class="business-grid">
+            <form id="busForm">
+              <div class="form-group">
+                <label>اسم البص / رقم اللوحة</label>
+                <div class="input-box"><i class="fas fa-id-card"></i><input id="busName" placeholder="مثال: بص النيل 1234" required></div>
+              </div>
+              <div class="form-group">
+                <label>عدد المقاعد</label>
+                <div class="input-box"><i class="fas fa-chair"></i><input id="busSeats" type="number" min="10" max="70" value="45" required></div>
+              </div>
+              <div class="form-group">
+                <label>مستوى الخدمة</label>
+                <div class="input-box"><i class="fas fa-star"></i><select id="busService"><option>عادي</option><option>مكيف</option><option>سياحي</option><option>مميز</option></select></div>
+              </div>
+              <button class="btn-submit" type="submit"><i class="fas fa-plus"></i> حفظ البص</button>
+            </form>
+            <form id="tripPublishForm">
+              <div class="form-group">
+                <label>من</label>
+                <div class="input-box"><i class="fas fa-location-dot"></i><select id="opFrom" required></select></div>
+              </div>
+              <div class="form-group">
+                <label>إلى</label>
+                <div class="input-box"><i class="fas fa-map-pin"></i><select id="opTo" required></select></div>
+              </div>
+              <div class="form-group">
+                <label>التاريخ والوقت</label>
+                <div class="input-box"><i class="fas fa-clock"></i><input id="opDate" type="date" required></div>
+              </div>
+              <div class="form-group">
+                <label>وقت التحرك</label>
+                <div class="input-box"><i class="fas fa-clock"></i><input id="opTime" placeholder="مثال: 7:00 صباحاً" required></div>
+              </div>
+              <div class="form-group">
+                <label>سعر التذكرة</label>
+                <div class="input-box"><i class="fas fa-coins"></i><input id="opPrice" type="number" min="0" step="1" value="10000" required></div>
+              </div>
+              <button class="btn-submit" type="submit"><i class="fas fa-bullhorn"></i> نشر الرحلة للعملاء</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3><i class="fas fa-route"></i> رحلاتي المنشورة</h3>
+          </div>
+          <div id="operatorTrips"></div>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-header">
             <h3><i class="fas fa-list-check"></i> طلبات البصات والاشتراكات</h3>
             <button class="btn-site" id="btnOpenNewReq"><i class="fas fa-plus"></i> تسجيل بص أو اشتراك</button>
           </div>
@@ -367,6 +426,7 @@
     </div>
   </main>
 
+  <script src="js/platform-data.js?v=202609112245"></script>
   <script>
     const STORAGE_KEY = 'aamn_bus_operator_data_v2';
     const OPS_KEY = 'aamn_bus_operations_v2';
@@ -391,6 +451,12 @@
     }
     function walletKindLabel(value) {
       return value === 'company' ? 'شركة / مجموعة بصات' : (value === 'operator' ? 'صاحب بص فردي' : 'صاحب بص فردي');
+    }
+    function esc(value) {
+      return String(value ?? '').replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+    }
+    function readJson(key, fallback) {
+      try { return JSON.parse(localStorage.getItem(key) || 'null') || fallback; } catch { return fallback; }
     }
 
     // Tabs
@@ -486,6 +552,98 @@
       renderOrders();
     });
 
+    function fillCitySelects() {
+      const cities = window.AletihadPlatform?.cities || ['الخرطوم', 'مدني', 'بورتسودان', 'كسلا', 'الأبيض'];
+      const options = '<option value="">اختر المدينة</option>' + cities.map(city => `<option>${esc(city)}</option>`).join('');
+      document.getElementById('opFrom').innerHTML = options;
+      document.getElementById('opTo').innerHTML = options;
+      document.getElementById('opDate').value = window.AletihadPlatform?.today?.() || new Date().toISOString().slice(0, 10);
+    }
+
+    document.getElementById('busForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const user = getUser();
+      const buses = window.AletihadPlatform.buses();
+      buses.unshift({
+        id: 'bus_' + Date.now().toString(36),
+        ownerEmail: user?.email || '',
+        ownerName: user?.fullName || 'صاحب بص',
+        name: document.getElementById('busName').value.trim(),
+        seats: Number(document.getElementById('busSeats').value || 45),
+        service: document.getElementById('busService').value,
+        status: 'ready',
+        createdAt: new Date().toISOString()
+      });
+      window.AletihadPlatform.saveBuses(buses);
+      alert('تم حفظ بيانات البص ويمكنك نشر رحلة الآن.');
+      e.target.reset();
+      document.getElementById('busSeats').value = 45;
+      renderOperatorTrips();
+    });
+
+    document.getElementById('tripPublishForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const user = getUser();
+      const from = document.getElementById('opFrom').value;
+      const to = document.getElementById('opTo').value;
+      if (from === to) { alert('اختر مدينتين مختلفتين'); return; }
+      const myBuses = window.AletihadPlatform.buses().filter(b => !user || b.ownerEmail === user.email);
+      const bus = myBuses[0] || { name: 'بص سفر', seats: 45, service: 'عادي' };
+      const trip = window.AletihadPlatform.addTrip({
+        operator: user?.fullName || 'صاحب بص',
+        bus: bus.name,
+        seats: bus.seats,
+        service: bus.service,
+        from,
+        to,
+        date: document.getElementById('opDate').value,
+        time: document.getElementById('opTime').value,
+        price: document.getElementById('opPrice').value,
+        status: 'published',
+        policy: 'تأكيد الحجز عبر المحفظة ثم التسوية بعد الرحلة'
+      });
+      const ops = JSON.parse(localStorage.getItem(OPS_KEY) || '[]');
+      ops.unshift({
+        id: 'op_' + Date.now().toString(36),
+        type: 'consultation',
+        status: 'done',
+        date: new Date().toISOString().slice(0, 10),
+        accountKind: user?.accountKind || 'operator',
+        customer: user?.fullName || 'صاحب بص',
+        phone: user?.phone || '',
+        email: user?.email || '',
+        service: `نشر رحلة ${trip.from} إلى ${trip.to}`,
+        amount: 0,
+        paymentStatus: 'unpaid',
+        paymentRef: trip.id,
+        notes: `${trip.time} - ${trip.bus} - ${trip.seats} مقعد`
+      });
+      localStorage.setItem(OPS_KEY, JSON.stringify(ops));
+      alert('تم نشر الرحلة للعملاء وربطها بلوحة التحكم.');
+      renderOperatorTrips();
+    });
+
+    function renderOperatorTrips() {
+      const box = document.getElementById('operatorTrips');
+      if (!box || !window.AletihadPlatform) return;
+      const user = getUser();
+      const trips = window.AletihadPlatform.trips().filter(t => !user || t.operator === user.fullName || t.operator === 'صاحب بص مستقل');
+      if (!trips.length) {
+        box.innerHTML = '<div style="text-align:center; padding:24px; color:var(--text-muted);">لا توجد رحلات منشورة لهذا الحساب بعد.</div>';
+        return;
+      }
+      box.innerHTML = trips.map(t => `
+        <div class="published-trip">
+          <div>
+            <h4>${esc(t.from)} إلى ${esc(t.to)}</h4>
+            <p>${esc(t.date)} · ${esc(t.time)} · ${esc(t.bus)} · ${window.AletihadPlatform.availableSeats(t)} مقعد متاح من ${Number(t.seats || 0)}</p>
+            <p>السعر: ${window.AletihadPlatform.money(t.price)} · ${esc(t.policy)}</p>
+          </div>
+          <span class="status-chip">منشورة</span>
+        </div>
+      `).join('');
+    }
+
     function renderOrders() {
       const user = getUser();
       const ops = JSON.parse(localStorage.getItem(OPS_KEY) || '[]');
@@ -544,6 +702,7 @@
         document.getElementById('userTierDisplay').textContent = user.tier || 'عضو مميز';
         document.getElementById('userNumberDisplay').textContent = 'رقم حساب الأعمال: ' + (user.id || '#MEM-2025');
 
+        renderOperatorTrips();
         renderOrders();
       } else {
         authSec.style.display = 'flex';
@@ -553,6 +712,7 @@
       }
     }
 
+    fillCitySelects();
     render();
   </script>
 </body>

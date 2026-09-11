@@ -439,29 +439,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const busBookingForm = document.getElementById('busBookingForm');
     const bookingResults = document.getElementById('bookingResults');
     if (busBookingForm && bookingResults) {
-        const sampleTrips = [
-            { time: '6:30 صباحاً', type: 'بص مكيف', seats: 18, price: 8500 },
-            { time: '2:00 ظهراً', type: 'سياحي', seats: 11, price: 12000 },
-            { time: '8:00 مساءً', type: 'مميز', seats: 7, price: 18000 }
-        ];
-
+        if (window.AletihadPlatform) {
+            const cityOptions = '<option value="">اختر المدينة</option>' + window.AletihadPlatform.cities.map((city) => `<option>${city}</option>`).join('');
+            const fromCity = document.getElementById('fromCity');
+            const toCity = document.getElementById('toCity');
+            const travelDate = document.getElementById('travelDate');
+            if (fromCity) fromCity.innerHTML = cityOptions;
+            if (toCity) toCity.innerHTML = cityOptions;
+            if (travelDate && !travelDate.value) travelDate.value = window.AletihadPlatform.today();
+        }
         busBookingForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const from = document.getElementById('fromCity')?.value || 'مدينة المغادرة';
             const to = document.getElementById('toCity')?.value || 'مدينة الوصول';
             const date = document.getElementById('travelDate')?.value || 'اليوم';
             const passengers = document.getElementById('passengers')?.value || '1';
+            const platform = window.AletihadPlatform;
 
             if (from === to) {
                 bookingResults.innerHTML = '<div class="result-card" style="grid-column:1/-1"><strong>اختر مدينتين مختلفتين</strong><span>مدينة المغادرة والوصول يجب ألا تكونا نفس المدينة.</span><b>عدّل البحث وأعد المحاولة</b></div>';
                 return;
             }
 
-            bookingResults.innerHTML = sampleTrips.map((trip) => `
+            const matchedTrips = platform ? platform.searchTrips({ from, to, date, passengers }) : [];
+            if (!matchedTrips.length) {
+                bookingResults.innerHTML = `
+                    <div class="result-card" style="grid-column:1/-1">
+                        <strong>لا توجد رحلة مطابقة الآن</strong>
+                        <span>يمكن للراكب إرسال طلب، ويمكن لصاحب البص نشر رحلة جديدة من بوابة أصحاب البصات.</span>
+                        <b>${from} إلى ${to} · ${date}</b>
+                    </div>
+                    <a class="owner-card" href="client.html">
+                        <i class="fas fa-ticket"></i>
+                        <span>افتح حساب مستخدم وأرسل طلب حجز ليظهر للإدارة.</span>
+                    </a>
+                    <a class="owner-card" href="operator.html">
+                        <i class="fas fa-bus"></i>
+                        <span>صاحب بص؟ أضف الرحلة والمقاعد لتظهر هنا مباشرة.</span>
+                    </a>
+                `;
+                return;
+            }
+
+            bookingResults.innerHTML = matchedTrips.map((trip) => `
                 <div class="result-card">
-                    <strong>${from} إلى ${to}</strong>
-                    <span>${trip.time} · ${trip.type} · ${trip.seats} مقعد متاح · ${passengers} راكب</span>
-                    <b>${trip.price.toLocaleString('ar-SA')} جنيه · ${date}</b>
+                    <strong>${trip.from} إلى ${trip.to}</strong>
+                    <span>${trip.time} · ${trip.service} · ${platform.availableSeats(trip)} مقعد متاح · ${trip.operator}</span>
+                    <b>${platform.money(trip.price)} · ${trip.date || date}</b>
+                    <a href="client.html?trip=${encodeURIComponent(trip.id)}&passengers=${encodeURIComponent(passengers)}" class="service-link">حجز وإصدار تذكرة <i class="fas fa-arrow-left"></i></a>
                 </div>
             `).join('') + `
                 <a class="owner-card" href="contact.html">
@@ -477,7 +502,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ============================================
-       14. SMOOTH ANCHOR SCROLLING
+       14. LIVE TRIPS GALLERY
+    ============================================ */
+    const projectsGrid = document.getElementById('projectsGrid');
+    if (projectsGrid && window.AletihadPlatform) {
+        const regionOf = (city) => {
+            if (['بورتسودان', 'كسلا', 'القضارف'].includes(city)) return 'commercial';
+            if (['عطبرة', 'شندي', 'دنقلا', 'كريمة'].includes(city)) return 'infrastructure';
+            if (['الأبيض', 'النهود', 'نيالا', 'الفاشر', 'الجنينة'].includes(city)) return 'industrial';
+            return 'residential';
+        };
+        const regionLabel = { residential: 'الوسط', commercial: 'الشرق', infrastructure: 'الشمال', industrial: 'الغرب' };
+        const trips = window.AletihadPlatform.trips();
+        projectsGrid.innerHTML = trips.map((trip, index) => {
+            const category = regionOf(trip.to);
+            const icons = ['fa-bus', 'fa-road', 'fa-route', 'fa-map-location-dot', 'fa-ticket'];
+            return `
+                <div class="project-card" data-category="${category}">
+                    <div class="project-img" style="height:260px">
+                        <div class="img-placeholder p${(index % 6) + 1}" style="height:100%"><i class="fas ${icons[index % icons.length]} fa-3x"></i></div>
+                        <div class="project-overlay"><a href="client.html?trip=${encodeURIComponent(trip.id)}" class="project-link"><i class="fas fa-ticket"></i></a></div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-cat">${regionLabel[category]}</span>
+                        <h3>${trip.from} إلى ${trip.to}</h3>
+                        <p class="proj-loc"><i class="fas fa-clock"></i> ${trip.date} · ${trip.time} · ${window.AletihadPlatform.availableSeats(trip)} مقعد متاح</p>
+                        <p class="proj-desc">${trip.operator} · ${trip.bus} · ${trip.service} · السعر ${window.AletihadPlatform.money(trip.price)}</p>
+                        <a href="client.html?trip=${encodeURIComponent(trip.id)}" class="service-link">حجز التذكرة <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        document.querySelectorAll('.filter-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('.filter-btn').forEach((item) => item.classList.remove('active'));
+                btn.classList.add('active');
+                projectsGrid.querySelectorAll('.project-card').forEach((card) => {
+                    card.classList.toggle('hidden', !(filter === 'all' || card.dataset.category === filter));
+                });
+            });
+        });
+    }
+
+    /* ============================================
+       15. SMOOTH ANCHOR SCROLLING
     ============================================ */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
@@ -492,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ============================================
-       15. WHATSAPP FLOAT BUTTON
+       16. WHATSAPP FLOAT BUTTON
     ============================================ */
     const waBtn = document.createElement('a');
     waBtn.href = 'https://wa.me/966500000000';

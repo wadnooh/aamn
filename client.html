@@ -142,6 +142,12 @@
     .wallet-box i { color: var(--primary); margin-bottom: 8px; }
     .wallet-box strong { display: block; font-size: 1.25rem; direction: ltr; text-align: right; }
     .wallet-box span { color: var(--text-muted); font-size: 0.82rem; }
+    .trip-search-grid { display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap:12px; align-items:end; }
+    .trip-results { display:grid; gap:12px; margin-top:16px; }
+    .trip-card { border:1px solid var(--border); border-radius:12px; padding:16px; background:#fff; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; }
+    .trip-card h4 { margin-bottom:6px; font-size:1.05rem; color:var(--secondary); }
+    .trip-card p { color:var(--text-muted); font-size:.88rem; line-height:1.8; }
+    .ticket-code { direction:ltr; display:inline-flex; padding:4px 10px; border-radius:999px; background:#eef2ff; color:#1d4ed8; font-weight:900; font-size:.78rem; }
 
     /* Quick Action Buttons */
     .action-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -156,6 +162,7 @@
     @media (max-width: 900px) {
       .dash-grid { grid-template-columns: 1fr; }
       .wallet-grid { grid-template-columns: 1fr; }
+      .trip-search-grid, .trip-card { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -279,6 +286,32 @@
       <div>
         <div class="dash-card">
           <div class="dash-card-header">
+            <h3><i class="fas fa-magnifying-glass-location"></i> البحث وحجز التذاكر</h3>
+          </div>
+          <form id="tripSearchForm" class="trip-search-grid">
+            <div class="form-group">
+              <label>من</label>
+              <div class="input-box"><i class="fas fa-location-dot"></i><select id="tripFrom" required></select></div>
+            </div>
+            <div class="form-group">
+              <label>إلى</label>
+              <div class="input-box"><i class="fas fa-map-pin"></i><select id="tripTo" required></select></div>
+            </div>
+            <div class="form-group">
+              <label>تاريخ السفر</label>
+              <div class="input-box"><i class="fas fa-calendar"></i><input id="tripDate" type="date" required></div>
+            </div>
+            <div class="form-group">
+              <label>عدد الركاب</label>
+              <div class="input-box"><i class="fas fa-users"></i><input id="tripPassengers" type="number" min="1" max="9" value="1"></div>
+            </div>
+            <button type="submit" class="btn-submit" style="grid-column:1/-1;"><i class="fas fa-search"></i> عرض الرحلات المتاحة</button>
+          </form>
+          <div class="trip-results" id="tripResults"></div>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-header">
             <h3><i class="fas fa-list-check"></i> حجوزاتي وطلباتي الحالية</h3>
             <button class="btn-site" id="btnOpenNewReq"><i class="fas fa-plus"></i> حجز أو طلب جديد</button>
           </div>
@@ -367,6 +400,7 @@
     </div>
   </main>
 
+  <script src="js/platform-data.js?v=202609112245"></script>
   <script>
     const STORAGE_KEY = 'aamn_bus_member_data_v2';
     const OPS_KEY = 'aamn_bus_operations_v2';
@@ -391,6 +425,12 @@
     }
     function walletKindLabel(value) {
       return value === 'company' ? 'شركة / مجموعة بصات' : (value === 'operator' ? 'صاحب بص فردي' : 'عميل / راكب');
+    }
+    function esc(value) {
+      return String(value ?? '').replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+    }
+    function readJson(key, fallback) {
+      try { return JSON.parse(localStorage.getItem(key) || 'null') || fallback; } catch { return fallback; }
     }
 
     // Tabs
@@ -486,14 +526,97 @@
       renderOrders();
     });
 
+    function fillCitySelects() {
+      const cities = window.AletihadPlatform?.cities || ['الخرطوم', 'مدني', 'بورتسودان', 'كسلا', 'الأبيض'];
+      const options = '<option value="">اختر المدينة</option>' + cities.map(city => `<option>${esc(city)}</option>`).join('');
+      document.getElementById('tripFrom').innerHTML = options;
+      document.getElementById('tripTo').innerHTML = options;
+      document.getElementById('tripDate').value = window.AletihadPlatform?.today?.() || new Date().toISOString().slice(0, 10);
+      const params = new URLSearchParams(location.search);
+      const selectedTrip = window.AletihadPlatform?.trips?.().find(t => t.id === params.get('trip'));
+      if (selectedTrip) {
+        document.getElementById('tripFrom').value = selectedTrip.from;
+        document.getElementById('tripTo').value = selectedTrip.to;
+        document.getElementById('tripDate').value = selectedTrip.date || window.AletihadPlatform.today();
+        document.getElementById('tripPassengers').value = params.get('passengers') || '1';
+        renderTripResults([selectedTrip], document.getElementById('tripPassengers').value);
+      }
+    }
+
+    function renderTripResults(list, passengers) {
+      const box = document.getElementById('tripResults');
+      if (!box) return;
+      const platform = window.AletihadPlatform;
+      if (!list.length) {
+        box.innerHTML = '<div class="trip-card"><div><h4>لا توجد رحلة مطابقة</h4><p>أرسل طلب حجز من النموذج أدناه أو جرّب خطًا آخر. ستظهر رحلات أصحاب البصات هنا فور نشرها.</p></div><a class="btn-site" href="operator.html"><i class="fas fa-bus"></i> تسجيل رحلة</a></div>';
+        return;
+      }
+      box.innerHTML = list.map(trip => `
+        <div class="trip-card">
+          <div>
+            <h4>${esc(trip.from)} إلى ${esc(trip.to)}</h4>
+            <p>${esc(trip.time)} · ${esc(trip.bus)} · ${esc(trip.operator)} · ${platform.availableSeats(trip)} مقعد متاح</p>
+            <p>${esc(trip.policy || 'سياسة إلغاء واسترداد منظمة')}</p>
+          </div>
+          <button class="btn-submit" style="width:auto; margin:0; min-width:180px;" type="button" onclick="bookTrip('${esc(trip.id)}', ${Number(passengers || 1)})">
+            <i class="fas fa-ticket"></i> ${platform.money(Number(trip.price || 0) * Number(passengers || 1))}
+          </button>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('tripSearchForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const from = document.getElementById('tripFrom').value;
+      const to = document.getElementById('tripTo').value;
+      const date = document.getElementById('tripDate').value;
+      const passengers = Number(document.getElementById('tripPassengers').value || 1);
+      if (from === to) { alert('اختر مدينة مغادرة ووصول مختلفتين'); return; }
+      renderTripResults(window.AletihadPlatform.searchTrips({ from, to, date, passengers }), passengers);
+    });
+
+    window.bookTrip = function (tripId, passengers) {
+      const user = getUser();
+      if (!user) { alert('سجل الدخول أولاً لإصدار التذكرة'); return; }
+      try {
+        const booking = window.AletihadPlatform.createBooking({
+          tripId,
+          passengers,
+          customer: user.fullName,
+          email: user.email,
+          phone: user.phone || ''
+        });
+        alert('تم إنشاء التذكرة وحجز المقاعد: ' + booking.seats.join(', ') + '\nرقم التذكرة: ' + booking.qr);
+        renderOrders();
+        document.getElementById('tripSearchForm')?.dispatchEvent(new Event('submit'));
+      } catch {
+        alert('تعذر الحجز الآن، ربما لا توجد مقاعد كافية.');
+      }
+    };
+
     function renderOrders() {
       const user = getUser();
       const ops = JSON.parse(localStorage.getItem(OPS_KEY) || '[]');
+      const bookings = readJson(window.AletihadPlatform?.KEYS?.bookings || 'aletihad_platform_bookings_v1', []);
+      const ticketOps = bookings.filter(b => user && b.email === user.email).map(b => ({
+        id: b.id,
+        service: `${b.from} إلى ${b.to}`,
+        date: b.travelDate,
+        customer: b.customer,
+        email: b.email,
+        phone: b.phone,
+        amount: b.amount,
+        status: b.status,
+        paymentStatus: b.paymentStatus,
+        paymentRef: b.qr,
+        notes: `المقاعد: ${(b.seats || []).join(', ')} - ${b.time}`
+      }));
       const userOps = ops.filter(o => (user && o.email === user.email) || !o.email || o.customer === user?.fullName);
+      const allUserOps = [...ticketOps, ...userOps.filter(o => !ticketOps.some(t => t.id === o.id))];
       const container = document.getElementById('ordersList');
-      renderWallet(userOps, user);
+      renderWallet(allUserOps, user);
 
-      if (!userOps.length) {
+      if (!allUserOps.length) {
         container.innerHTML = `
           <div style="text-align:center; padding:30px; color:var(--text-muted);">
             <i class="fas fa-inbox" style="font-size:2.5rem; margin-bottom:10px; color:#cbd5e1;"></i>
@@ -503,11 +626,12 @@
         return;
       }
 
-      container.innerHTML = userOps.map(op => `
+      container.innerHTML = allUserOps.map(op => `
         <div class="order-item">
           <div class="order-info">
             <h4>${op.service || 'حجز رحلة'}</h4>
             <span><i class="fas fa-calendar-alt"></i> ${op.date} · رقم الحجز/الطلب: ${op.id}</span>
+            ${op.paymentRef ? `<span class="ticket-code">${esc(op.paymentRef)}</span>` : ''}
             <span><i class="fas fa-wallet"></i> السداد: ${op.paymentStatus === 'paid' ? 'مدفوع ومؤكد' : (op.paymentStatus === 'pending' ? 'بانتظار السداد' : 'غير مدفوع')}</span>
           </div>
           <div>
@@ -553,6 +677,7 @@
       }
     }
 
+    fillCitySelects();
     render();
   </script>
 </body>
