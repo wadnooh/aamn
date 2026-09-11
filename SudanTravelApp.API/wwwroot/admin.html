@@ -283,8 +283,8 @@
 
   <div class="toast" id="toast"></div>
 
-    <script src="js/platform-data.js?v=202609112335"></script>
-    <script src="js/admin-site-config.js?v=202609112335"></script>
+    <script src="js/platform-data.js?v=202609112405"></script>
+    <script src="js/admin-site-config.js?v=202609112405"></script>
   <script>
   (function () {
     const K = {
@@ -384,7 +384,9 @@
       return Number(amount || 0) > 0 ? 'pending' : 'unpaid';
     }
     function paymentLabel(value) {
-      return value === 'paid' ? 'مدفوع ومؤكد' : (value === 'unpaid' ? 'غير مدفوع' : 'بانتظار السداد');
+      if (value === 'paid') return 'مدفوع ومؤكد';
+      if (value === 'review') return 'بانتظار مراجعة السداد';
+      return value === 'unpaid' ? 'غير مدفوع' : 'بانتظار السداد';
     }
     function walletKind(o) {
       if (o.accountKind) return o.accountKind;
@@ -833,6 +835,17 @@
       o.status = 'done';
       if (!o.paymentRef) o.paymentRef = 'تأكيد أدمن - ' + new Date().toLocaleString('ar-SA');
       saveOps(list);
+      if (window.AletihadPlatform) {
+        const bookingList = window.AletihadPlatform.bookings();
+        const booking = bookingList.find(item => item.id === opId);
+        if (booking) {
+          booking.paymentStatus = 'paid';
+          booking.status = 'done';
+          booking.paymentConfirmedAt = new Date().toISOString();
+          if (!booking.paymentReference && o.paymentRef) booking.paymentReference = o.paymentRef;
+          window.AletihadPlatform.saveBookings(bookingList);
+        }
+      }
       toast('تم تأكيد سداد المبلغ وتحديث حالة العملية');
     };
 
@@ -1068,4 +1081,5 @@
   </script>
 </body>
 </html>
+
 

@@ -180,6 +180,30 @@
     return booking;
   }
 
+  function updatePayment(ticketId, payment) {
+    const bookingList = bookings();
+    const booking = bookingList.find((item) => item.id === ticketId);
+    if (booking) {
+      booking.paymentStatus = 'review';
+      booking.paymentMethod = payment.method || '';
+      booking.paymentReference = payment.reference || '';
+      booking.paymentNote = payment.note || '';
+      booking.paymentSubmittedAt = new Date().toISOString();
+      saveBookings(bookingList);
+    }
+
+    const ops = operations();
+    const op = ops.find((item) => item.id === ticketId);
+    if (op) {
+      op.paymentStatus = 'review';
+      op.paymentMethod = payment.method || '';
+      op.paymentRef = payment.reference || op.paymentRef || '';
+      op.notes = [op.notes, payment.note ? `ملاحظة السداد: ${payment.note}` : '', payment.method ? `طريقة السداد: ${payment.method}` : ''].filter(Boolean).join(' | ');
+      saveOperations(ops);
+    }
+    return booking || op || null;
+  }
+
   window.AletihadPlatform = {
     KEYS,
     cities,
@@ -200,6 +224,7 @@
     saveOperations,
     searchTrips,
     addTrip,
-    createBooking
+    createBooking,
+    updatePayment
   };
 })();
