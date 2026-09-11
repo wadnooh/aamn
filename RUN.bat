@@ -2,7 +2,7 @@
 chcp 65001 >nul
 echo.
 echo ═══════════════════════════════════════════
-echo 🇸🇩 ود نوح للبرمجيات والكمبيوتر
+echo Wadnooh AAMN Bus Booking Platform
 echo Wad Nouh Software ^& Computer
 echo ═══════════════════════════════════════════
 echo.

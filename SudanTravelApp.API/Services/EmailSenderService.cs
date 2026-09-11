@@ -125,7 +125,7 @@ public class EmailVerificationService : IEmailVerificationService
         await _db.SaveChangesAsync(ct);
 
         var publicBase = (_config["PublicBaseUrl"] ?? "https://2-aa.com").TrimEnd('/');
-        var verifyUrl = $"{publicBase}/verify.html?token={Uri.EscapeDataString(token)}";
+        var verifyUrl = $"{publicBase}/client.html?token={Uri.EscapeDataString(token)}";
 
         var emailSent = false;
         var subject = "تأكيد بريدك · Confirm your email — Wadnooh";

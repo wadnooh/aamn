@@ -4,6 +4,9 @@ DirectoryIndex index.html index.php
   RewriteEngine On
   RewriteBase /
 
+  RewriteRule ^(code-hub|osh|specialty|verify|guide)\.html$ - [G,L]
+  RewriteRule ^data/ - [G,L]
+  RewriteRule ^js/(auth-portal|code-studio|wadnooh-eng|wep-gate)\.js$ - [G,L]
   RewriteRule ^app/?$ / [R=302,L]
 </IfModule>
 

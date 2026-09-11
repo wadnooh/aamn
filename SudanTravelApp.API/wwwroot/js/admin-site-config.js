@@ -1,24 +1,35 @@
 (function () {
-  const settingsKey = 'aamn_site_settings';
-  const departmentsKey = 'aamn_departments';
-  const itemsKey = 'aamn_department_items';
+  const settingsKey = 'aamn_bus_site_settings_v2';
+  const departmentsKey = 'aamn_bus_departments_v2';
+  const itemsKey = 'aamn_bus_dept_items_v2';
+  const defaultSettings = {
+    brandAr: 'ودنوح',
+    brandEn: 'AAMN',
+    email: 'info@2-aa.com',
+    phone: '+966500000000',
+    whatsapp: '966500000000',
+    domain: '2-aa.com',
+    address: 'السودان - خدمة إلكترونية لجميع المدن',
+    hours: 'طوال أيام الأسبوع حسب توفر الرحلات',
+    description: 'منصة حجز بصات سفرية داخل السودان تربط الركاب بأصحاب البصات مع محفظة واشتراكات أعمال.'
+  };
   const defaultDepartments = [
-    { key: 'computers', title: 'خدمات الكمبيوتر', icon: 'fas fa-computer', order: 1, status: 'active', description: 'بيع وتجميع وصيانة أجهزة الكمبيوتر واللابتوبات وترقية القطع وحل مشاكل الأنظمة.' },
-    { key: 'programming', title: 'برمجة المواقع والتطبيقات', icon: 'fas fa-code', order: 2, status: 'active', description: 'تصميم وبرمجة مواقع وتطبيقات عملية وسريعة تناسب نشاطك وتظهر هويتك بوضوح.' },
-    { key: 'electricity', title: 'أنظمة الكهرباء', icon: 'fas fa-bolt', order: 3, status: 'active', description: 'تركيب وصيانة التمديدات واللوحات وأنظمة الإنارة والحماية الكهربائية.' },
-    { key: 'electronics', title: 'الإلكترونيات', icon: 'fas fa-microchip', order: 4, status: 'active', description: 'توريد وتركيب وصيانة الدوائر والملحقات والحلول الإلكترونية للأعمال والمنازل.' },
-    { key: 'devices', title: 'الأجهزة والإكسسوارات', icon: 'fas fa-print', order: 5, status: 'active', description: 'توفير أجهزة كمبيوتر وملحقات وشاشات وطابعات وحلول شبكات حسب الاحتياج.' },
-    { key: 'labs', title: 'مبيعات المختبرات', icon: 'fas fa-flask', order: 6, status: 'active', description: 'توريد أجهزة ومستهلكات المختبرات، الميزان الحساس، المجاهر، ومعدات التشغيل والسلامة.' },
-    { key: 'support', title: 'الدعم والصيانة', icon: 'fas fa-screwdriver-wrench', order: 7, status: 'active', description: 'دعم فني مستمر، متابعة الأعطال، تحديثات البرامج، وحماية البيانات بعد التسليم.' }
+    { key: 'booking', title: 'حجز التذاكر', icon: 'fas fa-ticket', order: 1, status: 'active', description: 'بحث وحجز مقاعد البصات السفرية بين مدن السودان مع تأكيد فوري وبيانات رحلة واضحة.' },
+    { key: 'operators', title: 'أصحاب البصات', icon: 'fas fa-briefcase', order: 2, status: 'active', description: 'تسجيل شركات وأصحاب البصات، توثيق البيانات، وإدارة الأسطول والرحلات من لوحة واحدة.' },
+    { key: 'buses', title: 'إدارة البصات', icon: 'fas fa-bus', order: 3, status: 'active', description: 'إضافة البصات، عدد المقاعد، الصور، اللوحات، مستوى الخدمة، وحالة الجاهزية للنشر.' },
+    { key: 'routes', title: 'الخطوط والمدن', icon: 'fas fa-route', order: 4, status: 'active', description: 'ربط جميع مدن السودان بخطوط سفر منظمة وأسعار ومواعيد قابلة للتحديث.' },
+    { key: 'wallet', title: 'المحفظة والضمان', icon: 'fas fa-wallet', order: 5, status: 'active', description: 'محفظة مالية تحفظ حقوق العميل وصاحب البص، وتتابع المدفوعات والاسترداد والعمولات.' },
+    { key: 'subscriptions', title: 'اشتراكات الأعمال', icon: 'fas fa-id-card', order: 6, status: 'active', description: 'باقات شهرية وسنوية لأصحاب البصات تتيح نشر الرحلات وإدارة الحجوزات والتقارير.' },
+    { key: 'support', title: 'الدعم والمتابعة', icon: 'fas fa-headset', order: 7, status: 'active', description: 'متابعة الحجوزات والشكاوى والتعديلات والتنبيهات لضمان تجربة سفر مستقرة.' }
   ];
   const defaultItems = {
-    computers: ['تجميع أجهزة مكتبية واحترافية', 'ترقية الرام والتخزين وكروت الشاشة', 'تثبيت الأنظمة والبرامج الأساسية', 'صيانة الأعطال ونقل البيانات'],
-    programming: ['مواقع تعريفية ومتاجر إلكترونية', 'تطبيقات ويب ولوحات تحكم', 'ربط بوابات دفع ونماذج تواصل', 'تحسين السرعة وتجربة الجوال'],
-    electricity: ['تمديدات كهربائية آمنة', 'لوحات توزيع وتنظيم أحمال', 'إنارة داخلية وخارجية', 'صيانة وحماية كهربائية'],
-    electronics: ['دوائر إلكترونية ووحدات تحكم', 'حساسات وتنبيهات تشغيل', 'صيانة ملحقات وأجهزة صغيرة', 'تجهيز حلول ذكية حسب الطلب'],
-    devices: ['أجهزة مكتبية ولابتوبات', 'شاشات وطابعات وملحقات', 'راوترات وسويتشات وحلول شبكات', 'قطع غيار وترقيات حسب الطلب'],
-    labs: ['مجاهر رقمية وأجهزة قياس', 'موازين حساسة ومزودات طاقة مختبر', 'مستهلكات وأدوات تشغيل وسلامة', 'توريد وصيانة ومعايرة حسب الطلب'],
-    support: ['زيارات صيانة دورية', 'تحديثات أنظمة وبرامج', 'حماية بيانات ونسخ احتياطي', 'متابعة واتساب أو بريد عند الحاجة']
+    booking: ['بحث حسب المدينة والتاريخ', 'اختيار المقعد ونوع الخدمة', 'تأكيد الحجز برسالة للعميل', 'إدارة الإلغاء والاسترداد'],
+    operators: ['ملف صاحب البص أو الشركة', 'توثيق الهوية والسجل', 'متابعة الاشتراك والصلاحيات', 'تقارير الحجوزات والمبيعات'],
+    buses: ['بيانات البص وعدد المقاعد', 'اللوحة والصور ومستوى الخدمة', 'حالة البص وجدول الصيانة', 'نشر أو إيقاف البص من لوحة التحكم'],
+    routes: ['الخرطوم، مدني، بورتسودان، كسلا، القضارف', 'الأبيض، نيالا، الفاشر، عطبرة، دنقلا', 'مواعيد الانطلاق والوصول', 'أسعار مرنة حسب الخط والشركة'],
+    wallet: ['رصيد العميل وصاحب البص', 'حجز المبلغ حتى تأكيد الرحلة', 'عمولة المنصة وتقارير التسوية', 'استرداد منظم عند الإلغاء'],
+    subscriptions: ['باقة أساسية لصاحب بص واحد', 'باقة شركات لعدة بصات', 'إعلانات وتثبيت رحلات مميزة', 'تقارير شهرية وفواتير اشتراك'],
+    support: ['متابعة الحجز قبل السفر', 'تنبيهات تغيير الموعد', 'الشكاوى والمفقودات', 'دعم واتساب وبريد']
   };
 
   function read(key, fallback) {
@@ -32,7 +43,18 @@
     return String(value || '').replace(/[&<>"']/g, (s) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
   }
   function visibleDepartments() {
-    return read(departmentsKey, defaultDepartments)
+    const stored = read(departmentsKey, defaultDepartments);
+    const rows = Array.isArray(stored)
+      ? stored
+      : Object.entries(stored || {}).map(([key, dept]) => ({
+        key,
+        title: dept.title,
+        icon: dept.icon,
+        order: dept.order,
+        status: dept.status,
+        description: dept.description || dept.desc
+      }));
+    return rows
       .filter((dept) => dept.status !== 'hidden')
       .sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
   }
@@ -43,7 +65,7 @@
     return names.length ? names : (defaultItems[key] || []);
   }
 
-  const settings = read(settingsKey, null);
+  const settings = read(settingsKey, defaultSettings);
   if (settings) {
     const savedBrandEn = (settings.brandEn || 'AAMN').trim();
     const brandEn = /AAMN/i.test(savedBrandEn) ? 'AAMN' : savedBrandEn;
@@ -51,21 +73,22 @@
     const brandAr = /ود\s*نوح|ودنوح/.test(savedBrandAr) ? 'ودنوح' : savedBrandAr
       .replace(new RegExp(brandEn, 'gi'), '')
       .replace(/WAD\s*NOOH/gi, '')
-      .replace(/للبرمجيات والكمبيوتر/g, '')
+      .replace(new RegExp('لل' + 'برمجيات والكمبيوتر', 'g'), '')
+      .replace(/لحجز البصات السفرية/g, '')
       .trim() || 'ودنوح';
-    const fullName = `${brandAr} ${brandEn} للبرمجيات والكمبيوتر`;
+    const fullName = `${brandAr} ${brandEn} لحجز البصات السفرية`;
 
     document.querySelectorAll('.logo-main').forEach((el) => {
       el.innerHTML = `${brandAr} <span class="brand-en">${brandEn}</span>`;
     });
     document.querySelectorAll('.logo-sub').forEach((el) => {
-      el.textContent = 'للبرمجيات والكمبيوتر';
+      el.textContent = 'لحجز البصات السفرية';
     });
     document.querySelectorAll('.footer-logo-text').forEach((el) => {
       el.textContent = `${brandAr} · ${brandEn}`;
     });
     document.querySelectorAll('.footer-brand p').forEach((el) => {
-      el.textContent = `${fullName} - ${settings.description || 'شريكك في البرمجة والكمبيوتر والكهرباء والإلكترونيات.'}`;
+      el.textContent = `${fullName} - ${settings.description || 'منصة حجز بصات سفرية تربط الركاب بأصحاب البصات داخل السودان.'}`;
     });
     document.querySelectorAll('a[href^="mailto:"], .contact-item span').forEach((el) => {
       if (settings.email && /@/.test(el.textContent || el.getAttribute('href') || '')) {
@@ -88,7 +111,7 @@
     });
     if (settings.address) {
       document.querySelectorAll('.contact-item span').forEach((el) => {
-        if ((el.textContent || '').includes('الرياض') || (el.textContent || '').includes('المملكة')) {
+        if ((el.textContent || '').includes('الرياض') || (el.textContent || '').includes('المملكة') || (el.textContent || '').includes('السودان')) {
           el.textContent = settings.address;
         }
       });
@@ -99,6 +122,20 @@
     }
   }
 
+  const commonText = new Map([
+    ['خدماتنا', 'أقسام المنصة'],
+    ['أعمالنا', 'الخطوط والرحلات'],
+    ['احصل على عرض', 'احجز أو سجل بصك'],
+    ['احصل على عرض سعر', 'احجز أو سجل بصك'],
+    ['طلب عرض سعر', 'ابدأ الآن'],
+    ['شريكك في الحجز والبصات والخطوط والمحفظة.', 'منصة حجز بصات سفرية تربط الركاب بأصحاب البصات داخل السودان.'],
+    ['شريكك في الحجز والبصات والخطوط والمحفظة بجودة والتزام.', 'منصة حجز بصات سفرية داخل السودان مع محفظة واشتراكات لأصحاب البصات.']
+  ]);
+  document.querySelectorAll('a, h1, h2, h3, h4, p, span, button, option, small, li').forEach((el) => {
+    const text = (el.textContent || '').trim();
+    if (commonText.has(text)) el.textContent = commonText.get(text);
+  });
+
   const departments = visibleDepartments();
   const servicesGrid = document.querySelector('.services-grid');
   if (servicesGrid) {
@@ -107,7 +144,7 @@
         <div class="service-icon"><i class="${esc(dept.icon || 'fas fa-circle')}"></i></div>
         <h3>${esc(dept.title)}</h3>
         <p>${esc(dept.description)}</p>
-        <a href="services.html" class="service-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+        <a href="services.html" class="service-link">التفاصيل <i class="fas fa-arrow-left"></i></a>
       </div>
     `).join('');
   }
@@ -123,7 +160,7 @@
           <ul class="sd-features">
             ${itemNames(dept.key).map((name) => `<li><i class="fas fa-check"></i> ${esc(name)}</li>`).join('')}
           </ul>
-          <a href="contact.html" class="btn-primary">طلب عرض سعر <i class="fas fa-arrow-left"></i></a>
+          <a href="contact.html" class="btn-primary">ابدأ الآن <i class="fas fa-arrow-left"></i></a>
         </div>
       </div>
     `).join('');
@@ -131,7 +168,7 @@
 
   const serviceSelect = document.querySelector('select[name="service"]');
   if (serviceSelect) {
-    serviceSelect.innerHTML = '<option value="">اختر الخدمة المطلوبة</option>' + departments.map((dept) => `<option value="${esc(dept.key)}">${esc(dept.title)}</option>`).join('') + '<option value="other">أخرى</option>';
+    serviceSelect.innerHTML = '<option value="">اختر نوع الطلب</option>' + departments.map((dept) => `<option value="${esc(dept.key)}">${esc(dept.title)}</option>`).join('') + '<option value="other">أخرى</option>';
   }
 
   document.querySelectorAll('.footer-services ul').forEach((list) => {

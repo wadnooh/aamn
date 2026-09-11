@@ -1,14 +1,14 @@
 #Requires -Version 5.1
 <#
 .SYNOPSIS
-    Wad Nooh AAMN - Professional One-Click Auto-Deploy & Sync Pipeline
-    Synchronizes static assets, builds clean production package, and pushes to GitHub/Hostinger.
+    Wadnooh AAMN - Bus Booking Platform Deploy Pipeline
+    Synchronizes the static bus booking platform and builds a clean production package.
 #>
 
 $ErrorActionPreference = "Stop"
 $root = "e:\FLY"
 $src = Join-Path $root "SudanTravelApp.API\wwwroot"
-$dest = Join-Path $root "publish\wadnooh-clean-site"
+$dest = Join-Path $root "publish\aamn-bus-booking-platform"
 
 Write-Host "==========================================================" -ForegroundColor Cyan
 Write-Host "   Wadnooh AAMN - Automated Deployment & Sync Pipeline   " -ForegroundColor Cyan
@@ -16,13 +16,13 @@ Write-Host "==========================================================" -Foregro
 
 # 1. Sync files from wwwroot to repo root
 Write-Host "`n[1/3] Synchronizing web assets to repository root..." -ForegroundColor Yellow
-$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "specialty.html", "osh.html", "guide.html", "verify.html", "send-mail.php")
+$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "send-mail.php")
 foreach ($f in $htmlFiles) {
     $srcPath = Join-Path $src $f
     if (Test-Path $srcPath) { Copy-Item $srcPath $root -Force }
 }
 
-$dirs = @("css", "js", "images", "data")
+$dirs = @("css", "js", "images")
 foreach ($d in $dirs) {
     $s = Join-Path $src $d
     $t = Join-Path $root $d
@@ -40,7 +40,6 @@ foreach ($h in $allHtml) {
     $content = [regex]::Replace($content, 'href="css/style\.css(\?v=[^"]*)?"', "href=`"css/style.css?v=$ts`"")
     $content = [regex]::Replace($content, 'href="css/pages\.css(\?v=[^"]*)?"', "href=`"css/pages.css?v=$ts`"")
     $content = [regex]::Replace($content, 'src="js/main\.js(\?v=[^"]*)?"', "src=`"js/main.js?v=$ts`"")
-    $content = [regex]::Replace($content, 'src="js/auth-portal\.js(\?v=[^"]*)?"', "src=`"js/auth-portal.js?v=$ts`"")
     $content = [regex]::Replace($content, 'src="js/admin-site-config\.js(\?v=[^"]*)?"', "src=`"js/admin-site-config.js?v=$ts`"")
     [IO.File]::WriteAllText($h.FullName, $content, [Text.UTF8Encoding]::new($false))
     $rootTarget = Join-Path $root $h.Name
@@ -59,7 +58,7 @@ if ($tunnel) { $tunnel = $tunnel.Trim() }
 else { $tunnel = "https://onion-respected-karaoke-channels.trycloudflare.com" }
 
 $apiBase = "$tunnel/api"
-foreach ($rel in @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "js\wadnooh-eng.js", "js\wep-gate.js", "js\auth-portal.js", "js\main.js")) {
+foreach ($rel in @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "js\main.js", "js\admin-site-config.js")) {
     $p = Join-Path $dest $rel
     if (-not (Test-Path $p)) { continue }
     $text = [IO.File]::ReadAllText($p, [Text.UTF8Encoding]::new($false))
@@ -68,7 +67,7 @@ foreach ($rel in @("index.html", "about.html", "services.html", "projects.html",
     [IO.File]::WriteAllText($p, $text, [Text.UTF8Encoding]::new($false))
 }
 
-$cleanZip = Join-Path $root "publish\wadnooh-clean-site.zip"
+$cleanZip = Join-Path $root "publish\aamn-bus-booking-platform.zip"
 Remove-Item $cleanZip -Force -ErrorAction SilentlyContinue
 Compress-Archive -Path (Join-Path $dest "*") -DestinationPath $cleanZip -Force
 

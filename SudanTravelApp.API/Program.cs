@@ -53,7 +53,7 @@ builder.Services.Configure<CurrencyOptions>(
     builder.Configuration.GetSection(CurrencyOptions.SectionName));
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? "Data Source=SudanTravel.db";
+    ?? "Data Source=AamnBusBooking.db";
 builder.Services.AddDbContext<TravelDbContext>(options =>
     options.UseSqlite(connectionString));
 
@@ -232,7 +232,7 @@ using (var scope = app.Services.CreateScope())
 
         Console.WriteLine("");
         Console.WriteLine("╔════════════════════════════════════════════════════════════════╗");
-        Console.WriteLine("║     ود نوح للبرمجيات والكمبيوتر  v5 · Admin Panel                    ║");
+        Console.WriteLine("║     ودنوح AAMN لحجز البصات السفرية · Admin Panel                    ║");
         Console.WriteLine("║     Membership · Payments · Services · Company Control          ║");
         Console.WriteLine("╚════════════════════════════════════════════════════════════════╝");
         Console.WriteLine("");

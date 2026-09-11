@@ -259,6 +259,130 @@ body {
   gap: 24px;
 }
 
+.booking-console {
+  margin-top: -58px;
+  position: relative;
+  z-index: 5;
+  padding: 0 0 34px;
+}
+
+.booking-shell {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.booking-intro {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.booking-intro h2 {
+  color: var(--text-dark);
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.booking-intro p {
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.booking-form {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.booking-form .field {
+  display: grid;
+  gap: 6px;
+}
+
+.booking-form label {
+  color: var(--text-dark);
+  font-weight: 900;
+  font-size: .86rem;
+}
+
+.booking-form input,
+.booking-form select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fff;
+  color: var(--text-dark);
+  font-family: var(--font-primary);
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(212, 136, 27, .14);
+}
+
+.booking-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.result-card,
+.owner-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  background: var(--gray-100);
+  display: grid;
+  gap: 4px;
+}
+
+.result-card strong,
+.owner-card span {
+  color: var(--text-dark);
+  font-weight: 900;
+}
+
+.result-card span {
+  color: var(--text-light);
+  font-size: .88rem;
+}
+
+.result-card b {
+  color: var(--primary-dark);
+}
+
+.owner-card {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  background: #102033;
+  color: #fff;
+}
+
+.owner-card i {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(240, 166, 51, .16);
+  color: var(--primary-light);
+}
+
+.owner-card span {
+  color: #fff;
+  line-height: 1.7;
+}
+
 .service-detail-card,
 .service-detail-card.reverse {
   grid-template-columns: 112px minmax(0, 1fr);
@@ -353,6 +477,16 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .booking-form,
+  .booking-results {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .booking-form .btn-primary,
+  .owner-card {
+    grid-column: 1 / -1;
+  }
+
   .service-detail-card,
   .service-detail-card.reverse {
     grid-template-columns: 1fr;
@@ -374,7 +508,9 @@ body {
   }
 
   .services-grid,
-  .sd-features {
+  .sd-features,
+  .booking-form,
+  .booking-results {
     grid-template-columns: 1fr;
   }
 

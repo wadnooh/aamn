@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بوابة العملاء - ودنوح AAMN للبرمجيات والكمبيوتر</title>
+  <title>بوابة الركاب والأعمال - ودنوح AAMN لحجز البصات السفرية</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -160,8 +160,8 @@
     <div class="client-brand">
       <div class="client-logo-badge">AAMN</div>
       <div>
-        <h1>بوابة العملاء والأعضاء</h1>
-        <small style="color:var(--text-muted);">ودنوح AAMN للبرمجيات والكمبيوتر</small>
+        <h1>بوابة الركاب وأصحاب البصات</h1>
+        <small style="color:var(--text-muted);">ودنوح AAMN لحجز البصات السفرية</small>
       </div>
     </div>
     <div class="client-nav-links">
@@ -176,7 +176,7 @@
     <div class="auth-card">
       <div class="auth-tabs">
         <button class="auth-tab active" id="tabLogin">تسجيل الدخول</button>
-        <button class="auth-tab" id="tabRegister">حساب جديد / عضوية</button>
+        <button class="auth-tab" id="tabRegister">حساب راكب / صاحب بص</button>
       </div>
       <div class="auth-body">
         <!-- Login Form -->
@@ -226,14 +226,14 @@
             </div>
           </div>
           <div class="form-group">
-            <label>نوع باقة العضوية</label>
+            <label>نوع الحساب أو الاشتراك</label>
             <div class="input-box">
               <i class="fas fa-gem"></i>
               <select id="regTier">
-                <option value="Bronze">العضوية البرونزية (مجانية - خصم 5%)</option>
-                <option value="Silver">العضوية الفضية (خصم 10% على البرمجة والصيانة)</option>
-                <option value="Gold">العضوية الذهبية (دعم مباشر + خصم 15%)</option>
-                <option value="VIP">عضوية الشركات والأعمال VIP</option>
+                <option value="Passenger">راكب - حجز ومتابعة الرحلات</option>
+                <option value="BusOwner">صاحب بص - تسجيل بص واحد</option>
+                <option value="Company">شركة نقل - عدة بصات وخطوط</option>
+                <option value="VIP">اشتراك أعمال VIP</option>
               </select>
             </div>
           </div>
@@ -244,7 +244,7 @@
               <input type="password" id="regPassword" placeholder="••••••••" minlength="6" required>
             </div>
           </div>
-          <button type="submit" class="btn-submit"><i class="fas fa-user-plus"></i> تفعيل حساب العضوية</button>
+            <button type="submit" class="btn-submit"><i class="fas fa-user-plus"></i> تفعيل الحساب</button>
         </form>
       </div>
     </div>
@@ -269,8 +269,8 @@
       <div>
         <div class="dash-card">
           <div class="dash-card-header">
-            <h3><i class="fas fa-list-check"></i> طلباتي وخدماتي الحالية</h3>
-            <button class="btn-site" id="btnOpenNewReq"><i class="fas fa-plus"></i> طلب خدمة جديدة</button>
+            <h3><i class="fas fa-list-check"></i> حجوزاتي وطلباتي الحالية</h3>
+            <button class="btn-site" id="btnOpenNewReq"><i class="fas fa-plus"></i> حجز أو طلب جديد</button>
           </div>
           <div id="ordersList">
             <!-- Dynamically Loaded -->
@@ -280,28 +280,28 @@
         <!-- New Request Modal / Box -->
         <div class="dash-card" id="boxNewRequest" style="display:none;">
           <div class="dash-card-header">
-            <h3><i class="fas fa-laptop-code"></i> تقديم طلب خدمة أو استشارة</h3>
+            <h3><i class="fas fa-bus"></i> تقديم حجز أو طلب أعمال</h3>
           </div>
           <form id="formNewRequest">
             <div class="form-group">
-              <label>نوع الخدمة المطلوبة</label>
+              <label>نوع الطلب</label>
               <div class="input-box">
-                <i class="fas fa-tag"></i>
+                <i class="fas fa-ticket"></i>
                 <select id="reqService" required>
-                  <option value="برمجة المواقع والتطبيقات">برمجة المواقع والتطبيقات</option>
-                  <option value="خدمات الكمبيوتر والصيانة">خدمات الكمبيوتر والصيانة</option>
-                  <option value="الكهرباء والإلكترونيات">الكهرباء والإلكترونيات</option>
-                  <option value="الأجهزة والإكسسوارات">الأجهزة والإكسسوارات والشبكات</option>
-                  <option value="مبيعات المختبرات">مبيعات ومعدات المختبرات</option>
-                  <option value="دعم فني واستشارة">دعم فني واستشارة متخصصة</option>
+                  <option value="حجز رحلة">حجز رحلة</option>
+                  <option value="تعديل أو إلغاء حجز">تعديل أو إلغاء حجز</option>
+                  <option value="تسجيل صاحب بص">تسجيل صاحب بص</option>
+                  <option value="إضافة بص">إضافة بص للنشر</option>
+                  <option value="اشتراك أعمال">اشتراك أعمال لصاحب بص</option>
+                  <option value="المحفظة والضمان">المحفظة والضمان</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
-              <label>تفاصيل العمل أو المتطلبات</label>
+              <label>تفاصيل الرحلة أو بيانات البص</label>
               <div class="input-box">
                 <i class="fas fa-comment"></i>
-                <textarea id="reqDetails" rows="4" placeholder="اكتب تفاصيل طلبك بدقة..." required></textarea>
+                <textarea id="reqDetails" rows="4" placeholder="اكتب خط الرحلة، التاريخ، عدد الركاب، أو بيانات البص والشركة..." required></textarea>
               </div>
             </div>
             <div style="display:flex; gap:10px;">
@@ -321,11 +321,11 @@
           <div class="action-btn-grid">
             <a href="services.html" class="quick-action-btn">
               <i class="fas fa-th-large"></i>
-              <span>كتالوج الخدمات</span>
+              <span>أقسام المنصة</span>
             </a>
             <a href="projects.html" class="quick-action-btn">
               <i class="fas fa-briefcase"></i>
-              <span>نماذج أعمالنا</span>
+              <span>الخطوط والرحلات</span>
             </a>
             <a href="contact.html" class="quick-action-btn">
               <i class="fas fa-headset"></i>
@@ -340,13 +340,13 @@
 
         <div class="dash-card">
           <div class="dash-card-header">
-            <h3><i class="fas fa-shield-alt"></i> مزايا عضويتك</h3>
+            <h3><i class="fas fa-shield-alt"></i> مزايا حسابك</h3>
           </div>
           <ul style="list-style:none; line-height:2; font-size:0.9rem; color:var(--text-muted);">
-            <li><i class="fas fa-check" style="color:var(--primary);"></i> خصم مباشر على البرمجة والصيانة</li>
-            <li><i class="fas fa-check" style="color:var(--primary);"></i> أولوية في التنفيذ والدعم الفني</li>
-            <li><i class="fas fa-check" style="color:var(--primary);"></i> استشارات تقنية دورية مجانية</li>
-            <li><i class="fas fa-check" style="color:var(--primary);"></i> تقارير صيانة ومتابعة مباشرة</li>
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> متابعة الحجوزات والرحلات</li>
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> محفظة لحفظ المدفوعات والرصيد</li>
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> تسجيل بصات وخطوط لأصحاب الأعمال</li>
+            <li><i class="fas fa-check" style="color:var(--primary);"></i> تقارير حجوزات وتسويات شهرية</li>
           </ul>
         </div>
       </div>
@@ -354,8 +354,8 @@
   </main>
 
   <script>
-    const STORAGE_KEY = 'wadnooh_member_data';
-    const OPS_KEY = 'aamn_operations';
+    const STORAGE_KEY = 'aamn_bus_member_data_v2';
+    const OPS_KEY = 'aamn_bus_operations_v2';
 
     function getUser() {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch { return null; }
@@ -391,7 +391,7 @@
         id: '#MEM-' + Math.floor(1000 + Math.random()*9000),
         fullName: email.split('@')[0],
         email: email,
-        tier: 'العضوية الذهبية',
+        tier: 'راكب مميز',
         joinedAt: new Date().toISOString()
       };
       setUser(user);
@@ -448,7 +448,7 @@
       ops.unshift(newOp);
       localStorage.setItem(OPS_KEY, JSON.stringify(ops));
 
-      alert('تم إرسال طلبك بنجاح! سيتم التواصل معك من قبل فريق العمل.');
+      alert('تم إرسال طلبك بنجاح! سيتم التواصل معك لتأكيد الحجز أو بيانات البص.');
       formNewRequest.reset();
       boxNewRequest.style.display = 'none';
       renderOrders();
@@ -464,7 +464,7 @@
         container.innerHTML = `
           <div style="text-align:center; padding:30px; color:var(--text-muted);">
             <i class="fas fa-inbox" style="font-size:2.5rem; margin-bottom:10px; color:#cbd5e1;"></i>
-            <p>لا توجد طلبات سابقة حتى الآن. يمكنك تقديم طلب جديد الآن!</p>
+            <p>لا توجد حجوزات أو طلبات سابقة حتى الآن. يمكنك تقديم حجز جديد الآن!</p>
           </div>
         `;
         return;
@@ -473,8 +473,8 @@
       container.innerHTML = userOps.map(op => `
         <div class="order-item">
           <div class="order-info">
-            <h4>${op.service || 'طلب خدمة'}</h4>
-            <span><i class="fas fa-calendar-alt"></i> ${op.date} · رقم الطلب: ${op.id}</span>
+            <h4>${op.service || 'حجز رحلة'}</h4>
+            <span><i class="fas fa-calendar-alt"></i> ${op.date} · رقم الحجز/الطلب: ${op.id}</span>
           </div>
           <div>
             <span class="badge-status ${op.status === 'done' ? 'status-completed' : 'status-progress'}">

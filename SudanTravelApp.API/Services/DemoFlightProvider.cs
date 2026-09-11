@@ -24,7 +24,7 @@ public class DemoFlightProvider : IFlightProvider
         ("QR", "الخطوط القطرية", "Airbus A350"),
         ("TK", "الخطوط التركية", "Boeing 737-900"),
         ("ET", "الخطوط الإثيوبية", "Boeing 737-800"),
-        ("SV", "السعودية", "Airbus A321"),
+        ("SD", "السودان", "Bus Coach"),
         ("FZ", "فلاي دبي", "Boeing 737-800")
     ];
 

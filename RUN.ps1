@@ -1,8 +1,8 @@
-# ود نوح للبرمجيات والكمبيوتر - Script التشغيل
+# ودنوح AAMN لحجز البصات السفرية - Script التشغيل
 # Wad Nouh Software & Computer - PowerShell Run Script
 
 Write-Host "===============================================" -ForegroundColor Cyan
-Write-Host "🇸🇩 ود نوح للبرمجيات والكمبيوتر 🇸🇩" -ForegroundColor Green
+Write-Host "ودنوح AAMN لحجز البصات السفرية" -ForegroundColor Green
 Write-Host "Wad Nouh Software & Computer" -ForegroundColor Green
 Write-Host "===============================================" -ForegroundColor Cyan
 Write-Host ""

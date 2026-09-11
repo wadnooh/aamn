@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لوحة التحكم - ودنوح AAMN للبرمجيات والكمبيوتر</title>
+  <title>لوحة التحكم - ودنوح AAMN لحجز البصات السفرية</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
   <style>
@@ -22,7 +22,7 @@
 <body>
   <section class="login" id="login">
     <form class="login-card" id="loginForm" autocomplete="off">
-      <div class="brand"><div class="mark">AAMN</div><div><h1>لوحة تحكم الإدارة والموظفين</h1><p>ودنوح AAMN للبرمجيات والكمبيوتر</p></div></div>
+      <div class="brand"><div class="mark">AAMN</div><div><h1>لوحة تحكم الإدارة والأعمال</h1><p>ودنوح AAMN لحجز البصات السفرية</p></div></div>
       <div class="field"><label>البريد الوظيفي</label><input id="loginEmail" type="email" placeholder="أدخل البريد الوظيفي" dir="ltr" autocomplete="off" required></div>
       <div class="field"><label>كلمة المرور</label><input id="loginPassword" type="password" placeholder="أدخل كلمة المرور" autocomplete="new-password" required></div>
       <button class="btn btn-primary" style="width:100%; padding:12px; font-size:1rem;"><i class="fas fa-lock-open"></i> دخول إلى لوحة التحكم</button>
@@ -36,19 +36,19 @@
 
   <section class="app" id="app">
     <aside class="side" id="side">
-      <div class="side-brand"><div class="mark">AAMN</div><div><strong>ودنوح · AAMN</strong><br><small>Company Admin</small></div></div>
+      <div class="side-brand"><div class="mark">AAMN</div><div><strong>ودنوح · AAMN</strong><br><small>Travel Booking Admin</small></div></div>
       <div class="nav-label">الإدارة</div>
       <button class="nav active" data-panel="dashboard"><i class="fas fa-chart-line"></i> الرئيسية</button>
       <button class="nav" data-panel="site" id="navSite"><i class="fas fa-sliders-h"></i> تفاصيل الموقع</button>
-      <button class="nav" data-panel="ops"><i class="fas fa-receipt"></i> العمليات والمتابعة</button>
-      <div class="nav-label">أقسام الخدمات</div>
-      <button class="nav" data-dept="computers"><i class="fas fa-computer"></i> الكمبيوتر</button>
-      <button class="nav" data-dept="programming"><i class="fas fa-code"></i> البرمجة</button>
-      <button class="nav" data-dept="electricity"><i class="fas fa-bolt"></i> الكهرباء</button>
-      <button class="nav" data-dept="electronics"><i class="fas fa-microchip"></i> الإلكترونيات</button>
-      <button class="nav" data-dept="devices"><i class="fas fa-print"></i> الأجهزة والإكسسوارات</button>
-      <button class="nav" data-dept="labs"><i class="fas fa-flask"></i> مبيعات المختبرات</button>
-      <button class="nav" data-dept="support"><i class="fas fa-screwdriver-wrench"></i> الدعم والصيانة</button>
+      <button class="nav" data-panel="ops"><i class="fas fa-receipt"></i> الحجوزات والعمليات</button>
+      <div class="nav-label">أقسام المنصة</div>
+      <button class="nav" data-dept="booking"><i class="fas fa-ticket"></i> حجز التذاكر</button>
+      <button class="nav" data-dept="operators"><i class="fas fa-briefcase"></i> أصحاب البصات</button>
+      <button class="nav" data-dept="buses"><i class="fas fa-bus"></i> إدارة البصات</button>
+      <button class="nav" data-dept="routes"><i class="fas fa-route"></i> الخطوط والمدن</button>
+      <button class="nav" data-dept="wallet"><i class="fas fa-wallet"></i> المحفظة والضمان</button>
+      <button class="nav" data-dept="subscriptions"><i class="fas fa-id-card"></i> اشتراكات الأعمال</button>
+      <button class="nav" data-dept="support"><i class="fas fa-headset"></i> الدعم والمتابعة</button>
       <div class="nav-label">بيانات إضافية</div>
       <button class="nav" data-panel="customers" id="navCustomers"><i class="fas fa-address-book"></i> العملاء</button>
       <button class="nav" data-panel="staff" id="navStaff"><i class="fas fa-users-gear"></i> الموظفين والصلاحيات</button>
@@ -60,20 +60,20 @@
     </aside>
     <main class="main">
       <div class="top">
-        <div><button class="btn btn-light mobile" id="openSide" type="button"><i class="fas fa-bars"></i></button><h2 id="title">الرئيسية</h2><p id="subtitle">ملخص سريع لكل مبيعات واستشارات واشتراكات ودنوح AAMN.</p></div>
-        <div class="actions"><button class="btn btn-light" id="exportQuick"><i class="fas fa-download"></i> تصدير</button><button class="btn btn-primary" id="newTop"><i class="fas fa-plus"></i> عملية جديدة</button></div>
+        <div><button class="btn btn-light mobile" id="openSide" type="button"><i class="fas fa-bars"></i></button><h2 id="title">الرئيسية</h2><p id="subtitle">ملخص سريع للحجوزات، الرحلات، المحفظة، واشتراكات أصحاب البصات.</p></div>
+        <div class="actions"><button class="btn btn-light" id="exportQuick"><i class="fas fa-download"></i> تصدير</button><button class="btn btn-primary" id="newTop"><i class="fas fa-plus"></i> حجز أو عملية جديدة</button></div>
       </div>
 
       <section class="panel active" id="dashboard">
         <div class="stats">
-          <div class="stat"><i class="fas fa-receipt"></i><strong id="stTotal">0</strong><span>إجمالي العمليات</span></div>
-          <div class="stat"><i class="fas fa-sack-dollar"></i><strong id="stSales">0</strong><span>عمليات بيع</span></div>
-          <div class="stat"><i class="fas fa-comments"></i><strong id="stConsult">0</strong><span>استشارات</span></div>
-          <div class="stat"><i class="fas fa-flask"></i><strong id="stLabs">0</strong><span>منتجات المختبرات</span></div>
+          <div class="stat"><i class="fas fa-receipt"></i><strong id="stTotal">0</strong><span>إجمالي الحجوزات</span></div>
+          <div class="stat"><i class="fas fa-bus"></i><strong id="stSales">0</strong><span>رحلات مؤكدة</span></div>
+          <div class="stat"><i class="fas fa-briefcase"></i><strong id="stConsult">0</strong><span>طلبات أصحاب البصات</span></div>
+          <div class="stat"><i class="fas fa-id-card"></i><strong id="stLabs">0</strong><span>اشتراكات أعمال</span></div>
           <div class="stat"><i class="fas fa-coins"></i><strong id="stRevenue">0</strong><span>إجمالي المبالغ</span></div>
         </div>
         <div class="grid2">
-          <div class="card"><div class="head"><h3>آخر العمليات</h3><button class="btn btn-sm btn-outline" data-jump="ops">عرض الكل</button></div><div id="latest"></div></div>
+          <div class="card"><div class="head"><h3>آخر الحجوزات والعمليات</h3><button class="btn btn-sm btn-outline" data-jump="ops">عرض الكل</button></div><div id="latest"></div></div>
           <div class="card"><div class="head"><h3>تفاصيل الموقع الحالية</h3><button class="btn btn-sm btn-outline" data-jump="site">تعديل</button></div><div id="siteSummary"></div></div>
         </div>
       </section>
@@ -92,16 +92,16 @@
             <div class="field"><label>ساعات العمل</label><input name="hours"></div>
           </div>
           <div class="field"><label>وصف قصير</label><textarea name="description"></textarea></div>
-          <div class="field"><label>الخدمات، كل خدمة في سطر</label><textarea name="services"></textarea></div>
-          <button class="btn btn-primary"><i class="fas fa-save"></i> حفظ تفاصيل الموقع</button>
+          <div class="field"><label>أقسام المنصة، كل قسم في سطر</label><textarea name="services"></textarea></div>
+          <button class="btn btn-primary"><i class="fas fa-save"></i> حفظ تفاصيل المنصة</button>
         </form>
       </section>
 
       <section class="panel" id="ops">
         <div class="card">
-          <div class="head"><h3>سجل العمليات</h3><button class="btn btn-primary" id="addOp"><i class="fas fa-plus"></i> إضافة عملية</button></div>
-          <div class="toolbar"><input id="search" placeholder="بحث..."><select id="typeFilter"><option value="all">كل الأنواع</option><option value="sale">بيع</option><option value="consultation">استشارة</option><option value="subscription">اشتراك</option><option value="support">دعم وصيانة</option><option value="other">أخرى</option></select><select id="statusFilter"><option value="all">كل الحالات</option><option value="open">مفتوحة</option><option value="done">مكتملة</option><option value="cancelled">ملغاة</option></select></div>
-          <div class="table"><table><thead><tr><th>التاريخ</th><th>النوع</th><th>العميل</th><th>التواصل</th><th>المبلغ</th><th>الحالة</th><th>ملاحظات</th><th>إجراءات</th></tr></thead><tbody id="opsBody"></tbody></table></div>
+          <div class="head"><h3>سجل الحجوزات والعمليات</h3><button class="btn btn-primary" id="addOp"><i class="fas fa-plus"></i> إضافة حجز</button></div>
+          <div class="toolbar"><input id="search" placeholder="بحث..."><select id="typeFilter"><option value="all">كل الأنواع</option><option value="sale">حجز رحلة</option><option value="consultation">طلب صاحب بص</option><option value="subscription">اشتراك أعمال</option><option value="support">دعم ومتابعة</option><option value="other">أخرى</option></select><select id="statusFilter"><option value="all">كل الحالات</option><option value="open">مفتوحة</option><option value="done">مكتملة</option><option value="cancelled">ملغاة</option></select></div>
+          <div class="table"><table><thead><tr><th>التاريخ</th><th>النوع</th><th>العميل / صاحب البص</th><th>التواصل</th><th>المبلغ</th><th>الحالة</th><th>الرحلة / ملاحظات</th><th>إجراءات</th></tr></thead><tbody id="opsBody"></tbody></table></div>
         </div>
       </section>
 
@@ -141,13 +141,13 @@
             <input id="staffSearch" placeholder="بحث بالاسم أو البريد أو القسم...">
             <select id="staffDeptFilter">
               <option value="all">كل الأقسام</option>
-              <option value="computers">الكمبيوتر</option>
-              <option value="programming">البرمجة</option>
-              <option value="electricity">الكهرباء</option>
-              <option value="electronics">الإلكترونيات</option>
-              <option value="devices">الأجهزة والإكسسوارات</option>
-              <option value="labs">مبيعات المختبرات</option>
-              <option value="support">الدعم والصيانة</option>
+              <option value="booking">الحجوزات</option>
+              <option value="operators">أصحاب البصات</option>
+              <option value="buses">إدارة البصات</option>
+              <option value="routes">الخطوط والمدن</option>
+              <option value="wallet">المحفظة والضمان</option>
+              <option value="subscriptions">اشتراكات الأعمال</option>
+              <option value="support">الدعم والمتابعة</option>
               <option value="management">الإدارة العامة</option>
             </select>
           </div>
@@ -219,9 +219,9 @@
   </section>
 
   <!-- Modals -->
-  <div class="modal-bg" id="opModal"><div class="modal"><div class="head"><h3 id="opModalTitle">عملية جديدة</h3><button class="btn btn-sm btn-light" id="closeOpModal"><i class="fas fa-times"></i></button></div><form id="opForm"><input type="hidden" name="id"><div class="grid2"><div class="field"><label>التاريخ</label><input name="date" type="date" required></div><div class="field"><label>النوع</label><select name="type"><option value="sale">بيع</option><option value="consultation">استشارة</option><option value="subscription">اشتراك</option><option value="support">دعم وصيانة</option><option value="other">أخرى</option></select></div><div class="field"><label>اسم العميل</label><input name="customer" required></div><div class="field"><label>رقم الهاتف</label><input name="phone" dir="ltr"></div><div class="field"><label>البريد</label><input name="email" type="email" dir="ltr"></div><div class="field"><label>المبلغ</label><input name="amount" type="number" step="0.01" value="0"></div><div class="field"><label>الخدمة / البيان</label><input name="service"></div><div class="field"><label>الحالة</label><select name="status"><option value="open">مفتوحة</option><option value="done">مكتملة</option><option value="cancelled">ملغاة</option></select></div></div><div class="field"><label>ملاحظات</label><textarea name="notes"></textarea></div><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ العملية</button></form></div></div>
+  <div class="modal-bg" id="opModal"><div class="modal"><div class="head"><h3 id="opModalTitle">حجز أو عملية جديدة</h3><button class="btn btn-sm btn-light" id="closeOpModal"><i class="fas fa-times"></i></button></div><form id="opForm"><input type="hidden" name="id"><div class="grid2"><div class="field"><label>التاريخ</label><input name="date" type="date" required></div><div class="field"><label>النوع</label><select name="type"><option value="sale">حجز رحلة</option><option value="consultation">طلب صاحب بص</option><option value="subscription">اشتراك أعمال</option><option value="support">دعم ومتابعة</option><option value="other">أخرى</option></select></div><div class="field"><label>اسم العميل / صاحب البص</label><input name="customer" required></div><div class="field"><label>رقم الهاتف</label><input name="phone" dir="ltr"></div><div class="field"><label>البريد</label><input name="email" type="email" dir="ltr"></div><div class="field"><label>المبلغ</label><input name="amount" type="number" step="0.01" value="0"></div><div class="field"><label>الرحلة / البيان</label><input name="service" placeholder="مثال: الخرطوم إلى مدني - بص VIP"></div><div class="field"><label>الحالة</label><select name="status"><option value="open">مفتوحة</option><option value="done">مكتملة</option><option value="cancelled">ملغاة</option></select></div></div><div class="field"><label>ملاحظات</label><textarea name="notes"></textarea></div><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ الحجز أو العملية</button></form></div></div>
 
-  <div class="modal-bg" id="deptItemModal"><div class="modal"><div class="head"><h3 id="deptItemModalTitle">عنصر جديد</h3><button class="btn btn-sm btn-light" id="closeDeptItemModal"><i class="fas fa-times"></i></button></div><form id="deptItemForm"><input type="hidden" name="id"><div class="grid2"><div class="field"><label>اسم العنصر / الخدمة / المنتج</label><input name="name" required></div><div class="field"><label>السعر (ر.س)</label><input name="price" type="number" step="0.01" value="0"></div><div class="field"><label>الحالة</label><select name="status"><option value="available">متاح</option><option value="unavailable">غير متاح</option></select></div><div class="field"><label>رمز مميز / كود</label><input name="badge" placeholder="مثال: الأكثر طلباً"></div></div><div class="field"><label>الوصف / التفاصيل</label><textarea name="desc"></textarea></div><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ العنصر</button></form></div></div>
+  <div class="modal-bg" id="deptItemModal"><div class="modal"><div class="head"><h3 id="deptItemModalTitle">عنصر جديد</h3><button class="btn btn-sm btn-light" id="closeDeptItemModal"><i class="fas fa-times"></i></button></div><form id="deptItemForm"><input type="hidden" name="id"><div class="grid2"><div class="field"><label>اسم العنصر / الرحلة / الباقة</label><input name="name" required></div><div class="field"><label>السعر (جنيه سوداني)</label><input name="price" type="number" step="0.01" value="0"></div><div class="field"><label>الحالة</label><select name="status"><option value="available">متاح</option><option value="unavailable">غير متاح</option></select></div><div class="field"><label>رمز مميز / كود</label><input name="badge" placeholder="مثال: رحلة مميزة"></div></div><div class="field"><label>الوصف / التفاصيل</label><textarea name="desc"></textarea></div><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ العنصر</button></form></div></div>
 
   <div class="modal-bg" id="staffModal">
     <div class="modal">
@@ -233,7 +233,7 @@
           <div class="field"><label>البريد الإلكتروني الوظيفي</label><input name="email" type="email" dir="ltr" required autocomplete="off"></div>
           <div class="field"><label>كلمة المرور</label><input name="password" type="password" placeholder="أدخل كلمة المرور" required autocomplete="new-password"></div>
           <div class="field"><label>رقم الجوال</label><input name="phone" dir="ltr"></div>
-          <div class="field"><label>القسم</label><select name="department" required><option value="computers">خدمات الكمبيوتر</option><option value="programming">برمجة المواقع والتطبيقات</option><option value="electricity">أنظمة الكهرباء</option><option value="electronics">الإلكترونيات</option><option value="devices">الأجهزة والإكسسوارات</option><option value="labs">مبيعات المختبرات</option><option value="support">الدعم والصيانة</option><option value="management">الإدارة والمتابعة</option></select></div>
+          <div class="field"><label>القسم</label><select name="department" required><option value="booking">الحجوزات</option><option value="operators">أصحاب البصات</option><option value="buses">إدارة البصات</option><option value="routes">الخطوط والمدن</option><option value="wallet">المحفظة والضمان</option><option value="subscriptions">اشتراكات الأعمال</option><option value="support">الدعم والمتابعة</option><option value="management">الإدارة العامة</option></select></div>
           <div class="field"><label>المسمى الوظيفي / الدور</label><input name="role" placeholder="مثال: مهندس برمجيات، فني شبكات..." required></div>
           <div class="field"><label>حالة الحساب</label><select name="status"><option value="active">نشط</option><option value="inactive">معطل</option></select></div>
         </div>
@@ -259,65 +259,67 @@
   <script>
   (function () {
     const K = {
-      settings: 'aamn_site_settings',
-      admin: 'aamn_admin_credentials',
-      ops: 'aamn_operations',
-      departments: 'aamn_departments',
-      items: 'aamn_dept_items',
-      labs: 'aamn_lab_sales',
-      staff: 'aamn_staff',
-      currentUser: 'aamn_current_staff_user',
-      authEpoch: 'aamn_auth_epoch',
-      logged: 'aamn_admin_logged'
+      settings: 'aamn_bus_site_settings_v2',
+      admin: 'aamn_bus_admin_credentials_v2',
+      ops: 'aamn_bus_operations_v2',
+      departments: 'aamn_bus_departments_v2',
+      items: 'aamn_bus_dept_items_v2',
+      labs: 'aamn_bus_subscriptions_v2',
+      staff: 'aamn_bus_staff_v2',
+      currentUser: 'aamn_bus_current_staff_user_v2',
+      authEpoch: 'aamn_bus_auth_epoch_v2',
+      logged: 'aamn_bus_admin_logged_v2'
     };
 
     const D = {
       settings: {
-        brandAr: 'ودنوح AAMN',
+        brandAr: 'ودنوح',
         brandEn: 'AAMN',
-        email: 'info@wadnooh.tech',
+        email: 'info@2-aa.com',
         phone: '+966500000000',
         whatsapp: '966500000000',
         domain: '2-aa.com',
-        address: 'المملكة العربية السعودية، الرياض، حي الملك فهد',
-        hours: 'الأحد - الخميس: 8:00 ص - 5:00 م',
-        description: 'ودنوح AAMN للبرمجيات والكمبيوتر - شريكك في البرمجة والكمبيوتر والكهرباء والإلكترونيات.',
-        services: 'خدمات الكمبيوتر والصيانة\nبرمجة المواقع والتطبيقات\nأنظمة الكهرباء واللوحات\nالحلول الإلكترونية\nالأجهزة والإكسسوارات\nمبيعات المختبرات\nالدعم الفني والصيانة'
+        address: 'السودان - خدمة إلكترونية لجميع المدن',
+        hours: 'طوال أيام الأسبوع حسب توفر الرحلات',
+        description: 'منصة حجز بصات سفرية داخل السودان تربط الركاب بأصحاب البصات مع محفظة واشتراكات أعمال.',
+        services: 'حجز التذاكر\nتسجيل أصحاب البصات\nإدارة البصات والأسطول\nالخطوط والمدن\nالمحفظة والضمان\nاشتراكات الأعمال\nالدعم والمتابعة'
       },
       admin: {
         adminEmail: 'admin@2-aa.com',
         adminPassword: 'Admin@123456'
       },
       ops: [
-        { id: 'op_1', date: '2026-08-25', type: 'sale', customer: 'مؤسسة التقنية الحديثة', phone: '0501234567', email: 'tech@example.com', service: 'ترقية أجهزة وتمديد شبكات', amount: 4500, status: 'done', notes: 'تم التسليم والضمان ساري' },
-        { id: 'op_2', date: '2026-08-26', type: 'consultation', customer: 'شركة الأفق الرقمي', phone: '0559876543', email: 'info@horiz.com', service: 'استشارة برمجة نظام مالي', amount: 1200, status: 'open', notes: 'بانتظار الموافقة على العرض' }
+        { id: 'op_1', date: '2026-09-08', type: 'sale', customer: 'عميل تجريبي', phone: '0912345678', email: 'client@example.com', service: 'الخرطوم إلى مدني - مقعدين', amount: 17000, status: 'done', notes: 'تم تأكيد الحجز عبر المحفظة' },
+        { id: 'op_2', date: '2026-09-08', type: 'consultation', customer: 'شركة نقل النيل', phone: '0998765432', email: 'operator@example.com', service: 'تسجيل 3 بصات وخط الخرطوم - بورتسودان', amount: 0, status: 'open', notes: 'بانتظار توثيق بيانات البصات' },
+        { id: 'op_3', date: '2026-09-08', type: 'subscription', customer: 'صاحب بص مستقل', phone: '0922222222', email: '', service: 'اشتراك أعمال شهري', amount: 45000, status: 'open', notes: 'يتم التفعيل بعد السداد' }
       ],
       departments: {
-        computers: { title: 'خدمات الكمبيوتر', icon: 'fas fa-computer', order: 1, status: 'active', desc: 'صيانة وترقية أجهزة الكمبيوتر واللابتوبات.' },
-        programming: { title: 'البرمجة والتطوير', icon: 'fas fa-code', order: 2, status: 'active', desc: 'برمجة المواقع وتطبيقات الويب والأنظمة.' },
-        electricity: { title: 'أنظمة الكهرباء', icon: 'fas fa-bolt', order: 3, status: 'active', desc: 'لوحات وتمديدات وحماية كهربائية.' },
-        electronics: { title: 'الإلكترونيات', icon: 'fas fa-microchip', order: 4, status: 'active', desc: 'دوائر وحلول إلكترونية متطورة.' },
-        devices: { title: 'الأجهزة والإكسسوارات', icon: 'fas fa-print', order: 5, status: 'active', desc: 'شاشات وطابعات وملحقات شبكات.' },
-        labs: { title: 'مبيعات المختبرات', icon: 'fas fa-flask', order: 6, status: 'active', desc: 'معدات وأجهزة المختبرات التقنية.' },
-        support: { title: 'الدعم والصيانة', icon: 'fas fa-screwdriver-wrench', order: 7, status: 'active', desc: 'عقود صيانة ومتابعة دورية.' }
+        booking: { title: 'حجز التذاكر', icon: 'fas fa-ticket', order: 1, status: 'active', desc: 'بحث وحجز مقاعد البصات السفرية.' },
+        operators: { title: 'أصحاب البصات', icon: 'fas fa-briefcase', order: 2, status: 'active', desc: 'تسجيل الشركات وأصحاب البصات وتوثيقهم.' },
+        buses: { title: 'إدارة البصات', icon: 'fas fa-bus', order: 3, status: 'active', desc: 'بيانات البصات والمقاعد والصور والحالة.' },
+        routes: { title: 'الخطوط والمدن', icon: 'fas fa-route', order: 4, status: 'active', desc: 'كل مدن السودان والخطوط والمواعيد.' },
+        wallet: { title: 'المحفظة والضمان', icon: 'fas fa-wallet', order: 5, status: 'active', desc: 'حفظ حقوق العميل وصاحب البص والتسويات.' },
+        subscriptions: { title: 'اشتراكات الأعمال', icon: 'fas fa-id-card', order: 6, status: 'active', desc: 'باقات نشر الرحلات لأصحاب البصات.' },
+        support: { title: 'الدعم والمتابعة', icon: 'fas fa-headset', order: 7, status: 'active', desc: 'متابعة الحجوزات والشكاوى والتنبيهات.' }
       },
       items: {
-        computers: [
-          { id: 'it_1', name: 'صيانة وفحص شامل للكمبيوتر', price: 150, status: 'available', badge: 'شائع', desc: 'تنظيف، فحص الهاردوير، وتثبيت البرامج الأساسية.' },
-          { id: 'it_2', name: 'ترقية الذاكرة SSD & RAM', price: 350, status: 'available', badge: 'أداء عالي', desc: 'تسريع الجهاز وزيادة كفاءة الإقلاع.' }
+        booking: [
+          { id: 'it_1', name: 'الخرطوم إلى مدني', price: 8500, status: 'available', badge: 'يومي', desc: 'رحلات صباحية ومسائية مع اختيار مقعد.' },
+          { id: 'it_2', name: 'الخرطوم إلى بورتسودان', price: 28000, status: 'available', badge: 'VIP', desc: 'رحلة طويلة ببص مكيف وخدمة مميزة.' }
         ],
-        programming: [
-          { id: 'it_3', name: 'تصميم وبرمجة موقع تعريفي', price: 2500, status: 'available', badge: 'باقة متميزة', desc: 'موقع متجاوب سريع مع لوحة تحكم كاملة.' }
+        operators: [
+          { id: 'it_3', name: 'تسجيل صاحب بص', price: 0, status: 'available', badge: 'توثيق', desc: 'فتح ملف أعمال وتوثيق بيانات المالك والبص.' }
         ],
-        labs: [
-          { id: 'lab_1', name: 'جهاز تحليل عينات إلكتروني', price: 12000, status: 'available', badge: 'دقة عالية', desc: 'معدات فحص معتمدة مع ضمان سنة.' }
+        subscriptions: [
+          { id: 'sub_1', name: 'اشتراك صاحب بص مستقل', price: 45000, status: 'available', badge: 'شهري', desc: 'نشر الرحلات واستقبال الحجوزات وتقارير أساسية.' },
+          { id: 'sub_2', name: 'اشتراك شركة نقل', price: 120000, status: 'available', badge: 'أعمال', desc: 'إدارة عدة بصات وخطوط وتقارير وتسويات.' }
         ]
       }
     };
 
     const defaultStaff = [
-      { id: 'stf_1', name: 'المهندس أحمد نوح', email: 'ahmed@wadnooh.tech', password: 'Staff@123456', phone: '0500000001', department: 'programming', role: 'كبير مهندسي البرمجيات', status: 'active', perms: ['ops', 'services', 'customers'] },
-      { id: 'stf_2', name: 'فني الصيانة والدعم', email: 'tech@wadnooh.tech', password: 'Staff@123456', phone: '0500000002', department: 'computers', role: 'مسؤول الصيانة والشبكات', status: 'active', perms: ['ops', 'services'] }
+      { id: 'stf_1', name: 'مسؤول الحجوزات', email: 'booking@2-aa.com', password: 'Staff@123456', phone: '0910000001', department: 'booking', role: 'إدارة الحجوزات والرحلات', status: 'active', perms: ['ops', 'services', 'customers'] },
+      { id: 'stf_2', name: 'مسؤول أصحاب البصات', email: 'business@2-aa.com', password: 'Staff@123456', phone: '0910000002', department: 'operators', role: 'توثيق الشركات والبصات', status: 'active', perms: ['ops', 'services'] }
     ];
 
     // Helper functions
@@ -467,15 +469,15 @@
     });
 
     // Navigation and Panels
-    let currentDept = 'computers';
+    let currentDept = 'booking';
     const deptTitles = {
-      computers: 'خدمات الكمبيوتر',
-      programming: 'برمجة المواقع والتطبيقات',
-      electricity: 'أنظمة الكهرباء',
-      electronics: 'الإلكترونيات',
-      devices: 'الأجهزة والإكسسوارات',
-      labs: 'مبيعات المختبرات',
-      support: 'الدعم والصيانة'
+      booking: 'حجز التذاكر',
+      operators: 'أصحاب البصات',
+      buses: 'إدارة البصات',
+      routes: 'الخطوط والمدن',
+      wallet: 'المحفظة والضمان',
+      subscriptions: 'اشتراكات الأعمال',
+      support: 'الدعم والمتابعة'
     };
 
     function openPanel(p) {
@@ -498,7 +500,7 @@
       if (activeNav) activeNav.classList.add('active');
 
       const titleEl = document.getElementById('title');
-      const panelNames = { dashboard: 'الرئيسية', site: 'تفاصيل الموقع', ops: 'العمليات والمتابعة', customers: 'سجل العملاء', staff: 'إدارة الموظفين والصلاحيات', admin: 'إعدادات الأدمن', backup: 'النسخ الاحتياطي' };
+      const panelNames = { dashboard: 'الرئيسية', site: 'تفاصيل المنصة', ops: 'الحجوزات والعمليات', customers: 'سجل العملاء وأصحاب البصات', staff: 'إدارة الموظفين والصلاحيات', admin: 'إعدادات الأدمن', backup: 'النسخ الاحتياطي' };
       if (titleEl && panelNames[p]) titleEl.textContent = panelNames[p];
 
       document.getElementById('side')?.classList.remove('open');
@@ -581,8 +583,8 @@
       if (document.getElementById('stTotal')) document.getElementById('stTotal').textContent = total;
       if (document.getElementById('stSales')) document.getElementById('stSales').textContent = sales;
       if (document.getElementById('stConsult')) document.getElementById('stConsult').textContent = consult;
-      if (document.getElementById('stLabs')) document.getElementById('stLabs').textContent = (deptItems().labs || []).length;
-      if (document.getElementById('stRevenue')) document.getElementById('stRevenue').textContent = money(revenue) + ' ر.س';
+      if (document.getElementById('stLabs')) document.getElementById('stLabs').textContent = list.filter(x => x.type === 'subscription').length;
+      if (document.getElementById('stRevenue')) document.getElementById('stRevenue').textContent = money(revenue) + ' جنيه';
     }
 
     function renderLatest() {
@@ -614,7 +616,8 @@
 
       if (!list.length) { body.innerHTML = '<tr><td colspan="8" class="empty">لا توجد نتائج مطابقة</td></tr>'; return; }
 
-      body.innerHTML = list.map(o => '<tr><td>' + esc(o.date) + '</td><td><span class="badge ' + esc(o.type) + '">' + esc(o.type) + '</span></td><td><strong>' + esc(o.customer) + '</strong></td><td dir="ltr" style="text-align:right;">' + esc(o.phone || o.email) + '</td><td><strong>' + money(o.amount) + '</strong></td><td><span class="badge ' + esc(o.status) + '">' + esc(o.status === 'done' ? 'مكتملة' : (o.status === 'open' ? 'مفتوحة' : 'ملغاة')) + '</span></td><td>' + esc(o.notes || o.service) + '</td><td><button class="btn btn-sm btn-light" onclick="window.editOp(\'' + o.id + '\')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="window.delOp(\'' + o.id + '\')"><i class="fas fa-trash"></i></button></td></tr>').join('');
+      const typeLabels = { sale: 'حجز رحلة', consultation: 'طلب صاحب بص', subscription: 'اشتراك أعمال', support: 'دعم ومتابعة', other: 'أخرى' };
+      body.innerHTML = list.map(o => '<tr><td>' + esc(o.date) + '</td><td><span class="badge ' + esc(o.type) + '">' + esc(typeLabels[o.type] || o.type) + '</span></td><td><strong>' + esc(o.customer) + '</strong></td><td dir="ltr" style="text-align:right;">' + esc(o.phone || o.email) + '</td><td><strong>' + money(o.amount) + ' جنيه</strong></td><td><span class="badge ' + esc(o.status) + '">' + esc(o.status === 'done' ? 'مكتملة' : (o.status === 'open' ? 'مفتوحة' : 'ملغاة')) + '</span></td><td>' + esc(o.notes || o.service) + '</td><td><button class="btn btn-sm btn-light" onclick="window.editOp(\'' + o.id + '\')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="window.delOp(\'' + o.id + '\')"><i class="fas fa-trash"></i></button></td></tr>').join('');
     }
 
     function renderDeptItems() {
@@ -623,7 +626,7 @@
       const all = deptItems();
       const list = all[currentDept] || [];
       if (!list.length) { body.innerHTML = '<tr><td colspan="5" class="empty">لا توجد عناصر مضافة لهذا القسم</td></tr>'; return; }
-      body.innerHTML = list.map(it => '<tr><td><strong>' + esc(it.name) + '</strong> ' + (it.badge ? '<span class="badge">' + esc(it.badge) + '</span>' : '') + '</td><td>' + esc(it.desc) + '</td><td><strong>' + money(it.price) + ' ر.س</strong></td><td><span class="badge ' + esc(it.status) + '">' + esc(it.status === 'available' ? 'متاح' : 'غير متاح') + '</span></td><td><button class="btn btn-sm btn-light" onclick="window.editDeptItem(\'' + it.id + '\')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="window.delDeptItem(\'' + it.id + '\')"><i class="fas fa-trash"></i></button></td></tr>').join('');
+      body.innerHTML = list.map(it => '<tr><td><strong>' + esc(it.name) + '</strong> ' + (it.badge ? '<span class="badge">' + esc(it.badge) + '</span>' : '') + '</td><td>' + esc(it.desc) + '</td><td><strong>' + money(it.price) + ' جنيه</strong></td><td><span class="badge ' + esc(it.status) + '">' + esc(it.status === 'available' ? 'متاح' : 'غير متاح') + '</span></td><td><button class="btn btn-sm btn-light" onclick="window.editDeptItem(\'' + it.id + '\')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="window.delDeptItem(\'' + it.id + '\')"><i class="fas fa-trash"></i></button></td></tr>').join('');
     }
 
     function renderCustomers() {
@@ -640,7 +643,7 @@
       });
       const arr = Object.values(map);
       if (!arr.length) { body.innerHTML = '<tr><td colspan="6" class="empty">لا يوجد عملاء مسجلون</td></tr>'; return; }
-      body.innerHTML = arr.map(c => '<tr><td><strong>' + esc(c.name) + '</strong></td><td>' + esc(c.email) + '</td><td dir="ltr" style="text-align:right;">' + esc(c.phone) + '</td><td>' + c.count + '</td><td>' + esc(c.last) + '</td><td><strong>' + money(c.total) + ' ر.س</strong></td></tr>').join('');
+      body.innerHTML = arr.map(c => '<tr><td><strong>' + esc(c.name) + '</strong></td><td>' + esc(c.email) + '</td><td dir="ltr" style="text-align:right;">' + esc(c.phone) + '</td><td>' + c.count + '</td><td>' + esc(c.last) + '</td><td><strong>' + money(c.total) + ' جنيه</strong></td></tr>').join('');
     }
 
     function renderStaff() {
@@ -655,7 +658,7 @@
 
       if (!list.length) { body.innerHTML = '<tr><td colspan="7" class="empty">لا يوجد موظفون مطابقون</td></tr>'; return; }
 
-      const permLabels = { ops: 'العمليات', services: 'الخدمات', customers: 'العملاء', site: 'الموقع', staff: 'الموظفين', backup: 'النسخ' };
+      const permLabels = { ops: 'الحجوزات', services: 'الأقسام', customers: 'العملاء والأعمال', site: 'المنصة', staff: 'الموظفين', backup: 'النسخ' };
 
       body.innerHTML = list.map(s => {
         const permsBadge = (s.perms || []).map(p => '<span class="badge" style="margin:2px;">' + (permLabels[p] || p) + '</span>').join('');
@@ -668,7 +671,7 @@
     const opForm = document.getElementById('opForm');
     document.getElementById('addOp')?.addEventListener('click', () => {
       if (opForm) { opForm.reset(); opForm.elements.id.value = ''; opForm.elements.date.value = today(); }
-      document.getElementById('opModalTitle').textContent = 'إضافة عملية جديدة';
+      document.getElementById('opModalTitle').textContent = 'إضافة حجز أو عملية جديدة';
       if (opModal) opModal.style.display = 'grid';
     });
     document.getElementById('newTop')?.addEventListener('click', () => { document.getElementById('addOp')?.click(); });
@@ -688,21 +691,21 @@
       }
       saveOps(list);
       if (opModal) opModal.style.display = 'none';
-      toast('تم حفظ العملية بنجاح');
+      toast('تم حفظ الحجز أو العملية بنجاح');
     });
 
     window.editOp = function (opId) {
       const o = ops().find(x => x.id === opId);
       if (!o || !opForm) return;
       Object.keys(o).forEach(k => { if (opForm.elements[k]) opForm.elements[k].value = o[k] ?? ''; });
-      document.getElementById('opModalTitle').textContent = 'تعديل العملية';
+      document.getElementById('opModalTitle').textContent = 'تعديل الحجز أو العملية';
       if (opModal) opModal.style.display = 'grid';
     };
 
     window.delOp = function (opId) {
-      if (confirm('هل أنت متأكد من حذف هذه العملية؟')) {
+      if (confirm('هل أنت متأكد من حذف هذا الحجز أو العملية؟')) {
         saveOps(ops().filter(x => x.id !== opId));
-        toast('تم حذف العملية');
+        toast('تم حذف الحجز أو العملية');
       }
     };
 

@@ -1,5 +1,5 @@
 /**
- * AAMN - ودنوح AAMN للبرمجيات والكمبيوتر
+ * AAMN - ودنوح AAMN لحجز البصات السفرية
  * Main JavaScript File
  */
 
@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.open(`https://wa.me/${rawWhatsApp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
                     return;
                 }
-                window.location.href = `mailto:${settings.email || 'info@wadnooh.tech'}?subject=${encodeURIComponent('رسالة من موقع ودنوح AAMN')}&body=${encodeURIComponent(text)}`;
+                window.location.href = `mailto:${settings.email || 'info@2-aa.com'}?subject=${encodeURIComponent('رسالة من موقع ودنوح AAMN')}&body=${encodeURIComponent(text)}`;
             };
 
             saveLocalInquiry();
@@ -430,7 +430,46 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /* ============================================
-       13. SMOOTH ANCHOR SCROLLING
+       13. BUS BOOKING SEARCH
+    ============================================ */
+    const busBookingForm = document.getElementById('busBookingForm');
+    const bookingResults = document.getElementById('bookingResults');
+    if (busBookingForm && bookingResults) {
+        const sampleTrips = [
+            { time: '6:30 صباحاً', type: 'بص مكيف', seats: 18, price: 8500 },
+            { time: '2:00 ظهراً', type: 'سياحي', seats: 11, price: 12000 },
+            { time: '8:00 مساءً', type: 'VIP', seats: 7, price: 18000 }
+        ];
+
+        busBookingForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const from = document.getElementById('fromCity')?.value || 'مدينة المغادرة';
+            const to = document.getElementById('toCity')?.value || 'مدينة الوصول';
+            const date = document.getElementById('travelDate')?.value || 'اليوم';
+            const passengers = document.getElementById('passengers')?.value || '1';
+
+            if (from === to) {
+                bookingResults.innerHTML = '<div class="result-card" style="grid-column:1/-1"><strong>اختر مدينتين مختلفتين</strong><span>مدينة المغادرة والوصول يجب ألا تكونا نفس المدينة.</span><b>عدّل البحث وأعد المحاولة</b></div>';
+                return;
+            }
+
+            bookingResults.innerHTML = sampleTrips.map((trip) => `
+                <div class="result-card">
+                    <strong>${from} إلى ${to}</strong>
+                    <span>${trip.time} · ${trip.type} · ${trip.seats} مقعد متاح · ${passengers} راكب</span>
+                    <b>${trip.price.toLocaleString('ar-SA')} جنيه · ${date}</b>
+                </div>
+            `).join('') + `
+                <a class="owner-card" href="contact.html">
+                    <i class="fas fa-wallet"></i>
+                    <span>الدفع عبر المحفظة مع حفظ المبلغ حتى تأكيد الرحلة وتسوية حق صاحب البص.</span>
+                </a>
+            `;
+        });
+    }
+
+    /* ============================================
+       14. SMOOTH ANCHOR SCROLLING
     ============================================ */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
@@ -445,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ============================================
-       14. WHATSAPP FLOAT BUTTON
+       15. WHATSAPP FLOAT BUTTON
     ============================================ */
     const waBtn = document.createElement('a');
     waBtn.href = 'https://wa.me/966500000000';
