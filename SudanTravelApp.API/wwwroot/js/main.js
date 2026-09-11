@@ -1,5 +1,5 @@
 /**
- * AAMN - ودنوح AAMN لحجز البصات السفرية
+ * الاتحاد للخدمات - الاتحاد للخدمات
  * Main JavaScript File
  */
 
@@ -339,11 +339,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const openDirectChannel = () => {
                 const settings = (() => {
-                    try { return JSON.parse(localStorage.getItem('aamn_site_settings') || '{}'); } catch { return {}; }
+                    try { return JSON.parse(localStorage.getItem('aamn_bus_site_settings_v2') || '{}'); } catch { return {}; }
                 })();
                 const rawWhatsApp = String(settings.whatsapp || '966500000000').replace(/[^\d]/g, '');
                 const text = [
-                    'رسالة جديدة من موقع ودنوح AAMN',
+                    'رسالة جديدة من موقع الاتحاد للخدمات',
                     `الاسم: ${name}`,
                     `البريد: ${email}`,
                     `الجوال: ${phone || 'غير مذكور'}`,
@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.open(`https://wa.me/${rawWhatsApp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
                     return;
                 }
-                window.location.href = `mailto:${settings.email || 'info@2-aa.com'}?subject=${encodeURIComponent('رسالة من موقع ودنوح AAMN')}&body=${encodeURIComponent(text)}`;
+                window.location.href = `mailto:${settings.email || 'info@2-aa.com'}?subject=${encodeURIComponent('رسالة من موقع الاتحاد للخدمات')}&body=${encodeURIComponent(text)}`;
             };
 
             saveLocalInquiry();
@@ -438,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const sampleTrips = [
             { time: '6:30 صباحاً', type: 'بص مكيف', seats: 18, price: 8500 },
             { time: '2:00 ظهراً', type: 'سياحي', seats: 11, price: 12000 },
-            { time: '8:00 مساءً', type: 'VIP', seats: 7, price: 18000 }
+            { time: '8:00 مساءً', type: 'مميز', seats: 7, price: 18000 }
         ];
 
         busBookingForm.addEventListener('submit', (event) => {
@@ -522,5 +522,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.appendChild(waBtn);
 
-    console.log('✅ AAMN Website initialized successfully');
+    console.log('✅ موقع الاتحاد للخدمات initialized successfully');
 });

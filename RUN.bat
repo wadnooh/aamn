@@ -2,7 +2,7 @@
 chcp 65001 >nul
 echo.
 echo ═══════════════════════════════════════════
-echo Wadnooh AAMN Bus Booking Platform
+echo الاتحاد للخدمات لحجز البصات السفرية
 echo Wad Nouh Software ^& Computer
 echo ═══════════════════════════════════════════
 echo.

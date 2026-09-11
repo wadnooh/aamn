@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لوحة التحكم - ودنوح AAMN لحجز البصات السفرية</title>
+  <title>لوحة التحكم - الاتحاد للخدمات</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
   <style>
@@ -22,7 +22,7 @@
 <body>
   <section class="login" id="login">
     <form class="login-card" id="loginForm" autocomplete="off">
-      <div class="brand"><div class="mark">AAMN</div><div><h1>لوحة تحكم الإدارة والأعمال</h1><p>ودنوح AAMN لحجز البصات السفرية</p></div></div>
+      <div class="brand"><div class="mark">الاتحاد</div><div><h1>لوحة تحكم الإدارة والأعمال</h1><p>الاتحاد للخدمات</p></div></div>
       <div class="field"><label>البريد الوظيفي</label><input id="loginEmail" type="email" placeholder="أدخل البريد الوظيفي" dir="ltr" autocomplete="off" required></div>
       <div class="field"><label>كلمة المرور</label><input id="loginPassword" type="password" placeholder="أدخل كلمة المرور" autocomplete="new-password" required></div>
       <button class="btn btn-primary" style="width:100%; padding:12px; font-size:1rem;"><i class="fas fa-lock-open"></i> دخول إلى لوحة التحكم</button>
@@ -36,7 +36,7 @@
 
   <section class="app" id="app">
     <aside class="side" id="side">
-      <div class="side-brand"><div class="mark">AAMN</div><div><strong>ودنوح · AAMN</strong><br><small>Travel Booking Admin</small></div></div>
+      <div class="side-brand"><div class="mark">الاتحاد</div><div><strong>الاتحاد للخدمات</strong><br><small>لوحة حجز السفر</small></div></div>
       <div class="nav-label">الإدارة</div>
       <button class="nav active" data-panel="dashboard"><i class="fas fa-chart-line"></i> الرئيسية</button>
       <button class="nav" data-panel="site" id="navSite"><i class="fas fa-sliders-h"></i> تفاصيل الموقع</button>
@@ -83,7 +83,7 @@
         <form class="card" id="siteForm">
           <div class="grid2">
             <div class="field"><label>اسم الشركة العربي</label><input name="brandAr" required></div>
-            <div class="field"><label>الاسم الإنجليزي بجوار الشعار</label><input name="brandEn" required dir="ltr"></div>
+            <div class="field"><label>وصف إضافي بجوار الشعار</label><input name="brandEn" dir="rtl" placeholder="اختياري"></div>
             <div class="field"><label>البريد الرسمي</label><input name="email" type="email" dir="ltr"></div>
             <div class="field"><label>رقم الهاتف</label><input name="phone" dir="ltr"></div>
             <div class="field"><label>واتساب</label><input name="whatsapp" dir="ltr"></div>
@@ -174,7 +174,7 @@
         <div class="card">
           <div class="head"><h3>إعدادات الأمان وحساب الأدمن</h3></div>
           <div class="notice">
-            <i class="fas fa-shield-halved"></i> <strong>أمان الجلسات:</strong> يتم إدخال بيانات الأدمن يدوياً في كل جلسة لحماية لوحة التحكم. يمكنك هنا تعديل بيانات الدخول أو إنهاء كافة الجلسات النشطة على الأجهزة الأخرى فوراً.
+            <i class="fas fa-shield-halved"></i> <strong>أمان الجلسات:</strong> يتم إدخال بيانات الأدمن يدوياً في كل جلسة لحماية لوحة التحكم. يمكنك هنا تعديل بيانات الدخول أو إنهاء كافة الجلسات النشطة على البصات الأخرى فوراً.
           </div>
           <form id="adminForm" autocomplete="off" style="max-width: 500px; margin-bottom: 24px;">
             <div class="field">
@@ -191,9 +191,9 @@
           <hr style="border: 0; border-top: 1px solid var(--line); margin: 20px 0;">
           
           <div>
-            <h4 style="margin-bottom: 8px; color: var(--red);"><i class="fas fa-power-off"></i> تسجيل الخروج من كافة الأجهزة</h4>
-            <p style="color: var(--muted); font-size: 0.88rem; margin-bottom: 12px;">عند الضغط على هذا الزر، سيتم إبطال جميع الجلسات المفتوحة على جميع المتصفحات والأجهزة الأخرى فوراً.</p>
-            <button class="btn btn-danger" type="button" id="btnForceLogoutAll"><i class="fas fa-right-from-bracket"></i> تسجيل الخروج من كافة الأجهزة الآن</button>
+            <h4 style="margin-bottom: 8px; color: var(--red);"><i class="fas fa-power-off"></i> تسجيل الخروج من كافة البصات</h4>
+            <p style="color: var(--muted); font-size: 0.88rem; margin-bottom: 12px;">عند الضغط على هذا الزر، سيتم إبطال جميع الجلسات المفتوحة على جميع المتصفحات والبصات الأخرى فوراً.</p>
+            <button class="btn btn-danger" type="button" id="btnForceLogoutAll"><i class="fas fa-right-from-bracket"></i> تسجيل الخروج من كافة البصات الآن</button>
           </div>
         </div>
       </section>
@@ -219,7 +219,7 @@
   </section>
 
   <!-- Modals -->
-  <div class="modal-bg" id="opModal"><div class="modal"><div class="head"><h3 id="opModalTitle">حجز أو عملية جديدة</h3><button class="btn btn-sm btn-light" id="closeOpModal"><i class="fas fa-times"></i></button></div><form id="opForm"><input type="hidden" name="id"><div class="grid2"><div class="field"><label>التاريخ</label><input name="date" type="date" required></div><div class="field"><label>النوع</label><select name="type"><option value="sale">حجز رحلة</option><option value="consultation">طلب صاحب بص</option><option value="subscription">اشتراك أعمال</option><option value="support">دعم ومتابعة</option><option value="other">أخرى</option></select></div><div class="field"><label>اسم العميل / صاحب البص</label><input name="customer" required></div><div class="field"><label>رقم الهاتف</label><input name="phone" dir="ltr"></div><div class="field"><label>البريد</label><input name="email" type="email" dir="ltr"></div><div class="field"><label>المبلغ</label><input name="amount" type="number" step="0.01" value="0"></div><div class="field"><label>الرحلة / البيان</label><input name="service" placeholder="مثال: الخرطوم إلى مدني - بص VIP"></div><div class="field"><label>الحالة</label><select name="status"><option value="open">مفتوحة</option><option value="done">مكتملة</option><option value="cancelled">ملغاة</option></select></div></div><div class="field"><label>ملاحظات</label><textarea name="notes"></textarea></div><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ الحجز أو العملية</button></form></div></div>
+  <div class="modal-bg" id="opModal"><div class="modal"><div class="head"><h3 id="opModalTitle">حجز أو عملية جديدة</h3><button class="btn btn-sm btn-light" id="closeOpModal"><i class="fas fa-times"></i></button></div><form id="opForm"><input type="hidden" name="id"><div class="grid2"><div class="field"><label>التاريخ</label><input name="date" type="date" required></div><div class="field"><label>النوع</label><select name="type"><option value="sale">حجز رحلة</option><option value="consultation">طلب صاحب بص</option><option value="subscription">اشتراك أعمال</option><option value="support">دعم ومتابعة</option><option value="other">أخرى</option></select></div><div class="field"><label>اسم العميل / صاحب البص</label><input name="customer" required></div><div class="field"><label>رقم الهاتف</label><input name="phone" dir="ltr"></div><div class="field"><label>البريد</label><input name="email" type="email" dir="ltr"></div><div class="field"><label>المبلغ</label><input name="amount" type="number" step="0.01" value="0"></div><div class="field"><label>الرحلة / البيان</label><input name="service" placeholder="مثال: الخرطوم إلى مدني - بص مميز"></div><div class="field"><label>الحالة</label><select name="status"><option value="open">مفتوحة</option><option value="done">مكتملة</option><option value="cancelled">ملغاة</option></select></div></div><div class="field"><label>ملاحظات</label><textarea name="notes"></textarea></div><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ الحجز أو العملية</button></form></div></div>
 
   <div class="modal-bg" id="deptItemModal"><div class="modal"><div class="head"><h3 id="deptItemModalTitle">عنصر جديد</h3><button class="btn btn-sm btn-light" id="closeDeptItemModal"><i class="fas fa-times"></i></button></div><form id="deptItemForm"><input type="hidden" name="id"><div class="grid2"><div class="field"><label>اسم العنصر / الرحلة / الباقة</label><input name="name" required></div><div class="field"><label>السعر (جنيه سوداني)</label><input name="price" type="number" step="0.01" value="0"></div><div class="field"><label>الحالة</label><select name="status"><option value="available">متاح</option><option value="unavailable">غير متاح</option></select></div><div class="field"><label>رمز مميز / كود</label><input name="badge" placeholder="مثال: رحلة مميزة"></div></div><div class="field"><label>الوصف / التفاصيل</label><textarea name="desc"></textarea></div><button class="btn btn-primary"><i class="fas fa-save"></i> حفظ العنصر</button></form></div></div>
 
@@ -234,7 +234,7 @@
           <div class="field"><label>كلمة المرور</label><input name="password" type="password" placeholder="أدخل كلمة المرور" required autocomplete="new-password"></div>
           <div class="field"><label>رقم الجوال</label><input name="phone" dir="ltr"></div>
           <div class="field"><label>القسم</label><select name="department" required><option value="booking">الحجوزات</option><option value="operators">أصحاب البصات</option><option value="buses">إدارة البصات</option><option value="routes">الخطوط والمدن</option><option value="wallet">المحفظة والضمان</option><option value="subscriptions">اشتراكات الأعمال</option><option value="support">الدعم والمتابعة</option><option value="management">الإدارة العامة</option></select></div>
-          <div class="field"><label>المسمى الوظيفي / الدور</label><input name="role" placeholder="مثال: مهندس برمجيات، فني شبكات..." required></div>
+          <div class="field"><label>المسمى الوظيفي / الدور</label><input name="role" placeholder="مثال: مشرف رحلات، مسؤول حجوزات، مدير أسطول..." required></div>
           <div class="field"><label>حالة الحساب</label><select name="status"><option value="active">نشط</option><option value="inactive">معطل</option></select></div>
         </div>
         <div class="field" style="margin-top: 10px;">
@@ -255,7 +255,7 @@
 
   <div class="toast" id="toast"></div>
 
-    <script src="js/admin-site-config.js?v=202609082245"></script>
+    <script src="js/admin-site-config.js?v=202609111352"></script>
   <script>
   (function () {
     const K = {
@@ -273,8 +273,8 @@
 
     const D = {
       settings: {
-        brandAr: 'ودنوح',
-        brandEn: 'AAMN',
+        brandAr: 'الاتحاد للخدمات',
+        brandEn: '',
         email: 'info@2-aa.com',
         phone: '+966500000000',
         whatsapp: '966500000000',
@@ -305,7 +305,7 @@
       items: {
         booking: [
           { id: 'it_1', name: 'الخرطوم إلى مدني', price: 8500, status: 'available', badge: 'يومي', desc: 'رحلات صباحية ومسائية مع اختيار مقعد.' },
-          { id: 'it_2', name: 'الخرطوم إلى بورتسودان', price: 28000, status: 'available', badge: 'VIP', desc: 'رحلة طويلة ببص مكيف وخدمة مميزة.' }
+          { id: 'it_2', name: 'الخرطوم إلى بورتسودان', price: 28000, status: 'available', badge: 'مميز', desc: 'رحلة طويلة ببص مكيف وخدمة مميزة.' }
         ],
         operators: [
           { id: 'it_3', name: 'تسجيل صاحب بص', price: 0, status: 'available', badge: 'توثيق', desc: 'فتح ملف أعمال وتوثيق بيانات المالك والبص.' }
@@ -368,7 +368,7 @@
       const subtitle = document.getElementById('subtitle');
       if (subtitle) {
         const badge = '<span style="font-size:0.8rem; background:rgba(220,38,38,0.12); color:#dc2626; padding:3px 10px; border-radius:12px; font-weight:800; margin-right:8px;">' + esc(user.name) + ' (' + esc(user.role || user.department) + ')</span>';
-        subtitle.innerHTML = 'مرحباً بك، ' + badge + ' · لوحة تحكم ودنوح AAMN';
+        subtitle.innerHTML = 'مرحباً بك، ' + badge + ' · لوحة تحكم الاتحاد للخدمات';
       }
     }
 
@@ -396,7 +396,7 @@
       const newEpoch = 'epoch_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
       localStorage.setItem(K.authEpoch, newEpoch);
       sessionStorage.clear();
-      toast('تم إلغاء وإنهاء جميع الجلسات النشطة على كافة الأجهزة بنجاح.');
+      toast('تم إلغاء وإنهاء جميع الجلسات النشطة على كافة البصات بنجاح.');
       setTimeout(showLogin, 1200);
     }
 
@@ -463,7 +463,7 @@
 
     // Force Logout All Devices
     document.getElementById('btnForceLogoutAll')?.addEventListener('click', () => {
-      if (confirm('هل تريد فعلاً إنهاء وتسجيل الخروج من كافة الجلسات المفتوحة على جميع الأجهزة الأخرى؟')) {
+      if (confirm('هل تريد فعلاً إنهاء وتسجيل الخروج من كافة الجلسات المفتوحة على جميع البصات الأخرى؟')) {
         logoutAllDevices();
       }
     });
@@ -599,7 +599,7 @@
       const box = document.getElementById('siteSummary');
       if (!box) return;
       const s = settings();
-      box.innerHTML = '<p><strong>الاسم:</strong> ' + esc(s.brandAr) + ' (' + esc(s.brandEn) + ')</p><p><strong>البريد:</strong> ' + esc(s.email) + '</p><p><strong>الهاتف / واتساب:</strong> ' + esc(s.phone) + ' / ' + esc(s.whatsapp) + '</p><p><strong>العنوان:</strong> ' + esc(s.address) + '</p>';
+      box.innerHTML = '<p><strong>الاسم:</strong> ' + esc(s.brandAr) + '</p><p><strong>البريد:</strong> ' + esc(s.email) + '</p><p><strong>الهاتف / واتساب:</strong> ' + esc(s.phone) + ' / ' + esc(s.whatsapp) + '</p><p><strong>العنوان:</strong> ' + esc(s.address) + '</p>';
     }
 
     function renderOps() {

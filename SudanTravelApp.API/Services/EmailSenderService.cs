@@ -128,7 +128,7 @@ public class EmailVerificationService : IEmailVerificationService
         var verifyUrl = $"{publicBase}/client.html?token={Uri.EscapeDataString(token)}";
 
         var emailSent = false;
-        var subject = "تأكيد بريدك · Confirm your email — Wadnooh";
+        var subject = "تأكيد بريدك · الاتحاد للخدمات";
         var bodyText =
             $"مرحباً {user.FullName},\n\n" +
             $"أكد بريدك عبر الرابط:\n{verifyUrl}\n\n" +
@@ -137,7 +137,7 @@ public class EmailVerificationService : IEmailVerificationService
             $"Hello {user.FullName},\n\n" +
             $"Confirm your email:\n{verifyUrl}\n\n" +
             $"Or enter code: {code}\n\n" +
-            $"Valid for 48 hours.\n\n— Wadnooh Software & Computer";
+            $"Valid for 48 hours.\n\n— الاتحاد للخدمات";
 
         var bodyHtml =
             $"<p dir=\"rtl\">مرحباً <strong>{WebUtility.HtmlEncode(user.FullName)}</strong>،</p>" +
@@ -145,7 +145,7 @@ public class EmailVerificationService : IEmailVerificationService
             $"<p><a href=\"{WebUtility.HtmlEncode(verifyUrl)}\">{WebUtility.HtmlEncode(verifyUrl)}</a></p>" +
             $"<hr/><p>Hello <strong>{WebUtility.HtmlEncode(user.FullName)}</strong>,</p>" +
             $"<p>Confirm via link or code <strong>{code}</strong> (48h).</p>" +
-            $"<p>— Wadnooh Software & Computer</p>";
+            $"<p>— الاتحاد للخدمات</p>";
 
         if (_email.IsConfigured && !string.IsNullOrWhiteSpace(user.Email))
         {

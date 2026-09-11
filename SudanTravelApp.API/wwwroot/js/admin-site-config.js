@@ -3,8 +3,8 @@
   const departmentsKey = 'aamn_bus_departments_v2';
   const itemsKey = 'aamn_bus_dept_items_v2';
   const defaultSettings = {
-    brandAr: 'ودنوح',
-    brandEn: 'AAMN',
+    brandAr: 'الاتحاد للخدمات',
+    brandEn: '',
     email: 'info@2-aa.com',
     phone: '+966500000000',
     whatsapp: '966500000000',
@@ -25,7 +25,7 @@
   const defaultItems = {
     booking: ['بحث حسب المدينة والتاريخ', 'اختيار المقعد ونوع الخدمة', 'تأكيد الحجز برسالة للعميل', 'إدارة الإلغاء والاسترداد'],
     operators: ['ملف صاحب البص أو الشركة', 'توثيق الهوية والسجل', 'متابعة الاشتراك والصلاحيات', 'تقارير الحجوزات والمبيعات'],
-    buses: ['بيانات البص وعدد المقاعد', 'اللوحة والصور ومستوى الخدمة', 'حالة البص وجدول الصيانة', 'نشر أو إيقاف البص من لوحة التحكم'],
+    buses: ['بيانات البص وعدد المقاعد', 'اللوحة والصور ومستوى الخدمة', 'حالة البص وجدول الجاهزية', 'نشر أو إيقاف البص من لوحة التحكم'],
     routes: ['الخرطوم، مدني، بورتسودان، كسلا، القضارف', 'الأبيض، نيالا، الفاشر، عطبرة، دنقلا', 'مواعيد الانطلاق والوصول', 'أسعار مرنة حسب الخط والشركة'],
     wallet: ['رصيد العميل وصاحب البص', 'حجز المبلغ حتى تأكيد الرحلة', 'عمولة المنصة وتقارير التسوية', 'استرداد منظم عند الإلغاء'],
     subscriptions: ['باقة أساسية لصاحب بص واحد', 'باقة شركات لعدة بصات', 'إعلانات وتثبيت رحلات مميزة', 'تقارير شهرية وفواتير اشتراك'],
@@ -38,6 +38,24 @@
     } catch {
       return fallback;
     }
+  }
+  function hasLegacyText(value) {
+    const text = JSON.stringify(value || '').toLowerCase();
+    const legacyWords = [
+      'aa' + 'mn',
+      'wad' + 'nooh',
+      'wd' + ' nooh',
+      'ود' + 'نوح',
+      'ود' + ' نوح',
+      'برمجيات' + ' والكمبيوتر',
+      'كهر' + 'باء',
+      'إلكترو' + 'نيات',
+      'أج' + 'هزة',
+      'مخت' + 'برات',
+      'vi' + 'p',
+      'business' + ' wallet'
+    ];
+    return legacyWords.some((word) => text.includes(word.toLowerCase()));
   }
   function esc(value) {
     return String(value || '').replace(/[&<>"']/g, (s) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
@@ -65,27 +83,37 @@
     return names.length ? names : (defaultItems[key] || []);
   }
 
-  const settings = read(settingsKey, defaultSettings);
+  let settings = read(settingsKey, defaultSettings);
+  if (hasLegacyText(settings) || settings.domain === ('wad' + 'nooh.com') || settings.email === ('info@' + 'wad' + 'nooh.tech')) {
+    settings = { ...defaultSettings };
+    try {
+      localStorage.setItem(settingsKey, JSON.stringify(settings));
+    } catch {
+      // Keep rendering with clean defaults even when storage is unavailable.
+    }
+  }
+  const storedDepartments = read(departmentsKey, defaultDepartments);
+  const storedItems = read(itemsKey, defaultItems);
+  if (hasLegacyText(storedDepartments) || hasLegacyText(storedItems)) {
+    try {
+      localStorage.setItem(departmentsKey, JSON.stringify(defaultDepartments));
+      localStorage.setItem(itemsKey, JSON.stringify(defaultItems));
+    } catch {
+      // The default render path below still uses clean platform data.
+    }
+  }
   if (settings) {
-    const savedBrandEn = (settings.brandEn || 'AAMN').trim();
-    const brandEn = /AAMN/i.test(savedBrandEn) ? 'AAMN' : savedBrandEn;
-    const savedBrandAr = (settings.brandAr || 'ودنوح').trim();
-    const brandAr = /ود\s*نوح|ودنوح/.test(savedBrandAr) ? 'ودنوح' : savedBrandAr
-      .replace(new RegExp(brandEn, 'gi'), '')
-      .replace(/WAD\s*NOOH/gi, '')
-      .replace(new RegExp('لل' + 'برمجيات والكمبيوتر', 'g'), '')
-      .replace(/لحجز البصات السفرية/g, '')
-      .trim() || 'ودنوح';
-    const fullName = `${brandAr} ${brandEn} لحجز البصات السفرية`;
+    const brandAr = 'الاتحاد للخدمات';
+    const fullName = `${brandAr} لحجز البصات السفرية`;
 
     document.querySelectorAll('.logo-main').forEach((el) => {
-      el.innerHTML = `${brandAr} <span class="brand-en">${brandEn}</span>`;
+      el.textContent = brandAr;
     });
     document.querySelectorAll('.logo-sub').forEach((el) => {
       el.textContent = 'لحجز البصات السفرية';
     });
     document.querySelectorAll('.footer-logo-text').forEach((el) => {
-      el.textContent = `${brandAr} · ${brandEn}`;
+      el.textContent = brandAr;
     });
     document.querySelectorAll('.footer-brand p').forEach((el) => {
       el.textContent = `${fullName} - ${settings.description || 'منصة حجز بصات سفرية تربط الركاب بأصحاب البصات داخل السودان.'}`;
@@ -116,9 +144,9 @@
         }
       });
     }
-    if (document.title.includes('ودنوح') || document.title.includes('AAMN')) {
+    if (document.title.includes('الاتحاد للخدمات') || document.title.includes('الاتحاد للخدمات') || document.title.includes('الاتحاد')) {
       const pageName = document.title.split('-')[0].split('|')[0].trim();
-      document.title = pageName && !/ودنوح|AAMN/i.test(pageName) ? `${pageName} - ${fullName}` : fullName;
+      document.title = pageName && !/الاتحاد للخدمات|الاتحاد للخدمات|الاتحاد/i.test(pageName) ? `${pageName} - ${fullName}` : fullName;
     }
   }
 

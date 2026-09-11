@@ -1,7 +1,7 @@
 #Requires -Version 5.1
 <#
 .SYNOPSIS
-    Wadnooh AAMN - Bus Booking Platform Deploy Pipeline
+    الاتحاد للخدمات - Bus Booking Platform Deploy Pipeline
     Synchronizes the static bus booking platform and builds a clean production package.
 #>
 
@@ -11,7 +11,7 @@ $src = Join-Path $root "SudanTravelApp.API\wwwroot"
 $dest = Join-Path $root "publish\aamn-bus-booking-platform"
 
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host "   Wadnooh AAMN - Automated Deployment & Sync Pipeline   " -ForegroundColor Cyan
+Write-Host "   الاتحاد للخدمات - Automated Deployment & Sync Pipeline   " -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
 
 # 1. Sync files from wwwroot to repo root

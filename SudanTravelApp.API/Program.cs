@@ -232,7 +232,7 @@ using (var scope = app.Services.CreateScope())
 
         Console.WriteLine("");
         Console.WriteLine("╔════════════════════════════════════════════════════════════════╗");
-        Console.WriteLine("║     ودنوح AAMN لحجز البصات السفرية · Admin Panel                    ║");
+        Console.WriteLine("║     الاتحاد للخدمات لحجز البصات السفرية · Admin Panel                    ║");
         Console.WriteLine("║     Membership · Payments · Services · Company Control          ║");
         Console.WriteLine("╚════════════════════════════════════════════════════════════════╝");
         Console.WriteLine("");
