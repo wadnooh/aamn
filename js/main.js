@@ -309,6 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 email,
                 phone: phone || '',
                 service,
+                accountKind: /شركة|اشتراك|عدة بصات/.test(service) ? 'company' : (/صاحب بص|إضافة بص|تسجيل/.test(service) ? 'operator' : 'customer'),
                 message,
                 status: 'new',
                 submitted_at: new Date().toISOString()
@@ -321,6 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     current.unshift({
                         id: `op_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`,
                         type: 'consultation',
+                        accountKind: payload.accountKind,
                         status: 'open',
                         date: new Date().toISOString().slice(0, 10),
                         customer: name,

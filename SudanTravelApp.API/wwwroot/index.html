@@ -447,10 +447,10 @@
                         <div style="margin-bottom: 14px;">
                             <label style="display: block; font-weight: 800; font-size: 0.9rem; margin-bottom: 6px; color: #1e293b;">نوع باقة العضوية المرغوبة</label>
                             <select id="inpClientRegTier" style="width: 100%; padding: 12px 14px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: inherit; font-size: 0.95rem; background: #fff;">
-                                <option value="Bronze">الباقة الأساسية لصاحب بص واحد</option>
-                                <option value="Silver">باقة الخطوط المتعددة</option>
-                                <option value="Gold" selected>باقة الشركات مع دعم مباشر</option>
-                                <option value="premium">باقة الشركات المميزة</option>
+                                <option value="Passenger">محفظة عميل / راكب</option>
+                                <option value="BusOwner">محفظة صاحب بص فردي</option>
+                                <option value="Company" selected>محفظة شركة / مجموعة بصات</option>
+                                <option value="premium">محفظة شركات مميزة</option>
                             </select>
                         </div>
                         <div style="margin-bottom: 20px;">
@@ -531,6 +531,10 @@
                             <div style="margin-bottom: 16px;">
                                 <label style="display: block; font-weight: 700; font-size: 0.88rem; margin-bottom: 5px;">تفاصيل الرحلة أو بيانات البص</label>
                                 <textarea id="inpReqNotes" rows="3" placeholder="اكتب مدينة المغادرة والوصول والتاريخ أو بيانات البص وعدد المقاعد والخطوط المطلوبة..." required style="width: 100%; padding: 12px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 0.92rem;"></textarea>
+                            </div>
+                            <div style="margin-bottom: 16px;">
+                                <label style="display: block; font-weight: 700; font-size: 0.88rem; margin-bottom: 5px;">المبلغ المطلوب في المحفظة</label>
+                                <input type="number" id="inpReqAmount" min="0" step="1" value="0" placeholder="مثال: 17000" style="width: 100%; padding: 12px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 0.92rem;">
                             </div>
                             <div style="display: flex; gap: 10px;">
                                 <button type="submit" class="btn-primary" style="padding: 12px 24px; border-radius: 8px; font-weight: 800;"><i class="fas fa-paper-plane"></i> إرسال الطلب فوراً</button>
@@ -1051,8 +1055,8 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="js/admin-site-config.js?v=202609111405"></script>
-    <script src="js/main.js?v=202609111405"></script>
+    <script src="js/admin-site-config.js?v=202609111430"></script>
+    <script src="js/main.js?v=202609111430"></script>
 
     <!-- In-Page Portal Controller Script -->
     <script>
@@ -1060,6 +1064,11 @@
         const MEMBER_DATA_KEY = 'الاتحاد للخدمات_member_data';
         const STAFF_DATA_KEY = 'الاتحاد للخدمات_staff_session';
         const OPS_KEY = 'aamn_bus_operations_v2';
+        function accountKindFromTier(value) {
+            if (value === 'Company' || value === 'premium') return 'company';
+            if (value === 'BusOwner') return 'operator';
+            return 'customer';
+        }
 
         // Elements
         const tabClient = document.getElementById('inpageTabClient');
@@ -1130,7 +1139,8 @@
                 id: '#MEM-' + Math.floor(1000 + Math.random() * 9000),
                 fullName: email.split('@')[0],
                 email: email,
-                tier: 'العضوية الذهبية',
+                tier: 'محفظة عميل / راكب',
+                accountKind: 'customer',
                 joinedAt: new Date().toISOString()
             };
             localStorage.setItem(MEMBER_DATA_KEY, JSON.stringify(user));
@@ -1144,6 +1154,7 @@
             const email = document.getElementById('inpClientRegEmail').value.trim();
             const tierSelect = document.getElementById('inpClientRegTier');
             const tierText = tierSelect.options[tierSelect.selectedIndex].text;
+            const accountKind = accountKindFromTier(tierSelect.value);
 
             const user = {
                 id: '#MEM-' + Math.floor(1000 + Math.random() * 9000),
@@ -1151,6 +1162,7 @@
                 phone: phone,
                 email: email,
                 tier: tierText,
+                accountKind,
                 joinedAt: new Date().toISOString()
             };
             localStorage.setItem(MEMBER_DATA_KEY, JSON.stringify(user));
@@ -1176,6 +1188,7 @@
             const user = JSON.parse(localStorage.getItem(MEMBER_DATA_KEY) || '{}');
             const service = document.getElementById('inpReqServiceType').value;
             const notes = document.getElementById('inpReqNotes').value.trim();
+            const amount = Number(document.getElementById('inpReqAmount')?.value || 0);
 
             const ops = JSON.parse(localStorage.getItem(OPS_KEY) || '[]');
             const newOp = {
@@ -1183,12 +1196,13 @@
                 type: 'consultation',
                 status: 'open',
                 date: new Date().toISOString().slice(0, 10),
+                accountKind: user.accountKind || 'customer',
                 customer: user.fullName || 'عميل',
                 phone: user.phone || '',
                 email: user.email || '',
                 service: service,
-                amount: 0,
-                paymentStatus: 'unpaid',
+                amount,
+                paymentStatus: amount > 0 ? 'pending' : 'unpaid',
                 paymentRef: '',
                 notes: notes
             };

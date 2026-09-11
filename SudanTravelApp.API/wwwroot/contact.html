@@ -296,8 +296,8 @@
             </div>
         </div>
     </footer>
-    <script src="js/admin-site-config.js?v=202609111405"></script>
-    <script src="js/main.js?v=202609111405"></script>
+    <script src="js/admin-site-config.js?v=202609111430"></script>
+    <script src="js/main.js?v=202609111430"></script>
 
     <!-- Guaranteed Interactive Contact Form Engine -->
     <script>
@@ -340,6 +340,7 @@
             }
 
             const refId = '#MSG-' + Math.floor(1000 + Math.random() * 9000);
+            const accountKind = /شركة|اشتراك|عدة بصات/.test(service) ? 'company' : (/صاحب بص|إضافة بص|تسجيل/.test(service) ? 'operator' : 'customer');
 
             // Loading state
             if (submitBtn) {
@@ -354,6 +355,7 @@
                 current.unshift({
                     id: refId,
                     type: 'consultation',
+                    accountKind,
                     status: 'open',
                     date: new Date().toISOString().slice(0, 10),
                     customer: name,

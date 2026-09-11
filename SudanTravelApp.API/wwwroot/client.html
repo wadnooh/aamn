@@ -137,6 +137,11 @@
     .status-new { background: #e0f2fe; color: #0369a1; }
     .status-progress { background: #fef3c7; color: #92400e; }
     .status-completed { background: #dcfce7; color: #15803d; }
+    .wallet-grid { display: grid; grid-template-columns: repeat(3, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .wallet-box { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); }
+    .wallet-box i { color: var(--primary); margin-bottom: 8px; }
+    .wallet-box strong { display: block; font-size: 1.25rem; direction: ltr; text-align: right; }
+    .wallet-box span { color: var(--text-muted); font-size: 0.82rem; }
 
     /* Quick Action Buttons */
     .action-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -150,6 +155,7 @@
 
     @media (max-width: 900px) {
       .dash-grid { grid-template-columns: 1fr; }
+      .wallet-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -264,6 +270,12 @@
       </div>
     </div>
 
+    <div class="wallet-grid">
+      <div class="wallet-box"><i class="fas fa-wallet"></i><strong id="walletPaid">0 جنيه</strong><span>رصيد مؤكد</span></div>
+      <div class="wallet-box"><i class="fas fa-hourglass-half"></i><strong id="walletPending">0 جنيه</strong><span>بانتظار السداد</span></div>
+      <div class="wallet-box"><i class="fas fa-id-card"></i><strong id="walletType">عميل / راكب</strong><span>نوع المحفظة</span></div>
+    </div>
+
     <div class="dash-grid">
       <!-- Main Column: Requests & Orders -->
       <div>
@@ -302,6 +314,13 @@
               <div class="input-box">
                 <i class="fas fa-comment"></i>
                 <textarea id="reqDetails" rows="4" placeholder="اكتب خط الرحلة، التاريخ، عدد الركاب، أو بيانات البص والشركة..." required></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>المبلغ المطلوب في المحفظة</label>
+              <div class="input-box">
+                <i class="fas fa-coins"></i>
+                <input type="number" id="reqAmount" value="0" min="0" step="1" placeholder="مثال: 17000">
               </div>
             </div>
             <div style="display:flex; gap:10px;">
@@ -367,6 +386,17 @@
       localStorage.removeItem(STORAGE_KEY);
       render();
     }
+    function money(value) {
+      return Number(value || 0).toLocaleString('ar-SA') + ' جنيه';
+    }
+    function accountKindFromTier(value) {
+      if (value === 'Company' || value === 'premium') return 'company';
+      if (value === 'BusOwner') return 'operator';
+      return 'customer';
+    }
+    function walletKindLabel(value) {
+      return value === 'company' ? 'شركة / مجموعة بصات' : (value === 'operator' ? 'صاحب بص فردي' : 'عميل / راكب');
+    }
 
     // Tabs
     const tabLogin = document.getElementById('tabLogin');
@@ -392,6 +422,7 @@
         fullName: email.split('@')[0],
         email: email,
         tier: 'راكب مميز',
+        accountKind: 'customer',
         joinedAt: new Date().toISOString()
       };
       setUser(user);
@@ -405,10 +436,12 @@
       const email = document.getElementById('regEmail').value.trim();
       const phone = document.getElementById('regPhone').value.trim();
       const tier = document.getElementById('regTier').options[document.getElementById('regTier').selectedIndex].text;
+      const tierValue = document.getElementById('regTier').value;
 
       const user = {
         id: '#MEM-' + Math.floor(1000 + Math.random()*9000),
         fullName: name, email, phone, tier,
+        accountKind: accountKindFromTier(tierValue),
         joinedAt: new Date().toISOString()
       };
       setUser(user);
@@ -431,6 +464,7 @@
       const user = getUser();
       const service = document.getElementById('reqService').value;
       const details = document.getElementById('reqDetails').value;
+      const amount = Number(document.getElementById('reqAmount')?.value || 0);
 
       const ops = JSON.parse(localStorage.getItem(OPS_KEY) || '[]');
       const newOp = {
@@ -438,12 +472,13 @@
         type: 'consultation',
         status: 'open',
         date: new Date().toISOString().slice(0, 10),
+        accountKind: user ? (user.accountKind || 'customer') : 'customer',
         customer: user ? user.fullName : 'عميل',
         phone: user ? user.phone || '' : '',
         email: user ? user.email || '' : '',
         service: service,
-        amount: 0,
-        paymentStatus: 'unpaid',
+        amount,
+        paymentStatus: amount > 0 ? 'pending' : 'unpaid',
         paymentRef: '',
         notes: details
       };
@@ -461,6 +496,7 @@
       const ops = JSON.parse(localStorage.getItem(OPS_KEY) || '[]');
       const userOps = ops.filter(o => (user && o.email === user.email) || !o.email || o.customer === user?.fullName);
       const container = document.getElementById('ordersList');
+      renderWallet(userOps, user);
 
       if (!userOps.length) {
         container.innerHTML = `
@@ -489,6 +525,14 @@
       `).join('');
     }
 
+    function renderWallet(userOps, user) {
+      const paid = userOps.filter(o => o.paymentStatus === 'paid').reduce((sum, o) => sum + Number(o.amount || 0), 0);
+      const pending = userOps.filter(o => o.paymentStatus === 'pending').reduce((sum, o) => sum + Number(o.amount || 0), 0);
+      document.getElementById('walletPaid').textContent = money(paid);
+      document.getElementById('walletPending').textContent = money(pending);
+      document.getElementById('walletType').textContent = walletKindLabel(user?.accountKind || 'customer');
+    }
+
     function render() {
       const user = getUser();
       const authSec = document.getElementById('authSection');
@@ -510,6 +554,7 @@
         authSec.style.display = 'flex';
         dashSec.style.display = 'none';
         btnLogout.style.display = 'none';
+        renderWallet([], null);
       }
     }
 
