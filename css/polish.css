@@ -39,7 +39,7 @@ body {
 }
 
 .container {
-  max-width: 1180px;
+  max-width: 1320px;
 }
 
 .section-pad {
@@ -102,7 +102,8 @@ body {
 
 .nav-links a,
 .mobile-menu a {
-  font-weight: 700;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 .nav-links a:hover,
@@ -112,7 +113,8 @@ body {
 }
 
 .hero {
-  min-height: 92vh;
+  min-height: 88vh;
+  padding-top: 92px;
 }
 
 .hero::before {
@@ -128,13 +130,49 @@ body {
 .hero-title,
 .page-hero h1 {
   letter-spacing: 0;
-  line-height: 1.25;
-  text-wrap: balance;
+  line-height: 1.18;
+  text-wrap: initial;
+}
+
+.hero-content {
+  max-width: 980px;
+  text-align: center;
+  margin-inline: auto;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.hero-title {
+  font-size: clamp(48px, 5.2vw, 82px);
+  white-space: nowrap;
+  margin-bottom: 20px;
+}
+
+.hero-title .line-1,
+.hero-title .line-2 {
+  display: inline;
+}
+
+.hero-title .line-1::after {
+  content: " ";
+}
+
+.hero-desc {
+  max-width: 780px;
+  margin-inline: auto;
+  font-size: clamp(17px, 1.25vw, 21px);
+  line-height: 1.9;
+}
+
+.hero-buttons,
+.hero-stats {
+  justify-content: center;
 }
 
 .page-hero h1 {
   font-weight: 900;
   margin-bottom: 14px;
+  white-space: nowrap;
 }
 
 .page-hero .breadcrumb,
@@ -285,6 +323,7 @@ body {
   font-size: clamp(1.35rem, 2.6vw, 2rem);
   font-weight: 900;
   line-height: 1.35;
+  white-space: nowrap;
 }
 
 .booking-intro p {
@@ -469,6 +508,45 @@ body {
 }
 
 @media (max-width: 991px) {
+  .nav-container {
+    gap: 12px;
+  }
+
+  .logo {
+    gap: 8px;
+  }
+
+  .logo-main {
+    font-size: 16px;
+  }
+
+  .logo-sub {
+    font-size: 11px;
+  }
+
+  .nav-links {
+    gap: 2px;
+  }
+
+  .nav-links a {
+    padding: 8px 9px;
+    font-size: 13px;
+  }
+
+  .btn-cta {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .hero-title {
+    white-space: normal;
+  }
+
+  .page-hero h1,
+  .booking-intro h2 {
+    white-space: normal;
+  }
+
   .section-pad {
     padding: 60px 0;
   }
