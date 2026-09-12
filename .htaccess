@@ -1,19 +1,117 @@
+# ==============================================================================
+# WAD NOOH AAMN - Enterprise Production Apache/.htaccess Configuration
+# Primary Domain : https://2-aa.com
+# Legacy Domain  : https://wadnooh.com (301 Permanent Redirect)
+# ==============================================================================
+
+# 1. Directory Default Index
 DirectoryIndex index.html index.php
 
+# 2. Disable Directory Browsing
+Options -Indexes
+
+# 3. Default Character Encoding
+AddDefaultCharset UTF-8
+
+# 4. MIME Types Configuration
+<IfModule mod_mime.c>
+  AddCharset UTF-8 .html .css .js .json .xml .php
+  AddType application/json .json
+  AddType image/svg+xml .svg .svgz
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
+  AddType image/webp .webp
+</IfModule>
+
+# 5. URL Rewriting & Canonical Redirections
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  RewriteRule ^(code-hub|osh|specialty|verify|guide)\.html$ - [G,L]
-  RewriteRule ^data/ - [G,L]
-  RewriteRule ^js/(auth-portal|code-studio|wadnooh-eng|wep-gate)\.js$ - [G,L]
+  # 5.1 Allow ACME SSL Challenges (Let's Encrypt / AutoSSL)
+  RewriteRule ^\.well-known/ - [L]
+
+  # 5.2 301 Permanent Redirect from legacy domain wadnooh.com to 2-aa.com
+  RewriteCond %{HTTP_HOST} ^(www\.)?wadnooh\.com$ [NC]
+  RewriteRule ^(.*)$ https://2-aa.com/$1 [R=301,L]
+
+  # 5.3 301 Permanent Redirect www.2-aa.com to apex canonical 2-aa.com
+  RewriteCond %{HTTP_HOST} ^www\.2-aa\.com$ [NC]
+  RewriteRule ^(.*)$ https://2-aa.com/$1 [R=301,L]
+
+  # 5.4 Enforce HTTPS (Secure SSL)
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP:X-Forwarded-Proto} =http
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # 5.5 Application Alias Rewrite
   RewriteRule ^app/?$ / [R=302,L]
 </IfModule>
 
+# 6. Block Sensitive Files, Backups, and Hidden Directories
+<FilesMatch "(^\.env|^\.git|^\.vs|^\.github|\.(ps1|bat|sh|md|slnx|csproj|cs|log|env|bak|config|sql))$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# 7. Security Response Headers
 <IfModule mod_headers.c>
-  <FilesMatch "(admin\.html|client\.html)">
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# 8. Caching Strategy
+<IfModule mod_headers.c>
+  # 8.1 No-cache for dynamic portals and administrative dashboards
+  <FilesMatch "(admin\.html|client\.html|verify\.html)">
     Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
     Header set Pragma "no-cache"
     Header set Expires "0"
   </FilesMatch>
+
+  # 8.2 Aggressive caching for static assets
+  <FilesMatch "\.(ico|pdf|jpg|jpeg|png|gif|webp|js|css|svg|woff|woff2|ttf|eot)$">
+    Header set Cache-Control "max-age=2592000, public"
+  </FilesMatch>
 </IfModule>
+
+# 8.3 Expires Headers via mod_expires
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+</IfModule>
+
+# 9. GZIP / Deflate Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# 10. Friendly 404 Fallback
+ErrorDocument 404 /index.html

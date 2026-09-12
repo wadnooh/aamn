@@ -147,6 +147,14 @@
     .published-trip h4 { color:var(--secondary); margin-bottom:5px; }
     .published-trip p { color:var(--text-muted); font-size:.86rem; line-height:1.7; }
     .status-chip { display:inline-flex; border-radius:999px; padding:4px 10px; background:#dcfce7; color:#15803d; font-size:.78rem; font-weight:900; }
+    .payment-panel { border:1px solid #fed7aa; background:#fffbeb; border-radius:12px; padding:16px; margin:12px 0 0; display:grid; gap:12px; flex:0 0 100%; }
+    .payment-methods { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .pay-method { border:1px solid var(--border); background:#fff; border-radius:10px; padding:12px; display:grid; gap:4px; }
+    .pay-method strong { color:var(--secondary); }
+    .pay-method span { color:var(--text-muted); font-size:.82rem; direction:ltr; text-align:right; }
+    .payment-form { display:grid; grid-template-columns:1fr 1fr auto; gap:10px; align-items:end; }
+    .payment-form input, .payment-form select { width:100%; min-height:44px; border:1px solid var(--border); border-radius:8px; padding:9px 11px; background:#fff; }
+    .status-review { background:#fef3c7; color:#92400e; }
 
     /* Quick Action Buttons */
     .action-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -161,7 +169,7 @@
     @media (max-width: 900px) {
       .dash-grid { grid-template-columns: 1fr; }
       .wallet-grid { grid-template-columns: 1fr; }
-      .business-grid, .published-trip { grid-template-columns: 1fr; display:grid; }
+      .business-grid, .published-trip, .payment-methods, .payment-form { grid-template-columns: 1fr; display:grid; }
     }
   </style>
 </head>
@@ -374,7 +382,7 @@
               <label>المبلغ المطلوب في المحفظة</label>
               <div class="input-box">
                 <i class="fas fa-coins"></i>
-                <input type="number" id="reqAmount" value="0" min="0" step="1" placeholder="مثال: 17000">
+                <input type="number" id="reqAmount" value="45000" min="0" step="1" placeholder="مثال: 45000">
               </div>
             </div>
             <div style="display:flex; gap:10px;">
@@ -392,6 +400,10 @@
             <h3><i class="fas fa-bolt"></i> روابط سريعة</h3>
           </div>
           <div class="action-btn-grid">
+            <button type="button" class="quick-action-btn" id="btnShowPayments">
+              <i class="fas fa-credit-card"></i>
+              <span>سداد الاشتراك</span>
+            </button>
             <a href="services.html" class="quick-action-btn">
               <i class="fas fa-th-large"></i>
               <span>أقسام المنصة</span>
@@ -426,7 +438,7 @@
     </div>
   </main>
 
-  <script src="js/platform-data.js?v=202609112405"></script>
+  <script src="js/platform-data.js?v=202609120926"></script>
   <script>
     const STORAGE_KEY = 'aamn_bus_operator_data_v2';
     const OPS_KEY = 'aamn_bus_operations_v2';
@@ -451,6 +463,17 @@
     }
     function walletKindLabel(value) {
       return value === 'company' ? 'شركة / مجموعة بصات' : (value === 'operator' ? 'صاحب بص فردي' : 'صاحب بص فردي');
+    }
+    function paymentLabel(value) {
+      if (value === 'paid') return 'مدفوع ومؤكد';
+      if (value === 'review') return 'تم الإرسال وينتظر تأكيد الأدمن';
+      if (value === 'unpaid') return 'غير مدفوع';
+      return 'بانتظار السداد';
+    }
+    function paymentBadgeClass(value) {
+      if (value === 'paid') return 'status-completed';
+      if (value === 'review') return 'status-review';
+      return 'status-progress';
     }
     function esc(value) {
       return String(value ?? '').replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
@@ -519,6 +542,18 @@
 
     btnOpenNewReq.addEventListener('click', () => { boxNewRequest.style.display = 'block'; });
     btnCancelNewReq.addEventListener('click', () => { boxNewRequest.style.display = 'none'; });
+    document.getElementById('reqService')?.addEventListener('change', (event) => {
+      const amountInput = document.getElementById('reqAmount');
+      if (!amountInput) return;
+      if (event.target.value.includes('اشتراك')) amountInput.value = '45000';
+      else if (event.target.value.includes('إضافة بص')) amountInput.value = '15000';
+      else if (event.target.value.includes('تسجيل')) amountInput.value = '0';
+    });
+    document.getElementById('btnShowPayments')?.addEventListener('click', () => {
+      const firstPending = document.querySelector('[data-payment-panel]');
+      if (firstPending) firstPending.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      else alert('لا توجد عملية بانتظار السداد حالياً. أضف طلب اشتراك أو نشر رحلة بمبلغ أولاً.');
+    });
 
     formNewRequest.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -530,7 +565,7 @@
       const ops = JSON.parse(localStorage.getItem(OPS_KEY) || '[]');
       const newOp = {
         id: 'op_' + Date.now().toString(36),
-        type: 'consultation',
+        type: service.includes('اشتراك') ? 'subscription' : 'consultation',
         status: 'open',
         date: new Date().toISOString().slice(0, 10),
         accountKind: user ? (user.accountKind || 'operator') : 'operator',
@@ -546,7 +581,7 @@
       ops.unshift(newOp);
       localStorage.setItem(OPS_KEY, JSON.stringify(ops));
 
-      alert('تم إرسال طلبك بنجاح! سيتم التواصل معك لتأكيد الحجز أو بيانات البص.');
+      alert(amount > 0 ? 'تم إرسال الطلب. ستظهر لك خيارات السداد الآن لإدخال مرجع الدفع.' : 'تم إرسال طلبك بنجاح! سيتم التواصل معك لتأكيد بيانات البص.');
       formNewRequest.reset();
       boxNewRequest.style.display = 'none';
       renderOrders();
@@ -666,21 +701,71 @@
           <div class="order-info">
             <h4>${op.service || 'طلب صاحب بص'}</h4>
             <span><i class="fas fa-calendar-alt"></i> ${op.date} · رقم الحجز/الطلب: ${op.id}</span>
-            <span><i class="fas fa-wallet"></i> السداد: ${op.paymentStatus === 'paid' ? 'مدفوع ومؤكد' : (op.paymentStatus === 'pending' ? 'بانتظار السداد' : 'غير مدفوع')}</span>
+            ${op.paymentRef ? `<span style="direction:ltr; display:inline-flex; padding:4px 10px; border-radius:999px; background:#eef2ff; color:#1d4ed8; font-weight:900; font-size:.78rem;">${esc(op.paymentRef)}</span>` : ''}
+            <span><i class="fas fa-wallet"></i> السداد: ${paymentLabel(op.paymentStatus)}</span>
           </div>
           <div>
-            <span class="badge-status ${op.status === 'done' ? 'status-completed' : 'status-progress'}">
+            <span class="badge-status ${op.status === 'done' ? 'status-completed' : paymentBadgeClass(op.paymentStatus)}">
               <i class="fas fa-circle" style="font-size:0.5rem;"></i> ${op.status === 'done' ? 'مكتمل' : 'قيد المتابعة'}
             </span>
-            <a class="btn-site" style="padding:7px 10px; font-size:0.78rem; margin-top:6px;" target="_blank" rel="noopener noreferrer" href="https://wa.me/966500000000?text=${encodeURIComponent('إشعار سداد محفظة من منصة الاتحاد للخدمات\nرقم الطلب: ' + op.id + '\nالبيان: ' + (op.service || 'طلب صاحب بص') + '\nصاحب البص / الشركة: ' + (op.customer || '') + '\nيرجى تأكيد السداد والمتابعة.')}"><i class="fab fa-whatsapp"></i> إشعار السداد</a>
           </div>
+          ${op.amount > 0 && op.paymentStatus !== 'paid' ? paymentPanel(op) : ''}
         </div>
       `).join('');
     }
 
+    function paymentPanel(op) {
+      return `
+        <div class="payment-panel" data-payment-panel>
+          <div>
+            <strong><i class="fas fa-credit-card"></i> سداد محفظة الأعمال أو الاشتراك</strong>
+            <p style="color:var(--text-muted); font-size:.88rem; line-height:1.8;">المبلغ المطلوب: <b>${money(op.amount)}</b>. بعد السداد أدخل رقم العملية ليظهر للأدمن لتأكيد الاشتراك أو عملية النشر.</p>
+          </div>
+          <div class="payment-methods">
+            <div class="pay-method"><strong>بنكك</strong><span>رقم الحساب: 0000000000</span><span>الاتحاد للخدمات</span></div>
+            <div class="pay-method"><strong>فوري</strong><span>رقم التاجر: 000000</span><span>الاتحاد للخدمات</span></div>
+            <div class="pay-method"><strong>تحويل بنكي</strong><span>حساب: 0000000000</span><span>أدخل المرجع بعد التحويل</span></div>
+          </div>
+          <form class="payment-form" onsubmit="submitPayment(event, '${esc(op.id)}')">
+            <div>
+              <label style="font-weight:800; font-size:.84rem;">طريقة الدفع</label>
+              <select name="method" required>
+                <option value="">اختر طريقة الدفع</option>
+                <option>بنكك</option>
+                <option>فوري</option>
+                <option>تحويل بنكي</option>
+                <option>كاش عند المكتب</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-weight:800; font-size:.84rem;">رقم العملية / المرجع</label>
+              <input name="reference" dir="ltr" placeholder="مثال: 583920 أو TXN123" required>
+            </div>
+            <button class="btn-submit" style="margin:0;" type="submit"><i class="fas fa-check"></i> أرسلت السداد</button>
+          </form>
+        </div>
+      `;
+    }
+
+    window.submitPayment = function (event, opId) {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(event.target));
+      const ops = JSON.parse(localStorage.getItem(OPS_KEY) || '[]');
+      const op = ops.find(item => item.id === opId);
+      if (op) {
+        op.paymentStatus = 'review';
+        op.paymentMethod = data.method;
+        op.paymentRef = data.reference;
+        op.notes = [op.notes, 'طريقة السداد: ' + data.method].filter(Boolean).join(' | ');
+        localStorage.setItem(OPS_KEY, JSON.stringify(ops));
+      }
+      alert('تم تسجيل السداد. سيظهر للأدمن لتأكيد العملية.');
+      renderOrders();
+    };
+
     function renderWallet(userOps, user) {
       const paid = userOps.filter(o => o.paymentStatus === 'paid').reduce((sum, o) => sum + Number(o.amount || 0), 0);
-      const pending = userOps.filter(o => o.paymentStatus === 'pending').reduce((sum, o) => sum + Number(o.amount || 0), 0);
+      const pending = userOps.filter(o => o.paymentStatus === 'pending' || o.paymentStatus === 'review').reduce((sum, o) => sum + Number(o.amount || 0), 0);
       document.getElementById('walletPaid').textContent = money(paid);
       document.getElementById('walletPending').textContent = money(pending);
       document.getElementById('walletType').textContent = walletKindLabel(user?.accountKind || 'operator');
@@ -717,6 +802,7 @@
   </script>
 </body>
 </html>
+
 
 
 

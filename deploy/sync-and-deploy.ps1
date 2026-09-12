@@ -1,8 +1,8 @@
 #Requires -Version 5.1
 <#
 .SYNOPSIS
-    الاتحاد للخدمات - Bus Booking Platform Deploy Pipeline
-    Synchronizes the static bus booking platform and builds a clean production package.
+    AAMN Bus Booking Platform Deploy Pipeline
+    Synchronizes static platform assets and builds a clean production package for Hostinger.
 #>
 
 $ErrorActionPreference = "Stop"
@@ -11,12 +11,12 @@ $src = Join-Path $root "SudanTravelApp.API\wwwroot"
 $dest = Join-Path $root "publish\aamn-bus-booking-platform"
 
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host "   الاتحاد للخدمات - Automated Deployment & Sync Pipeline   " -ForegroundColor Cyan
+Write-Host "   AAMN PLATFORM - AUTOMATED DEPLOYMENT & SYNC PIPELINE   " -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
 
 # 1. Sync files from wwwroot to repo root
 Write-Host "`n[1/3] Synchronizing web assets to repository root..." -ForegroundColor Yellow
-$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "send-mail.php")
+$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "operator.html", "send-mail.php", ".htaccess")
 foreach ($f in $htmlFiles) {
     $srcPath = Join-Path $src $f
     if (Test-Path $srcPath) { Copy-Item $srcPath $root -Force }
@@ -41,6 +41,7 @@ foreach ($h in $allHtml) {
     $content = [regex]::Replace($content, 'href="css/pages\.css(\?v=[^"]*)?"', "href=`"css/pages.css?v=$ts`"")
     $content = [regex]::Replace($content, 'src="js/main\.js(\?v=[^"]*)?"', "src=`"js/main.js?v=$ts`"")
     $content = [regex]::Replace($content, 'src="js/admin-site-config\.js(\?v=[^"]*)?"', "src=`"js/admin-site-config.js?v=$ts`"")
+    $content = [regex]::Replace($content, 'src="js/platform-data\.js(\?v=[^"]*)?"', "src=`"js/platform-data.js?v=$ts`"")
     [IO.File]::WriteAllText($h.FullName, $content, [Text.UTF8Encoding]::new($false))
     $rootTarget = Join-Path $root $h.Name
     [IO.File]::WriteAllText($rootTarget, $content, [Text.UTF8Encoding]::new($false))
@@ -53,12 +54,18 @@ if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
 New-Item -ItemType Directory -Force -Path $dest | Out-Null
 Copy-Item (Join-Path $src "*") -Destination $dest -Recurse -Force
 
+# Ensure .htaccess is copied into dest
+$srcHtaccess = Join-Path $src ".htaccess"
+if (Test-Path $srcHtaccess) {
+    Copy-Item $srcHtaccess (Join-Path $dest ".htaccess") -Force
+}
+
 $tunnel = (Get-Content (Join-Path $root "deploy\runtime\public-url.txt") -Raw -ErrorAction SilentlyContinue)
 if ($tunnel) { $tunnel = $tunnel.Trim() }
 else { $tunnel = "https://onion-respected-karaoke-channels.trycloudflare.com" }
 
 $apiBase = "$tunnel/api"
-foreach ($rel in @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "js\main.js", "js\admin-site-config.js")) {
+foreach ($rel in @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "operator.html", "js\main.js", "js\admin-site-config.js", "js\platform-data.js")) {
     $p = Join-Path $dest $rel
     if (-not (Test-Path $p)) { continue }
     $text = [IO.File]::ReadAllText($p, [Text.UTF8Encoding]::new($false))
@@ -69,7 +76,7 @@ foreach ($rel in @("index.html", "about.html", "services.html", "projects.html",
 
 $cleanZip = Join-Path $root "publish\aamn-bus-booking-platform.zip"
 Remove-Item $cleanZip -Force -ErrorAction SilentlyContinue
-Compress-Archive -Path (Join-Path $dest "*") -DestinationPath $cleanZip -Force
+Compress-Archive -Path (Join-Path $dest "*"), (Join-Path $dest ".htaccess") -DestinationPath $cleanZip -Force
 
 # 3. Git Stage, Commit and Push
 Write-Host "[3/4] Pushing updates to GitHub (wadnooh/aamn)..." -ForegroundColor Yellow
@@ -77,16 +84,16 @@ Set-Location $root
 git add -A
 $status = git status --porcelain
 if ($status) {
-    git commit -m "Auto-Deploy: Sync production assets and site updates"
+    git commit -m "Auto-Deploy: Sync production assets, operator payment flow, and hardened .htaccess"
     git push origin main
 } else {
     Write-Host "Working tree clean, pushing current branch..." -ForegroundColor Gray
     git push origin main
 }
 
-# 3. Success Summary
-Write-Host "`n[3/3] Direct deployment to domain triggered successfully!" -ForegroundColor Green
+# 4. Success Summary
+Write-Host "`n[4/4] Direct deployment triggered successfully!" -ForegroundColor Green
 Write-Host "----------------------------------------------------------" -ForegroundColor Green
 Write-Host "  Live Domain : https://2-aa.com" -ForegroundColor Cyan
-Write-Host "  Status      : Synced and Pushed Directly to Server" -ForegroundColor Green
+Write-Host "  Status      : Synced, Hardened, and Pushed to Origin" -ForegroundColor Green
 Write-Host "==========================================================`n" -ForegroundColor Cyan
