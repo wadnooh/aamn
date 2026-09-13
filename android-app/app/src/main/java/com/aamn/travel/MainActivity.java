@@ -39,6 +39,19 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Style system bars for seamless mobile immersion
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            android.view.Window window = getWindow();
+            window.addFlags(android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(android.graphics.Color.parseColor("#0f172a"));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                window.setNavigationBarColor(android.graphics.Color.parseColor("#ffffff"));
+                window.getDecorView().setSystemUiVisibility(
+                    window.getDecorView().getSystemUiVisibility() | android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                );
+            }
+        }
+
         mWebView = findViewById(R.id.webview);
         mProgressBar = findViewById(R.id.progress_bar);
 
@@ -86,7 +99,7 @@ public class MainActivity extends Activity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
-                if (url.startsWith("tel:") || url.startsWith("mailto:") || url.startsWith("whatsapp:") || url.startsWith("intent:")) {
+                if (url.startsWith("tel:") || url.startsWith("mailto:") || url.startsWith("whatsapp:") || url.startsWith("intent:") || url.contains("wa.me") || url.contains("api.whatsapp.com")) {
                     try {
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                         startActivity(intent);
@@ -186,11 +199,23 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (mWebView != null && mWebView.canGoBack()) {
-            mWebView.goBack();
-        } else {
-            super.onBackPressed();
+        if (mWebView != null) {
+            mWebView.evaluateJavascript("(function(){ return window.handleAndroidBack ? window.handleAndroidBack() : false; })()", new ValueCallback<String>() {
+                @Override
+                public void onReceiveValue(String value) {
+                    if ("true".equalsIgnoreCase(value) || "\"true\"".equalsIgnoreCase(value)) {
+                        return; // Handled smoothly in JS (closed modal or returned to home tab)
+                    }
+                    if (mWebView.canGoBack()) {
+                        mWebView.goBack();
+                    } else {
+                        MainActivity.super.onBackPressed();
+                    }
+                }
+            });
+            return;
         }
+        super.onBackPressed();
     }
 
     @Override

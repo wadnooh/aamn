@@ -53,4 +53,17 @@ public class WebAppInterface {
     public void showToast(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * Native haptic feedback vibration
+     */
+    @JavascriptInterface
+    public void vibrate(long milliseconds) {
+        try {
+            android.os.Vibrator v = (android.os.Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+            if (v != null && v.hasVibrator()) {
+                v.vibrate(milliseconds > 0 ? milliseconds : 35);
+            }
+        } catch (Exception ignored) {}
+    }
 }

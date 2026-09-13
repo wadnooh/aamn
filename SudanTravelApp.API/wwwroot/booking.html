@@ -2,11 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>الاتحاد لحجز البصات | تطبيق المسافر</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>آمن لحجز الباصات | تطبيق المسافر</title>
   <style>
     :root {
       --primary: #0284c7;
@@ -16,7 +13,7 @@
       --accent-dark: #059669;
       --warning: #f59e0b;
       --danger: #ef4444;
-      --bg: #f8fafc;
+      --bg: #f1f5f9;
       --card: #ffffff;
       --border: #e2e8f0;
       --text: #0f172a;
@@ -30,27 +27,35 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Cairo', 'Tajawal', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", "Tajawal", "Noto Sans Arabic", sans-serif;
       -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
-    body {
+    html, body {
+      width: 100%;
+      min-height: 100%;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
-      padding-bottom: 84px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body {
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px));
       overflow-x: hidden;
     }
     a { text-decoration: none; color: inherit; }
-    button { cursor: pointer; font: inherit; border: none; outline: none; }
+    button { cursor: pointer; font: inherit; border: none; outline: none; background: none; }
+    input, select { font: inherit; }
 
-    /* Top App Bar */
+    /* Top Native App Bar */
     .app-header {
       background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
       color: #fff;
-      padding: 16px 20px 20px;
+      padding: 14px 18px 20px;
       border-bottom-left-radius: 24px;
       border-bottom-right-radius: 24px;
-      box-shadow: 0 8px 25px rgba(2, 132, 199, 0.2);
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.22);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -67,37 +72,38 @@
       gap: 10px;
     }
     .brand-icon {
-      width: 42px;
-      height: 42px;
-      background: rgba(255,255,255,0.15);
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.18);
       backdrop-filter: blur(10px);
-      border-radius: 12px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
-      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.25);
     }
     .brand-title {
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       font-weight: 900;
       line-height: 1.2;
+      letter-spacing: -0.3px;
     }
     .brand-sub {
       font-size: 0.76rem;
       color: #93c5fd;
-      font-weight: 600;
+      font-weight: 700;
     }
     .header-status {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       padding: 5px 12px;
-      background: rgba(16, 185, 129, 0.2);
-      border: 1px solid rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.22);
+      border: 1px solid rgba(16, 185, 129, 0.45);
       color: #6ee7b7;
       border-radius: 20px;
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       font-weight: 800;
     }
     .status-dot {
@@ -105,22 +111,22 @@
       height: 8px;
       border-radius: 50%;
       background: #10b981;
-      animation: pulse 2s infinite;
+      animation: pulseDot 2s infinite;
     }
-    @keyframes pulse {
-      0% { opacity: 0.5; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.1); }
-      100% { opacity: 0.5; transform: scale(0.9); }
+    @keyframes pulseDot {
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+      100% { opacity: 0.4; transform: scale(0.9); }
     }
 
     /* Container */
     .app-container {
-      max-width: 600px;
+      max-width: 540px;
       margin: 0 auto;
-      padding: 16px;
+      padding: 14px 14px 20px;
     }
 
-    /* View Navigation Tabs (Bottom Bar) */
+    /* Bottom Navigation Bar (Material 3 Mobile Style) */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -130,61 +136,75 @@
       border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-around;
-      padding: 8px 12px;
+      padding: 6px 8px max(10px, env(safe-area-inset-bottom, 10px));
       z-index: 1000;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+      box-shadow: 0 -4px 25px rgba(0,0,0,0.07);
     }
     .nav-btn {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      padding: 6px 4px;
-      background: none;
+      gap: 3px;
+      padding: 6px 2px;
       color: var(--text-muted);
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 700;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 12px;
+      position: relative;
+    }
+    .nav-icon-wrap {
+      width: 42px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
       transition: all 0.2s;
-      border-radius: 10px;
     }
     .nav-btn svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       stroke: currentColor;
-      stroke-width: 2;
+      stroke-width: 2.2;
       fill: none;
       transition: transform 0.2s;
     }
     .nav-btn.active {
-      color: var(--primary);
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+    .nav-btn.active .nav-icon-wrap {
+      background: #e0f2fe;
     }
     .nav-btn.active svg {
-      transform: translateY(-2px);
       stroke: var(--primary);
+      transform: scale(1.08);
     }
     .badge-count {
       position: absolute;
-      top: 4px;
-      right: calc(50% - 18px);
+      top: 2px;
+      right: calc(50% - 20px);
       background: var(--danger);
       color: #fff;
       font-size: 0.65rem;
       font-weight: 900;
-      padding: 2px 6px;
+      padding: 1px 6px;
       border-radius: 10px;
+      border: 2px solid #fff;
     }
 
-    /* App Views */
+    /* Views */
     .app-view {
       display: none;
-      animation: fadeIn 0.25s ease-in-out;
+      animation: fadeIn 0.22s ease-out;
     }
     .app-view.active {
       display: block;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -192,42 +212,42 @@
     .card {
       background: var(--card);
       border-radius: var(--radius);
-      padding: 18px;
+      padding: 16px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .card-title {
       font-size: 1.05rem;
-      font-weight: 800;
+      font-weight: 900;
       color: var(--text);
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     /* Search Box */
     .search-card {
       background: #ffffff;
       border-radius: 20px;
-      padding: 20px;
+      padding: 18px;
       border: 1px solid #cbd5e1;
       box-shadow: var(--shadow-md);
-      margin-top: -12px;
+      margin-top: -10px;
       position: relative;
     }
     .route-row {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .route-field {
       flex: 1;
     }
     .route-label {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 800;
       color: var(--text-muted);
       margin-bottom: 4px;
@@ -235,16 +255,14 @@
     }
     .select-box, .input-box {
       width: 100%;
-      height: 48px;
+      height: 46px;
       border: 1.5px solid var(--border);
       border-radius: 12px;
       background: #f8fafc;
-      padding: 0 12px;
-      font-size: 0.95rem;
+      padding: 0 10px;
+      font-size: 0.92rem;
       font-weight: 700;
       color: var(--text);
-      display: flex;
-      align-items: center;
     }
     .select-box:focus, .input-box:focus {
       outline: none;
@@ -260,36 +278,63 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      font-weight: 900;
       margin-top: 18px;
-      transition: transform 0.2s;
+      transition: transform 0.25s;
     }
-    .swap-btn:hover {
-      transform: rotate(180deg);
+    .swap-btn:active {
+      transform: rotate(180deg) scale(0.92);
     }
     .filter-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 14px;
     }
+
+    /* Quick Date Chips */
+    .quick-date-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .date-chip {
+      flex: 1;
+      padding: 8px 4px;
+      text-align: center;
+      background: #f1f5f9;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .date-chip.active {
+      background: #e0f2fe;
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+
     .btn-search-trips {
       width: 100%;
-      height: 50px;
+      height: 48px;
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: #fff;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 900;
       border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.3);
-      transition: all 0.2s;
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.28);
+      transition: transform 0.15s, filter 0.15s;
     }
     .btn-search-trips:active {
       transform: scale(0.98);
+      filter: brightness(0.95);
     }
 
     /* Section Header */
@@ -297,15 +342,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 20px 4px 12px;
+      margin: 18px 4px 10px;
     }
     .section-title {
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       font-weight: 900;
       color: var(--text);
     }
     .section-badge {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 800;
       background: #e2e8f0;
       color: var(--text-muted);
@@ -318,35 +363,34 @@
       background: #fff;
       border-radius: 18px;
       border: 1px solid var(--border);
-      padding: 16px;
-      margin-bottom: 14px;
+      padding: 15px;
+      margin-bottom: 12px;
       box-shadow: var(--shadow-sm);
       transition: transform 0.2s, border-color 0.2s;
     }
     .trip-item:active {
-      transform: translateY(-2px);
       border-color: var(--primary);
     }
     .trip-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       border-bottom: 1px dashed var(--border);
-      padding-bottom: 10px;
+      padding-bottom: 8px;
     }
     .operator-tag {
       font-size: 0.95rem;
-      font-weight: 800;
+      font-weight: 900;
       color: var(--text);
       display: flex;
       align-items: center;
       gap: 6px;
     }
     .bus-type-badge {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 800;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 8px;
       background: #e0f2fe;
       color: #0369a1;
@@ -355,18 +399,18 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .time-point {
       text-align: center;
     }
     .time-val {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 900;
       color: var(--text);
     }
     .city-val {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
       font-weight: 700;
     }
@@ -375,7 +419,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 12px;
+      padding: 0 8px;
       color: var(--primary);
     }
     .route-line {
@@ -388,45 +432,65 @@
     .route-line::after {
       content: '🚌';
       position: absolute;
-      top: -12px;
+      top: -11px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+    }
+    .features-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .feature-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      color: #475569;
     }
     .trip-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-top: 10px;
+      gap: 10px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #f1f5f9;
     }
     .trip-price {
       display: flex;
       flex-direction: column;
     }
     .price-amount {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 900;
       color: #0284c7;
       line-height: 1;
     }
     .price-label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
       font-weight: 700;
       margin-top: 2px;
     }
     .btn-book-now {
-      padding: 10px 22px;
+      padding: 9px 18px;
       background: linear-gradient(135deg, #0284c7, #0369a1);
       color: #fff;
       border-radius: 12px;
       font-weight: 800;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.22);
+    }
+    .btn-book-now:active {
+      transform: scale(0.96);
     }
 
     /* Ticket / Boarding Pass Card */
@@ -435,35 +499,32 @@
       border-radius: 20px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-md);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       overflow: hidden;
       position: relative;
     }
     .ticket-top {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #fff;
-      padding: 16px 20px;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
     .ticket-code {
       font-family: monospace;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 900;
       letter-spacing: 1px;
       color: #38bdf8;
       background: rgba(255,255,255,0.1);
-      padding: 4px 10px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 6px;
     }
     .ticket-status {
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 800;
-      padding: 4px 12px;
+      padding: 3px 10px;
       border-radius: 20px;
     }
     .status-confirmed { background: #dcfce7; color: #15803d; }
@@ -471,69 +532,62 @@
     .status-review { background: #e0f2fe; color: #0369a1; }
     
     .ticket-body {
-      padding: 20px;
+      padding: 16px;
     }
     .ticket-route {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .ticket-meta-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 14px 0;
+      gap: 10px;
+      padding: 12px 0;
       border-top: 1px dashed #cbd5e1;
       border-bottom: 1px dashed #cbd5e1;
     }
     .meta-item strong {
       display: block;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--text);
       font-weight: 800;
     }
     .meta-item span {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       font-weight: 700;
     }
-    .ticket-perforation {
-      position: relative;
-      height: 20px;
-      background: var(--bg);
-      margin: 0 -20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .perfor-notch-left, .perfor-notch-right {
-      width: 24px;
-      height: 24px;
-      background: var(--bg);
-      border-radius: 50%;
-    }
-    .ticket-footer {
-      padding: 16px 20px;
-      background: #fafafa;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .ticket-barcode-sim {
+      font-family: monospace;
+      text-align: center;
+      letter-spacing: 4px;
+      font-size: 1.1rem;
+      color: #334155;
+      padding: 8px 0;
+      background: #f8fafc;
+      border-radius: 8px;
+      margin-top: 10px;
+      border: 1px dashed #cbd5e1;
     }
     .ticket-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-top: 1px solid #f1f5f9;
     }
     .btn-ticket-act {
-      padding: 10px;
+      padding: 9px;
       border-radius: 10px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
     }
     .btn-whatsapp {
       background: #22c55e;
@@ -544,82 +598,70 @@
       color: #fff;
     }
 
-    /* Bank Account Card */
+    /* Bank Account Cards */
     .bank-card {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       color: #fff;
       border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 16px;
+      padding: 18px;
+      margin-bottom: 14px;
       box-shadow: var(--shadow-md);
       position: relative;
       overflow: hidden;
-    }
-    .bank-card::after {
-      content: '';
-      position: absolute;
-      top: -30px;
-      left: -30px;
-      width: 120px;
-      height: 120px;
-      background: rgba(2, 132, 199, 0.2);
-      border-radius: 50%;
-      filter: blur(30px);
     }
     .bank-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .bank-name {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 900;
       color: #38bdf8;
     }
     .bank-acc-number {
       font-family: monospace;
-      font-size: 1.4rem;
+      font-size: 1.45rem;
       font-weight: 900;
       letter-spacing: 2px;
       direction: ltr;
       text-align: right;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: #f8fafc;
     }
     .bank-acc-holder {
-      font-size: 0.86rem;
+      font-size: 0.82rem;
       color: #cbd5e1;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .btn-copy-acc {
       width: 100%;
       padding: 10px;
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.14);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.25);
       border-radius: 10px;
       color: #fff;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: background 0.2s;
+      gap: 6px;
     }
     .btn-copy-acc:active {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.28);
     }
 
-    /* Modals & Slide-ups */
+    /* Modals & Native Bottom Sheets */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(15, 23, 42, 0.65);
       backdrop-filter: blur(4px);
       z-index: 2000;
       display: none;
@@ -632,14 +674,14 @@
     .bottom-sheet {
       background: #fff;
       width: 100%;
-      max-width: 600px;
-      border-top-left-radius: 28px;
-      border-top-right-radius: 28px;
-      padding: 24px 20px 32px;
-      max-height: 90vh;
+      max-width: 540px;
+      border-top-left-radius: 26px;
+      border-top-right-radius: 26px;
+      padding: 20px 18px max(24px, env(safe-area-inset-bottom, 24px));
+      max-height: 88vh;
       overflow-y: auto;
-      box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
-      animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
+      animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
     @keyframes slideUp {
       from { transform: translateY(100%); }
@@ -650,37 +692,102 @@
       height: 5px;
       background: #cbd5e1;
       border-radius: 10px;
-      margin: 0 auto 18px;
-    }
-    .form-group {
-      margin-bottom: 14px;
-    }
-    .form-label {
-      display: block;
-      font-size: 0.84rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 6px;
+      margin: 0 auto 16px;
     }
 
-    /* Toast Notification */
+    /* Visual Bus Seat Selector */
+    .bus-seat-container {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 14px;
+      margin: 12px 0;
+    }
+    .bus-front-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1.5px dashed #cbd5e1;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #64748b;
+    }
+    .seat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      justify-items: center;
+    }
+    .seat-col-spacer {
+      grid-column: 3;
+    }
+    .seat-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .seat-btn.selected {
+      background: #10b981;
+      border-color: #059669;
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+    .seat-btn.booked {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+    .seat-legend {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #64748b;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+    }
+
+    /* Toast */
     .toast-box {
       position: fixed;
-      top: 24px;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%) translateY(-100px);
       background: #0f172a;
       color: #fff;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-size: 0.88rem;
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-size: 0.85rem;
       font-weight: 800;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
       z-index: 3000;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       align-items: center;
       gap: 8px;
+      max-width: 90%;
+      text-align: center;
     }
     .toast-box.show {
       transform: translateX(-50%) translateY(0);
@@ -689,26 +796,26 @@
     /* Empty state */
     .empty-state {
       text-align: center;
-      padding: 40px 20px;
+      padding: 36px 16px;
       color: var(--text-muted);
     }
     .empty-icon {
-      font-size: 3rem;
-      margin-bottom: 12px;
-      opacity: 0.6;
+      font-size: 2.8rem;
+      margin-bottom: 8px;
+      opacity: 0.7;
     }
   </style>
 </head>
 <body>
 
-  <!-- App Header -->
+  <!-- Top Native App Bar -->
   <header class="app-header">
     <div class="header-top">
       <div class="brand-box">
         <div class="brand-icon">🚌</div>
         <div>
-          <h1 class="brand-title">الاتحاد لحجز البصات</h1>
-          <span class="brand-sub">تطبيق المسافر والحجز الفوري</span>
+          <h1 class="brand-title">آمن لحجز الباصات</h1>
+          <span class="brand-sub">سفريات السودان | حجز وتذاكر فورية</span>
         </div>
       </div>
       <div class="header-status">
@@ -738,6 +845,12 @@
             </div>
           </div>
 
+          <!-- Quick Date Chips -->
+          <div class="quick-date-row">
+            <button type="button" class="date-chip active" id="chipToday">رحلات اليوم</button>
+            <button type="button" class="date-chip" id="chipTomorrow">رحلات الغد</button>
+          </div>
+
           <div class="filter-grid">
             <div>
               <label class="route-label">تاريخ السفر</label>
@@ -746,17 +859,17 @@
             <div>
               <label class="route-label">عدد المقاعد</label>
               <select id="selectPassengers" class="select-box">
-                <option value="1">1 راكب</option>
-                <option value="2">2 ركاب</option>
-                <option value="3">3 ركاب</option>
-                <option value="4">4 ركاب</option>
-                <option value="5">5 ركاب</option>
+                <option value="1">1 مقعد</option>
+                <option value="2">2 مقاعد</option>
+                <option value="3">3 مقاعد</option>
+                <option value="4">4 مقاعد</option>
+                <option value="5">5 مقاعد</option>
               </select>
             </div>
           </div>
 
           <button type="submit" class="btn-search-trips">
-            <span>البحث عن الرحلات المتاحة</span>
+            <span>البحث عن الرحلات المتوفرة</span>
             <span>🔍</span>
           </button>
         </form>
@@ -764,8 +877,8 @@
 
       <!-- Search Results List -->
       <div class="section-title-row">
-        <h2 class="section-title">الرحلات المتوفرة للمسار</h2>
-        <span class="section-badge" id="tripsCountBadge">6 رحلات</span>
+        <h2 class="section-title">رحلات الباصات المتاحة</h2>
+        <span class="section-badge" id="tripsCountBadge">0 رحلة</span>
       </div>
 
       <div id="tripsListContainer">
@@ -795,9 +908,9 @@
       <div class="bank-card">
         <div class="bank-header">
           <span class="bank-name">بنك الخرطوم (تطبيق بنكك)</span>
-          <span style="font-size:1.5rem;">🏦</span>
+          <span style="font-size:1.4rem;">🏦</span>
         </div>
-        <div class="bank-acc-number" id="txtBankakAcc">2648195</div>
+        <div class="bank-acc-number">2648195</div>
         <div class="bank-acc-holder">اسم المستفيد: <strong>الاتحاد لخدمات النقل والسفريات</strong></div>
         <button type="button" class="btn-copy-acc" onclick="copyAccount('2648195', 'رقم حساب بنكك')">
           <span>نسخ رقم الحساب</span>
@@ -809,9 +922,9 @@
       <div class="bank-card" style="background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);">
         <div class="bank-header">
           <span class="bank-name">بنك فيصل الإسلامي (فوري)</span>
-          <span style="font-size:1.5rem;">💳</span>
+          <span style="font-size:1.4rem;">💳</span>
         </div>
-        <div class="bank-acc-number" id="txtFawryAcc">10884920</div>
+        <div class="bank-acc-number">10884920</div>
         <div class="bank-acc-holder">اسم المستفيد: <strong>الاتحاد للخدمات - الحساب المعتمد</strong></div>
         <button type="button" class="btn-copy-acc" onclick="copyAccount('10884920', 'رقم حساب فوري')">
           <span>نسخ رقم الحساب</span>
@@ -821,32 +934,32 @@
 
       <!-- Submit Payment Slip Form -->
       <div class="card">
-        <h3 class="card-title"><span>إرفاق إشعار الدفع لتأكيد الحجز</span></h3>
+        <h3 class="card-title"><span>إرفاق إشعار الدفع لتأكيد المقعد</span></h3>
         <form id="formConfirmPayment">
-          <div class="form-group">
-            <label class="form-label">اختر التذكرة المراد سدادها</label>
+          <div style="margin-bottom:12px;">
+            <label class="route-label">اختر التذكرة المراد سدادها</label>
             <select id="payTicketSelect" class="select-box" required>
               <option value="">-- اختر من تذاكرك الحالية --</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label">طريقة السداد</label>
+          <div style="margin-bottom:12px;">
+            <label class="route-label">طريقة التحويل المستخدمة</label>
             <select id="payMethodSelect" class="select-box" required>
               <option value="بنكك - بنك الخرطوم">بنكك - بنك الخرطوم</option>
               <option value="فوري - بنك فيصل">فوري - بنك فيصل</option>
               <option value="سداد نقدي في المحطة">سداد نقدي في المحطة</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label">الرقم المرجعي للإشعار (رقم المعاملة)</label>
-            <input type="text" id="payRefNumber" class="input-box" placeholder="مثال: 9845127003" required>
+          <div style="margin-bottom:12px;">
+            <label class="route-label">الرقم المرجعي للإشعار (رقم المعاملة)</label>
+            <input type="text" id="payRefNumber" inputmode="numeric" class="input-box" placeholder="مثال: 9845127003" required>
           </div>
-          <div class="form-group">
-            <label class="form-label">صورة إشعار التحويل (اختياري)</label>
+          <div style="margin-bottom:12px;">
+            <label class="route-label">صورة إشعار التحويل (اختياري)</label>
             <input type="file" id="paySlipFile" class="input-box" accept="image/*" style="padding: 10px;">
           </div>
-          <button type="submit" class="btn-search-trips" style="background: linear-gradient(135deg, #10b981, #059669); margin-top: 14px;">
-            <span>إرسال إشعار السداد وتأكيد الحجز</span>
+          <button type="submit" class="btn-search-trips" style="background: linear-gradient(135deg, #10b981, #059669); margin-top: 10px;">
+            <span>إرسال إشعار السداد وتأكيد التذكرة</span>
             <span>✓</span>
           </button>
         </form>
@@ -857,18 +970,18 @@
     <section class="app-view" id="viewProfile">
       <div class="card">
         <h3 class="card-title"><span>بيانات المسافر المحفوظة</span></h3>
-        <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:14px;">يتم حفظ بياناتك محلياً في هاتفك لتعبئة تذاكرك وحجوزاتك المستقبلية بنقرة واحدة.</p>
+        <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;">يتم حفظ بياناتك محلياً في هاتفك لتعبئة تذاكرك وحجوزاتك القادمة بنقرة واحدة.</p>
         <form id="formSaveProfile">
-          <div class="form-group">
-            <label class="form-label">الاسم الكامل للمسافر</label>
+          <div style="margin-bottom:12px;">
+            <label class="route-label">الاسم الكامل للمسافر</label>
             <input type="text" id="profName" class="input-box" placeholder="مثال: محمد أحمد علي" required>
           </div>
-          <div class="form-group">
-            <label class="form-label">رقم الهاتف / الواتساب</label>
-            <input type="tel" id="profPhone" class="input-box" placeholder="مثال: 0912345678" required>
+          <div style="margin-bottom:12px;">
+            <label class="route-label">رقم الهاتف / الواتساب</label>
+            <input type="tel" id="profPhone" inputmode="tel" class="input-box" placeholder="مثال: 0912345678" required>
           </div>
-          <button type="submit" class="btn-search-trips" style="margin-top:10px;">
-            <span>حفظ البيانات في هاتفي</span>
+          <button type="submit" class="btn-search-trips" style="margin-top:8px;">
+            <span>حفظ بياناتي في الهاتف</span>
             <span>💾</span>
           </button>
         </form>
@@ -876,7 +989,7 @@
 
       <div class="card">
         <h3 class="card-title"><span>المساعدة والدعم الفني المباشر</span></h3>
-        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">فريق دعم حجز التذاكر جاهز للرد على استفساراتك وتأكيد المقاعد طوال 24 ساعة.</p>
+        <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:14px;">فريق خدمة الركاب جاهز للرد على استفساراتك وتأكيد المقاعد طوال 24 ساعة.</p>
         <div style="display:grid; gap:10px;">
           <a href="https://wa.me/249912345678" target="_blank" class="btn-search-trips" style="background:#22c55e; box-shadow:none;">
             <span>محادثة واتساب فورية</span>
@@ -892,32 +1005,48 @@
 
   </main>
 
-  <!-- MODAL: BOOKING BOTTOM SHEET -->
+  <!-- MODAL: BOOKING & SEAT SELECTION BOTTOM SHEET -->
   <div class="modal-overlay" id="bookingModal">
     <div class="bottom-sheet">
       <div class="sheet-notch"></div>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-        <h3 style="font-size:1.2rem; font-weight:900;">تأكيد حجز التذكرة</h3>
-        <button type="button" onclick="closeBookingModal()" style="font-size:1.4rem; background:none;">✕</button>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 style="font-size:1.15rem; font-weight:900;">حجز التذكرة واختيار المقاعد</h3>
+        <button type="button" onclick="closeBookingModal()" style="font-size:1.3rem; padding:4px 8px;">✕</button>
       </div>
 
-      <div id="modalTripSummary" style="background:#f1f5f9; padding:14px; border-radius:14px; margin-bottom:16px;">
+      <div id="modalTripSummary" style="background:#f1f5f9; padding:12px; border-radius:12px; margin-bottom:14px;">
         <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- Interactive Bus Seat Layout -->
+      <div class="bus-seat-container">
+        <div class="bus-front-header">
+          <span>🧭 مقدمة البص (السائق)</span>
+          <span id="selectedSeatsLabel">المقاعد المختارة: لا يوجد</span>
+        </div>
+        <div class="seat-grid" id="seatGrid">
+          <!-- Injected via JavaScript -->
+        </div>
+        <div class="seat-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#fff; border:1px solid #cbd5e1;"></div><span>شاغر</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div><span>مقعدك</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#cbd5e1;"></div><span>محجوز</span></div>
+        </div>
       </div>
 
       <form id="formConfirmBooking">
         <input type="hidden" id="modalTripId">
-        <div class="form-group">
-          <label class="form-label">اسم الراكب الأساسي *</label>
-          <input type="text" id="modalPassengerName" class="input-box" placeholder="أدخل الاسم الثلاثي" required>
+        <div style="margin-bottom:10px;">
+          <label class="route-label">اسم المسافر الأساسي *</label>
+          <input type="text" id="modalPassengerName" class="input-box" placeholder="الاسم الثلاثي" required>
         </div>
-        <div class="form-group">
-          <label class="form-label">رقم الهاتف / الواتساب *</label>
-          <input type="tel" id="modalPassengerPhone" class="input-box" placeholder="مثال: 0912345678" required>
+        <div style="margin-bottom:10px;">
+          <label class="route-label">رقم هاتف المسافر *</label>
+          <input type="tel" id="modalPassengerPhone" inputmode="tel" class="input-box" placeholder="مثال: 0912345678" required>
         </div>
-        <div class="form-group">
-          <label class="form-label">عدد المقاعد</label>
-          <select id="modalPassengerCount" class="select-box" onchange="calculateModalTotal()">
+        <div style="margin-bottom:12px;">
+          <label class="route-label">عدد المقاعد</label>
+          <select id="modalPassengerCount" class="select-box" onchange="onPassengerCountChange()">
             <option value="1">1 مقعد</option>
             <option value="2">2 مقاعد</option>
             <option value="3">3 مقاعد</option>
@@ -925,13 +1054,13 @@
           </select>
         </div>
 
-        <div style="background:#e0f2fe; border:1px solid #bae6fd; border-radius:12px; padding:14px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;">
-          <span style="font-weight:800; color:#0369a1;">إجمالي المبلغ المطلوب:</span>
-          <strong id="modalTotalAmount" style="font-size:1.3rem; color:#0284c7;">0 جنيه</strong>
+        <div style="background:#e0f2fe; border:1px solid #bae6fd; border-radius:12px; padding:12px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-weight:800; color:#0369a1; font-size:0.9rem;">إجمالي المبلغ:</span>
+          <strong id="modalTotalAmount" style="font-size:1.25rem; color:#0284c7;">0 جنيه</strong>
         </div>
 
         <button type="submit" class="btn-search-trips" style="background: linear-gradient(135deg, #10b981, #059669);">
-          <span>إصدار التذكرة وتأكيد الحجز</span>
+          <span>تأكيد الحجز وإصدار التذكرة</span>
           <span>🎟️</span>
         </button>
       </form>
@@ -941,20 +1070,28 @@
   <!-- Bottom Navigation Bar -->
   <nav class="bottom-nav">
     <button type="button" class="nav-btn active" onclick="switchView('viewBook', this)">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="15" rx="3"></rect><path d="M7 19v2M17 19v2M3 10h18"></path></svg>
+      <div class="nav-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="15" rx="3"></rect><path d="M7 19v2M17 19v2M3 10h18"></path></svg>
+      </div>
       <span>حجز رحلة</span>
     </button>
     <button type="button" class="nav-btn" onclick="switchView('viewTickets', this)" style="position:relative;">
       <span class="badge-count" id="navTicketsCount" style="display:none;">0</span>
-      <svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V7z"></path></svg>
+      <div class="nav-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V7z"></path></svg>
+      </div>
       <span>تذاكري</span>
     </button>
     <button type="button" class="nav-btn" onclick="switchView('viewPayment', this)">
-      <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+      <div class="nav-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+      </div>
       <span>السداد وبنكك</span>
     </button>
     <button type="button" class="nav-btn" onclick="switchView('viewProfile', this)">
-      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <div class="nav-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      </div>
       <span>حسابي والدعم</span>
     </button>
   </nav>
@@ -964,27 +1101,55 @@
     <span id="toastMsg">تمت العملية بنجاح</span>
   </div>
 
-  <script src="js/platform-data.js?v=202609132252"></script>
   <script>
-    // Embedded Data fallback if script fails to load offline
+    // Cities list for Sudan
     const CITIES = [
       'الخرطوم', 'بورتسودان', 'مدني', 'كسلا', 'القضارف', 'عطبرة', 'شندي', 'دنقلا',
-      'الأبيض', 'كوستي', 'سنار', 'مروي', 'الفاشر', 'نيالا'
+      'الأبيض', 'كوستي', 'سنار', 'مروي', 'الدمازين', 'الفاشر', 'كريمة', 'حلفا'
     ];
 
+    // Rich Bus Trips in Sudan
     const DEFAULT_TRIPS = [
-      { id: 'trip_krt_portsudan_0800', operator: 'اتحاد الشرق للنقل', bus: 'بص سفر مميز VIP', from: 'الخرطوم', to: 'بورتسودان', date: '', time: '08:00 صباحاً', price: 28000, seats: 45, bookedSeats: [1, 2, 5, 12, 14] },
-      { id: 'trip_krt_madani_0700', operator: 'شركة نقل النيل', bus: 'بص مكيف 49 راكب', from: 'الخرطوم', to: 'مدني', date: '', time: '07:00 صباحاً', price: 8500, seats: 49, bookedSeats: [3, 4, 8] },
-      { id: 'trip_krt_kassala_0630', operator: 'شركة كسلا للسفريات', bus: 'بص سياحي حديث', from: 'الخرطوم', to: 'كسلا', date: '', time: '06:30 صباحاً', price: 18000, seats: 47, bookedSeats: [9, 10, 11] },
-      { id: 'trip_krt_obayid_1500', operator: 'سفريات كردفان الكبرى', bus: 'بص 45 راكب', from: 'الخرطوم', to: 'الأبيض', date: '', time: '03:00 عصراً', price: 22000, seats: 45, bookedSeats: [7, 18] },
-      { id: 'trip_krt_dongola_1900', operator: 'شمال السودان للنقل', bus: 'بص مكيف VIP', from: 'الخرطوم', to: 'دنقلا', date: '', time: '07:00 مساءً', price: 24000, seats: 49, bookedSeats: [2, 16, 21] },
-      { id: 'trip_krt_atbara_0900', operator: 'سفريات نهر النيل', bus: 'بص سياحي سريع', from: 'الخرطوم', to: 'عطبرة', date: '', time: '09:00 صباحاً', price: 12000, seats: 45, bookedSeats: [5, 6] }
+      { id: 'trip_krt_portsudan_0800', operator: 'شركة شريان الشمال', bus: 'بص مرسيدس VIP', from: 'الخرطوم', to: 'بورتسودان', date: '', time: '08:00 صباحاً', price: 30000, seats: 45, bookedSeats: [1, 2, 5, 12, 14, 22] },
+      { id: 'trip_krt_portsudan_1900', operator: 'شركة السهم الذهبي', bus: 'بص VIP مكيف درجة أولى', from: 'الخرطوم', to: 'بورتسودان', date: '', time: '07:00 مساءً', price: 32000, seats: 45, bookedSeats: [3, 4, 7, 8, 15] },
+      { id: 'trip_krt_madani_0700', operator: 'شركة نقل النيل', bus: 'بص سياحي مكيف', from: 'الخرطوم', to: 'مدني', date: '', time: '07:00 صباحاً', price: 9000, seats: 49, bookedSeats: [3, 4, 8, 11] },
+      { id: 'trip_krt_kassala_0630', operator: 'سفريات شروق الشرق', bus: 'بص VIP حديث', from: 'الخرطوم', to: 'كسلا', date: '', time: '06:30 صباحاً', price: 19000, seats: 45, bookedSeats: [9, 10, 11, 25] },
+      { id: 'trip_krt_obayid_1500', operator: 'سفريات كردفان الكبرى', bus: 'بص سياحي سريع', from: 'الخرطوم', to: 'الأبيض', date: '', time: '03:00 عصراً', price: 23000, seats: 45, bookedSeats: [7, 18, 19] },
+      { id: 'trip_krt_dongola_1900', operator: 'شركة تاركو البرية', bus: 'بص VIP مكيف', from: 'الخرطوم', to: 'دنقلا', date: '', time: '07:00 مساءً', price: 25000, seats: 49, bookedSeats: [2, 16, 21, 30] },
+      { id: 'trip_krt_atbara_0900', operator: 'سفريات نهر النيل', bus: 'بص سياحي سريع', from: 'الخرطوم', to: 'عطبرة', date: '', time: '09:00 صباحاً', price: 13000, seats: 45, bookedSeats: [5, 6, 20] },
+      { id: 'trip_krt_gedaref_0800', operator: 'سفريات القضارف المتحدة', bus: 'بص VIP مكيف', from: 'الخرطوم', to: 'القضارف', date: '', time: '08:00 صباحاً', price: 17000, seats: 45, bookedSeats: [8, 12] }
     ];
 
     const STORAGE_MY_TICKETS = 'aamn_passenger_tickets_v1';
     const STORAGE_PROFILE = 'aamn_passenger_profile_v1';
 
     let currentSelectedTrip = null;
+    let selectedSeatNumbers = [];
+
+    // Haptic Feedback Helper
+    function triggerHaptic(ms = 35) {
+      if (window.AndroidBridge && typeof window.AndroidBridge.vibrate === 'function') {
+        window.AndroidBridge.vibrate(ms);
+      } else if (navigator.vibrate) {
+        navigator.vibrate(ms);
+      }
+    }
+
+    // Android Hardware/Gesture Back Button Handler
+    window.handleAndroidBack = function() {
+      const modal = document.getElementById('bookingModal');
+      if (modal && modal.classList.contains('active')) {
+        closeBookingModal();
+        return true;
+      }
+      const activeView = document.querySelector('.app-view.active');
+      if (activeView && activeView.id !== 'viewBook') {
+        const firstNavBtn = document.querySelectorAll('.nav-btn')[0];
+        switchView('viewBook', firstNavBtn);
+        return true;
+      }
+      return false; // Exit or minimize app
+    };
 
     // Toast helper
     function showToast(msg) {
@@ -995,11 +1160,12 @@
       const text = document.getElementById('toastMsg');
       text.innerText = msg;
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2800);
+      setTimeout(() => toast.classList.remove('show'), 2600);
     }
 
     // Copy Account Helper
     function copyAccount(acc, label) {
+      triggerHaptic(45);
       if (window.AndroidBridge && window.AndroidBridge.copyToClipboard) {
         window.AndroidBridge.copyToClipboard(acc, label);
       } else if (navigator.clipboard) {
@@ -1025,6 +1191,7 @@
 
     // View Switching
     function switchView(viewId, btn) {
+      triggerHaptic(25);
       document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       const target = document.getElementById(viewId);
@@ -1036,34 +1203,53 @@
       } else if (viewId === 'viewPayment') {
         populatePendingPaymentTickets();
       }
+      window.scrollTo(0, 0);
     }
 
     // Initialize City Dropdowns
     function initCities() {
-      const cityList = (window.AletihadPlatform && window.AletihadPlatform.cities) || CITIES;
       const selectFrom = document.getElementById('selectFrom');
       const selectTo = document.getElementById('selectTo');
 
       selectFrom.innerHTML = '';
       selectTo.innerHTML = '';
 
-      cityList.forEach(city => {
+      CITIES.forEach(city => {
         selectFrom.add(new Option(city, city));
         selectTo.add(new Option(city, city));
       });
 
-      // Defaults: Khartoum to Port Sudan
       selectFrom.value = 'الخرطوم';
       selectTo.value = 'بورتسودان';
 
-      // Date default: today
-      const todayStr = new Date().toISOString().slice(0, 10);
+      const today = new Date();
+      const todayStr = today.toISOString().slice(0, 10);
       document.getElementById('inputDate').value = todayStr;
       document.getElementById('inputDate').min = todayStr;
+
+      // Quick date chips
+      document.getElementById('chipToday').addEventListener('click', () => {
+        triggerHaptic(20);
+        document.getElementById('inputDate').value = todayStr;
+        document.getElementById('chipToday').classList.add('active');
+        document.getElementById('chipTomorrow').classList.remove('active');
+        searchAndRenderTrips();
+      });
+
+      document.getElementById('chipTomorrow').addEventListener('click', () => {
+        triggerHaptic(20);
+        const tom = new Date(today);
+        tom.setDate(tom.getDate() + 1);
+        document.getElementById('inputDate').value = tom.toISOString().slice(0, 10);
+        document.getElementById('chipTomorrow').classList.add('active');
+        document.getElementById('chipToday').classList.remove('active');
+        searchAndRenderTrips();
+      });
     }
 
     // Swap Route
     document.getElementById('btnSwapRoute').addEventListener('click', () => {
+      triggerHaptic(35);
       const selectFrom = document.getElementById('selectFrom');
       const selectTo = document.getElementById('selectTo');
       const tmp = selectFrom.value;
@@ -1074,9 +1260,6 @@
 
     // Get Trips list
     function getTrips() {
-      if (window.AletihadPlatform && typeof window.AletihadPlatform.trips === 'function') {
-        return window.AletihadPlatform.trips();
-      }
       return DEFAULT_TRIPS;
     }
 
@@ -1100,8 +1283,8 @@
         container.innerHTML = `
           <div class="empty-state card">
             <div class="empty-icon">🚌</div>
-            <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:6px;">لا توجد رحلات مجدولة حالياً</h3>
-            <p style="font-size:0.86rem;">يرجى تجربة مسار آخر أو تغيير تاريخ السفر، أو التواصل مع الدعم.</p>
+            <h3 style="font-size:1.05rem; font-weight:800; margin-bottom:6px;">لا توجد رحلات مجدولة لهذا المسار</h3>
+            <p style="font-size:0.84rem;">يرجى تجربة مسار آخر أو تغيير تاريخ السفر، أو التواصل مع الدعم الفني.</p>
           </div>
         `;
         return;
@@ -1111,7 +1294,7 @@
         const booked = trip.bookedSeats ? trip.bookedSeats.length : 0;
         const total = trip.seats || 45;
         const remaining = Math.max(0, total - booked);
-        const priceFmt = Number(trip.price || 0).toLocaleString('ar-SA');
+        const priceFmt = Number(trip.price || 0).toLocaleString();
 
         return `
           <div class="trip-item">
@@ -1120,7 +1303,7 @@
                 <span>🚌</span>
                 <span>${trip.operator}</span>
               </div>
-              <span class="bus-type-badge">${trip.bus || 'بص سياحي'}</span>
+              <span class="bus-type-badge">${trip.bus || 'بص VIP'}</span>
             </div>
 
             <div class="trip-timing">
@@ -1130,9 +1313,9 @@
               </div>
 
               <div class="route-arrow">
-                <span style="font-size:0.75rem; color:#64748b; font-weight:700;">رحلة مباشرة</span>
+                <span style="font-size:0.72rem; color:#64748b; font-weight:800;">رحلة مباشرة</span>
                 <div class="route-line"></div>
-                <span style="font-size:0.72rem; color:#10b981; font-weight:800;">متبقي ${remaining} مقعد</span>
+                <span style="font-size:0.7rem; color:#10b981; font-weight:900;">متبقي ${remaining} مقعد</span>
               </div>
 
               <div class="time-point">
@@ -1141,13 +1324,20 @@
               </div>
             </div>
 
+            <div class="features-row">
+              <span class="feature-tag">❄️ مكيف ثلج</span>
+              <span class="feature-tag">🔌 شواحن USB</span>
+              <span class="feature-tag">🥪 ضيافة مجانية</span>
+              <span class="feature-tag">📶 واي فاي</span>
+            </div>
+
             <div class="trip-footer">
               <div class="trip-price">
-                <span class="price-amount">${priceFmt} <small style="font-size:0.8rem;">جنيه</small></span>
-                <span class="price-label">شامل التذكرة والمقعد</span>
+                <span class="price-amount">${priceFmt} <small style="font-size:0.75rem;">جنيه</small></span>
+                <span class="price-label">شامل المقعد والتأمين</span>
               </div>
               <button type="button" class="btn-book-now" onclick="openBookingModal('${trip.id}')">
-                <span>حجز المقعد</span>
+                <span>اختيار المقاعد والحجز</span>
                 <span>🎟️</span>
               </button>
             </div>
@@ -1158,44 +1348,124 @@
 
     document.getElementById('formSearchTrips').addEventListener('submit', (e) => {
       e.preventDefault();
+      triggerHaptic(30);
       searchAndRenderTrips();
     });
 
-    // Modal Booking Logic
+    // Modal Booking & Seat Picker Logic
     function openBookingModal(tripId) {
+      triggerHaptic(35);
       const allTrips = getTrips();
       const trip = allTrips.find(t => t.id === tripId);
       if (!trip) return;
 
       currentSelectedTrip = trip;
+      selectedSeatNumbers = [];
       document.getElementById('modalTripId').value = trip.id;
 
-      // Summary
-      const priceFmt = Number(trip.price || 0).toLocaleString('ar-SA');
+      // Trip Summary in Sheet
+      const priceFmt = Number(trip.price || 0).toLocaleString();
       document.getElementById('modalTripSummary').innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
           <strong style="font-size:1.05rem; color:#0f172a;">${trip.operator}</strong>
-          <span style="font-size:0.8rem; background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:6px; font-weight:800;">${trip.bus}</span>
+          <span style="font-size:0.78rem; background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:6px; font-weight:800;">${trip.bus}</span>
         </div>
-        <div style="font-size:0.88rem; color:#475569; display:flex; justify-content:space-between;">
+        <div style="font-size:0.86rem; color:#475569; display:flex; justify-content:space-between;">
           <span>المسار: <strong>${trip.from} ➔ ${trip.to}</strong></span>
           <span>الموعد: <strong>${trip.time}</strong></span>
         </div>
-        <div style="font-size:0.84rem; color:#64748b; margin-top:6px;">سعر المقعد الواحد: <strong>${priceFmt} جنيه</strong></div>
+        <div style="font-size:0.82rem; color:#64748b; margin-top:4px;">سعر التذكرة: <strong>${priceFmt} جنيه</strong></div>
       `;
 
-      // Auto fill profile if available
+      // Auto-fill passenger profile if saved
       const savedProfile = getSavedProfile();
       if (savedProfile) {
         document.getElementById('modalPassengerName').value = savedProfile.name || '';
         document.getElementById('modalPassengerPhone').value = savedProfile.phone || '';
       }
 
+      // Render Visual Seat Grid (Rows of 4 seats: 1A, 1B, 1C, 1D)
+      renderBusSeats(trip);
+      autoAssignSeats(1);
       calculateModalTotal();
+
       document.getElementById('bookingModal').classList.add('active');
     }
 
+    function renderBusSeats(trip) {
+      const grid = document.getElementById('seatGrid');
+      grid.innerHTML = '';
+      const booked = trip.bookedSeats || [];
+      const totalSeats = Math.min(trip.seats || 45, 44);
+
+      for (let s = 1; s <= totalSeats; s++) {
+        const isBooked = booked.includes(s);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `seat-btn ${isBooked ? 'booked' : ''}`;
+        btn.innerText = s;
+        btn.dataset.seat = s;
+
+        if (!isBooked) {
+          btn.onclick = () => toggleSeatSelection(s);
+        }
+        grid.appendChild(btn);
+      }
+    }
+
+    function toggleSeatSelection(seatNum) {
+      triggerHaptic(20);
+      const idx = selectedSeatNumbers.indexOf(seatNum);
+      const maxSeats = Number(document.getElementById('modalPassengerCount').value || 1);
+
+      if (idx > -1) {
+        selectedSeatNumbers.splice(idx, 1);
+      } else {
+        if (selectedSeatNumbers.length >= maxSeats) {
+          selectedSeatNumbers.shift(); // Remove oldest
+        }
+        selectedSeatNumbers.push(seatNum);
+      }
+      updateSeatUI();
+    }
+
+    function autoAssignSeats(count) {
+      selectedSeatNumbers = [];
+      const booked = (currentSelectedTrip && currentSelectedTrip.bookedSeats) || [];
+      const total = (currentSelectedTrip && currentSelectedTrip.seats) || 45;
+      for (let s = 1; s <= total && selectedSeatNumbers.length < count; s++) {
+        if (!booked.includes(s)) {
+          selectedSeatNumbers.push(s);
+        }
+      }
+      updateSeatUI();
+    }
+
+    function onPassengerCountChange() {
+      const count = Number(document.getElementById('modalPassengerCount').value || 1);
+      autoAssignSeats(count);
+      calculateModalTotal();
+    }
+
+    function updateSeatUI() {
+      document.querySelectorAll('.seat-btn').forEach(btn => {
+        const s = Number(btn.dataset.seat);
+        if (selectedSeatNumbers.includes(s)) {
+          btn.classList.add('selected');
+        } else {
+          btn.classList.remove('selected');
+        }
+      });
+      const lbl = document.getElementById('selectedSeatsLabel');
+      if (selectedSeatNumbers.length > 0) {
+        lbl.innerText = `المقاعد المختارة: ${selectedSeatNumbers.join(' , ')}`;
+      } else {
+        lbl.innerText = 'المقاعد المختارة: لا يوجد';
+      }
+    }
+
     function closeBookingModal() {
+      triggerHaptic(20);
       document.getElementById('bookingModal').classList.remove('active');
     }
 
@@ -1203,111 +1473,93 @@
       if (!currentSelectedTrip) return;
       const count = Number(document.getElementById('modalPassengerCount').value || 1);
       const total = Number(currentSelectedTrip.price || 0) * count;
-      document.getElementById('modalTotalAmount').innerText = `${total.toLocaleString('ar-SA')} جنيه`;
+      document.getElementById('modalTotalAmount').innerText = `${total.toLocaleString()} جنيه`;
     }
 
-    // Submit Booking
+    // Submit Booking & Issue Ticket
     document.getElementById('formConfirmBooking').addEventListener('submit', (e) => {
       e.preventDefault();
+      triggerHaptic(40);
       if (!currentSelectedTrip) return;
 
       const name = document.getElementById('modalPassengerName').value.trim();
       const phone = document.getElementById('modalPassengerPhone').value.trim();
       const count = Number(document.getElementById('modalPassengerCount').value || 1);
 
-      // Save profile for reuse
       saveProfileData(name, phone);
 
-      let newBooking = null;
+      const randomPart = Math.floor(100000 + Math.random() * 900000);
+      const seats = selectedSeatNumbers.length > 0 ? selectedSeatNumbers : [1];
 
-      if (window.AletihadPlatform && typeof window.AletihadPlatform.createBooking === 'function') {
-        try {
-          newBooking = window.AletihadPlatform.createBooking({
-            tripId: currentSelectedTrip.id,
-            customer: name,
-            phone: phone,
-            passengers: count
-          });
-        } catch (err) {
-          console.warn('Fallback booking creation', err);
-        }
-      }
+      const newBooking = {
+        id: `ticket_${Date.now()}`,
+        code: `AAMN-${randomPart}`,
+        tripId: currentSelectedTrip.id,
+        passengerName: name,
+        phone: phone,
+        passengers: count,
+        seats: seats,
+        from: currentSelectedTrip.from,
+        to: currentSelectedTrip.to,
+        time: currentSelectedTrip.time,
+        operator: currentSelectedTrip.operator,
+        bus: currentSelectedTrip.bus,
+        totalAmount: Number(currentSelectedTrip.price || 0) * count,
+        date: document.getElementById('inputDate').value || new Date().toISOString().slice(0, 10),
+        bookingDate: new Date().toLocaleString('ar-SA'),
+        paymentStatus: 'pending' // pending, review, confirmed
+      };
 
-      if (!newBooking) {
-        // Local generation fallback
-        const randomPart = Math.floor(100000 + Math.random() * 900000);
-        newBooking = {
-          id: `ticket_${Date.now()}`,
-          tripId: currentSelectedTrip.id,
-          customer: name,
-          phone: phone,
-          passengers: count,
-          from: currentSelectedTrip.from,
-          to: currentSelectedTrip.to,
-          time: currentSelectedTrip.time,
-          operator: currentSelectedTrip.operator,
-          bus: currentSelectedTrip.bus,
-          amount: Number(currentSelectedTrip.price || 0) * count,
-          seats: [Math.floor(Math.random() * 30) + 1],
-          sadadCode: `SADAD-2026-${randomPart}`,
-          date: new Date().toISOString().slice(0, 10),
-          paymentStatus: 'pending'
-        };
-      }
-
-      // Store in personal tickets
-      saveToMyTickets(newBooking);
+      // Save to local tickets
+      const tickets = getMyTickets();
+      tickets.unshift(newBooking);
+      localStorage.setItem(STORAGE_MY_TICKETS, JSON.stringify(tickets));
 
       closeBookingModal();
-      showToast('تم تأكيد حجزك وإصدار التذكرة بنجاح! 🎟️');
+      showToast('🎉 تم إصدار تذكرتك بنجاح! يرجى سداد الحجز عبر بنكك.');
+      updateTicketsBadge();
 
-      // Switch to tickets view
+      // Switch to tickets tab
       const ticketsNavBtn = document.querySelectorAll('.nav-btn')[1];
       switchView('viewTickets', ticketsNavBtn);
     });
 
-    // My Tickets Management
+    // Tickets Management
     function getMyTickets() {
       try {
-        const stored = JSON.parse(localStorage.getItem(STORAGE_MY_TICKETS) || '[]');
-        return Array.isArray(stored) ? stored : [];
+        return JSON.parse(localStorage.getItem(STORAGE_MY_TICKETS) || '[]');
       } catch {
         return [];
       }
     }
 
-    function saveToMyTickets(booking) {
-      const list = getMyTickets();
-      list.unshift(booking);
-      localStorage.setItem(STORAGE_MY_TICKETS, JSON.stringify(list));
-      updateTicketsBadge();
-    }
-
     function updateTicketsBadge() {
-      const list = getMyTickets();
+      const tickets = getMyTickets();
       const badge = document.getElementById('navTicketsCount');
-      if (list.length > 0) {
-        badge.style.display = 'block';
-        badge.innerText = list.length;
+      const headerBadge = document.getElementById('myTicketsBadge');
+      if (tickets.length > 0) {
+        badge.innerText = tickets.length;
+        badge.style.display = 'inline-block';
+        headerBadge.innerText = `${tickets.length} تذكرة`;
       } else {
         badge.style.display = 'none';
+        headerBadge.innerText = `0 تذكرة`;
       }
     }
 
     function renderMyTickets() {
-      const list = getMyTickets();
+      const tickets = getMyTickets();
       const container = document.getElementById('myTicketsContainer');
-      const badge = document.getElementById('myTicketsBadge');
-      badge.innerText = `${list.length} تذكرة`;
+      updateTicketsBadge();
 
-      if (list.length === 0) {
+      if (tickets.length === 0) {
         container.innerHTML = `
           <div class="empty-state card">
-            <div class="empty-icon">🎟️</div>
-            <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:6px;">لا توجد تذاكر حالية</h3>
-            <p style="font-size:0.86rem; margin-bottom:16px;">لم تقم بحجز أي رحلة بعد. يمكنك البحث وحجز رحلتك فوراً.</p>
+            <div class="empty-icon">🎫</div>
+            <h3 style="font-size:1.05rem; font-weight:800; margin-bottom:6px;">لا توجد تذاكر محجوزة حتى الآن</h3>
+            <p style="font-size:0.84rem; margin-bottom:16px;">قم بالبحث عن وجهتك في قسم "حجز رحلة" لإصدار تذكرتك فوراً.</p>
             <button type="button" class="btn-search-trips" onclick="switchView('viewBook', document.querySelectorAll('.nav-btn')[0])">
-              <span>استعراض الرحلات الآن</span>
+              <span>احجز تذكرتك الأولى الآن</span>
               <span>🚌</span>
             </button>
           </div>
@@ -1315,142 +1567,143 @@
         return;
       }
 
-      container.innerHTML = list.map(ticket => {
-        let statusBadge = '<span class="ticket-status status-pending">بانتظار السداد</span>';
-        if (ticket.paymentStatus === 'confirmed' || ticket.status === 'confirmed') {
-          statusBadge = '<span class="ticket-status status-confirmed">مؤكدة ✓</span>';
-        } else if (ticket.paymentStatus === 'review') {
-          statusBadge = '<span class="ticket-status status-review">قيد مراجعة السداد</span>';
+      container.innerHTML = tickets.map(ticket => {
+        let statusBadge = `<span class="ticket-status status-pending">بانتظار السداد ⏳</span>`;
+        if (ticket.paymentStatus === 'review') {
+          statusBadge = `<span class="ticket-status status-review">قيد مراجعة السداد 🔍</span>`;
+        } else if (ticket.paymentStatus === 'confirmed') {
+          statusBadge = `<span class="ticket-status status-confirmed">تذكرة مؤكدة ومسددة ✓</span>`;
         }
 
-        const seatsStr = Array.isArray(ticket.seats) ? ticket.seats.join('، ') : (ticket.seats || '1');
-        const amountFmt = Number(ticket.amount || 0).toLocaleString('ar-SA');
+        const seatsText = (ticket.seats && ticket.seats.length > 0) ? ticket.seats.join(', ') : `${ticket.passengers} مقعد`;
+        const totalFmt = Number(ticket.totalAmount || 0).toLocaleString();
 
         return `
-          <div class="ticket-card">
+          <div class="ticket-card" id="${ticket.id}">
             <div class="ticket-top">
-              <div class="ticket-code">
-                <span>#${ticket.sadadCode || ticket.id}</span>
-                <button type="button" onclick="copyAccount('${ticket.sadadCode || ticket.id}', 'رقم التذكرة')" style="background:none; color:#38bdf8; font-size:0.9rem;" title="نسخ الكود">📋</button>
-              </div>
+              <span class="ticket-code">${ticket.code}</span>
               ${statusBadge}
             </div>
 
             <div class="ticket-body">
               <div class="ticket-route">
                 <div>
-                  <span style="font-size:0.75rem; color:#64748b; font-weight:800;">محطة المغادرة</span>
-                  <div style="font-size:1.2rem; font-weight:900;">${ticket.from}</div>
+                  <span style="font-size:0.75rem; color:#64748b; font-weight:700;">محطة المغادرة</span>
+                  <div style="font-size:1.15rem; font-weight:900;">${ticket.from}</div>
                 </div>
-                <div style="font-size:1.5rem; color:#0284c7;">🚌 ➔</div>
+                <div style="text-align:center; color:#0284c7; font-size:1.2rem;">➔</div>
                 <div style="text-align:left;">
-                  <span style="font-size:0.75rem; color:#64748b; font-weight:800;">محطة الوصول</span>
-                  <div style="font-size:1.2rem; font-weight:900;">${ticket.to}</div>
+                  <span style="font-size:0.75rem; color:#64748b; font-weight:700;">محطة الوصول</span>
+                  <div style="font-size:1.15rem; font-weight:900;">${ticket.to}</div>
                 </div>
               </div>
 
               <div class="ticket-meta-grid">
                 <div class="meta-item">
-                  <span>اسم الراكب:</span>
-                  <strong>${ticket.customer}</strong>
+                  <span>المسافر:</span>
+                  <strong>${ticket.passengerName}</strong>
                 </div>
                 <div class="meta-item">
-                  <span>شركة النقل:</span>
+                  <span>الشركة / البص:</span>
                   <strong>${ticket.operator}</strong>
                 </div>
                 <div class="meta-item">
-                  <span>المقاعد المحجوزة:</span>
-                  <strong style="color:#0284c7;">مقعد (${seatsStr})</strong>
+                  <span>تاريخ وموعد السفر:</span>
+                  <strong>${ticket.date} - ${ticket.time}</strong>
                 </div>
                 <div class="meta-item">
-                  <span>إجمالي القيمة:</span>
-                  <strong style="color:#10b981;">${amountFmt} جنيه</strong>
+                  <span>أرقام المقاعد:</span>
+                  <strong style="color:#0284c7;">💺 مقعد: ${seatsText}</strong>
                 </div>
               </div>
 
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px;">
-                <span style="font-size:0.8rem; color:#64748b;">تاريخ الرحلة: <strong>${ticket.date || 'اليوم'}</strong></span>
-                <span style="font-size:0.8rem; color:#64748b;">وقت التحرك: <strong>${ticket.time || 'صباحاً'}</strong></span>
+              <div class="ticket-barcode-sim">||| | |||| | ||| |||| | || |||</div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                <span style="font-size:0.76rem; color:#64748b;">إجمالي السعر:</span>
+                <strong style="font-size:1.1rem; color:#0284c7;">${totalFmt} جنيه</strong>
               </div>
             </div>
 
-            <div class="ticket-footer">
-              <div class="ticket-actions">
-                <button type="button" class="btn-ticket-act btn-whatsapp" onclick="shareTicket('${ticket.id}')">
-                  <span>مشاركة عبر الواتساب</span>
-                  <span>💬</span>
-                </button>
-                ${ticket.paymentStatus !== 'confirmed' ? `
-                  <button type="button" class="btn-ticket-act btn-pay-ticket" onclick="goToPayForTicket('${ticket.id}')">
-                    <span>سداد التذكرة الآن</span>
-                    <span>💳</span>
-                  </button>
-                ` : `
-                  <button type="button" class="btn-ticket-act" style="background:#f1f5f9; color:#334155;" onclick="window.print()">
-                    <span>طباعة التذكرة</span>
-                    <span>🖨️</span>
-                  </button>
-                `}
-              </div>
+            <div class="ticket-actions">
+              <button type="button" class="btn-ticket-act btn-whatsapp" onclick="shareTicketWhatsApp('${ticket.id}')">
+                <span>مشاركة واتساب</span>
+                <span>💬</span>
+              </button>
+              <button type="button" class="btn-ticket-act btn-pay-ticket" onclick="jumpToPayTicket('${ticket.id}')">
+                <span>سداد الحجز (بنكك)</span>
+                <span>💳</span>
+              </button>
             </div>
           </div>
         `;
       }).join('');
     }
 
-    // Share Ticket
-    function shareTicket(ticketId) {
-      const tickets = getMyTickets();
-      const t = tickets.find(item => item.id === ticketId);
-      if (!t) return;
+    // WhatsApp Share Boarding Pass
+    function shareTicketWhatsApp(ticketId) {
+      triggerHaptic(30);
+      const ticket = getMyTickets().find(t => t.id === ticketId);
+      if (!ticket) return;
 
-      const text = `تذكرة سفر مؤكدة - الاتحاد لحجز البصات\nرقم التذكرة: ${t.sadadCode || t.id}\nالراكب: ${t.customer}\nالخط: من ${t.from} إلى ${t.to}\nالمقاعد: ${Array.isArray(t.seats)?t.seats.join(', '):t.seats}\nالمبلغ: ${Number(t.amount).toLocaleString('ar-SA')} جنيه\nموعد الرحلة: ${t.time || 'صباحاً'}`;
+      const seatsText = (ticket.seats && ticket.seats.length > 0) ? ticket.seats.join(', ') : `${ticket.passengers}`;
+      const msg = `🎫 *تذكرة سفر إلكترونية - آمن لحجز الباصات*\n` +
+        `━━━━━━━━━━━━━━━━━━\n` +
+        `📌 رقم الحجز: ${ticket.code}\n` +
+        `👤 اسم المسافر: ${ticket.passengerName}\n` +
+        `🚌 الخط: من ${ticket.from} إلى ${ticket.to}\n` +
+        `🏢 الناقل: ${ticket.operator} (${ticket.bus})\n` +
+        `📅 الموعد: ${ticket.date} | ${ticket.time}\n` +
+        `💺 رقم المقعد: ${seatsText}\n` +
+        `💰 إجمالي المبلغ: ${Number(ticket.totalAmount).toLocaleString()} جنيه سوداني\n` +
+        `الحالة: ${ticket.paymentStatus === 'confirmed' ? 'مؤكدة ومسددة ✅' : 'قيد السداد والمراجعة ⏳'}\n` +
+        `━━━━━━━━━━━━━━━━━━\n` +
+        `تم الحجز عبر تطبيق آمن لسفريات السودان`;
 
       if (window.AndroidBridge && window.AndroidBridge.shareText) {
-        window.AndroidBridge.shareText('تذكرة بص سفري', text);
+        window.AndroidBridge.shareText('تذكرة سفر آمن', msg);
       } else {
-        const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-        window.open(url, '_blank');
+        window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(msg), '_blank');
       }
     }
 
-    // Go to Pay for Ticket
-    function goToPayForTicket(ticketId) {
+    // Jump from ticket to payment tab
+    function jumpToPayTicket(ticketId) {
+      triggerHaptic(30);
       const payNavBtn = document.querySelectorAll('.nav-btn')[2];
       switchView('viewPayment', payNavBtn);
       setTimeout(() => {
-        const sel = document.getElementById('payTicketSelect');
-        if (sel) sel.value = ticketId;
+        const select = document.getElementById('payTicketSelect');
+        if (select) select.value = ticketId;
       }, 100);
     }
 
-    // Populate Pending Payment Select
+    // Populate Payment Select
     function populatePendingPaymentTickets() {
-      const list = getMyTickets();
-      const sel = document.getElementById('payTicketSelect');
-      sel.innerHTML = '<option value="">-- اختر من تذاكرك الحالية --</option>';
+      const tickets = getMyTickets();
+      const select = document.getElementById('payTicketSelect');
+      select.innerHTML = '<option value="">-- اختر من تذاكرك الحالية --</option>';
 
-      list.forEach(t => {
-        const opt = document.createElement('option');
-        opt.value = t.id;
-        opt.innerText = `${t.sadadCode || t.id} | من ${t.from} إلى ${t.to} (${Number(t.amount).toLocaleString('ar-SA')} جنيه)`;
-        sel.appendChild(opt);
+      tickets.forEach(t => {
+        const label = `${t.code} - ${t.from} إلى ${t.to} (${Number(t.totalAmount).toLocaleString()} جنيه)`;
+        const opt = new Option(label, t.id);
+        select.add(opt);
       });
     }
 
     // Submit Payment Confirmation
     document.getElementById('formConfirmPayment').addEventListener('submit', (e) => {
       e.preventDefault();
+      triggerHaptic(40);
       const ticketId = document.getElementById('payTicketSelect').value;
       const method = document.getElementById('payMethodSelect').value;
       const ref = document.getElementById('payRefNumber').value.trim();
 
       if (!ticketId) {
-        showToast('يرجى اختيار التذكرة أولاً');
+        showToast('يرجى اختيار التذكرة المراد سدادها أولاً');
         return;
       }
 
-      // Update in local tickets
+      // Update ticket status
       const tickets = getMyTickets();
       const t = tickets.find(item => item.id === ticketId);
       if (t) {
@@ -1460,16 +1713,7 @@
         localStorage.setItem(STORAGE_MY_TICKETS, JSON.stringify(tickets));
       }
 
-      // Update platform data if available
-      if (window.AletihadPlatform && typeof window.AletihadPlatform.updatePayment === 'function') {
-        window.AletihadPlatform.updatePayment(ticketId, {
-          method: method,
-          reference: ref,
-          note: 'تم إرفاق إشعار السداد من تطبيق المسافر'
-        });
-      }
-
-      showToast('تم استلام إشعار الدفع بنجاح! جاري مراجعة وتأكيد مقعدك.');
+      showToast('✓ تم إرسال إشعار السداد بنجاح! جاري تأكيد مقعدك.');
       document.getElementById('formConfirmPayment').reset();
       
       // Redirect back to tickets
@@ -1477,7 +1721,7 @@
       switchView('viewTickets', ticketsNavBtn);
     });
 
-    // Profile Management
+    // Profile Storage
     function getSavedProfile() {
       try {
         return JSON.parse(localStorage.getItem(STORAGE_PROFILE) || 'null');
@@ -1502,13 +1746,14 @@
 
     document.getElementById('formSaveProfile').addEventListener('submit', (e) => {
       e.preventDefault();
+      triggerHaptic(30);
       const name = document.getElementById('profName').value.trim();
       const phone = document.getElementById('profPhone').value.trim();
       saveProfileData(name, phone);
-      showToast('تم حفظ بيانات المسافر في هاتفك بنجاح! 💾');
+      showToast('✓ تم حفظ بياناتك في الهاتف بنجاح!');
     });
 
-    // Init on load
+    // Initialization on Page Load
     window.addEventListener('DOMContentLoaded', () => {
       initCities();
       searchAndRenderTrips();
