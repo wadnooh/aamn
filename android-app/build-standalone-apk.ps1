@@ -89,6 +89,10 @@ if ($LASTEXITCODE -ne 0) { throw "D8 dexing failed with code $LASTEXITCODE" }
 # Add classes.dex to APK
 Set-Location "$buildDir\dex"
 & $aapt add "$buildDir\unaligned.apk" "classes.dex"
+Set-Location "$root\app\src\main"
+& $aapt add "$buildDir\unaligned.apk" "assets/index.html"
+& $aapt add "$buildDir\unaligned.apk" "assets/www/index.html"
+& $aapt add "$buildDir\unaligned.apk" "assets/www/js/platform-data.js"
 Set-Location $root
 
 # 5. Zipalign APK (4-byte alignment)

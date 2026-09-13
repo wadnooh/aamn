@@ -23,7 +23,9 @@ import android.widget.Toast;
  */
 public class MainActivity extends Activity {
 
-    public static final String APP_URL = "https://2-aa.com/";
+    public static final String LOCAL_APP_URL = "file:///android_asset/index.html";
+    public static final String REMOTE_APP_URL = "https://2-aa.com/booking.html";
+    public static final String LEGACY_APP_URL = "https://2-aa.com/";
     private static final int INPUT_FILE_REQUEST_CODE = 1001;
 
     private WebView mWebView;
@@ -48,10 +50,11 @@ public class MainActivity extends Activity {
             // Check intent if launched from deep link
             Intent intent = getIntent();
             Uri data = intent != null ? intent.getData() : null;
-            if (data != null && data.toString().contains("2-aa.com")) {
+            if (data != null && (data.toString().contains("2-aa.com") || data.toString().startsWith("http"))) {
                 mWebView.loadUrl(data.toString());
             } else {
-                mWebView.loadUrl(APP_URL);
+                // Load embedded dedicated booking interface directly
+                mWebView.loadUrl(LOCAL_APP_URL);
             }
         }
     }
@@ -66,12 +69,14 @@ public class MainActivity extends Activity {
         webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         webSettings.setAllowFileAccess(true);
         webSettings.setAllowContentAccess(true);
+        webSettings.setAllowFileAccessFromFileURLs(true);
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(false);
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        webSettings.setUserAgentString(webSettings.getUserAgentString() + " AamnTravelAndroid/1.0");
+        webSettings.setUserAgentString(webSettings.getUserAgentString() + " AamnTravelBookingApp/1.0");
 
         // Native JavaScript Bridge for Android Clipboard, Toasts and Sharing
         mWebView.addJavascriptInterface(new WebAppInterface(this), "AndroidBridge");
@@ -111,15 +116,8 @@ public class MainActivity extends Activity {
                 super.onReceivedError(view, request, error);
                 if (request.isForMainFrame()) {
                     if (mProgressBar != null) mProgressBar.setVisibility(View.GONE);
-                    String offlineHtml = "<!DOCTYPE html><html lang='ar' dir='rtl'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
-                            "<style>body{font-family:sans-serif;background:#f0f9ff;color:#0f172a;display:flex;flex-direction:column;align-items:center;justify-content:center;height:90vh;margin:0;padding:20px;text-align:center;}" +
-                            "h2{color:#0369a1;margin-bottom:10px;}p{color:#64748b;margin-bottom:24px;line-height:1.6;}" +
-                            ".btn{background:#0284c7;color:#fff;border:0;padding:12px 28px;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 14px rgba(2,132,199,0.3);}</style></head>" +
-                            "<body><div style='font-size:54px;margin-bottom:12px;'>🚌</div>" +
-                            "<h2>تعذر الاتصال بالشبكة</h2>" +
-                            "<p>يرجى التأكد من تشغيل البيانات أو الواي فاي ثم الضغط أدناه لتحديث الصفحة ومتابعة الحجز.</p>" +
-                            "<button class='btn' onclick='window.location.href=\"" + APP_URL + "\"'>إعادة المحاولة الآن</button></body></html>";
-                    view.loadDataWithBaseURL(APP_URL, offlineHtml, "text/html", "UTF-8", null);
+                    // Fallback directly to the embedded local booking app
+                    view.loadUrl(LOCAL_APP_URL);
                 }
             }
         });

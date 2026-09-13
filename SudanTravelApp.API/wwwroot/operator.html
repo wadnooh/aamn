@@ -220,6 +220,9 @@
         <button class="auth-tab" id="tabRegister">حساب صاحب بص أو شركة</button>
       </div>
       <div class="auth-body">
+        <!-- Auth Alert Box -->
+        <div id="operatorAuthAlert" style="display:none; padding:14px 16px; border-radius:12px; margin-bottom:18px; font-size:0.92rem; font-weight:700; line-height:1.6; border:1.5px solid transparent;"></div>
+
         <!-- Login Form -->
         <form id="formClientLogin" autocomplete="off">
           <div class="form-group">
@@ -464,7 +467,7 @@
     </div>
   </footer>
 
-  <script src="js/platform-data.js?v=202609132237"></script>
+  <script src="js/platform-data.js?v=202609132252"></script>
   <script>
     const STORAGE_KEY = 'aamn_bus_operator_data_v2';
     const OPS_KEY = 'aamn_bus_operations_v2';
@@ -508,6 +511,26 @@
       try { return JSON.parse(localStorage.getItem(key) || 'null') || fallback; } catch { return fallback; }
     }
 
+    // Auth Alert Helpers
+    const authAlert = document.getElementById('operatorAuthAlert');
+    function showAlert(html, type = 'error') {
+      if (!authAlert) return;
+      authAlert.style.display = 'block';
+      if (type === 'error') {
+        authAlert.style.background = '#fef2f2';
+        authAlert.style.color = '#991b1b';
+        authAlert.style.borderColor = '#fecaca';
+      } else {
+        authAlert.style.background = '#f0fdf4';
+        authAlert.style.color = '#166534';
+        authAlert.style.borderColor = '#bbf7d0';
+      }
+      authAlert.innerHTML = html;
+    }
+    function hideAlert() {
+      if (authAlert) authAlert.style.display = 'none';
+    }
+
     // Tabs
     const tabLogin = document.getElementById('tabLogin');
     const tabRegister = document.getElementById('tabRegister');
@@ -515,47 +538,101 @@
     const formRegister = document.getElementById('formClientRegister');
 
     tabLogin.addEventListener('click', () => {
+      hideAlert();
       tabLogin.classList.add('active'); tabRegister.classList.remove('active');
       formLogin.style.display = 'block'; formRegister.style.display = 'none';
     });
     tabRegister.addEventListener('click', () => {
+      hideAlert();
       tabRegister.classList.add('active'); tabLogin.classList.remove('active');
       formRegister.style.display = 'block'; formLogin.style.display = 'none';
     });
 
-    // Login submit
+    // Login submit with strict role & specialty check
     formLogin.addEventListener('submit', (e) => {
       e.preventDefault();
+      hideAlert();
       const email = document.getElementById('loginEmail').value.trim();
-      const user = {
-        id: '#MEM-' + Math.floor(1000 + Math.random()*9000),
-        fullName: email.split('@')[0],
-        email: email,
-        tier: 'صاحب بص فردي',
-        accountKind: 'operator',
-        joinedAt: new Date().toISOString()
-      };
+
+      if (!window.AletihadPlatform || typeof window.AletihadPlatform.authenticate !== 'function') {
+        showAlert('جاري تحميل بيانات المنصة... يرجى إعادة المحاولة.');
+        return;
+      }
+
+      const auth = window.AletihadPlatform.authenticate(email, '', 'operator');
+
+      if (!auth.success) {
+        if (auth.code === 'FORBIDDEN_PASSENGER') {
+          showAlert(
+            `<strong>${auth.message}</strong><br>` +
+            `<div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">` +
+            `<a href="client.html" style="background:#0284c7; color:#fff; padding:7px 14px; border-radius:8px; text-decoration:none; font-weight:800; display:inline-flex; align-items:center; gap:6px;"><i class="fas fa-users"></i> الانتقال لبوابة الركاب والمسافرين</a>` +
+            `<a href="booking.html" style="background:#10b981; color:#fff; padding:7px 14px; border-radius:8px; text-decoration:none; font-weight:800; display:inline-flex; align-items:center; gap:6px;"><i class="fas fa-ticket"></i> حجز تذكرة مباشر</a>` +
+            `</div>`,
+            'error'
+          );
+        } else {
+          showAlert(
+            `<strong>❌ ${auth.message}</strong><br>` +
+            `<span style="font-size:0.84rem; color:#64748b;">إذا كنت صاحب بص جديد، يرجى الضغط على تبويب <strong>"حساب صاحب بص أو شركة"</strong> لإنشاء وتفعيل حسابك الرسمي.</span>`,
+            'error'
+          );
+        }
+        return;
+      }
+
+      const user = auth.user;
       setUser(user);
       render();
     });
 
-    // Register submit
+    // Register submit with distinct operator database creation
     formRegister.addEventListener('submit', (e) => {
       e.preventDefault();
+      hideAlert();
       const name = document.getElementById('regName').value.trim();
       const email = document.getElementById('regEmail').value.trim();
       const phone = document.getElementById('regPhone').value.trim();
       const tier = document.getElementById('regTier').options[document.getElementById('regTier').selectedIndex].text;
       const tierValue = document.getElementById('regTier').value;
+      const isCompany = tierValue === 'Company' || tierValue === 'premium';
 
-      const user = {
-        id: '#MEM-' + Math.floor(1000 + Math.random()*9000),
-        fullName: name, email, phone, tier,
-        accountKind: accountKindFromTier(tierValue),
-        joinedAt: new Date().toISOString()
-      };
-      setUser(user);
-      render();
+      if (!window.AletihadPlatform || typeof window.AletihadPlatform.registerAccount !== 'function') {
+        showAlert('جاري تجهيز النظام... يرجى إعادة المحاولة.');
+        return;
+      }
+
+      try {
+        const newAccount = window.AletihadPlatform.registerAccount({
+          fullName: name,
+          email: email,
+          phone: phone,
+          role: isCompany ? 'company' : 'operator',
+          accountKind: isCompany ? 'company' : 'operator',
+          tier: tier
+        });
+
+        setUser(newAccount);
+        render();
+      } catch (err) {
+        if (err.code === 'EMAIL_EXISTS') {
+          const existing = window.AletihadPlatform.findAccount(email);
+          if (existing && existing.role === 'passenger') {
+            showAlert(
+              `❌ <strong>تنبيه: هذا البريد مسجل مسبقاً كـ (مستخدم / راكب) في منصة الحجز.</strong><br>` +
+              `منعاً لتضارب وتداخل بيانات المقاعد والأسطول، يرجى استخدام بريد إلكتروني تجاري مخصص للبصات، أو التواصل مع إدارة المنصة لترقية الحساب.`,
+              'error'
+            );
+          } else {
+            showAlert(
+              `❌ هذا البريد مسجل كصاحب بص بالفعل! يرجى الانتقال إلى تبويب <strong>"تسجيل الدخول"</strong> للدخول إلى حسابك.`,
+              'error'
+            );
+          }
+        } else {
+          showAlert('حدث خطأ أثناء إنشاء الحساب. يرجى مراجعة البيانات والمحاولة مجدداً.', 'error');
+        }
+      }
     });
 
     document.getElementById('btnTopLogout').addEventListener('click', logout);
@@ -864,6 +941,21 @@
       const authSec = document.getElementById('authSection');
       const dashSec = document.getElementById('dashboardContainer');
       const btnLogout = document.getElementById('btnTopLogout');
+
+      // Guard: Strictly prevent passenger accounts from accessing bus fleet dashboard
+      if (user && (user.accountKind === 'customer' || user.role === 'passenger')) {
+        localStorage.removeItem(STORAGE_KEY);
+        showAlert(
+          '❌ <strong>تم حظر الجلسة:</strong> هذا الحساب مسجل كـ (مستخدم / راكب)، ولا يملك قاعدة بيانات في تخصص أصحاب البصات والشركات.<br>' +
+          '<a href="client.html" style="display:inline-block; margin-top:8px; color:#0284c7; font-weight:800; text-decoration:underline;">الانتقال إلى بوابة الركاب والمسافرين ➔</a>',
+          'error'
+        );
+        authSec.style.display = 'flex';
+        dashSec.style.display = 'none';
+        btnLogout.style.display = 'none';
+        renderWallet([], null);
+        return;
+      }
 
       if (user) {
         authSec.style.display = 'none';

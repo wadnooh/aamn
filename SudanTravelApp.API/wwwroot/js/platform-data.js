@@ -1,16 +1,62 @@
-(function () {
   const KEYS = {
     trips: 'aletihad_platform_trips_v1',
     bookings: 'aletihad_platform_bookings_v1',
     operators: 'aletihad_platform_operators_v1',
     buses: 'aletihad_platform_buses_v1',
-    ops: 'aamn_bus_operations_v2'
+    ops: 'aamn_bus_operations_v2',
+    accounts: 'aletihad_accounts_registry_v1'
   };
 
   const cities = [
     'الخرطوم', 'أم درمان', 'بحري', 'مدني', 'سنار', 'كوستي', 'ربك', 'القضارف',
     'كسلا', 'بورتسودان', 'عطبرة', 'شندي', 'دنقلا', 'كريمة', 'الأبيض', 'النهود',
     'نيالا', 'الفاشر', 'الجنينة', 'الدمازين'
+  ];
+
+  const defaultAccounts = [
+    {
+      id: 'acc_opr_east',
+      email: 'east@transport.sd',
+      phone: '0911000200',
+      fullName: 'اتحاد الشرق للنقل',
+      role: 'company',
+      tier: 'شركة نقل مميزة',
+      accountKind: 'company',
+      operatorId: 'opr_east',
+      status: 'verified'
+    },
+    {
+      id: 'acc_opr_nile',
+      email: 'nile@transport.sd',
+      phone: '0998765432',
+      fullName: 'شركة نقل النيل',
+      role: 'company',
+      tier: 'شركة / مجموعة بصات',
+      accountKind: 'company',
+      operatorId: 'opr_nile',
+      status: 'verified'
+    },
+    {
+      id: 'acc_opr_independent',
+      email: 'owner@bus.sd',
+      phone: '0922222222',
+      fullName: 'أحمد عثمان (صاحب بص)',
+      role: 'operator',
+      tier: 'صاحب بص فردي',
+      accountKind: 'operator',
+      operatorId: 'opr_independent',
+      status: 'verified'
+    },
+    {
+      id: 'acc_passenger_demo',
+      email: 'passenger@travel.sd',
+      phone: '0912345678',
+      fullName: 'عمر خالد الصادق',
+      role: 'passenger',
+      tier: 'مستخدم / راكب',
+      accountKind: 'customer',
+      status: 'verified'
+    }
   ];
 
   const defaultTrips = [
@@ -212,11 +258,113 @@
     return booking || op || null;
   }
 
+  function accounts() {
+    return read(KEYS.accounts, defaultAccounts);
+  }
+
+  function saveAccounts(list) {
+    write(KEYS.accounts, list);
+  }
+
+  function findAccount(email) {
+    if (!email) return null;
+    const clean = email.trim().toLowerCase();
+    return accounts().find((a) => (a.email || '').trim().toLowerCase() === clean) || null;
+  }
+
+  function registerAccount(data) {
+    const list = accounts();
+    const clean = (data.email || '').trim().toLowerCase();
+    const existing = list.find((a) => (a.email || '').trim().toLowerCase() === clean);
+    if (existing) {
+      const err = new Error('EMAIL_EXISTS');
+      err.code = 'EMAIL_EXISTS';
+      err.existingRole = existing.role;
+      throw err;
+    }
+
+    const isBusiness = data.role === 'company' || data.role === 'operator' || data.accountKind === 'operator' || data.accountKind === 'company';
+    const operatorId = isBusiness ? (data.operatorId || id('opr')) : null;
+
+    const newAcc = {
+      id: id('acc'),
+      fullName: data.fullName || 'مستخدم',
+      email: clean,
+      phone: data.phone || '',
+      role: isBusiness ? (data.role || (data.tier?.includes('شركة') ? 'company' : 'operator')) : 'passenger',
+      accountKind: isBusiness ? (data.accountKind || (data.tier?.includes('شركة') ? 'company' : 'operator')) : 'customer',
+      tier: data.tier || (isBusiness ? 'صاحب بص فردي' : 'مستخدم / راكب'),
+      operatorId: operatorId,
+      status: 'verified',
+      joinedAt: new Date().toISOString()
+    };
+
+    list.unshift(newAcc);
+    saveAccounts(list);
+
+    if (isBusiness) {
+      const oprList = operators();
+      if (!oprList.some((o) => o.id === operatorId)) {
+        oprList.unshift({
+          id: operatorId,
+          name: newAcc.fullName,
+          type: newAcc.role === 'company' ? 'company' : 'individual',
+          phone: newAcc.phone,
+          subscription: newAcc.tier,
+          status: 'verified'
+        });
+        saveOperators(oprList);
+      }
+    }
+
+    return newAcc;
+  }
+
+  function authenticate(email, password, requiredPortal) {
+    const acc = findAccount(email);
+    if (!acc) {
+      return {
+        success: false,
+        code: 'NOT_FOUND',
+        message: 'البريد الإلكتروني غير مسجل مسبقاً. يرجى إنشاء حساب جديد أولاً من تبويب حساب جديد.'
+      };
+    }
+
+    const isOperatorRole = acc.role === 'operator' || acc.role === 'company' || acc.accountKind === 'operator' || acc.accountKind === 'company';
+
+    if (requiredPortal === 'operator') {
+      if (!isOperatorRole) {
+        return {
+          success: false,
+          code: 'FORBIDDEN_PASSENGER',
+          userRole: acc.role,
+          message: '❌ تنبيه: هذا الحساب مسجل كـ (مستخدم / راكب) في بوابة حجز التذاكر، ولا يملك قاعدة بيانات في تخصص أصحاب البصات والشركات. منعاً لخلط البيانات، يرجى التوجه لبوابة الركاب والمسافرين.',
+          redirectUrl: 'client.html'
+        };
+      }
+    } else if (requiredPortal === 'passenger') {
+      if (isOperatorRole) {
+        return {
+          success: true,
+          isOperatorBrowsing: true,
+          user: acc,
+          notice: 'حسابك مسجل كـ (صاحب بص / شركة). يمكنك حجز التذاكر كمسافر، أو التوجه للوحة أصحاب البصات لإدارة أسطولك.'
+        };
+      }
+    }
+
+    return {
+      success: true,
+      user: acc
+    };
+  }
+
   window.AletihadPlatform = {
     KEYS,
     cities,
     defaultTrips,
     defaultOperators,
+    defaultAccounts,
     today,
     money,
     availableSeats,
@@ -233,6 +381,11 @@
     searchTrips,
     addTrip,
     createBooking,
-    updatePayment
+    updatePayment,
+    accounts,
+    saveAccounts,
+    findAccount,
+    registerAccount,
+    authenticate
   };
 })();
