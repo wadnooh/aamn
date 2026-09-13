@@ -71,11 +71,15 @@
 
 ---
 
-## 5. سياسة الخصوصية (Privacy Policy)
+## 5. سياسة الخصوصية وحذف البيانات (Privacy Policy & Data Deletion)
 
-يتطلب متجر Google Play رابط سياسة خصوصية يعمل على الإنترنت:
-- رابط سياسة الخصوصية المتاح في موقعكم:
-  `https://2-aa.com/about.html#privacy`
+يتطلب متجر Google Play رابط سياسة خصوصية وحذف بيانات يعمل على الإنترنت:
+- **رابط سياسة الخصوصية الرسمي المعتمد:**
+  `https://2-aa.com/privacy.html`
+- **رابط طلب حذف البيانات والحساب (Data Deletion URL):**
+  `https://2-aa.com/privacy.html#data-deletion`
+- **ملف التوثيق الرسمي للنطاق والتطبيق (Digital Asset Links):**
+  `https://2-aa.com/.well-known/assetlinks.json`
 
 ---
 
@@ -85,10 +89,12 @@
 2. انقر على **Create App** (إنشاء تطبيق).
 3. أدخل اسم التطبيق: `آمن - حجز باصات وسفريات السودان`.
 4. حدد النوع: **App** ثم **Free**.
-5. أكمل قسم **App Content**:
-   - Privacy Policy: `https://2-aa.com/about.html#privacy`
-   - Target Audience: `18 and above` (أو الجميع)
-   - Ads: حدد `No, my app does not contain ads`
+5. أكمل قسم **App Content (محتوى التطبيق)**:
+   - **Privacy Policy:** ضع الرابط `https://2-aa.com/privacy.html`
+   - **Data Safety:** أجب بنعم على جمع (الاسم، الهاتف، إيصال السداد لحجز الرحلات)، واختر عدم مشاركتها لأي غرض إعلاني، مع إمكانية حذف البيانات.
+   - **Financial Features:** حدد توفير خدمات دفع وسداد حجوزات (سداد بنكي يدوي/رقمي).
+   - **Target Audience:** حدد `18 and above` (أو كافة الأعمار 13+).
+   - **Ads:** حدد `No, my app does not contain ads`.
 6. في قسم **Production Releases**، اضغط على **Create New Release** وقم برفع ملف `app-release.aab`.
 7. اضغط على **Save** ثم **Review and Rollout to Production**.
 8. يتم مراجعة التطبيق من قبل فريق Google والموافقة عليه عادة خلال 24 - 48 ساعة.

@@ -121,6 +121,15 @@ public class MainActivity extends AppCompatActivity {
                 if (request.isForMainFrame()) {
                     mProgressBar.setVisibility(View.GONE);
                     mSwipeRefresh.setRefreshing(false);
+                    String offlineHtml = "<!DOCTYPE html><html lang='ar' dir='rtl'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
+                            "<style>body{font-family:sans-serif;background:#f0f9ff;color:#0f172a;display:flex;flex-direction:column;align-items:center;justify-content:center;height:90vh;margin:0;padding:20px;text-align:center;}" +
+                            "h2{color:#0369a1;margin-bottom:10px;}p{color:#64748b;margin-bottom:24px;line-height:1.6;}" +
+                            ".btn{background:#0284c7;color:#fff;border:0;padding:12px 28px;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 14px rgba(2,132,199,0.3);}</style></head>" +
+                            "<body><div style='font-size:54px;margin-bottom:12px;'>🚌</div>" +
+                            "<h2>تعذر الاتصال بالشبكة</h2>" +
+                            "<p>يرجى التأكد من تشغيل البيانات أو الواي فاي ثم الضغط أدناه لتحديث الصفحة ومتابعة الحجز.</p>" +
+                            "<button class='btn' onclick='window.location.href=\"" + APP_URL + "\"'>إعادة المحاولة الآن</button></body></html>";
+                    view.loadDataWithBaseURL(APP_URL, offlineHtml, "text/html", "UTF-8", null);
                 }
             }
         });

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Shield Outline / Safety Emblem (Aamn Concept) -->
+    <path
+        android:fillColor="#38bdf8"
+        android:pathData="M54,22 C64,22 75,27 75,27 L75,54 C75,69 54,84 54,84 C54,84 33,69 33,54 L33,27 C33,27 44,22 54,22 Z"
+        android:fillAlpha="0.25" />
+        
+    <!-- Main Modern Bus Body -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M38,36 C38,33 41,31 45,31 L63,31 C67,31 70,33 70,36 L70,64 C70,67 67,69 63,69 L45,69 C41,69 38,67 38,64 Z" />
+        
+    <!-- Bus Windshield (Upper Glass) -->
+    <path
+        android:fillColor="#0f172a"
+        android:pathData="M41,35 C41,34 43,34 45,34 L63,34 C65,34 67,34 67,35 L67,46 L41,46 Z" />
+        
+    <!-- Bus Lower Grille / Headlights -->
+    <path
+        android:fillColor="#38bdf8"
+        android:pathData="M43,58 A2.5,2.5 0 1,1 43,57.9 Z" />
+    <path
+        android:fillColor="#38bdf8"
+        android:pathData="M65,58 A2.5,2.5 0 1,1 65,57.9 Z" />
+    <path
+        android:fillColor="#0284c7"
+        android:pathData="M48,58 L60,58 L60,60 L48,60 Z" />
+
+    <!-- Bus Wheels -->
+    <path
+        android:fillColor="#1e293b"
+        android:pathData="M41,69 L45,69 L45,73 L41,73 Z" />
+    <path
+        android:fillColor="#1e293b"
+        android:pathData="M63,69 L67,69 L67,73 L63,73 Z" />
+</vector>

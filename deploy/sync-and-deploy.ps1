@@ -16,13 +16,13 @@ Write-Host "==========================================================" -Foregro
 
 # 1. Sync files from wwwroot to repo root
 Write-Host "`n[1/3] Synchronizing web assets to repository root..." -ForegroundColor Yellow
-$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "operator.html", "send-mail.php", ".htaccess")
+$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "operator.html", "privacy.html", "send-mail.php", ".htaccess")
 foreach ($f in $htmlFiles) {
     $srcPath = Join-Path $src $f
     if (Test-Path $srcPath) { Copy-Item $srcPath $root -Force }
 }
 
-$dirs = @("css", "js", "images")
+$dirs = @("css", "js", "images", ".well-known")
 foreach ($d in $dirs) {
     $s = Join-Path $src $d
     $t = Join-Path $root $d
@@ -87,8 +87,7 @@ if ($status) {
     git commit -m "Auto-Deploy: Sync production assets, operator payment flow, and hardened .htaccess"
     git push origin main
 } else {
-    Write-Host "Working tree clean, pushing current branch..." -ForegroundColor Gray
-    git push origin main
+    Write-Host "Working tree clean, syncing branch..." -ForegroundColor Gray
 }
 
 # 4. Success Summary
