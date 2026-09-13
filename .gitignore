@@ -46,6 +46,9 @@ kids-learn/
 **/.gradle/**
 *.apk
 *.aab
+*.idsig
+build-standalone/
+**/build-standalone/
 
 
 
