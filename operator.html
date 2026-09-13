@@ -10,18 +10,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #D4881B;
-      --primary-dark: #A96510;
-      --primary-light: #F0A633;
-      --secondary: #1A2744;
-      --secondary-dark: #0f172a;
-      --text: #1e293b;
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #38bdf8;
+      --secondary: #0f172a;
+      --secondary-dark: #020617;
+      --text: #0f172a;
       --text-muted: #64748b;
-      --bg: #f8fafc;
+      --bg: #f0f9ff;
       --card: #ffffff;
       --border: #e2e8f0;
       --radius: 8px;
-      --shadow: 0 10px 30px rgba(0,0,0,0.06);
+      --shadow: 0 10px 30px rgba(2,132,199,0.06);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', 'Tajawal', sans-serif; }
     body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
@@ -54,7 +54,7 @@
     /* Auth Screen */
     .auth-section {
       min-height: calc(100vh - 70px); display: flex; align-items: center; justify-content: center; padding: 30px 20px;
-      background: radial-gradient(circle at top, rgba(220,38,38,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle at top, rgba(2,132,199,0.08) 0%, transparent 70%);
     }
     .auth-card {
       background: var(--card); width: min(480px, 100%); border-radius: var(--radius);
@@ -78,27 +78,27 @@
       font-size: 0.94rem; background: #f8fafc; transition: all 0.2s; font-family: inherit;
     }
     .input-box input:focus, .input-box select:focus, .input-box textarea:focus {
-      outline: none; border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(220,38,38,0.12);
+      outline: none; border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(2,132,199,0.14);
     }
     .btn-submit {
       width: 100%; padding: 13px; background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: #fff; border: 0; border-radius: 10px; font-weight: 800; font-size: 1rem;
       display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;
-      box-shadow: 0 4px 14px rgba(220,38,38,0.3); transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(2,132,199,0.25); transition: all 0.2s;
     }
-    .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(220,38,38,0.4); }
+    .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(2,132,199,0.35); }
 
     /* Dashboard */
     .dashboard-container { max-width: 1200px; margin: 0 auto; width: 100%; padding: 30px 20px; flex: 1; display: none; }
     .client-header-card {
-      background: linear-gradient(135deg, #1A2744 0%, #0f172a 100%); color: #fff;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff;
       border-radius: var(--radius); padding: 28px; margin-bottom: 24px; display: flex;
       align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
       box-shadow: 0 14px 40px rgba(15,23,42,0.15); position: relative; overflow: hidden;
     }
     .client-header-card::after {
       content: ''; position: absolute; top: -50%; left: -10%; width: 250px; height: 250px;
-      background: rgba(220,38,38,0.15); border-radius: 50%; filter: blur(50px); pointer-events: none;
+      background: rgba(2,132,199,0.15); border-radius: 50%; filter: blur(50px); pointer-events: none;
     }
     .client-info h2 { font-size: 1.6rem; font-weight: 900; margin-bottom: 4px; }
     .client-info p { color: #cbd5e1; font-size: 0.92rem; }
@@ -106,7 +106,7 @@
       background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
       padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); text-align: center;
     }
-    .client-badge-box strong { display: block; font-size: 1.2rem; color: #f87171; }
+    .client-badge-box strong { display: block; font-size: 1.2rem; color: #38bdf8; }
     .client-badge-box span { font-size: 0.82rem; color: #94a3b8; }
 
     /* Dashboard Grid */
@@ -438,7 +438,7 @@
     </div>
   </main>
 
-  <script src="js/platform-data.js?v=202609120926"></script>
+  <script src="js/platform-data.js?v=202609132108"></script>
   <script>
     const STORAGE_KEY = 'aamn_bus_operator_data_v2';
     const OPS_KEY = 'aamn_bus_operations_v2';

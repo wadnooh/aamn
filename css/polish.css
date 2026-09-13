@@ -1,26 +1,26 @@
 /* طبقة تحسين الاتحاد للخدمات */
 :root {
-  --primary: #D4881B;
-  --primary-dark: #A96510;
-  --primary-light: #F0A633;
-  --secondary: #132033;
-  --secondary-dark: #0B1220;
-  --secondary-light: #24344F;
-  --accent: #1F7A8C;
-  --light: #F6F7F9;
-  --gray-100: #F8FAFC;
-  --gray-200: #E5E7EB;
-  --gray-400: #9CA3AF;
-  --gray-600: #667085;
-  --gray-800: #1F2937;
-  --text-dark: #111827;
-  --text-body: #344054;
-  --text-light: #667085;
-  --border: #E5E7EB;
-  --shadow-sm: 0 1px 3px rgba(16, 24, 40, .08), 0 1px 2px rgba(16, 24, 40, .06);
-  --shadow-md: 0 10px 24px rgba(16, 24, 40, .10);
-  --shadow-lg: 0 18px 44px rgba(16, 24, 40, .14);
-  --shadow-gold: 0 10px 24px rgba(212, 136, 27, .26);
+  --primary: #0284c7;
+  --primary-dark: #0369a1;
+  --primary-light: #38bdf8;
+  --secondary: #0f172a;
+  --secondary-dark: #020617;
+  --secondary-light: #1e293b;
+  --accent: #38bdf8;
+  --light: #f0f9ff;
+  --gray-100: #f8fafc;
+  --gray-200: #e2e8f0;
+  --gray-400: #94a3b8;
+  --gray-600: #64748b;
+  --gray-800: #1e293b;
+  --text-dark: #0f172a;
+  --text-body: #334155;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, .06), 0 1px 2px rgba(15, 23, 42, .04);
+  --shadow-md: 0 10px 24px rgba(15, 23, 42, .08);
+  --shadow-lg: 0 18px 44px rgba(15, 23, 42, .12);
+  --shadow-gold: 0 10px 24px rgba(2, 132, 199, .22);
   --radius-sm: 8px;
   --radius-md: 8px;
   --radius-lg: 8px;
@@ -53,8 +53,8 @@ body {
 
 .section-tag {
   color: var(--primary-dark);
-  background: rgba(212, 136, 27, .10);
-  border: 1px solid rgba(212, 136, 27, .20);
+  background: rgba(2, 132, 199, .10);
+  border: 1px solid rgba(2, 132, 199, .20);
   border-radius: 999px;
   padding: 5px 13px;
   font-size: 13px;
@@ -186,7 +186,7 @@ body {
 .hero-actions .btn-primary,
 .map-actions .btn-primary {
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  color: #111827;
+  color: #FFFFFF;
   border-radius: 8px;
   font-weight: 900;
   box-shadow: var(--shadow-gold);
@@ -197,7 +197,7 @@ body {
 .hero-actions .btn-primary:hover,
 .map-actions .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(212, 136, 27, .32);
+  box-shadow: 0 14px 30px rgba(2, 132, 199, .32);
 }
 
 .btn-outline-dark,
@@ -244,7 +244,7 @@ body {
 .process-step:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
-  border-color: rgba(212, 136, 27, .36);
+  border-color: rgba(2, 132, 199, .36);
 }
 
 .service-card::before {
@@ -257,7 +257,7 @@ body {
 .step-icon,
 .contact-icon {
   border-radius: 8px;
-  background: rgba(212, 136, 27, .10);
+  background: rgba(2, 132, 199, .10);
   color: var(--primary-dark);
   box-shadow: none;
 }
@@ -365,7 +365,7 @@ body {
 .booking-form select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(212, 136, 27, .14);
+  box-shadow: 0 0 0 4px rgba(2, 132, 199, .14);
 }
 
 .booking-results {
@@ -403,7 +403,7 @@ body {
 .owner-card {
   grid-template-columns: auto 1fr;
   align-items: center;
-  background: #102033;
+  background: #0f172a;
   color: #fff;
 }
 
@@ -413,7 +413,7 @@ body {
   display: grid;
   place-items: center;
   border-radius: 8px;
-  background: rgba(240, 166, 51, .16);
+  background: rgba(56, 189, 248, .16);
   color: var(--primary-light);
 }
 
@@ -484,7 +484,7 @@ body {
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(212, 136, 27, .16);
+  box-shadow: 0 0 0 4px rgba(2, 132, 199, .16);
 }
 
 .btn-submit {
