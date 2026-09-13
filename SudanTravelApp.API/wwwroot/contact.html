@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تواصل ودعم - الاتحاد للخدمات</title>
-    <link rel="stylesheet" href="css/style.css?v=202609132130">
-    <link rel="stylesheet" href="css/pages.css?v=202609132130">
+    <link rel="stylesheet" href="css/style.css?v=202609132237">
+    <link rel="stylesheet" href="css/pages.css?v=202609132237">
     <link rel="stylesheet" href="css/polish.css?v=202609112430">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
@@ -22,6 +22,24 @@
         </div>
     </div>
 
+    <!-- Sticky Android Notification Bar -->
+    <div class="android-top-bar" id="topAndroidBar">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <i class="fab fa-android" style="font-size: 1.25rem; color: #34d399;"></i>
+                <span><strong>تطبيق الأندرويد متوفر ومفعل الآن!</strong> حمّل تطبيق الاتحاد للخدمات بصيغة APK مباشرة.</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <a href="aamn-travel.apk" download="aamn-travel.apk" class="btn-top-android-dl">
+                    <i class="fas fa-download"></i> تحميل APK (26 KB)
+                </a>
+                <button type="button" onclick="document.getElementById('topAndroidBar').style.display='none'" style="background:none; border:none; color:#a7f3d0; cursor:pointer; padding:4px;" title="إغلاق">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header id="header">
         <nav class="navbar">
@@ -32,12 +50,16 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="portal.html">بوابة الركاب والأعمال</a></li>
                     <li><a href="about.html">من نحن</a></li>
                     <li><a href="services.html">أقسام المنصة</a></li>
                     <li><a href="projects.html">الخطوط والرحلات</a></li>
                     <li><a href="contact.html" class="active">تواصل معنا</a></li>
                 </ul>
-                <a href="client.html" class="btn-cta">احجز تذكرتك</a>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <a href="portal.html" class="btn-cta btn-unified-portal"><i class="fas fa-door-open"></i> بوابة الركاب والأعمال</a>
+                    <a href="aamn-travel.apk" download="aamn-travel.apk" class="btn-android-header" title="تحميل تطبيق الأندرويد"><i class="fab fa-android"></i> تطبيق الأندرويد</a>
+                </div>
                 <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
             </div>
         </nav>
@@ -46,12 +68,16 @@
         <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
         <ul>
             <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="portal.html">بوابة الركاب والأعمال</a></li>
             <li><a href="about.html">من نحن</a></li>
             <li><a href="services.html">أقسام المنصة</a></li>
             <li><a href="projects.html">الخطوط والرحلات</a></li>
             <li><a href="contact.html">تواصل معنا</a></li>
         </ul>
-        <a href="client.html" class="btn-mobile-cta">احجز تذكرتك</a>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+            <a href="portal.html" class="btn-mobile-cta"><i class="fas fa-door-open"></i> بوابة الركاب والأعمال</a>
+            <a href="aamn-travel.apk" download="aamn-travel.apk" class="btn-mobile-cta" style="background: linear-gradient(135deg, #10b981, #059669); border-color: #059669;"><i class="fab fa-android"></i> تحميل تطبيق الأندرويد (APK)</a>
+        </div>
     </div>
     <div class="overlay" id="overlay"></div>
 
@@ -292,8 +318,8 @@
             </div>
         </div>
     </footer>
-    <script src="js/admin-site-config.js?v=202609132130"></script>
-    <script src="js/main.js?v=202609132130"></script>
+    <script src="js/admin-site-config.js?v=202609132237"></script>
+    <script src="js/main.js?v=202609132237"></script>
 
     <!-- Guaranteed Interactive Contact Form Engine -->
     <script>

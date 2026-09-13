@@ -16,7 +16,7 @@ Write-Host "==========================================================" -Foregro
 
 # 1. Sync files from wwwroot to repo root
 Write-Host "`n[1/3] Synchronizing web assets to repository root..." -ForegroundColor Yellow
-$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "operator.html", "privacy.html", "send-mail.php", ".htaccess")
+$htmlFiles = @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "operator.html", "privacy.html", "portal.html", "aamn-travel.apk", "send-mail.php", ".htaccess")
 foreach ($f in $htmlFiles) {
     $srcPath = Join-Path $src $f
     if (Test-Path $srcPath) { Copy-Item $srcPath $root -Force }
@@ -65,7 +65,7 @@ if ($tunnel) { $tunnel = $tunnel.Trim() }
 else { $tunnel = "https://onion-respected-karaoke-channels.trycloudflare.com" }
 
 $apiBase = "$tunnel/api"
-foreach ($rel in @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "operator.html", "js\main.js", "js\admin-site-config.js", "js\platform-data.js")) {
+foreach ($rel in @("index.html", "about.html", "services.html", "projects.html", "contact.html", "admin.html", "client.html", "operator.html", "portal.html", "js\main.js", "js\admin-site-config.js", "js\platform-data.js")) {
     $p = Join-Path $dest $rel
     if (-not (Test-Path $p)) { continue }
     $text = [IO.File]::ReadAllText($p, [Text.UTF8Encoding]::new($false))

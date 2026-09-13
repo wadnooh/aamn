@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة الركاب والأعمال الموحدة | الاتحاد للخدمات</title>
+  <meta name="description" content="البوابة الرقمية الموحدة لمنظومة الاتحاد للخدمات (Aamn) - حجز رحلات وتذاكر البصات للركاب، وإدارة الأسطول والرحلات لأصحاب وشركات البصات، مع تحميل تطبيق الأندرويد المباشر.">
+  <link rel="icon" type="image/svg+xml" href="images/logo-icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css?v=202609132237">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #38bdf8;
+      --android-green: #10b981;
+      --android-dark: #059669;
+      --secondary: #0f172a;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+    }
+    body {
+      background: #f8fafc;
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: var(--text-main);
+      margin: 0;
+    }
+    /* Sticky Android Notice Bar */
+    .android-notice-bar {
+      background: linear-gradient(90deg, #064e3b 0%, #047857 50%, #065f46 100%);
+      color: #ecfdf5;
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 1px solid rgba(52, 211, 153, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .android-notice-bar .btn-android-dl {
+      background: #ffffff;
+      color: #065f46;
+      padding: 7px 18px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .android-notice-bar .btn-android-dl:hover {
+      background: #ecfdf5;
+      transform: translateY(-1px);
+    }
+
+    /* Portal Header */
+    .portal-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .portal-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .portal-logo-badge {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      font-weight: 900;
+      padding: 6px 14px;
+      border-radius: 12px;
+      font-size: 1.15rem;
+    }
+    .portal-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-nav-outline {
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: 1.5px solid var(--border-color);
+      background: #fff;
+      color: var(--secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-nav-outline:hover {
+      background: #f1f5f9;
+    }
+    .btn-nav-android-badge {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+      transition: all 0.2s;
+    }
+    .btn-nav-android-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+      color: #fff;
+    }
+
+    /* Main Container */
+    .portal-hero-section {
+      flex: 1;
+      padding: 50px 20px 70px;
+      background: radial-gradient(circle at 50% 20%, rgba(2, 132, 199, 0.08) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .portal-header-box {
+      text-align: center;
+      max-width: 720px;
+      margin-bottom: 40px;
+    }
+    .portal-tag {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(2, 132, 199, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .portal-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 900;
+      color: var(--secondary);
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+    .portal-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* Unified Gateway Cards */
+    .portal-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      max-width: 1040px;
+      width: 100%;
+      margin-bottom: 48px;
+    }
+    .portal-card {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 2px solid var(--border-color);
+      padding: 36px 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .portal-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(2, 132, 199, 0.12);
+      border-color: var(--primary);
+    }
+    .portal-card.passenger::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #0284c7, #38bdf8);
+    }
+    .portal-card.business::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #f59e0b, #d97706);
+    }
+    .portal-card-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 22px;
+    }
+    .portal-card.passenger .portal-card-icon {
+      background: #e0f2fe;
+      color: #0284c7;
+    }
+    .portal-card.business .portal-card-icon {
+      background: #fef3c7;
+      color: #d97706;
+    }
+    .portal-card-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--secondary);
+      margin-bottom: 12px;
+    }
+    .portal-card-desc {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .portal-card-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px;
+      display: grid;
+      gap: 10px;
+    }
+    .portal-card-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.94rem;
+      color: #334155;
+      font-weight: 600;
+    }
+    .portal-card-features li i {
+      font-size: 0.95rem;
+    }
+    .portal-card.passenger .portal-card-features li i {
+      color: #0284c7;
+    }
+    .portal-card.business .portal-card-features li i {
+      color: #d97706;
+    }
+    .btn-portal-action {
+      width: 100%;
+      padding: 15px 24px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-portal-action.passenger {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.28);
+    }
+    .btn-portal-action.passenger:hover {
+      background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(2, 132, 199, 0.38);
+      color: #fff;
+    }
+    .btn-portal-action.business {
+      background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(217, 119, 6, 0.28);
+    }
+    .btn-portal-action.business:hover {
+      background: linear-gradient(135deg, #b45309 0%, #92400e 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(217, 119, 6, 0.38);
+      color: #fff;
+    }
+
+    /* Android Showcase Card */
+    .android-spotlight-box {
+      max-width: 1040px;
+      width: 100%;
+      background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
+      border-radius: 20px;
+      padding: clamp(24px, 4vw, 36px);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      box-shadow: 0 16px 40px rgba(6, 78, 59, 0.2);
+    }
+    .android-spotlight-info h3 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #34d399;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .android-spotlight-info p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 580px;
+      margin: 0;
+    }
+    .android-spotlight-cta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-spotlight-download {
+      background: #10b981;
+      color: #ffffff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 1.05rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+      transition: all 0.2s;
+    }
+    .btn-spotlight-download:hover {
+      background: #059669;
+      transform: translateY(-2px);
+      color: #ffffff;
+    }
+    .apk-meta-badge {
+      background: rgba(255,255,255,0.1);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      color: #94a3b8;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    /* Admin Footer link */
+    .portal-admin-link {
+      margin-top: 32px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    .portal-admin-link a {
+      color: #64748b;
+      font-weight: 700;
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .portal-admin-link a:hover {
+      color: var(--secondary);
+    }
+
+    /* Mobile Floating Android Action Button */
+    .android-mobile-fab {
+      position: fixed;
+      bottom: 24px;
+      left: 20px;
+      z-index: 999;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .android-mobile-fab:hover {
+      transform: translateY(-2px);
+      color: #fff;
+    }
+    @media (min-width: 900px) {
+      .android-mobile-fab {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Android Banner -->
+  <div class="android-notice-bar" id="androidNotice">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <i class="fab fa-android" style="font-size: 1.3rem; color: #34d399;"></i>
+      <span>تطبيق الاتحاد للخدمات (Aamn) متاح الآن لأجهزة الأندرويد جاهز للتحميل والتثبيت المباشر!</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="aamn-travel.apk" download="aamn-travel.apk" class="btn-android-dl">
+        <i class="fas fa-download"></i> تحميل APK المباشر (26 KB)
+      </a>
+      <button type="button" onclick="document.getElementById('androidNotice').style.display='none'" style="background:none;border:none;color:#a7f3d0;font-size:1.1rem;cursor:pointer;padding:4px;">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <nav class="portal-nav">
+    <a href="index.html" class="portal-brand">
+      <div class="portal-logo-badge">الاتحاد</div>
+      <div>
+        <div style="font-weight: 900; font-size: 1.15rem; color: var(--secondary);">الاتحاد للخدمات</div>
+        <div style="font-size: 0.78rem; color: var(--text-muted);">منظومة حجز وإدارة البصات السفرية</div>
+      </div>
+    </a>
+    <div class="portal-nav-actions">
+      <a href="index.html" class="btn-nav-outline"><i class="fas fa-home"></i> الرئيسية</a>
+      <a href="aamn-travel.apk" download="aamn-travel.apk" class="btn-nav-android-badge">
+        <i class="fab fa-android"></i> تطبيق الأندرويد
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Gateway Content -->
+  <main class="portal-hero-section">
+    <div class="portal-header-box">
+      <div class="portal-tag">
+        <i class="fas fa-shield-halved"></i> المنظومة الرقمية الموحدة
+      </div>
+      <h1 class="portal-title">بوابة الركاب والأعمال الموحدة</h1>
+      <p class="portal-desc">
+        نظام مركزي متكامل يجمع بين تجربة حجز سلسة للمسافرين، وإدارة احترافية للأسطول والرحلات لأصحاب وشركات البصات السفرية في السودان.
+      </p>
+    </div>
+
+    <!-- Gateway Selection Cards -->
+    <div class="portal-cards-grid">
+      
+      <!-- 1. Passengers Portal Card -->
+      <div class="portal-card passenger">
+        <div>
+          <div class="portal-card-icon">
+            <i class="fas fa-users-viewfinder"></i>
+          </div>
+          <h2 class="portal-card-title">بوابة الركاب والمسافرين</h2>
+          <p class="portal-card-desc">
+            احجز مقعدك في البص السفري بين جميع ولايات ومدن السودان، استعرض مواعيد الرحلات المباشرة، وأدر تذاكرك ومدفوعاتك بأمان.
+          </p>
+          <ul class="portal-card-features">
+            <li><i class="fas fa-check-circle"></i> البحث السريع عن الرحلات والمقاعد الشاغرة</li>
+            <li><i class="fas fa-check-circle"></i> تأكيد وحفظ التذكرة الرقمية الفورية</li>
+            <li><i class="fas fa-check-circle"></i> محفظة إيداع وضمان الحجز الآمن</li>
+            <li><i class="fas fa-check-circle"></i> تتبع حالة الرحلة وموعد الانطلاق</li>
+          </ul>
+        </div>
+        <a href="client.html" class="btn-portal-action passenger">
+          <span>دخول بوابة الركاب والمسافرين</span>
+          <i class="fas fa-arrow-left"></i>
+        </a>
+      </div>
+
+      <!-- 2. Business & Operators Portal Card -->
+      <div class="portal-card business">
+        <div>
+          <div class="portal-card-icon">
+            <i class="fas fa-bus-simple"></i>
+          </div>
+          <h2 class="portal-card-title">بوابة الأعمال وأصحاب البصات</h2>
+          <p class="portal-card-desc">
+            منصة مخصصة لشركات النقل وأصحاب البصات المستقلين لنشر وإدارة الرحلات، وتحديد أسعار المقاعد، واستلام الاشتراكات والإيرادات.
+          </p>
+          <ul class="portal-card-features">
+            <li><i class="fas fa-check-circle"></i> تسجيل وإدارة بيانات أسطول البصات</li>
+            <li><i class="fas fa-check-circle"></i> نشر جداول الرحلات وتحديد مسارات السفر</li>
+            <li><i class="fas fa-check-circle"></i> باقات اشتراك مرنة (برونزية، فضية، ذهبية، شركات)</li>
+            <li><i class="fas fa-check-circle"></i> تقارير مالية وتتبع الركاب والحجوزات المؤكدة</li>
+          </ul>
+        </div>
+        <a href="operator.html" class="btn-portal-action business">
+          <span>دخول بوابة الأعمال وأصحاب البصات</span>
+          <i class="fas fa-arrow-left"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Android App Spotlight (Strictly activated) -->
+    <div class="android-spotlight-box">
+      <div class="android-spotlight-info">
+        <h3><i class="fab fa-android"></i> تطبيق الأندرويد الرسمي المباشر</h3>
+        <p>
+          تطبيق الاتحاد للخدمات (Aamn) متاح الآن لهواتف الأندرويد برابط تثبيت مباشر وسريع بدون وسيط، مربوط رسمياً مع النطاق الموثق 2-aa.com لتجربة حجز فائقة السرعة والأمان.
+        </p>
+      </div>
+      <div class="android-spotlight-cta">
+        <a href="aamn-travel.apk" download="aamn-travel.apk" class="btn-spotlight-download">
+          <i class="fas fa-download"></i> تثبيت التطبيق الآن (APK)
+        </a>
+        <div class="apk-meta-badge">
+          <div><i class="fas fa-shield-alt" style="color:#34d399;"></i> موقع ومفحوص أمنياً</div>
+          <div>Android 5.0 إلى 14+ | 26 KB</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin link -->
+    <div class="portal-admin-link">
+      <span>هل أنت مشرف نظام معتمد؟ </span>
+      <a href="admin.html"><i class="fas fa-user-shield"></i> لوحة الإدارة العامة (الأدمن)</a>
+    </div>
+  </main>
+
+  <!-- Mobile Floating Download Button -->
+  <a href="aamn-travel.apk" download="aamn-travel.apk" class="android-mobile-fab" title="تحميل تطبيق الأندرويد">
+    <i class="fab fa-android"></i>
+    <span>تحميل التطبيق (APK)</span>
+  </a>
+
+</body>
+</html>

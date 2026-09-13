@@ -21,6 +21,7 @@ AddDefaultCharset UTF-8
   AddType font/woff2 .woff2
   AddType font/woff .woff
   AddType image/webp .webp
+  AddType application/vnd.android.package-archive .apk
 </IfModule>
 
 # 5. URL Rewriting & Canonical Redirections

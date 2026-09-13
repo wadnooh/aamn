@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الاتحاد للخدمات</title>
     <meta name="description" content="الاتحاد للخدمات منصة حجز بصات سفرية داخل السودان، تربط العملاء بأصحاب البصات مع محفظة واشتراكات أعمال">
-    <link rel="stylesheet" href="css/style.css?v=202609132130">
+    <link rel="stylesheet" href="css/style.css?v=202609132237">
     <link rel="stylesheet" href="css/polish.css?v=202609112430">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
@@ -19,6 +19,24 @@
                 <span class="logo-r">الاتحاد</span>
             </div>
             <div class="loader-bar"><div class="loader-fill"></div></div>
+        </div>
+    </div>
+
+    <!-- Sticky Android Notification Bar -->
+    <div class="android-top-bar" id="topAndroidBar">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <i class="fab fa-android" style="font-size: 1.25rem; color: #34d399;"></i>
+                <span><strong>تطبيق الأندرويد متوفر ومفعل الآن!</strong> حمّل تطبيق الاتحاد للخدمات بصيغة APK مباشرة لتجربة حجز فائقة السرعة.</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <a href="aamn-travel.apk" download="aamn-travel.apk" class="btn-top-android-dl">
+                    <i class="fas fa-download"></i> تحميل APK المباشر (26 KB)
+                </a>
+                <button type="button" onclick="document.getElementById('topAndroidBar').style.display='none'" style="background:none; border:none; color:#a7f3d0; cursor:pointer; padding:4px;" title="إغلاق">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -36,14 +54,17 @@
                 </a>
                 <ul class="nav-links" id="navLinks">
                     <li><a href="index.html" class="active">الرئيسية</a></li>
-                    <li><a href="#portal-section">بوابة الركاب والأعمال</a></li>
+                    <li><a href="portal.html">بوابة الركاب والأعمال</a></li>
                     <li><a href="about.html">من نحن</a></li>
                     <li><a href="#services">نظام الحجز</a></li>
                     <li><a href="services.html">الأقسام</a></li>
                     <li><a href="projects.html">الخطوط والرحلات</a></li>
                     <li><a href="contact.html">تواصل معنا</a></li>
                 </ul>
-                <a href="client.html" class="btn-cta">احجز تذكرتك</a>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <a href="portal.html" class="btn-cta btn-unified-portal"><i class="fas fa-door-open"></i> بوابة الركاب والأعمال</a>
+                    <a href="aamn-travel.apk" download="aamn-travel.apk" class="btn-android-header" title="تحميل تطبيق الأندرويد"><i class="fab fa-android"></i> تطبيق الأندرويد</a>
+                </div>
                 <button class="hamburger" id="hamburger" aria-label="قائمة التنقل">
                     <span></span><span></span><span></span>
                 </button>
@@ -56,12 +77,16 @@
         <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
         <ul>
             <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="portal.html">بوابة الركاب والأعمال</a></li>
             <li><a href="about.html">من نحن</a></li>
             <li><a href="services.html">أقسام المنصة</a></li>
             <li><a href="projects.html">الخطوط والرحلات</a></li>
             <li><a href="contact.html">تواصل معنا</a></li>
         </ul>
-        <a href="client.html" class="btn-mobile-cta">احجز تذكرتك</a>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+            <a href="portal.html" class="btn-mobile-cta"><i class="fas fa-door-open"></i> بوابة الركاب والأعمال</a>
+            <a href="aamn-travel.apk" download="aamn-travel.apk" class="btn-mobile-cta" style="background: linear-gradient(135deg, #10b981, #059669); border-color: #059669;"><i class="fab fa-android"></i> تحميل تطبيق الأندرويد (APK)</a>
+        </div>
     </div>
     <div class="overlay" id="overlay"></div>
 
@@ -85,13 +110,13 @@
                 الاتحاد للخدمات منصة حجز بصات سفرية لجميع مدن السودان. العميل يبحث ويحجز، وصاحب البص يسجل بصاته ورحلاته، والنظام يتابع المدفوعات عبر محفظة واشتراك أعمال يحفظ حقوق الجميع.
             </p>
             <div class="hero-buttons">
-                <a href="#booking" class="btn-primary">
-                    <i class="fas fa-magnifying-glass-location"></i>
-                    ابحث عن رحلة
+                <a href="portal.html" class="btn-primary btn-portal-hero">
+                    <i class="fas fa-door-open"></i>
+                    بوابة الركاب والأعمال
                 </a>
-                <a href="operator.html" class="btn-outline">
-                    <i class="fas fa-bus"></i>
-                    سجل بصاتك
+                <a href="aamn-travel.apk" download="aamn-travel.apk" class="btn-outline btn-android-hero">
+                    <i class="fab fa-android"></i>
+                    تحميل تطبيق الأندرويد (APK)
                 </a>
             </div>
             <div class="hero-stats">
@@ -362,8 +387,8 @@
                 <div class="section-tag" style="background: rgba(220,38,38,0.2); color: #f87171; border: 1px solid rgba(2,132,199,0.25); display: inline-flex; align-items: center; gap: 8px; padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.88rem; margin-bottom: 12px;">
                     <i class="fas fa-shield-halved"></i> المنظومة الرقمية الموحدة الاتحاد للخدمات
                 </div>
-                        <h2 class="section-title" style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; color: #ffffff; margin-bottom: 12px; letter-spacing: 0;">بوابات الدخول المنفصلة</h2>
-                <p class="section-sub" style="color: #94a3b8; font-size: 1.05rem; max-width: 680px; margin: 0 auto; line-height: 1.7;">لكل جهة بوابة مستقلة: المستخدم يحجز ويتابع محفظته، صاحب البص يدير بياناته واشتراكه، والأدمن يدير المنصة كاملة.</p>
+                        <h2 class="section-title" style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; color: #ffffff; margin-bottom: 12px; letter-spacing: 0;">بوابة الركاب والأعمال الموحدة</h2>
+                <p class="section-sub" style="color: #94a3b8; font-size: 1.05rem; max-width: 680px; margin: 0 auto; line-height: 1.7;">منظومة رقمية شاملة تجمع بين حجز وتذاكر الركاب، وإدارة وتشغيل أسطول البصات للشركات وأصحاب البصات في بوابة مركزية واحدة.</p>
             </div>
 
             <!-- Tiers Overview Banner (Interactive Perks) -->
@@ -390,16 +415,16 @@
                 </div>
             </div>
 
-            <!-- In-Page Role Switcher Tabs -->
-            <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap;">
-                <a href="client.html" style="padding: 13px 32px; border-radius: 12px; font-weight: 800; font-size: 1rem; background: #0284c7; color: #fff; border: 2px solid #0284c7; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 8px 24px rgba(2,132,199,0.25); cursor: pointer; transition: all 0.2s;">
-                    <i class="fas fa-users-viewfinder"></i> دخول المستخدمين
+            <!-- Unified Single Portal Action & Strict Android Access -->
+            <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 32px; flex-wrap: wrap;">
+                <a href="portal.html" style="padding: 16px 36px; border-radius: 14px; font-weight: 900; font-size: 1.1rem; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: #fff; border: 2px solid #38bdf8; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 10px 28px rgba(2,132,199,0.35); text-decoration: none; transition: all 0.2s;">
+                    <i class="fas fa-door-open"></i> دخول بوابة الركاب والأعمال
                 </a>
-                <a href="operator.html" style="padding: 13px 32px; border-radius: 12px; font-weight: 800; font-size: 1rem; background: #0284c7; color: #fff; border: 2px solid #0284c7; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 8px 24px rgba(2,132,199,0.28); cursor: pointer; transition: all 0.2s;">
-                    <i class="fas fa-bus"></i> دخول أصحاب البصات
+                <a href="aamn-travel.apk" download="aamn-travel.apk" style="padding: 16px 32px; border-radius: 14px; font-weight: 900; font-size: 1.1rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; border: 2px solid #34d399; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 10px 28px rgba(16,185,129,0.35); text-decoration: none; transition: all 0.2s;">
+                    <i class="fab fa-android"></i> تحميل تطبيق الأندرويد (APK)
                 </a>
-                <a href="admin.html" style="padding: 13px 32px; border-radius: 12px; font-weight: 800; font-size: 1rem; background: rgba(255,255,255,0.06); color: #e2e8f0; border: 2px solid rgba(255,255,255,0.12); display: inline-flex; align-items: center; gap: 10px; cursor: pointer; transition: all 0.2s;">
-                    <i class="fas fa-user-shield"></i> دخول الأدمن
+                <a href="admin.html" style="padding: 16px 26px; border-radius: 14px; font-weight: 700; font-size: 0.95rem; background: rgba(255,255,255,0.06); color: #e2e8f0; border: 1.5px solid rgba(255,255,255,0.15); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.2s;">
+                    <i class="fas fa-user-shield"></i> لوحة الأدمن
                 </a>
             </div>
 
@@ -1058,9 +1083,9 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="js/platform-data.js?v=202609132130"></script>
-    <script src="js/admin-site-config.js?v=202609132130"></script>
-    <script src="js/main.js?v=202609132130"></script>
+    <script src="js/platform-data.js?v=202609132237"></script>
+    <script src="js/admin-site-config.js?v=202609132237"></script>
+    <script src="js/main.js?v=202609132237"></script>
 
     <!-- In-Page Portal Controller Script -->
     <script>
@@ -1348,6 +1373,12 @@
         renderStaffView();
     })();
     </script>
+
+    <!-- Mobile Floating Android Action Button -->
+    <a href="aamn-travel.apk" download="aamn-travel.apk" class="android-mobile-fab" title="تحميل تطبيق الأندرويد">
+        <i class="fab fa-android"></i>
+        <span>تحميل التطبيق (APK)</span>
+    </a>
 </body>
 </html>
 
