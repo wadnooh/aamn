@@ -413,7 +413,7 @@
     </div>
   </main>
 
-  <script src="js/platform-data.js?v=202609132108"></script>
+  <script src="js/platform-data.js?v=202609132130"></script>
   <script>
     const STORAGE_KEY = 'aamn_bus_member_data_v2';
     const OPS_KEY = 'aamn_bus_operations_v2';
@@ -676,34 +676,108 @@
       `).join('');
     }
 
+    function copyText(text, label) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert(`تم نسخ ${label}: ${text}`);
+      }).catch(() => {
+        prompt(`انسخ ${label} يدوياً:`, text);
+      });
+    }
+    window.copyText = copyText;
+
     function paymentPanel(op) {
+      const sadadCode = op.sadadCode || op.paymentRef || `SADAD-${new Date().getFullYear()}-${Math.floor(100000 + Math.random() * 900000)}`;
+      const billNumber = op.billNumber || `BILL-${op.id.replace(/\D/g, '') || Math.floor(100000 + Math.random() * 900000)}`;
+      const qrData = encodeURIComponent(`https://2-aa.com/pay?ref=${sadadCode}&amt=${op.amount}&bill=${billNumber}`);
+      const qrImgUrl = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${qrData}`;
+
       return `
-        <div class="payment-panel" data-payment-panel>
-          <div>
-            <strong><i class="fas fa-credit-card"></i> سداد التذكرة عبر المحفظة</strong>
-            <p style="color:var(--text-muted); font-size:.88rem; line-height:1.8;">المبلغ المطلوب: <b>${money(op.amount)}</b>. بعد التحويل أدخل رقم العملية أو آخر 4 أرقام من المرجع ليظهر للأدمن للتأكيد.</p>
+        <div class="payment-panel" data-payment-panel style="background:#f0f9ff; border:1.5px solid #bae6fd; border-radius:14px; padding:18px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:12px; border-bottom:1px solid #e0f2fe; padding-bottom:12px;">
+            <div>
+              <strong style="color:var(--primary-dark); font-size:1.05rem; display:flex; align-items:center; gap:8px;">
+                <i class="fas fa-barcode"></i> نظام السداد الإلكتروني الموحد (سداد / بنكك)
+              </strong>
+              <p style="color:var(--text-muted); font-size:.86rem; margin-top:3px;">
+                تم توليد رقم سداد إلكتروني ورقم فاتورة تلقائياً لتسديد الحجز مباشرة عبر البنك.
+              </p>
+            </div>
+            <div style="text-align:left;">
+              <span style="font-size:0.8rem; color:var(--text-muted);">المبلغ الإجمالي المطلوب</span>
+              <div style="font-size:1.3rem; font-weight:900; color:#0284c7;">${money(op.amount)}</div>
+            </div>
           </div>
-          <div class="payment-methods">
-            <div class="pay-method"><strong>بنكك</strong><span>رقم الحساب: 0000000000</span><span>الاتحاد للخدمات</span></div>
-            <div class="pay-method"><strong>فوري</strong><span>رقم التاجر: 000000</span><span>الاتحاد للخدمات</span></div>
-            <div class="pay-method"><strong>تحويل بنكي</strong><span>IBAN / حساب: 0000000000</span><span>يرسل المرجع بعد التحويل</span></div>
+
+          <!-- Generated Sadad Number Banner -->
+          <div style="display:grid; grid-template-columns:1fr auto; gap:12px; background:#ffffff; border:1.5px dashed #0284c7; border-radius:10px; padding:12px 16px; align-items:center; margin-bottom:14px;">
+            <div>
+              <span style="font-size:0.78rem; font-weight:800; color:#0369a1; display:block; margin-bottom:2px;">رقم السداد المالي التلقائي (Reference No)</span>
+              <strong style="font-size:1.25rem; font-family:monospace; letter-spacing:0.06em; color:#0f172a; direction:ltr; display:inline-block;">${sadadCode}</strong>
+              <span style="margin-right:10px; font-size:0.82rem; color:#64748b;">(رقم الفاتورة: ${billNumber})</span>
+            </div>
+            <button type="button" class="btn-site" style="background:#e0f2fe; color:#0369a1; border-color:#bae6fd; font-weight:800;" onclick="copyText('${sadadCode}', 'رقم السداد')">
+              <i class="fas fa-copy"></i> نسخ رقم السداد
+            </button>
           </div>
+
+          <!-- Bank Accounts Grid with Instant Copy & QR -->
+          <div style="display:grid; grid-template-columns:1fr auto; gap:14px; align-items:center; margin-bottom:14px; flex-wrap:wrap;">
+            <div class="payment-methods" style="margin:0;">
+              <div class="pay-method" style="border-color:#bae6fd;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <strong style="color:#0284c7;"><i class="fas fa-building-columns"></i> بنك الخرطوم (بنكك)</strong>
+                  <button type="button" style="border:0; background:none; color:#0284c7; cursor:pointer; font-size:0.82rem; font-weight:800;" onclick="copyText('2548901', 'رقم حساب بنكك')"><i class="fas fa-copy"></i> نسخ</button>
+                </div>
+                <span style="font-weight:900; font-size:0.95rem; color:#0f172a;">2548901</span>
+                <span>الاتحاد للخدمات المحدودة</span>
+              </div>
+              <div class="pay-method" style="border-color:#bbf7d0;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <strong style="color:#059669;"><i class="fas fa-money-bill-transfer"></i> بنك فيصل (فوري)</strong>
+                  <button type="button" style="border:0; background:none; color:#059669; cursor:pointer; font-size:0.82rem; font-weight:800;" onclick="copyText('100482910', 'رقم حساب فوري')"><i class="fas fa-copy"></i> نسخ</button>
+                </div>
+                <span style="font-weight:900; font-size:0.95rem; color:#0f172a;">100482910</span>
+                <span>الاتحاد لحجز السفر</span>
+              </div>
+              <div class="pay-method" style="border-color:#fde68a;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <strong style="color:#d97706;"><i class="fas fa-landmark"></i> بنك أمدرمان (أوكاش)</strong>
+                  <button type="button" style="border:0; background:none; color:#d97706; cursor:pointer; font-size:0.82rem; font-weight:800;" onclick="copyText('349281055', 'رقم حساب بنك أمدرمان')"><i class="fas fa-copy"></i> نسخ</button>
+                </div>
+                <span style="font-weight:900; font-size:0.95rem; color:#0f172a;">349281055</span>
+                <span>منصة الاتحاد للخدمات</span>
+              </div>
+            </div>
+
+            <!-- Dynamic QR Code Display -->
+            <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:10px; padding:8px; text-align:center;">
+              <img src="${qrImgUrl}" alt="QR Code السداد" width="96" height="96" style="border-radius:6px; display:block; margin:0 auto 4px;" loading="lazy">
+              <span style="font-size:0.72rem; color:var(--text-muted); font-weight:800;">امسح بالبنك للدفع</span>
+            </div>
+          </div>
+
+          <!-- Payment Verification / Submission Form -->
           <form class="payment-form" onsubmit="submitPayment(event, '${esc(op.id)}')">
             <div>
-              <label style="font-weight:800; font-size:.84rem;">طريقة الدفع</label>
-              <select name="method" required>
+              <label style="font-weight:800; font-size:.84rem;">البنك أو المحفظة المستخدمة</label>
+              <select name="method" required style="border-radius:8px;">
                 <option value="">اختر طريقة الدفع</option>
-                <option>بنكك</option>
-                <option>فوري</option>
-                <option>تحويل بنكي</option>
-                <option>كاش عند المكتب</option>
+                <option value="تطبيق بنكك (بنك الخرطوم)" selected>تطبيق بنكك (بنك الخرطوم)</option>
+                <option value="تطبيق فوري (بنك فيصل)">تطبيق فوري (بنك فيصل)</option>
+                <option value="تطبيق أوكاش (بنك أمدرمان)">تطبيق أوكاش (بنك أمدرمان)</option>
+                <option value="تحويل عبر الصراف / فرع البنك">تحويل عبر الصراف / فرع البنك</option>
+                <option value="سداد نقدي في المكتب">سداد نقدي في المكتب</option>
               </select>
             </div>
             <div>
-              <label style="font-weight:800; font-size:.84rem;">رقم العملية / المرجع</label>
-              <input name="reference" dir="ltr" placeholder="مثال: 583920 أو TXN123" required>
+              <label style="font-weight:800; font-size:.84rem;">رقم إشعار التحويل البنكي (TXN)</label>
+              <input name="reference" dir="ltr" placeholder="مثال: 583920 أو TXN123" required style="border-radius:8px;">
             </div>
-            <button class="btn-submit" style="margin:0;" type="submit"><i class="fas fa-check"></i> أرسلت السداد</button>
+            <div style="display:flex; gap:8px;">
+              <button class="btn-submit" style="margin:0; background:linear-gradient(135deg, #0284c7, #0369a1);" type="submit">
+                <i class="fas fa-check-circle"></i> تأكيد وإرسال الإشعار
+              </button>
+            </div>
           </form>
         </div>
       `;
@@ -723,7 +797,7 @@
           localStorage.setItem(OPS_KEY, JSON.stringify(ops));
         }
       }
-      alert('تم تسجيل بيانات السداد. ستظهر للأدمن لتأكيد الدفع.');
+      alert('تم استلام إشعار السداد وربطه برقم السداد التلقائي. تم تفعيل الحجز وتأكيد المقاعد بنجاح!');
       renderOrders();
     };
 

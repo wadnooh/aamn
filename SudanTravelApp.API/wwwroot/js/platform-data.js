@@ -135,6 +135,10 @@
     trip.bookedSeats = [...(trip.bookedSeats || []), ...seats];
     saveTrips(list);
 
+    const randomPart = Math.floor(100000 + Math.random() * 900000);
+    const sadadCode = `SADAD-${new Date().getFullYear()}-${randomPart}`;
+    const billNumber = `${(new Date().getMonth() + 1).toString().padStart(2, '0')}${new Date().getDate().toString().padStart(2, '0')}${randomPart}`;
+
     const amount = Number(trip.price || 0) * passengers;
     const booking = {
       id: id('ticket'),
@@ -152,6 +156,8 @@
       passengers,
       seats,
       amount,
+      sadadCode,
+      billNumber,
       paymentStatus: 'pending',
       status: 'open',
       qr: `ETIHAD-${Date.now().toString(36).toUpperCase()}`
@@ -171,10 +177,12 @@
       email: booking.email,
       service: `${booking.from} إلى ${booking.to} - ${booking.passengers} راكب`,
       amount: booking.amount,
+      sadadCode: booking.sadadCode,
+      billNumber: booking.billNumber,
       status: 'open',
       paymentStatus: 'pending',
-      paymentRef: booking.qr,
-      notes: `المقاعد: ${booking.seats.join(', ')} - ${booking.operator}`
+      paymentRef: booking.sadadCode,
+      notes: `المقاعد: ${booking.seats.join(', ')} - ${booking.operator} | رقم السداد: ${sadadCode}`
     });
     saveOperations(ops);
     return booking;
