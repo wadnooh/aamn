@@ -31,7 +31,7 @@ public class WebAppInterface {
      */
     @JavascriptInterface
     public String getAppVersion() {
-        return "1.0.0";
+        return "1.2.0";
     }
 
     /**

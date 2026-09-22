@@ -893,9 +893,12 @@
           <span class="brand-sub">سفريات السودان | حجز وتذاكر فورية</span>
         </div>
       </div>
-      <div class="header-status">
-        <span class="status-dot"></span>
-        <span>حجز مباشر</span>
+      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+        <div class="header-status">
+          <span class="status-dot"></span>
+          <span>حجز مباشر</span>
+        </div>
+        <span id="appVersionTag" style="font-size:0.68rem; color:#93c5fd; font-weight:800; font-family:monospace;">v1.2.0</span>
       </div>
     </div>
   </header>
@@ -2155,6 +2158,14 @@
       searchAndRenderTrips();
       updateTicketsBadge();
       renderUserAccountSection();
+
+      if (window.AndroidBridge && typeof window.AndroidBridge.getAppVersion === 'function') {
+        try {
+          const ver = window.AndroidBridge.getAppVersion();
+          const tag = document.getElementById('appVersionTag');
+          if (tag && ver) tag.innerText = 'v' + ver;
+        } catch (ignored) {}
+      }
     });
   </script>
 </body>
