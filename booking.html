@@ -358,6 +358,81 @@
       border-radius: 20px;
     }
 
+    /* User Account & Auth Component Styles */
+    .auth-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 14px;
+    }
+    .auth-tabs {
+      display: flex;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 10px 4px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+    .auth-tab.active {
+      background: #ffffff;
+      color: var(--primary-dark);
+      box-shadow: var(--shadow-sm);
+    }
+    .user-card-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 18px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+    .user-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .user-badge {
+      font-size: 0.74rem;
+      font-weight: 800;
+      background: rgba(16, 185, 129, 0.25);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .user-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255,255,255,0.18);
+      text-align: center;
+    }
+    .user-stat-val {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #38bdf8;
+    }
+    .user-stat-lbl {
+      font-size: 0.68rem;
+      color: #cbd5e1;
+      font-weight: 700;
+    }
+
     /* Trip Card */
     .trip-item {
       background: #fff;
@@ -893,6 +968,13 @@
         <span class="section-badge" id="myTicketsBadge">0 تذكرة</span>
       </div>
 
+      <!-- Ticket History Filter Chips -->
+      <div class="quick-date-row" style="margin-bottom:14px;">
+        <button type="button" class="date-chip active" id="chipTicketUpcoming" onclick="setTicketFilter('upcoming')">الرحلات القادمة 🚌</button>
+        <button type="button" class="date-chip" id="chipTicketPast" onclick="setTicketFilter('past')">السجل السابق 📜</button>
+        <button type="button" class="date-chip" id="chipTicketAll" onclick="setTicketFilter('all')">جميع التذاكر 📋</button>
+      </div>
+
       <div id="myTicketsContainer">
         <!-- Injected via JavaScript -->
       </div>
@@ -966,28 +1048,14 @@
       </div>
     </section>
 
-    <!-- VIEW 4: MY ACCOUNT & SUPPORT -->
+    <!-- VIEW 4: MY ACCOUNT & AUTH -->
     <section class="app-view" id="viewProfile">
-      <div class="card">
-        <h3 class="card-title"><span>بيانات المسافر المحفوظة</span></h3>
-        <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;">يتم حفظ بياناتك محلياً في هاتفك لتعبئة تذاكرك وحجوزاتك القادمة بنقرة واحدة.</p>
-        <form id="formSaveProfile">
-          <div style="margin-bottom:12px;">
-            <label class="route-label">الاسم الكامل للمسافر</label>
-            <input type="text" id="profName" class="input-box" placeholder="مثال: محمد أحمد علي" required>
-          </div>
-          <div style="margin-bottom:12px;">
-            <label class="route-label">رقم الهاتف / الواتساب</label>
-            <input type="tel" id="profPhone" inputmode="tel" class="input-box" placeholder="مثال: 0912345678" required>
-          </div>
-          <button type="submit" class="btn-search-trips" style="margin-top:8px;">
-            <span>حفظ بياناتي في الهاتف</span>
-            <span>💾</span>
-          </button>
-        </form>
+      <!-- Container for Dynamic User Auth / Profile Dashboard -->
+      <div id="userAccountContainer">
+        <!-- Injected via JavaScript -->
       </div>
 
-      <div class="card">
+      <div class="card" style="margin-top:14px;">
         <h3 class="card-title"><span>المساعدة والدعم الفني المباشر</span></h3>
         <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:14px;">فريق خدمة الركاب جاهز للرد على استفساراتك وتأكيد المقاعد طوال 24 ساعة.</p>
         <div style="display:grid; gap:10px;">
@@ -1122,7 +1190,11 @@
 
     const STORAGE_MY_TICKETS = 'aamn_passenger_tickets_v1';
     const STORAGE_PROFILE = 'aamn_passenger_profile_v1';
+    const STORAGE_ACCOUNT = 'aamn_passenger_account_v2';
+    const STORAGE_USERS = 'aamn_registered_users_v2';
 
+    let currentTicketFilter = 'upcoming'; // 'upcoming', 'past', 'all'
+    let currentAuthTab = 'login'; // 'login' or 'register'
     let currentSelectedTrip = null;
     let selectedSeatNumbers = [];
 
@@ -1497,6 +1569,7 @@
       const phone = document.getElementById('modalPassengerPhone').value.trim();
       const count = Number(document.getElementById('modalPassengerCount').value || 1);
 
+      const currentUser = getLoggedInUser();
       saveProfileData(name, phone);
 
       const randomPart = Math.floor(100000 + Math.random() * 900000);
@@ -1506,6 +1579,8 @@
         id: `ticket_${Date.now()}`,
         code: `AAMN-${randomPart}`,
         tripId: currentSelectedTrip.id,
+        userId: currentUser ? currentUser.id : null,
+        userPhone: currentUser ? currentUser.phone : phone,
         passengerName: name,
         phone: phone,
         passengers: count,
@@ -1526,6 +1601,11 @@
       tickets.unshift(newBooking);
       localStorage.setItem(STORAGE_MY_TICKETS, JSON.stringify(tickets));
 
+      // Auto-claim if logged in
+      if (currentUser) {
+        claimTicketsForUser(currentUser);
+      }
+
       closeBookingModal();
       showToast('🎉 تم إصدار تذكرتك بنجاح! يرجى سداد الحجز عبر بنكك.');
       updateTicketsBadge();
@@ -1535,13 +1615,271 @@
       switchView('viewTickets', ticketsNavBtn);
     });
 
-    // Tickets Management
+    // --- USER ACCOUNT & AUTH SYSTEM ---
+    function getLoggedInUser() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_ACCOUNT) || 'null');
+      } catch {
+        return null;
+      }
+    }
+
+    function setLoggedInUser(user) {
+      if (user) {
+        localStorage.setItem(STORAGE_ACCOUNT, JSON.stringify(user));
+        claimTicketsForUser(user);
+      } else {
+        localStorage.removeItem(STORAGE_ACCOUNT);
+      }
+      renderUserAccountSection();
+      renderMyTickets();
+    }
+
+    function claimTicketsForUser(user) {
+      if (!user || !user.phone) return;
+      const tickets = getMyTickets();
+      let updated = false;
+      tickets.forEach(t => {
+        if (!t.userId && (t.phone === user.phone || !t.phone)) {
+          t.userId = user.id;
+          t.userPhone = user.phone;
+          t.passengerName = user.name || t.passengerName;
+          updated = true;
+        }
+      });
+      if (updated) {
+        localStorage.setItem(STORAGE_MY_TICKETS, JSON.stringify(tickets));
+      }
+    }
+
+    function handleUserLogin(phone, password) {
+      triggerHaptic(35);
+      const cleanPhone = phone.trim();
+      const users = getAllUsers();
+      const existing = users.find(u => u.phone === cleanPhone);
+
+      if (existing) {
+        if (existing.password && existing.password !== password) {
+          showToast('كلمة المرور غير صحيحة، يرجى المحاولة مجدداً');
+          return;
+        }
+        setLoggedInUser(existing);
+        showToast(`أهلاً بك مجدداً يا ${existing.name || 'عزيزنا المسافر'}!`);
+      } else {
+        const newUser = {
+          id: 'USER-' + Math.floor(100000 + Math.random() * 900000),
+          name: 'مسافر آمن',
+          phone: cleanPhone,
+          password: password,
+          joinedDate: new Date().toISOString().slice(0, 10)
+        };
+        saveUserToDB(newUser);
+        setLoggedInUser(newUser);
+        showToast('تم إنشاء حسابك بنجاح وتسجيل الدخول!');
+      }
+    }
+
+    function handleUserRegister(name, phone, password, city) {
+      triggerHaptic(35);
+      const cleanPhone = phone.trim();
+      const cleanName = name.trim();
+
+      const newUser = {
+        id: 'USER-' + Math.floor(100000 + Math.random() * 900000),
+        name: cleanName,
+        phone: cleanPhone,
+        password: password,
+        city: city || 'الخرطوم',
+        joinedDate: new Date().toISOString().slice(0, 10)
+      };
+
+      saveUserToDB(newUser);
+      setLoggedInUser(newUser);
+      showToast(`مرحباً بك يا ${cleanName}! تم إنشاء حسابك بنجاح.`);
+    }
+
+    function getAllUsers() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_USERS) || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function saveUserToDB(user) {
+      const users = getAllUsers();
+      const idx = users.findIndex(u => u.phone === user.phone);
+      if (idx > -1) {
+        users[idx] = user;
+      } else {
+        users.push(user);
+      }
+      localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
+    }
+
+    function renderUserAccountSection() {
+      const container = document.getElementById('userAccountContainer');
+      if (!container) return;
+
+      const user = getLoggedInUser();
+
+      if (user) {
+        const userTickets = getMyTickets().filter(t => t.userId === user.id || t.phone === user.phone);
+        const todayStr = new Date().toISOString().slice(0, 10);
+        const upcomingCount = userTickets.filter(t => !t.date || t.date >= todayStr).length;
+        const pastCount = userTickets.filter(t => t.date && t.date < todayStr).length;
+
+        container.innerHTML = `
+          <div class="user-card-header">
+            <div class="user-card-top">
+              <div>
+                <span class="user-badge">عضوية معتمدة ✅</span>
+                <h3 style="font-size:1.25rem; font-weight:900; margin-top:6px;">${user.name}</h3>
+                <span style="font-size:0.82rem; color:#93c5fd; font-weight:700;">📱 ${user.phone}</span>
+              </div>
+              <div style="text-align:left;">
+                <span style="font-size:0.68rem; color:#cbd5e1; display:block;">رقم المسافر</span>
+                <strong style="font-size:0.88rem; color:#38bdf8; font-family:monospace;">${user.id}</strong>
+              </div>
+            </div>
+
+            <div class="user-stats-grid">
+              <div>
+                <div class="user-stat-val">${userTickets.length}</div>
+                <div class="user-stat-lbl">إجمالي الحجوزات</div>
+              </div>
+              <div>
+                <div class="user-stat-val" style="color:#6ee7b7;">${upcomingCount}</div>
+                <div class="user-stat-lbl">رحلات قادمة</div>
+              </div>
+              <div>
+                <div class="user-stat-val" style="color:#cbd5e1;">${pastCount}</div>
+                <div class="user-stat-lbl">رحلات سابقة</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title"><span>إدارة حساب العميل والبيانات</span></h3>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">بياناتك وحجوزاتك محمية ومربوطة برقم هاتفك لضمان حقوق السفر واسترجاعها فوراً.</p>
+            <div style="display:grid; gap:10px;">
+              <button type="button" class="btn-search-trips" onclick="switchView('viewTickets', document.querySelectorAll('.nav-btn')[1])">
+                <span>عرض تذاكري وسجل الرحلات</span>
+                <span>🎟️</span>
+              </button>
+              <button type="button" class="btn-search-trips" style="background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; box-shadow:none;" onclick="setLoggedInUser(null)">
+                <span>تسجيل الخروج من الحساب</span>
+                <span>🚪</span>
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="auth-card">
+            <h3 style="font-size:1.1rem; font-weight:900; margin-bottom:6px; color:#0f172a;">دخول المسافر والربط التلقائي</h3>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">سجل دخولك أو أنشئ حساباً لضمان حفظ كافة حجوزاتك السابقة والمقبلة وعدم ضياع التذاكر.</p>
+
+            <div class="auth-tabs">
+              <button type="button" class="auth-tab ${currentAuthTab === 'login' ? 'active' : ''}" onclick="switchAuthTab('login')">تسجيل الدخول</button>
+              <button type="button" class="auth-tab ${currentAuthTab === 'register' ? 'active' : ''}" onclick="switchAuthTab('register')">إنشاء حساب جديد</button>
+            </div>
+
+            ${currentAuthTab === 'login' ? `
+              <form id="formUserLogin" onsubmit="onLoginFormSubmit(event)">
+                <div style="margin-bottom:12px;">
+                  <label class="route-label">رقم الهاتف / الواتساب *</label>
+                  <input type="tel" id="authLoginPhone" inputmode="tel" class="input-box" placeholder="مثال: 0912345678" required>
+                </div>
+                <div style="margin-bottom:14px;">
+                  <label class="route-label">كلمة المرور *</label>
+                  <input type="password" id="authLoginPass" class="input-box" placeholder="أدخل كلمة المرور" required>
+                </div>
+                <button type="submit" class="btn-search-trips">
+                  <span>تسجيل الدخول إلى حسابي</span>
+                  <span>🔐</span>
+                </button>
+              </form>
+            ` : `
+              <form id="formUserRegister" onsubmit="onRegisterFormSubmit(event)">
+                <div style="margin-bottom:10px;">
+                  <label class="route-label">الاسم الكامل للمسافر *</label>
+                  <input type="text" id="authRegName" class="input-box" placeholder="الاسم الثلاثي" required>
+                </div>
+                <div style="margin-bottom:10px;">
+                  <label class="route-label">رقم الهاتف / الواتساب *</label>
+                  <input type="tel" id="authRegPhone" inputmode="tel" class="input-box" placeholder="مثال: 0912345678" required>
+                </div>
+                <div style="margin-bottom:10px;">
+                  <label class="route-label">كلمة المرور *</label>
+                  <input type="password" id="authRegPass" class="input-box" placeholder="اختر كلمة مرور" required>
+                </div>
+                <div style="margin-bottom:14px;">
+                  <label class="route-label">المدينة الأساسية</label>
+                  <select id="authRegCity" class="select-box">
+                    <option value="الخرطوم">الخرطوم</option>
+                    <option value="بورتسودان">بورتسودان</option>
+                    <option value="مدني">مدني</option>
+                    <option value="عطبرة">عطبرة</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn-search-trips" style="background: linear-gradient(135deg, #10b981, #059669);">
+                  <span>إنشاء الحساب وتوثيق التذاكر</span>
+                  <span>✨</span>
+                </button>
+              </form>
+            `}
+          </div>
+        `;
+      }
+    }
+
+    function switchAuthTab(tab) {
+      triggerHaptic(20);
+      currentAuthTab = tab;
+      renderUserAccountSection();
+    }
+
+    function onLoginFormSubmit(e) {
+      e.preventDefault();
+      const p = document.getElementById('authLoginPhone').value;
+      const pass = document.getElementById('authLoginPass').value;
+      handleUserLogin(p, pass);
+    }
+
+    function onRegisterFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('authRegName').value;
+      const p = document.getElementById('authRegPhone').value;
+      const pass = document.getElementById('authRegPass').value;
+      const city = document.getElementById('authRegCity').value;
+      handleUserRegister(name, p, pass, city);
+    }
+
+    // Tickets Management & Filter Logic
     function getMyTickets() {
       try {
         return JSON.parse(localStorage.getItem(STORAGE_MY_TICKETS) || '[]');
       } catch {
         return [];
       }
+    }
+
+    function setTicketFilter(filter) {
+      triggerHaptic(20);
+      currentTicketFilter = filter;
+      document.querySelectorAll('#viewTickets .date-chip').forEach(c => c.classList.remove('active'));
+      if (filter === 'upcoming') {
+        const chip = document.getElementById('chipTicketUpcoming');
+        if (chip) chip.classList.add('active');
+      } else if (filter === 'past') {
+        const chip = document.getElementById('chipTicketPast');
+        if (chip) chip.classList.add('active');
+      } else if (filter === 'all') {
+        const chip = document.getElementById('chipTicketAll');
+        if (chip) chip.classList.add('active');
+      }
+      renderMyTickets();
     }
 
     function updateTicketsBadge() {
@@ -1559,18 +1897,35 @@
     }
 
     function renderMyTickets() {
-      const tickets = getMyTickets();
+      const allTickets = getMyTickets();
+      const user = getLoggedInUser();
+      const todayStr = new Date().toISOString().slice(0, 10);
+
+      let userTickets = allTickets;
+      if (user) {
+        userTickets = allTickets.filter(t => t.userId === user.id || t.phone === user.phone || t.userPhone === user.phone);
+      }
+
+      let filtered = userTickets;
+      if (currentTicketFilter === 'upcoming') {
+        filtered = userTickets.filter(t => !t.date || t.date >= todayStr);
+      } else if (currentTicketFilter === 'past') {
+        filtered = userTickets.filter(t => t.date && t.date < todayStr);
+      }
+
       const container = document.getElementById('myTicketsContainer');
       updateTicketsBadge();
 
-      if (tickets.length === 0) {
+      if (filtered.length === 0) {
         container.innerHTML = `
           <div class="empty-state card">
-            <div class="empty-icon">🎫</div>
-            <h3 style="font-size:1.05rem; font-weight:800; margin-bottom:6px;">لا توجد تذاكر محجوزة حتى الآن</h3>
+            <div class="empty-icon">${currentTicketFilter === 'past' ? '📜' : '🎫'}</div>
+            <h3 style="font-size:1.05rem; font-weight:800; margin-bottom:6px;">
+              ${currentTicketFilter === 'past' ? 'لا توجد رحلات سابقة في سجل الحساب' : 'لا توجد رحلات قادمة محجوزة حالياً'}
+            </h3>
             <p style="font-size:0.84rem; margin-bottom:16px;">قم بالبحث عن وجهتك في قسم "حجز رحلة" لإصدار تذكرتك فوراً.</p>
             <button type="button" class="btn-search-trips" onclick="switchView('viewBook', document.querySelectorAll('.nav-btn')[0])">
-              <span>احجز تذكرتك الأولى الآن</span>
+              <span>احجز تذكرتك الجديدة الآن</span>
               <span>🚌</span>
             </button>
           </div>
@@ -1578,7 +1933,7 @@
         return;
       }
 
-      container.innerHTML = tickets.map(ticket => {
+      container.innerHTML = filtered.map(ticket => {
         let statusBadge = `<span class="ticket-status status-pending">بانتظار السداد ⏳</span>`;
         if (ticket.paymentStatus === 'review') {
           statusBadge = `<span class="ticket-status status-review">قيد مراجعة السداد 🔍</span>`;
@@ -1586,14 +1941,15 @@
           statusBadge = `<span class="ticket-status status-confirmed">تذكرة مؤكدة ومسددة ✓</span>`;
         }
 
+        const isPast = ticket.date && ticket.date < todayStr;
         const seatsText = (ticket.seats && ticket.seats.length > 0) ? ticket.seats.join(', ') : `${ticket.passengers} مقعد`;
         const totalFmt = Number(ticket.totalAmount || 0).toLocaleString();
 
         return `
-          <div class="ticket-card" id="${ticket.id}">
+          <div class="ticket-card" id="${ticket.id}" style="${isPast ? 'opacity: 0.88; filter: grayscale(0.15);' : ''}">
             <div class="ticket-top">
               <span class="ticket-code">${ticket.code}</span>
-              ${statusBadge}
+              ${isPast ? '<span class="ticket-status" style="background:#e2e8f0; color:#475569;">رحلة سابقة مكتملة 📜</span>' : statusBadge}
             </div>
 
             <div class="ticket-body">
@@ -1637,13 +1993,20 @@
 
             <div class="ticket-actions">
               <button type="button" class="btn-ticket-act btn-whatsapp" onclick="shareTicketWhatsApp('${ticket.id}')">
-                <span>مشاركة واتساب</span>
+                <span>مشاركة الخيارات</span>
                 <span>💬</span>
               </button>
-              <button type="button" class="btn-ticket-act btn-pay-ticket" onclick="jumpToPayTicket('${ticket.id}')">
-                <span>سداد الحجز (بنكك)</span>
-                <span>💳</span>
-              </button>
+              ${!isPast ? `
+                <button type="button" class="btn-ticket-act btn-pay-ticket" onclick="jumpToPayTicket('${ticket.id}')">
+                  <span>سداد الحجز (بنكك)</span>
+                  <span>💳</span>
+                </button>
+              ` : `
+                <button type="button" class="btn-ticket-act" style="background:#e0f2fe; color:#0369a1;" onclick="shareTicketWhatsApp('${ticket.id}')">
+                  <span>إعادة عرض التذكرة</span>
+                  <span>📄</span>
+                </button>
+              `}
             </div>
           </div>
         `;
@@ -1755,21 +2118,12 @@
       }
     }
 
-    document.getElementById('formSaveProfile').addEventListener('submit', (e) => {
-      e.preventDefault();
-      triggerHaptic(30);
-      const name = document.getElementById('profName').value.trim();
-      const phone = document.getElementById('profPhone').value.trim();
-      saveProfileData(name, phone);
-      showToast('✓ تم حفظ بياناتك في الهاتف بنجاح!');
-    });
-
     // Initialization on Page Load
     window.addEventListener('DOMContentLoaded', () => {
       initCities();
       searchAndRenderTrips();
       updateTicketsBadge();
-      loadProfileToForm();
+      renderUserAccountSection();
     });
   </script>
 </body>
