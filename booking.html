@@ -1438,6 +1438,16 @@
     // Modal Booking & Seat Picker Logic
     function openBookingModal(tripId) {
       triggerHaptic(35);
+
+      // STRICT MANDATORY AUTH GATE: Check logged-in status before allowing booking
+      const user = getLoggedInUser();
+      if (!user) {
+        showToast('🔒 لا يمكنك الحجز! يرجى تسجيل الدخول أو إنشاء حساب أولاً لمتابعة حجز المقاعد');
+        const profileNavBtn = document.querySelectorAll('.nav-btn')[3];
+        switchView('viewProfile', profileNavBtn);
+        return;
+      }
+
       const allTrips = getTrips();
       const trip = allTrips.find(t => t.id === tripId);
       if (!trip) return;
@@ -1460,11 +1470,16 @@
         <div style="font-size:0.82rem; color:#64748b; margin-top:4px;">سعر التذكرة: <strong>${priceFmt} جنيه</strong></div>
       `;
 
-      // Auto-fill passenger profile if saved
-      const savedProfile = getSavedProfile();
-      if (savedProfile) {
-        document.getElementById('modalPassengerName').value = savedProfile.name || '';
-        document.getElementById('modalPassengerPhone').value = savedProfile.phone || '';
+      // Pre-fill and lock passenger details to authenticated account
+      const nameInput = document.getElementById('modalPassengerName');
+      const phoneInput = document.getElementById('modalPassengerPhone');
+      if (nameInput) {
+        nameInput.value = user.name || '';
+        nameInput.readOnly = true;
+      }
+      if (phoneInput) {
+        phoneInput.value = user.phone || '';
+        phoneInput.readOnly = true;
       }
 
       // Render Visual Seat Grid (Rows of 4 seats: 1A, 1B, 1C, 1D)
@@ -1563,10 +1578,19 @@
     document.getElementById('formConfirmBooking').addEventListener('submit', (e) => {
       e.preventDefault();
       triggerHaptic(40);
+
+      const currentUser = getLoggedInUser();
+      if (!currentUser) {
+        showToast('🔒 يجب تسجيل الدخول أولاً لإصدار وتثبيت التذكرة');
+        closeBookingModal();
+        switchView('viewProfile', document.querySelectorAll('.nav-btn')[3]);
+        return;
+      }
+
       if (!currentSelectedTrip) return;
 
-      const name = document.getElementById('modalPassengerName').value.trim();
-      const phone = document.getElementById('modalPassengerPhone').value.trim();
+      const name = currentUser.name || document.getElementById('modalPassengerName').value.trim();
+      const phone = currentUser.phone || document.getElementById('modalPassengerPhone').value.trim();
       const count = Number(document.getElementById('modalPassengerCount').value || 1);
 
       const currentUser = getLoggedInUser();
@@ -2068,6 +2092,14 @@
     document.getElementById('formConfirmPayment').addEventListener('submit', (e) => {
       e.preventDefault();
       triggerHaptic(40);
+
+      const currentUser = getLoggedInUser();
+      if (!currentUser) {
+        showToast('🔒 يرجى تسجيل الدخول أولاً لإرسال ومراجعة إشعارات السداد');
+        switchView('viewProfile', document.querySelectorAll('.nav-btn')[3]);
+        return;
+      }
+
       const ticketId = document.getElementById('payTicketSelect').value;
       const method = document.getElementById('payMethodSelect').value;
       const ref = document.getElementById('payRefNumber').value.trim();
