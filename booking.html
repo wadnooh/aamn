@@ -991,7 +991,7 @@
         <h3 class="card-title"><span>المساعدة والدعم الفني المباشر</span></h3>
         <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:14px;">فريق خدمة الركاب جاهز للرد على استفساراتك وتأكيد المقاعد طوال 24 ساعة.</p>
         <div style="display:grid; gap:10px;">
-          <a href="https://wa.me/249912345678" target="_blank" class="btn-search-trips" style="background:#22c55e; box-shadow:none;">
+          <a href="https://wa.me/249912345678" onclick="openWhatsAppContact(event)" target="_blank" class="btn-search-trips" style="background:#22c55e; box-shadow:none;">
             <span>محادثة واتساب فورية</span>
             <span>💬</span>
           </a>
@@ -1133,6 +1133,17 @@
       } else if (navigator.vibrate) {
         navigator.vibrate(ms);
       }
+    }
+
+    // Open WhatsApp via Native Bridge if present
+    function openWhatsAppContact(e) {
+      if (window.AndroidBridge && typeof window.AndroidBridge.openWhatsApp === 'function') {
+        if (e) e.preventDefault();
+        triggerHaptic(30);
+        window.AndroidBridge.openWhatsApp('249912345678', 'مرحباً، أود الاستفسار عن حجز تذكرة باص عبر آمن');
+        return false;
+      }
+      return true;
     }
 
     // Android Hardware/Gesture Back Button Handler

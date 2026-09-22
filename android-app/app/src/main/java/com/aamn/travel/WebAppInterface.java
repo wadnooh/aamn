@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
@@ -15,6 +16,22 @@ public class WebAppInterface {
 
     public WebAppInterface(Context context) {
         this.mContext = context;
+    }
+
+    /**
+     * Check if running inside native Android WebView container
+     */
+    @JavascriptInterface
+    public boolean isNativeApp() {
+        return true;
+    }
+
+    /**
+     * Get current application version
+     */
+    @JavascriptInterface
+    public String getAppVersion() {
+        return "1.0.0";
     }
 
     /**
@@ -35,15 +52,19 @@ public class WebAppInterface {
      */
     @JavascriptInterface
     public void shareText(String title, String content) {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, content);
-        sendIntent.putExtra(Intent.EXTRA_SUBJECT, title);
-        sendIntent.setType("text/plain");
+        try {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, content);
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, title);
+            sendIntent.setType("text/plain");
 
-        Intent shareIntent = Intent.createChooser(sendIntent, title);
-        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(shareIntent);
+            Intent shareIntent = Intent.createChooser(sendIntent, title);
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(shareIntent);
+        } catch (Exception e) {
+            showToast("تعذر مشاركة النص");
+        }
     }
 
     /**
@@ -65,5 +86,40 @@ public class WebAppInterface {
                 v.vibrate(milliseconds > 0 ? milliseconds : 35);
             }
         } catch (Exception ignored) {}
+    }
+
+    /**
+     * Open WhatsApp directly with phone number and optional message
+     */
+    @JavascriptInterface
+    public void openWhatsApp(String phone, String message) {
+        try {
+            String cleanPhone = phone != null ? phone.replaceAll("[^0-9+]", "") : "";
+            String url = "https://api.whatsapp.com/send?phone=" + cleanPhone;
+            if (message != null && !message.isEmpty()) {
+                url += "&text=" + Uri.encode(message);
+            }
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+        } catch (Exception e) {
+            showToast("تعذر فتح تطبيق واتساب");
+        }
+    }
+
+    /**
+     * Open external web URL or external activity intent
+     */
+    @JavascriptInterface
+    public void openExternalUrl(String url) {
+        try {
+            if (url != null && !url.isEmpty()) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+        } catch (Exception e) {
+            showToast("لا يمكن فتح الرابط المطلوب");
+        }
     }
 }
