@@ -1593,7 +1593,6 @@
       const phone = currentUser.phone || document.getElementById('modalPassengerPhone').value.trim();
       const count = Number(document.getElementById('modalPassengerCount').value || 1);
 
-      const currentUser = getLoggedInUser();
       saveProfileData(name, phone);
 
       const randomPart = Math.floor(100000 + Math.random() * 900000);
