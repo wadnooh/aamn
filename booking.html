@@ -898,7 +898,7 @@
           <span class="status-dot"></span>
           <span>حجز مباشر</span>
         </div>
-        <span id="appVersionTag" style="font-size:0.68rem; color:#93c5fd; font-weight:800; font-family:monospace;">v1.4.0</span>
+        <span id="appVersionTag" style="font-size:0.68rem; color:#93c5fd; font-weight:800; font-family:monospace;">v1.5.0</span>
       </div>
     </div>
   </header>
@@ -1298,9 +1298,18 @@
       showToast(`تم نسخ ${label}`);
     }
 
-    // View Switching
+    // View Switching with Auth Guard
     function switchView(viewId, btn) {
       triggerHaptic(25);
+      const user = getLoggedInUser();
+
+      // Auth Gate: Require login for booking, tickets, and payment
+      if (!user && viewId !== 'viewProfile') {
+        showToast('🔑 يرجى تسجيل الدخول أو إنشاء حسابك أولاً للوصول للرحلات والحجز');
+        viewId = 'viewProfile';
+        btn = document.querySelectorAll('.nav-btn')[3];
+      }
+
       document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       const target = document.getElementById(viewId);
@@ -1681,11 +1690,23 @@
       if (user) {
         localStorage.setItem(STORAGE_ACCOUNT, JSON.stringify(user));
         claimTicketsForUser(user);
+        renderUserAccountSection();
+        renderMyTickets();
+
+        // Smooth transition to Trip Search & Booking Screen
+        setTimeout(() => {
+          const bookNavBtn = document.querySelectorAll('.nav-btn')[0];
+          switchView('viewBook', bookNavBtn);
+          showToast(`✨ مرحباً بك يا ${user.name}! يمكنك الآن البحث وحجز مقاعدك.`);
+        }, 150);
       } else {
         localStorage.removeItem(STORAGE_ACCOUNT);
+        renderUserAccountSection();
+        renderMyTickets();
+
+        const profileNavBtn = document.querySelectorAll('.nav-btn')[3];
+        switchView('viewProfile', profileNavBtn);
       }
-      renderUserAccountSection();
-      renderMyTickets();
     }
 
     function claimTicketsForUser(user) {
@@ -2179,12 +2200,23 @@
       }
     }
 
-    // Initialization on Page Load
+    // Initialization on Page Load - First Step Auth Logic
     window.addEventListener('DOMContentLoaded', () => {
       initCities();
       searchAndRenderTrips();
       updateTicketsBadge();
       renderUserAccountSection();
+
+      const user = getLoggedInUser();
+      if (!user) {
+        // Step 1: Open Login / Register Screen First for new or unauthenticated users
+        const profileNavBtn = document.querySelectorAll('.nav-btn')[3];
+        switchView('viewProfile', profileNavBtn);
+      } else {
+        // Logged-in Passengers open Trip Search directly
+        const bookNavBtn = document.querySelectorAll('.nav-btn')[0];
+        switchView('viewBook', bookNavBtn);
+      }
 
       if (window.AndroidBridge && typeof window.AndroidBridge.getAppVersion === 'function') {
         try {

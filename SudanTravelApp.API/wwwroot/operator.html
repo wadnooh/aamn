@@ -467,7 +467,7 @@
     </div>
   </footer>
 
-  <script src="js/platform-data.js?v=202609242201"></script>
+  <script src="js/platform-data.js?v=202609242213"></script>
   <script>
     const STORAGE_KEY = 'aamn_bus_operator_data_v2';
     const OPS_KEY = 'aamn_bus_operations_v2';
@@ -761,25 +761,86 @@
       renderOperatorTrips();
     });
 
+    function confirmPassengerSeat(ticketId) {
+      try {
+        const tickets = JSON.parse(localStorage.getItem('aamn_passenger_tickets_v1') || '[]');
+        const t = tickets.find(item => item.id === ticketId);
+        if (t) {
+          t.paymentStatus = 'confirmed';
+          localStorage.setItem('aamn_passenger_tickets_v1', JSON.stringify(tickets));
+          alert(`✓ تم تأكيد حجز المسافر (${t.passengerName || 'المسافر'}) وتثبيت مقاعده بنجاح!`);
+          renderOperatorTrips();
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
     function renderOperatorTrips() {
       const box = document.getElementById('operatorTrips');
       if (!box || !window.AletihadPlatform) return;
       const user = getUser();
       const trips = window.AletihadPlatform.trips().filter(t => !user || t.operator === user.fullName || t.operator === 'صاحب بص مستقل');
+      const allPassengerTickets = JSON.parse(localStorage.getItem('aamn_passenger_tickets_v1') || '[]');
+
       if (!trips.length) {
         box.innerHTML = '<div style="text-align:center; padding:24px; color:var(--text-muted);">لا توجد رحلات منشورة لهذا الحساب بعد.</div>';
         return;
       }
-      box.innerHTML = trips.map(t => `
-        <div class="published-trip">
-          <div>
-            <h4>${esc(t.from)} إلى ${esc(t.to)}</h4>
-            <p>${esc(t.date)} · ${esc(t.time)} · ${esc(t.bus)} · ${window.AletihadPlatform.availableSeats(t)} مقعد متاح من ${Number(t.seats || 0)}</p>
-            <p>السعر: ${window.AletihadPlatform.money(t.price)} · ${esc(t.policy)}</p>
+
+      box.innerHTML = trips.map(t => {
+        const matchedTickets = allPassengerTickets.filter(pt =>
+          (pt.from === t.from && pt.to === t.to) ||
+          (pt.operator && pt.operator.includes(t.operator || ''))
+        );
+
+        const passengerManifestHtml = matchedTickets.length > 0 ? `
+          <div style="margin-top:12px; padding-top:10px; border-top:1px dashed #cbd5e1; font-size:0.85rem;">
+            <strong style="color:#0369a1; display:block; margin-bottom:8px;">👥 كشف ركاب وتأكيدات المقاعد (${matchedTickets.length} مسافر):</strong>
+            <div style="display:grid; gap:8px;">
+              ${matchedTickets.map(pt => {
+                const seatsFmt = pt.seats ? pt.seats.join(', ') : pt.passengers;
+                const isConfirmed = pt.paymentStatus === 'confirmed';
+                const statusFmt = isConfirmed ? 'مؤكد ومسدد ✓' : (pt.paymentStatus === 'review' ? 'إشعار قيد المراجعة 🔍' : 'بانتظار السداد ⏳');
+
+                return `
+                  <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                      <strong style="color:#0f172a;">${esc(pt.passengerName)}</strong>
+                      <span style="color:#64748b; font-size:0.78rem;">(📱 ${esc(pt.phone)})</span>
+                      <div style="font-size:0.76rem; color:#0284c7; margin-top:2px;">💺 مقعد: <strong>${seatsFmt}</strong> | ${statusFmt}</div>
+                      ${pt.paymentRef ? `<div style="font-size:0.72rem; color:#10b981;">رقم المعاملة: <code>${esc(pt.paymentRef)}</code></div>` : ''}
+                    </div>
+                    <div>
+                      ${!isConfirmed ? `
+                        <button type="button" onclick="confirmPassengerSeat('${pt.id}')" style="background:#10b981; color:#fff; border:none; padding:6px 12px; border-radius:8px; font-weight:800; font-size:0.76rem; cursor:pointer;">
+                          تأكيد المقعد ✓
+                        </button>
+                      ` : `
+                        <span style="background:#dcfce7; color:#15803d; padding:4px 10px; border-radius:12px; font-weight:800; font-size:0.74rem;">مكتمل ✓</span>
+                      `}
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
           </div>
-          <span class="status-chip">منشورة</span>
-        </div>
-      `).join('');
+        ` : `<div style="font-size:0.78rem; color:#94a3b8; margin-top:8px;">لا يوجد ركاب حجزوا على هذه الرحلة حتى الآن.</div>`;
+
+        return `
+          <div class="published-trip" style="margin-bottom:14px; padding:14px; background:#fff; border-radius:14px; border:1px solid #cbd5e1;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <h4 style="font-size:1.05rem; font-weight:900; color:#0f172a; margin-bottom:4px;">${esc(t.from)} إلى ${esc(t.to)}</h4>
+                <p style="font-size:0.82rem; color:#64748b;">${esc(t.date)} · ${esc(t.time)} · ${esc(t.bus)} · ${window.AletihadPlatform.availableSeats(t)} مقعد متاح من ${Number(t.seats || 0)}</p>
+                <p style="font-size:0.82rem; color:#0284c7; font-weight:800; margin-top:2px;">السعر: ${window.AletihadPlatform.money(t.price)} · ${esc(t.policy)}</p>
+              </div>
+              <span class="status-chip" style="background:#e0f2fe; color:#0369a1; padding:4px 10px; border-radius:12px; font-weight:800; font-size:0.75rem;">منشورة</span>
+            </div>
+            ${passengerManifestHtml}
+          </div>
+        `;
+      }).join('');
     }
 
     function renderOrders() {
