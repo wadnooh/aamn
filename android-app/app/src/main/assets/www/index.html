@@ -893,9 +893,12 @@
           <span class="brand-sub">سفريات السودان | حجز وتذاكر فورية</span>
         </div>
       </div>
-      <div class="header-status">
-        <span class="status-dot"></span>
-        <span>حجز مباشر</span>
+      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+        <div class="header-status">
+          <span class="status-dot"></span>
+          <span>حجز مباشر</span>
+        </div>
+        <span id="appVersionTag" style="font-size:0.68rem; color:#93c5fd; font-weight:800; font-family:monospace;">v1.3.0</span>
       </div>
     </div>
   </header>
@@ -939,6 +942,29 @@
                 <option value="3">3 مقاعد</option>
                 <option value="4">4 مقاعد</option>
                 <option value="5">5 مقاعد</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filter-grid" style="margin-top:-4px;">
+            <div>
+              <label class="route-label">تصفية بحسب الشركة / الناقل</label>
+              <select id="filterOperator" class="select-box" onchange="searchAndRenderTrips()">
+                <option value="">جميع الشركات المتاحة</option>
+                <option value="شريان الشمال">شركة شريان الشمال</option>
+                <option value="السهم الذهبي">شركة السهم الذهبي</option>
+                <option value="تاركو">شركة تاركو البرية</option>
+                <option value="نهر النيل">سفريات نهر النيل</option>
+                <option value="كردفان">سفريات كردفان الكبرى</option>
+                <option value="القضارف">سفريات القضارف المتحدة</option>
+              </select>
+            </div>
+            <div>
+              <label class="route-label">درجة البص والدرجة السياحية</label>
+              <select id="filterBusType" class="select-box" onchange="searchAndRenderTrips()">
+                <option value="">جميع الفئات والدرجات</option>
+                <option value="VIP">باصات VIP المكيفة</option>
+                <option value="سياحي">باصات سياحية مباشرة</option>
               </select>
             </div>
           </div>
@@ -1350,12 +1376,16 @@
     function searchAndRenderTrips() {
       const from = document.getElementById('selectFrom').value;
       const to = document.getElementById('selectTo').value;
+      const opFilter = document.getElementById('filterOperator') ? document.getElementById('filterOperator').value : '';
+      const busFilter = document.getElementById('filterBusType') ? document.getElementById('filterBusType').value : '';
       const allTrips = getTrips();
       
       const filtered = allTrips.filter(t => {
         const sameFrom = !from || t.from === from;
         const sameTo = !to || t.to === to;
-        return sameFrom && sameTo;
+        const sameOp = !opFilter || t.operator.includes(opFilter);
+        const sameBus = !busFilter || t.bus.includes(busFilter);
+        return sameFrom && sameTo && sameOp && sameBus;
       });
 
       const container = document.getElementById('tripsListContainer');
@@ -1830,7 +1860,7 @@
                   <input type="text" id="authRegName" class="input-box" placeholder="الاسم الثلاثي" required>
                 </div>
                 <div style="margin-bottom:10px;">
-                  <label class="route-label">رقم الهاتف / الواتساب *</label>
+                  <label class="route-label">رقم هاتف المسافر *</label>
                   <input type="tel" id="authRegPhone" inputmode="tel" class="input-box" placeholder="مثال: 0912345678" required>
                 </div>
                 <div style="margin-bottom:10px;">
@@ -2094,7 +2124,7 @@
 
       const currentUser = getLoggedInUser();
       if (!currentUser) {
-        showToast('🔒 يرجى تسجيل الدخول أولاً لإرسال ومراجعة إشعارات السداد');
+        showToast('🔒 يرجى تسجيل الدخول أولاً لإرسال ومراجع إشعارات السداد');
         switchView('viewProfile', document.querySelectorAll('.nav-btn')[3]);
         return;
       }
@@ -2155,6 +2185,14 @@
       searchAndRenderTrips();
       updateTicketsBadge();
       renderUserAccountSection();
+
+      if (window.AndroidBridge && typeof window.AndroidBridge.getAppVersion === 'function') {
+        try {
+          const ver = window.AndroidBridge.getAppVersion();
+          const tag = document.getElementById('appVersionTag');
+          if (tag && ver) tag.innerText = 'v' + ver;
+        } catch (ignored) {}
+      }
     });
   </script>
 </body>

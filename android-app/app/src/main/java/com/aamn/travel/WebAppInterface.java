@@ -31,7 +31,7 @@ public class WebAppInterface {
      */
     @JavascriptInterface
     public String getAppVersion() {
-        return "1.2.0";
+        return "1.3.0";
     }
 
     /**
@@ -104,6 +104,22 @@ public class WebAppInterface {
             mContext.startActivity(intent);
         } catch (Exception e) {
             showToast("تعذر فتح تطبيق واتساب");
+        }
+    }
+
+    /**
+     * Open location in Google Maps directly
+     */
+    @JavascriptInterface
+    public void openGoogleMaps(String locationQuery) {
+        try {
+            String uriStr = "geo:0,0?q=" + Uri.encode(locationQuery != null ? locationQuery : "السودان - ميناء البري");
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uriStr));
+            intent.setPackage("com.google.android.apps.maps");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+        } catch (Exception e) {
+            openExternalUrl("https://maps.google.com/?q=" + Uri.encode(locationQuery));
         }
     }
 
