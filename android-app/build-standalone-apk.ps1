@@ -5,7 +5,7 @@ $ErrorActionPreference = "Stop"
 $root = $PSScriptRoot
 
 # Version Tag
-$versionTag = "1.5.0"
+$versionTag = "1.6.0"
 
 # Locate Android SDK automatically
 $sdkCandidates = @(
@@ -69,7 +69,7 @@ Write-Host "[2/6] Linking resources and generating R.java (Target API 34 / Andro
     "$buildDir\compiled_res.zip" `
     --min-sdk-version 21 `
     --target-sdk-version 34 `
-    --version-code 5 `
+    --version-code 6 `
     --version-name "$versionTag" `
     --auto-add-overlay
 if ($LASTEXITCODE -ne 0) { throw "AAPT2 link failed with code $LASTEXITCODE" }
