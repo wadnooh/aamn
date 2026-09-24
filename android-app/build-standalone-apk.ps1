@@ -65,8 +65,8 @@ Write-Host "[2/6] Linking resources and generating R.java (Target API 34 / Andro
     "$buildDir\compiled_res.zip" `
     --min-sdk-version 21 `
     --target-sdk-version 34 `
-    --version-code 3 `
-    --version-name "1.3.0" `
+    --version-code 4 `
+    --version-name "1.4.0" `
     --auto-add-overlay
 if ($LASTEXITCODE -ne 0) { throw "AAPT2 link failed with code $LASTEXITCODE" }
 
