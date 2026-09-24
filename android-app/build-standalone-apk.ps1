@@ -4,6 +4,9 @@ $ErrorActionPreference = "Stop"
 # Use relative path of the script directory (100% portable)
 $root = $PSScriptRoot
 
+# Version Tag
+$versionTag = "1.4.0"
+
 # Locate Android SDK automatically
 $sdkCandidates = @(
     $env:ANDROID_HOME,
@@ -41,6 +44,7 @@ $androidJar = "$platform\android.jar"
 
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host "   BUILDING AAMN TRAVEL ANDROID APK (STANDALONE COMPILER)   " -ForegroundColor Cyan
+Write-Host "   Version: v$versionTag (Code 4)                             " -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host "SDK Path        : $sdk" -ForegroundColor Gray
 Write-Host "Build Tools     : $buildTools" -ForegroundColor Gray
@@ -66,7 +70,7 @@ Write-Host "[2/6] Linking resources and generating R.java (Target API 34 / Andro
     --min-sdk-version 21 `
     --target-sdk-version 34 `
     --version-code 4 `
-    --version-name "1.4.0" `
+    --version-name "$versionTag" `
     --auto-add-overlay
 if ($LASTEXITCODE -ne 0) { throw "AAPT2 link failed with code $LASTEXITCODE" }
 
@@ -108,16 +112,26 @@ if (-not (Test-Path $keystore)) {
     & keytool -genkey -v -keystore $keystore -alias aamn -keyalg RSA -keysize 2048 -validity 10000 -storepass aamn2026 -keypass aamn2026 -dname "CN=Aamn Travel, OU=Production, O=Aamn Ltd, L=Khartoum, ST=Khartoum, C=SD"
 }
 
-$outputApkLocal = "$root\aamn-travel.apk"
+$outputApkLocal = "$root\aamn-travel-v$versionTag.apk"
+$outputApkLegacy = "$root\aamn-travel.apk"
+
 cmd /c "$apksigner sign --ks `"$keystore`" --ks-pass pass:aamn2026 --key-pass pass:aamn2026 --min-sdk-version 21 --out `"$outputApkLocal`" `"$buildDir\aligned.apk`""
 if ($LASTEXITCODE -ne 0) { throw "APK signing failed with code $LASTEXITCODE" }
 
+Copy-Item $outputApkLocal $outputApkLegacy -Force
+
 # Copy to external locations if available
 if (Test-Path "e:\FLY") {
+    Copy-Item $outputApkLocal "e:\FLY\aamn-travel-v$versionTag.apk" -Force
     Copy-Item $outputApkLocal "e:\FLY\aamn-travel.apk" -Force
 }
 if (Test-Path "e:\FLY\publish") {
+    Copy-Item $outputApkLocal "e:\FLY\publish\aamn-travel-v$versionTag.apk" -Force
     Copy-Item $outputApkLocal "e:\FLY\publish\aamn-travel.apk" -Force
+}
+if (Test-Path "e:\FLY\SudanTravelApp.API\wwwroot") {
+    Copy-Item $outputApkLocal "e:\FLY\SudanTravelApp.API\wwwroot\aamn-travel-v$versionTag.apk" -Force
+    Copy-Item $outputApkLocal "e:\FLY\SudanTravelApp.API\wwwroot\aamn-travel.apk" -Force
 }
 
 # Verify APK
@@ -127,8 +141,8 @@ cmd /c "$apksigner verify --verbose `"$outputApkLocal`""
 $apkItem = Get-Item $outputApkLocal
 Write-Host "`n============================================================" -ForegroundColor Green
 Write-Host " [SUCCESS] AAMN TRAVEL APK READY FOR DIRECT INSTALLATION!   " -ForegroundColor Green
-Write-Host " Location : $($apkItem.FullName)" -ForegroundColor Cyan
-Write-Host " Size     : $([math]::Round($apkItem.Length / 1KB, 2)) KB" -ForegroundColor Cyan
-Write-Host " Target   : Android 5.0 (API 21) up to Android 14 (API 34)  " -ForegroundColor Green
-Write-Host " Domain   : https://2-aa.com/                              " -ForegroundColor Cyan
+Write-Host " Versioned File : $($apkItem.FullName)" -ForegroundColor Cyan
+Write-Host " Size           : $([math]::Round($apkItem.Length / 1KB, 2)) KB" -ForegroundColor Cyan
+Write-Host " Target         : Android 5.0 (API 21) up to Android 14 (API 34)  " -ForegroundColor Green
+Write-Host " Direct Download: https://2-aa.com/aamn-travel-v$versionTag.apk   " -ForegroundColor Cyan
 Write-Host "============================================================`n" -ForegroundColor Green
